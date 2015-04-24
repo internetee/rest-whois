@@ -1,15 +1,16 @@
-class RecordsController < ApplicationController
+class WhoisRecordsController < ApplicationController
   def show
     # fix id if there is no correct format
     params[:id] = "#{params[:id]}.#{params[:format]}" if !['json', 'html'].include? params[:format]
-
-    @record = WhoisRecord.find_by_name(params[:id])
+    @verified = verify_recaptcha
+    @whois_record = WhoisRecord.find_by_name(params[:id])
     
     begin
       respond_to do |format|
         format.json do
-          if @record.present?
-            return render json: @record.json
+          if @whois_record.present?
+            json = @verified ? @whois_record.full_json : @whois_record.public_json
+            return render json: json
           else
             return render json: {
               name: params[:id],
@@ -19,7 +20,7 @@ class RecordsController < ApplicationController
         end
       end
     rescue ActionController::UnknownFormat
-      if @record.present?
+      if @whois_record.present?
       else
         return render text: "Domain not found: #{params[:id]}", status: :not_found
       end

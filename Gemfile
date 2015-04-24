@@ -6,8 +6,12 @@ gem 'rails', '4.2.1'
 # model related
 gem 'pg', '~> 0.18.0'
 
-# rest api
-gem 'grape',    '~> 0.10.1'
+# views
+gem 'haml-rails', '~> 0.9.0'
+gem 'recaptcha', '~> 0.4.0', require: 'recaptcha/rails'
+
+# load env
+gem 'figaro', '~> 1.1.0'
 
 group :development, :test do
   # debug
