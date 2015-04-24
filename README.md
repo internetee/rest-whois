@@ -30,7 +30,7 @@ Installation
 
 Rest whois is based on Rails 4
 
-Manual demo install and database setup:
+Manual demo install:
 
     git clone git@github.com:domify/rest-whois.git
     cd rest-whois
@@ -40,3 +40,13 @@ Manual demo install and database setup:
     cp config/database-example.yml config/database.yml # and edit it
     bundle exec rake db:setup # for production, please follow deployment howto
 
+
+Deployment
+----------
+
+    cd rest-whois
+    mina pr setup
+
+Add apache or nginx config files
+
+    mina pr deploy
