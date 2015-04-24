@@ -46,6 +46,7 @@ Deployment
 
     cd rest-whois
     mina pr setup
+    edit shared/config/application.yml and shared/config/database.yml files
 
 Add apache or nginx config files
 
