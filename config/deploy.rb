@@ -18,19 +18,19 @@ set :rails_env, 'alpha'
 
 # staging
 task :st do
-  set :domain, 'registry-st'
+  set :domain, 'restwhois-st'
   set :deploy_to, '$HOME/rest-whois'
   set :repository, 'https://github.com/internetee/rest-whois' # production repo
-  set :branch, 'master' # same as production
+  set :branch, 'master'
   set :rails_env, 'staging'
 end
 
 # production
 task :pr do
-  set :domain, 'registry'
+  set :domain, 'restwhois'
   set :deploy_to, '$HOME/registry'
   set :repository, 'https://github.com/internetee/rest-whois' # production repo
-  set :branch, 'master' # same as staging
+  set :branch, 'master'
   set :rails_env, 'production'
 end
 
