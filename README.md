@@ -48,6 +48,41 @@ Deployment
     mina pr setup
     edit shared/config/application.yml and shared/config/database.yml files
 
-Add apache or nginx config files
+Add apache config file:
+
+```
+<VirtualHost *:80>
+  ServerName your-rest-whois.ee
+
+  PassengerRoot /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini
+  PassengerRuby /home/registry/.rbenv/shims/ruby
+  PassengerEnabled on
+  PassengerMinInstances 10
+  PassengerMaxPoolSize 10
+  PassengerPoolIdleTime 0
+  PassengerMaxRequests 1000
+
+  RailsEnv production # or staging
+  DocumentRoot /home/registry/rest-whois/current/public
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  LogLevel info
+  ErrorLog /var/log/apache2/rest-whois.error.log
+  CustomLog /var/log/apache2/rest-whois.access.log combined
+
+  <Directory /home/registry/rest-whois/current/public>
+    # for Apache older than version 2.4
+    Allow from all
+
+    # for Apache verison 2.4 or newer
+    # Require all granted
+
+    Options -MultiViews
+  </Directory>
+</VirtualHost>
+```
+
+Deploy from your machine:
 
     mina pr deploy
+
