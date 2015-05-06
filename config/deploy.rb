@@ -28,7 +28,7 @@ end
 # production
 task :pr do
   set :domain, 'restwhois'
-  set :deploy_to, '$HOME/registry'
+  set :deploy_to, '$HOME/rest-whois'
   set :repository, 'https://github.com/internetee/rest-whois' # production repo
   set :branch, 'master'
   set :rails_env, 'production'
