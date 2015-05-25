@@ -13,6 +13,9 @@ gem 'recaptcha', '~> 0.4.0', require: 'recaptcha/rails'
 # load env
 gem 'figaro', '~> 1.1.0'
 
+# monitors
+gem 'newrelic_rpm', '~> 3.9.9.275'
+
 group :development, :test do
   # debug
   gem 'pry', '~> 0.10.1'

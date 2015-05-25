@@ -5,3 +5,6 @@ recaptcha_private_key: 'add-your-own-private-key'
 # Your secret key is used for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
 secret_key_base: 'please-change-it-you-can-generate-it-with-rake-secret'
+
+# New Relic app name
+new_relic_app_name: 'Restful-whois' 
