@@ -21,7 +21,7 @@ task :st do
   set :domain, 'restwhois-st'
   set :deploy_to, '$HOME/rest-whois'
   set :repository, 'https://github.com/internetee/rest-whois' # production repo
-  set :branch, 'master'
+  set :branch, 'staging'
   set :rails_env, 'staging'
 end
 

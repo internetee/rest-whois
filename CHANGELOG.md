@@ -1,5 +1,6 @@
 26.05.2015
 
+* Updated deploy script, now staging comes from staging branch
 * Added NewRelic config to application-example.yml file
 
 12.05.2015
