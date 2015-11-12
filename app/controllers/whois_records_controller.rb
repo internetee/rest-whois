@@ -3,8 +3,8 @@ class WhoisRecordsController < ApplicationController
     # fix id if there is no correct format
     params[:id] = "#{params[:id]}.#{params[:format]}" if !['json', 'html'].include? params[:format]
     @verified = verify_recaptcha
-    @whois_record = WhoisRecord.find_by_name(params[:id])
-    
+    @whois_record = WhoisRecord.find_by(name: params[:id])
+
     begin
       respond_to do |format|
         format.json do
