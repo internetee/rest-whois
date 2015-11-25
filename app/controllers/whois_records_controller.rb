@@ -22,7 +22,7 @@ class WhoisRecordsController < ApplicationController
     rescue ActionController::UnknownFormat
       if @whois_record.present?
       else
-        return render text: "Domain not found: #{params[:id]}", status: :not_found
+        return render text: "Domain not found: #{CGI::escapeHTML params[:id]}", status: :not_found
       end
     end
   end
