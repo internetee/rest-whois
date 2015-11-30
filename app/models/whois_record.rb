@@ -1,24 +1,20 @@
 class WhoisRecord < ActiveRecord::Base
   def full_body
     @disclosed = (json['disclosed'] || []).dup
+    return body.to_s if @disclosed.empty?
+
+
     @full_body = ''
+    @disclosed = @disclosed.each_with_object(Hash.new([])){|e,h| h[e.first] += [e.last]}
+    disc_keys = "(" + @disclosed.keys.map{|e| " ?#{e}: " }.join("|") + ")"
 
     # add disclosed elements
     body.to_s.each_line do |line|
-      if @disclosed.first.nil?
-        @full_body << line
-        next
-      end
+      if line.match(": +Not Disclosed")
+        key_column = line.split(":").first
+        new_line   = line.split(/Not Disclosed.+/).insert(1, @disclosed[key_column].shift || "not set")
 
-      disclosed = @disclosed.first
-      key   = disclosed.first
-      value = disclosed.second
- 
-      if line.match("  #{key}:")
-        key_column = "  #{key}:"
-        key_column += ' ' * (14 - key_column.size)
-        @full_body << "#{key_column}#{value}\n"
-        @disclosed.shift
+        @full_body << new_line.join
       else
         @full_body << line
       end
