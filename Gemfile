@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '4.2.1'
+gem 'simpleidn', '0.0.5' # For punycode
 
 # model related
 gem 'pg', '~> 0.18.0'
