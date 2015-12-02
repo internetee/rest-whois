@@ -8,7 +8,7 @@
     %meta{:content => "Full stack top-level domain (TLD) management.", :name => "description"}/
     %meta{:content => "Gitlab LTD", :name => "author"}/
     %title
-      Whois record: #{params[:id]}
+      Whois record: #{@domain_name}
   %body
     = render 'shared/flash'
     = yield
