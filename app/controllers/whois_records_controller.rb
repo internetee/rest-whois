@@ -2,7 +2,7 @@ class WhoisRecordsController < ApplicationController
   def show
     # fix id if there is no correct format
     params[:id] = "#{params[:id]}.#{params[:format]}" if !['json', 'html'].include? params[:format]
-    @domain_name = SimpleIDN.to_unicode(params[:id].to_s)
+    @domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
 
     @verified = verify_recaptcha
     @whois_record = WhoisRecord.find_by(name: @domain_name)
