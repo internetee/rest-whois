@@ -1,7 +1,7 @@
 %pre
   - if @verified
     = @whois_record.full_body
-  - if @whitelist 
+  - elsif @whitelist 
     = @whois_record.full_body
   - else
     = @whois_record.public_body
