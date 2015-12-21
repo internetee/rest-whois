@@ -1,6 +1,8 @@
 %pre
   - if @verified
     = @whois_record.full_body
+  - if @whitelist 
+    = @whois_record.full_body
   - else
     = @whois_record.public_body
 
@@ -10,3 +12,4 @@
       = recaptcha_tags
       %br
       = submit_tag 'View full whois info', name: nil
+

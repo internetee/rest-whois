@@ -6,7 +6,10 @@ class WhoisRecordsController < ApplicationController
 
     @verified = verify_recaptcha
     @whois_record = WhoisRecord.find_by(name: @domain_name)
-
+    @client_ip = request.remote_ip
+    if @client_ip == ENV['whitelist_ip']
+	@whitelist = true
+    end	
     begin
       respond_to do |format|
         format.json do
