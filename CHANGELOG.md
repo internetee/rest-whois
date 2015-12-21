@@ -1,3 +1,7 @@
+21.12.2015
+
+* whitelist_ip new config param for no-captcha
+
 26.05.2015
 
 * Updated deploy script, now staging comes from staging branch
