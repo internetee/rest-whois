@@ -14,7 +14,14 @@ class WhoisRecordsController < ApplicationController
       respond_to do |format|
         format.json do
           if @whois_record.present?
-            json = @verified ? @whois_record.full_json : @whois_record.public_json
+                 if @whitelist
+                    json =  @whois_record.full_json
+                 elsif @verified
+                    json =  @whois_record.full_json
+                 else
+                    json =  @whois_record.public_json
+                 end
+ 
             return render json: json
           else
             return render json: {
