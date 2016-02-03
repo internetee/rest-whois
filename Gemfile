@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '4.2.4'
+gem 'rails', '~> 4.2.5'
 gem 'simpleidn', '0.0.5' # For punycode
 
 # model related
@@ -33,5 +33,5 @@ group :development, :test do
   gem 'binding_of_caller', '~> 0.7.2'
 
   # deploy
-  gem 'mina', '~> 0.3.1' # for fast deployment
+  gem 'mina', '~> 0.3.8' # for fast deployment
 end
