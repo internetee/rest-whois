@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '~> 4.2.5'
-gem 'simpleidn', '0.0.5' # For punycode
+gem 'rails', '~> 4.2.5.2'
+gem 'simpleidn', '0.0.6' # For punycode
 
 # model related
 gem 'pg', '~> 0.18.0'
 
 # views
 gem 'haml-rails', '~> 0.9.0'
-gem 'recaptcha', '~> 0.4.0', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
 
 # load env
 gem 'figaro', '~> 1.1.0'
