@@ -1,3 +1,7 @@
+14.06.2016
+
+* added SyslogLogger
+
 21.12.2015
 
 * whitelist_ip new config param for no-captcha
