@@ -7,6 +7,9 @@ gem 'simpleidn', '0.0.6' # For punycode
 # model related
 gem 'pg', '~> 0.18.0'
 
+#logger
+gem 'SyslogLogger', '2.0', require: 'syslog/logger'
+
 # views
 gem 'haml-rails', '~> 0.9.0'
 gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
