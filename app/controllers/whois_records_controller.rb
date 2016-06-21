@@ -8,8 +8,9 @@ class WhoisRecordsController < ApplicationController
     @whois_record = WhoisRecord.find_by(name: @domain_name)
     @client_ip = request.remote_ip
     if @client_ip == ENV['whitelist_ip']
-	@whitelist = true
-    end	
+	    @whitelist = true
+    end
+
     begin
       respond_to do |format|
         format.json do
@@ -21,9 +22,10 @@ class WhoisRecordsController < ApplicationController
                  else
                     json =  @whois_record.public_json
                  end
- 
+            Rails.logger.info "WhoisRecordsController query was success - Domain: #{@domain_name}, Captcha result: #{@verified}"
             return render json: json
           else
+            Rails.logger.info "WhoisRecordsController query was failed - Domain: #{@domain_name}, Captcha result: #{@verified}"
             return render json: {
               name: @domain_name,
               error: "Domain not found."},
