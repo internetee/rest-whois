@@ -4,10 +4,15 @@ class WhoisRecordsController < ApplicationController
     params[:id] = "#{params[:id]}.#{params[:format]}" if !['json', 'html'].include? params[:format]
     @domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
 
-    log = Syslog::Logger.new 'WhoisRecordsController'
-
     @verified = verify_recaptcha
     @whois_record = WhoisRecord.find_by(name: @domain_name)
+
+    if @whois_record
+      Rails.logger.info "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}"
+    else
+      Rails.logger.info "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}"
+    end
+
     @client_ip = request.remote_ip
     if @client_ip == ENV['whitelist_ip']
 	    @whitelist = true
@@ -24,10 +29,8 @@ class WhoisRecordsController < ApplicationController
                  else
                     json =  @whois_record.public_json
                  end
-            log.info "requested: #{@domain_name}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}"
             return render json: json
           else
-            log.info "requested: #{@domain_name}; Record not found;  Captcha result: #{@verified ? "yes" : "no"}"
             return render json: {
               name: @domain_name,
               error: "Domain not found."},
