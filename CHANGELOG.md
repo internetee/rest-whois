@@ -1,6 +1,10 @@
 14.07.2016
 
-* syslog logging, custom log entry logged on warn loglevel
+* custom log entry logged on warn loglevel
+
+15.06.2016
+
+* added SyslogLogger
 
 21.12.2015
 
