@@ -5,14 +5,14 @@ class WhoisRecordsController < ApplicationController
     @domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
     @verified = verify_recaptcha
     @whois_record = WhoisRecord.find_by(name: @domain_name)
+    @client_ip = request.remote_ip
 
     if @whois_record
-      Rails.logger.warn "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}"
+      Rails.logger.warn "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}  ip: #{@client_ip};"
     else
-      Rails.logger.warn "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}"
+      Rails.logger.warn "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}  ip: #{@client_ip};"
     end
 
-    @client_ip = request.remote_ip
     if @client_ip == ENV['whitelist_ip']
 	    @whitelist = true
     end
