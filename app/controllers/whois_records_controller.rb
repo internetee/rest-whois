@@ -7,9 +7,9 @@ class WhoisRecordsController < ApplicationController
     @whois_record = WhoisRecord.find_by(name: @domain_name)
 
     if @whois_record
-      Rails.logger.info "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}"
+      Rails.logger.warn "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}"
     else
-      Rails.logger.info "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}"
+      Rails.logger.warn "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}"
     end
 
     @client_ip = request.remote_ip

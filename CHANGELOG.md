@@ -1,3 +1,7 @@
+14.07.2016
+
+* syslog logging, custom log entry logged on warn loglevel
+
 21.12.2015
 
 * whitelist_ip new config param for no-captcha
