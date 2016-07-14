@@ -8,9 +8,9 @@ class WhoisRecordsController < ApplicationController
     @client_ip = request.remote_ip
 
     if @whois_record
-      Rails.logger.warn "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}  ip: #{@client_ip};"
+      Rails.logger.warn "Requested: #{params[:id]}; Record found with id: #{@whois_record.id}; Captcha result: #{@verified ? "yes" : "no"}; ip: #{@client_ip};"
     else
-      Rails.logger.warn "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}  ip: #{@client_ip};"
+      Rails.logger.warn "Requested: #{params[:id]}; Record not found; Captcha result: #{@verified ? "yes" : "no"}; ip: #{@client_ip};"
     end
 
     if @client_ip == ENV['whitelist_ip']
