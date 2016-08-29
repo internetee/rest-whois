@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '~> 4.2.5.2'
+gem 'rails', '~> 4.2.7.1'
 gem 'simpleidn', '0.0.6' # For punycode
 
 # model related
