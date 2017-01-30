@@ -1,3 +1,7 @@
+30.01.2017
+
+* Ruby version updated to 2.2.6
+
 14.07.2016
 
 * custom log entry logged on warn loglevel
