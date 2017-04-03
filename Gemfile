@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '~> 4.2.7.1'
-gem 'simpleidn', '0.0.6' # For punycode
+gem 'simpleidn', '0.0.7' # For punycode
 
 # model related
-gem 'pg', '~> 0.18.0'
+gem 'pg', '~> 0.19.0'
 
 #logger
 gem 'SyslogLogger', '2.0', require: 'syslog/logger'
