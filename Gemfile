@@ -29,7 +29,7 @@ group :development, :test do
 
   # dev tools
   gem 'spring',  '~> 1.3.3'
-  gem 'rubocop', '~> 0.26.1'
+  gem 'rubocop'
 
   # improved errors
   gem 'better_errors',     '~> 2.0.0'
