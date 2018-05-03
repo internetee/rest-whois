@@ -23,8 +23,8 @@ class WhoisRecordsController < ApplicationController
           if @whois_record.present?
                  if @whitelist
                     json =  @whois_record.full_json
-                 elsif @verified
-                    json =  @whois_record.full_json
+                 # elsif @verified
+                 #    json =  @whois_record.full_json
                  else
                     json =  @whois_record.public_json
                  end

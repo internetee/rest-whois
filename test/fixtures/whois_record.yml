@@ -1,0 +1,92 @@
+---
+test_domain:
+  body: |
+      The information obtained through .ee WHOIS is subject to database
+      protection according to the Estonian Copyright Act and international
+      conventions. All rights are reserved to Estonian Internet Foundation.
+      Search results may not be used for commercial, advertising, recompilation,
+      repackaging, redistribution, reuse, obscuring or other similar activities.
+      Downloading of information about domain names for the creation of your own
+      database is not permitted. If any of the information from .ee WHOIS is
+      transferred to a third party, it must be done in its entirety. This server
+      must not be used as a backend for a search engine.
+
+      Estonia .ee Top Level Domain WHOIS server
+
+      Domain:
+      name:       domain.test
+      status:     inactive
+      registered: 2018-04-25 14:10:41 +03:00
+      changed:    2018-04-25 14:10:41 +03:00
+      expire:     2018-07-25
+      outzone:
+      delete:
+
+      Registrant:
+      name:    test
+      email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
+      changed: 2018-04-25 14:10:39 +03:00
+
+      Administrative contact:
+      name:       Not Disclosed
+      email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
+      changed:    Not Disclosed
+
+
+      Technical contact:
+      name:       Not Disclosed
+      email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
+      changed:    Not Disclosed
+
+      Registrar:
+      name:       test
+      url:
+      phone:
+      changed:    2018-04-25 14:10:39 +03:00
+
+      Estonia .ee Top Level Domain WHOIS server
+      More information at http://internet.ee
+  json:
+    admin_contacts:
+      -
+        changed: "2018-04-25T14:10:41+03:00"
+        email: test@test.com
+        name: test
+    changed: "2018-04-25T14:10:41+03:00"
+    delete: null
+    disclaimer: "The information obtained through .ee WHOIS is subject to database protection according to the Estonian Copyright Act and international conventions. All rights are reserved to Estonian Internet Foundation. Search results may not be used for commercial,advertising, recompilation, repackaging, redistribution, reuse, obscuring or other similar activities. Downloading of information about domain names for the creation of your own database is not permitted. If any of the information from .ee WHOIS is transferred to a third party, it must be done in its entirety. This server must not be used as a backend for a search engine."
+    disclosed:
+      -
+        - email
+        - test@test.com
+      -
+        - email
+        - test@test.com
+      -
+        - email
+        - test@test.com
+    dnssec_changed: null
+    dnssec_keys: []
+    email: test@test.com
+    expire: "2018-07-25"
+    name: domain.test
+    nameservers: []
+    nameservers_changed: null
+    outzone: null
+    registered: "2018-04-25T14:10:41+03:00"
+    registrant: test
+    registrant_changed: "2018-04-25T14:10:39+03:00"
+    registrant_kind: priv
+    registrar: test
+    registrar_address: "test, test, test, test"
+    registrar_changed: "2018-04-25T14:10:39+03:00"
+    registrar_phone: null
+    registrar_website: null
+    status:
+      - inactive
+    tech_contacts:
+      -
+        changed: "2018-04-25T14:10:41+03:00"
+        email: test@test.com
+        name: test
+  name: domain.test
