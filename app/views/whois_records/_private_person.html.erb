@@ -1,0 +1,22 @@
+Registrant:
+name:    Private Person
+email:   Not Disclosed
+changed: Not Disclosed
+
+<%- if json['admin_contacts'].present? -%>
+Administrative contact:
+<%- for contact in json['admin_contacts'] -%>
+name:       Not Disclosed
+email:      Not Disclosed
+changed:    Not Disclosed
+<%- end -%>
+<%- end -%>
+
+<% if json['tech_contacts'].present? %>
+Technical contact:
+<%- for contact in json['tech_contacts'] -%>
+name:       Not Disclosed
+email:      Not Disclosed
+changed:    Not Disclosed
+<%- end -%>
+<%- end -%>

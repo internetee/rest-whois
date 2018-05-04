@@ -1,0 +1,24 @@
+Registrant:
+name:       <%= json['registrant'] %>
+org id:     <%= json['registrant_reg_no'] %>
+country:    <%= json['registrant_ident_country_code'] %>
+email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
+changed:    <%= json['changed'] %>
+
+<%- if json['admin_contacts'].present? -%>
+Administrative contact:
+<%- for contact in json['admin_contacts'] -%>
+name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
+email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
+changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+<%- end -%>
+<%- end -%>
+
+<% if json['tech_contacts'].present? %>
+Technical contact:
+<%- for contact in json['tech_contacts'] -%>
+name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
+email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
+changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+<%- end -%>
+<%- end -%>

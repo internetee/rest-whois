@@ -12,6 +12,7 @@ gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 
 # views
 gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
+gem 'jbuilder' # For cleaner JSON views
 
 # load env
 gem 'figaro', '~> 1.1.0'

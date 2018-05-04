@@ -1,11 +1,5 @@
 <pre>
-    <% if @verified %>
-        <%= @whois_record.full_body %>
-    <% elsif @whitelist  %>
-        <%= @whois_record.full_body %>
-    <% else %>
-        <%= @whois_record.public_body %>
-    <% end %>
+  <%= render partial: "whois", locals: { json: @whois_record.json } %>
 </pre>
 <% if @verified.blank? %>
     <div class="full_info_form" style="padding: 20px 0 0 24px">

@@ -1,0 +1,23 @@
+json.name @whois_record.json['name']
+json.changed @whois_record.json['changed']
+json.delete @whois_record.json['delete']
+json.disclaimer @whois_record.json['disclaimer']
+json.dnssec_changed @whois_record.json['dnssec_changed']
+json.dnssec_keys @whois_record.json['dnssec_keys']
+json.expire @whois_record.json['expire']
+json.name @whois_record.json['name']
+json.nameservers @whois_record.json['nameservers']
+json.nameservers_changed @whois_record.json['nameservers_changed']
+json.outzone @whois_record.json['outzone']
+json.registered @whois_record.json['registered']
+
+json.registrant_changed @whois_record.json['registrant_changed']
+json.registrant_kind @whois_record.json['registrant_kind']
+
+json.registrar @whois_record.json['registrar']
+json.registrar_address @whois_record.json['registrar_address']
+json.registrar_changed @whois_record.json['registrar_changed']
+json.registrar_phone @whois_record.json['registrar_phone']
+json.registrar_website @whois_record.json['registrar_website']
+json.status @whois_record.json['status']
+json.partial! @whois_record.partial_name(@whitelist), locals: { whois_record: @whois_record }

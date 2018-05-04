@@ -1,0 +1,24 @@
+Registrant:
+name:       <%= json['registrant'] %>
+org id:     <%= json['registrant_reg_no'] %>
+country:    <%= json['registrant_ident_country_code'] %>
+email:      <%= json['email'] %>
+changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+
+<%- if json['admin_contacts'].present? -%>
+Administrative contact:
+<%- for contact in json['admin_contacts'] -%>
+name:       <%= contact['name'] %>
+email:      <%= contact['email'] %>
+changed:    <%= contact['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+<%- end -%>
+<%- end -%>
+
+<% if json['tech_contacts'].present? %>
+Technical contact:
+<%- for contact in json['tech_contacts'] -%>
+name:       <%= contact['name'] %>
+email:      <%= contact['email'] %>
+changed:    <%= contact['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+<%- end -%>
+<%- end -%>
