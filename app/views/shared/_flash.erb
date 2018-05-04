@@ -1,0 +1,8 @@
+<% display = (flash[:notice] || flash[:alert] || flash[:warning]) ? 'block' : 'none' %>
+<div id="flash" style="display: <%= display %>;">
+    <% type = (flash[:notice]) ? 'bg-success' : 'bg-danger' %>
+    <% type = 'bg-warning' if flash[:warning] %>
+    <div class="<%= type %> alert">
+        <%= flash[:notice] || flash[:alert] || flash[:warning] %>
+    </div>
+</div>

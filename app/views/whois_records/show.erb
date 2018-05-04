@@ -1,0 +1,18 @@
+<pre>
+    <% if @verified %>
+        <%= @whois_record.full_body %>
+    <% elsif @whitelist  %>
+        <%= @whois_record.full_body %>
+    <% else %>
+        <%= @whois_record.public_body %>
+    <% end %>
+</pre>
+<% if @verified.blank? %>
+    <div class="full_info_form" style="padding: 20px 0 0 24px">
+        <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
+            <%= recaptcha_tags %>
+            <br/>
+            <%= submit_tag 'View full whois info', name: nil %>
+        <% end %>
+    </div>
+<% end %>
