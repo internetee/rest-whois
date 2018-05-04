@@ -1,6 +1,8 @@
 require 'test_helper'
 
-class JsonTest < ActionDispatch::IntegrationTest
+class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
+  # By default, all requests are done from 127.0.0.1, which is inside the
+  # whitelist
   def test_JSON_does_not_include_disclosed_field_when_not_on_whitelist
     get('/v1/domain.test.json', {}, { 'REMOTE_ADDR': '1.2.3.4' })
 
@@ -17,7 +19,7 @@ class JsonTest < ActionDispatch::IntegrationTest
     assert_equal('test@test.com', response_json['email'])
   end
 
-  def test_JSON_fields
+  def test_JSON_all_fields_are_as_expected
     expected_response = {
       'admin_contacts': [{'changed': '2018-04-25T14:10:41+03:00',
                           'email': 'test@test.com',
