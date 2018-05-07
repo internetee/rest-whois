@@ -6,12 +6,10 @@ class WhoisRecord < ActiveRecord::Base
   def partial_name(authorized = false)
     if private_person?
       'private_person'
+    elsif authorized
+      'legal_person_for_authorized'
     else
-      if authorized
-        'legal_person_for_authorized'
-      else
-        'legal_person'
-      end
+      'legal_person'
     end
   end
 end
