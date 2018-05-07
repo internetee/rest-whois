@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
+  def test_HTML_returns_404_for_missing_domains
+    visit('/v1/missing-domain.test')
+
+    assert_equal(404, page.status_code)
+    assert_text('Domain not found: missing-domain.test')
+  end
+
   def test_HTML_has_disclaimer_text
     visit('/v1/privatedomain.test')
 

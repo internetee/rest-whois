@@ -11,7 +11,25 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json['email'])
   end
 
-  def test_JSON_includes_disclosed_field_when_on_whitelist
+  def test_json_returns_404_for_missing_domains
+    get('/v1/missing-domain.test.json')
+
+    assert_equal(404, response.status)
+    response_json = JSON.parse(response.body)
+    assert_equal('Domain not found.', response_json['error'])
+    assert_equal('missing-domain.test', response_json['name'])
+  end
+
+  def test_POST_requests_works_as_get
+    post('/v1/missing-domain.test.json')
+
+    assert_equal(404, response.status)
+    response_json = JSON.parse(response.body)
+    assert_equal('Domain not found.', response_json['error'])
+    assert_equal('missing-domain.test', response_json['name'])
+  end
+
+  def test_json_includes_disclosed_field_when_on_whitelist
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)

@@ -1,9 +1,5 @@
 class WhoisRecordsController < ApplicationController
   def show
-    # fix id if there is no correct format
-    params[:id] = "#{params[:id]}.#{params[:format]}" unless begin
-      %w[json html].include? params[:format]
-    end
     domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
@@ -16,6 +12,15 @@ class WhoisRecordsController < ApplicationController
           render :show, status: :ok
         else
           render json: { name: domain_name, error: "Domain not found." },
+                 status: :not_found
+        end
+      end
+
+      format.html do
+        if @whois_record
+          render :show, status: :ok
+        else
+          render text: "Domain not found: #{CGI::escapeHTML(domain_name)}",
                  status: :not_found
         end
       end
