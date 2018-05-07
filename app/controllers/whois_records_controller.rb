@@ -9,6 +9,17 @@ class WhoisRecordsController < ApplicationController
 
     set_captcha_and_whitelist
     log_message(params, @whois_record)
+
+    respond_to do |format|
+      format.json do
+        if @whois_record
+          render :show, status: :ok
+        else
+          render json: { name: domain_name, error: "Domain not found." },
+                 status: :not_found
+        end
+      end
+    end
   end
 
   private
