@@ -1,7 +1,7 @@
 Domain:
 name:       <%= json['name'] %>
 <%- for st in Array(json['status']) -%>
-    status:     <%= st %>
+status:     <%= st %>
 <%- end -%>
 registered: <%= json['registered'].to_s.tr('T',' ').sub('+', ' +') %>
 changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
@@ -25,7 +25,7 @@ changed:    <%= contact['changed'].to_s.tr('T',' ').sub('+', ' +') %>
 <%- end -%>
 <%- end -%>
 
-<% if json['tech_contacts'].present? %>
+<%- if json['tech_contacts'].present? -%>
 Technical contact:
 <%- for contact in json['tech_contacts'] -%>
 name:       <%= contact['name'] %>

@@ -10,9 +10,9 @@ outzone:    <%= json['outzone'].to_s.tr('T',' ').sub('+', ' +') %>
 delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
 
 Registrant:
-name:    Private Person
-email:   Not Disclosed
-changed: Not Disclosed
+name:       Private Person
+email:      Not Disclosed
+changed:    Not Disclosed
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:
@@ -23,7 +23,7 @@ changed:    Not Disclosed
 <%- end -%>
 <%- end -%>
 
-<% if json['tech_contacts'].present? %>
+<%- if json['tech_contacts'].present? -%>
 Technical contact:
 <%- for contact in json['tech_contacts'] -%>
 name:       Not Disclosed

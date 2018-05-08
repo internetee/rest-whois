@@ -92,7 +92,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
       org id:  123
       country: EE
       email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
-      changed: 2018-04-25T14:10:41+03:00
+      changed: 2018-04-25 14:10:41 +03:00
       TEXT
     )
 
