@@ -187,3 +187,19 @@ legally_owned:
         email: tech-contact@company-domain.test
         name: "Tech Contact"
   name: company-domain.test
+
+discarded:
+  body: |
+      Estonia .ee Top Level Domain WHOIS server
+
+      Domain:
+      name:       discarded-domain.test
+      status:     deleteCandidate
+
+      Estonia .ee Top Level Domain WHOIS server
+      More information at http://internet.ee
+  json:
+    name: discarded-domain.test
+    status:
+      - deleteCandidate
+  name: discarded-domain.test

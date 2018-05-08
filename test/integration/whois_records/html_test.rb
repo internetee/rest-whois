@@ -8,6 +8,22 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     assert_text('Domain not found: missing-domain.test')
   end
 
+  def test_returns_minimal_html
+    visit("v1/discarded-domain.test")
+
+    assert_text(
+      <<-TEXT.squish
+         Estonia .ee Top Level Domain WHOIS server
+         Domain:
+         name:       discarded-domain.test
+         status:     deleteCandidate
+
+         Estonia .ee Top Level Domain WHOIS server
+         More information at http://internet.ee
+      TEXT
+    )
+  end
+
   def test_HTML_has_disclaimer_text
     visit('/v1/privatedomain.test')
 

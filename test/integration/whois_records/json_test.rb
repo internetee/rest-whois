@@ -37,6 +37,16 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('owner@company-domain.test', response_json['email'])
   end
 
+  def test_discarded_returns_minimal_json
+    get('/v1/discarded-domain.test.json')
+
+    response_json = JSON.parse(response.body)
+    assert_equal('discarded-domain.test', response_json['name'])
+    assert_equal(['deleteCandidate'], response_json['status'])
+    refute(response_json.has_key?('admin_contact'))
+    refute(response_json.has_key?('registrant'))
+  end
+
   def test_JSON_does_not_include_private_person_contact_data
     get('/v1/privatedomain.test.json')
 
