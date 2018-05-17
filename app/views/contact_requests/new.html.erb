@@ -1,0 +1,13 @@
+<div class="instructions">
+  <p><%= I18n.t('contact_requests.instructions') %>
+  <p><%= I18n.t('contact_requests.link_expiration') %>
+</div>
+
+<%= form_for(@contact_request) do |f| %>
+  <p>
+    <%= f.label I18n.t('contact_requests.email') %><br>
+    <%= f.email_field :email %>
+    <%= f.hidden_field :whois_record_id %>
+  </p>
+  <%= f.submit t(:submit) %>
+<% end %>

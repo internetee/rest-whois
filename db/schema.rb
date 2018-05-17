@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113113236) do
+ActiveRecord::Schema.define(version: 20180515105348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_requests", force: :cascade do |t|
+    t.integer  "whois_record_id",                 null: false
+    t.string   "secret",                          null: false
+    t.string   "email",                           null: false
+    t.datetime "valid_to",                        null: false
+    t.string   "status",          default: "new", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contact_requests", ["email"], name: "index_contact_requests_on_email", using: :btree
+  add_index "contact_requests", ["secret"], name: "index_contact_requests_on_secret", unique: true, using: :btree
+  add_index "contact_requests", ["whois_record_id"], name: "index_contact_requests_on_whois_record_id", using: :btree
 
   create_table "whois_records", force: :cascade do |t|
     t.string   "name"
@@ -24,4 +38,5 @@ ActiveRecord::Schema.define(version: 20150113113236) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "contact_requests", "whois_records"
 end

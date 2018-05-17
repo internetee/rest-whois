@@ -1,0 +1,8 @@
+en:
+  contact_requests:
+    instructions: 'You will receive an one time link to confirm your email, and then send a message to the owner or administrator of the domain.'
+    link_expiration: 'The link expires in 24 hours.'
+    email: 'Your email address:'
+    successfully_created: 'Contact request created. Check your email for a link to the one-time contact form.'
+    confirmation_sent: 'We sent a confirmation request to %{email}'
+    confirmation_reminder: 'Please complete your email within 24 hours.'

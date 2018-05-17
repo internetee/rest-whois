@@ -26,9 +26,8 @@ group :development, :test do
   gem 'spring',  '~> 1.3.3'
   gem 'rubocop'
 
-  # improved errors
-  gem 'better_errors',     '~> 2.0.0'
-  gem 'binding_of_caller', '~> 0.7.2'
+  gem 'webmock'
+  gem 'capybara'
 
   # Test helpers
   gem 'webmock'
