@@ -18,6 +18,14 @@ class ContactRequest < ActiveRecord::Base
     set_valid_to_at_24_hours_from_now
   end
 
+  def send_confirmation_email
+    ContactRequestMailer.confirmation_email(self).deliver_now
+  end
+
+  def send_contact_email(body)
+    # no-op
+  end
+
   def mark_as_sent
     if sendable?
       self.status = STATUS_SENT
@@ -30,6 +38,10 @@ class ContactRequest < ActiveRecord::Base
       self.status = STATUS_CONFIRMED
       save
     end
+  end
+
+  def completed_or_expired?
+    status == STATUS_SENT || !still_valid?
   end
 
   private

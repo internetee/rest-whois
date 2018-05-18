@@ -69,4 +69,20 @@ class ContactRequestTest < ActiveSupport::TestCase
 
     assert(@contact_request.mark_as_sent)
   end
+
+  def test_completed_or_expired_during_lifecycle
+    @contact_request.save
+    refute(@contact_request.completed_or_expired?)
+
+    @contact_request.confirm_email
+    refute(@contact_request.completed_or_expired?)
+
+    @contact_request.mark_as_sent
+    assert(@contact_request.completed_or_expired?)
+  end
+
+  def test_completed_or_expired_when_contact_request_is_old
+    expired_request = contact_requests(:expired)
+    assert(expired_request.completed_or_expired?)
+  end
 end

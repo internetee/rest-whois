@@ -6,3 +6,24 @@ en:
     successfully_created: 'Contact request created. Check your email for a link to the one-time contact form.'
     confirmation_sent: 'We sent a confirmation request to %{email}'
     confirmation_reminder: 'Please complete your email within 24 hours.'
+
+    # Confirmation email
+    confirmation_email_subject: 'Send an email to %{domain} domain owner'
+    confirmation_email_heading: 'Confirm your email'
+    confirmation_email_text: 'Click the link below to send an email to owner of %{domain}.'
+    confirmation_email_disclaimer: 'This link expires in 24 hours.'
+    confirmation_email_footer: 'Internet.ee, some legal text.'
+
+    # Contact email
+    contact_request_email_subject: 'Email to domain owner and/or contact'
+    contact_request_email_heading: |
+      Message forwarded to owner and contacts through Internet.ee WHOIS.
+      We recommend not to click any links inside the message body.
+      To ensure safety, Internet.ee removes HTML tags from the message body.
+
+      You can reply directly to the author of this email and reveal your
+      contact info or ignore it.
+    contact_request_email_footer: 'Internet.EE is not the author of this email.'
+
+    # Contact email creation view.
+    contact_email_instruction: 'Please enter your message. It can be no longer than 1000 characters. All HTML tags are stripped to ensure that the message is plaintext only.'

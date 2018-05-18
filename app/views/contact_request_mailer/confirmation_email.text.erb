@@ -1,0 +1,13 @@
+<%= I18n.t('contact_requests.confirmation_email_heading') %>
+
+========================================================================
+
+<%= I18n.t('contact_requests.confirmation_email_text', domain: @domain) %>
+
+<%= contact_request_url(@contact_request.secret) %>
+
+<%= I18n.t('contact_requests.confirmation_email_disclaimer') %>
+
+========================================================================
+
+<%= I18n.t('contact_requests.confirmation_email_footer') -%>
