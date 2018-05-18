@@ -1,6 +1,13 @@
 <p><%= t('contact_requests.contact_email_instruction') %></p>
 
-<%= form_tag(action: 'update', method: 'put') do %>
+<%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
+  <p><%= I18n.t('contact_requests.contact_email_recipients_instructions')%></p>
+  <%- contacts = [:domain_owner, :administrative_contact, :technical_contact] -%>
+  <%- contacts.each do |contact| %>
+    <%= label_tag(contact) %>
+    <%= check_box_tag("contacts[]", contact) %><br>
+  <% end %>
+
   <%= label_tag(:email_body) %><br>
   <%= text_area_tag(:email_body, "Your email body", size: "72x14") %><br>
   <%= submit_tag(I18n.t('submit')) %>
