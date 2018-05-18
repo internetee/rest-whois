@@ -29,10 +29,6 @@ group :development, :test do
   gem 'webmock'
   gem 'capybara'
 
-  # Test helpers
-  gem 'webmock'
-  gem 'capybara'
-
   # deploy
   gem 'mina', '~> 0.3.8' # for fast deployment
 end
