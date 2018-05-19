@@ -3,25 +3,17 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: registry
-  password: registry_pwd
+  username:
+  password:
 
 development:
   <<: *default
-  database: registry_whois_development
+  database: rest_whois_development
 
 test:
   <<: *default
-  database: registry_whois_test
-
-alpha:
-  <<: *default
-  database: registry_whois_alpha
-
-staging:
-  <<: *default
-  database: registry_whois_staging
+  database: rest_whois_test
 
 production:
   <<: *default
-  database: registry_whois_development
+  database: rest_whois_production
