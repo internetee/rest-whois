@@ -3,7 +3,7 @@ require 'test_helper'
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   # By default, all requests are done from 127.0.0.1, which is inside the
   # whitelist
-  def test_JSON_does_not_include_disclosed_field_when_not_on_whitelist
+  def test_json_does_not_include_disclosed_field_when_not_on_whitelist
     get('/v1/company-domain.test.json', {}, { 'REMOTE_ADDR': '1.2.3.4' })
 
     response_json = JSON.parse(response.body)
@@ -20,7 +20,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('missing-domain.test', response_json['name'])
   end
 
-  def test_POST_requests_works_as_get
+  def test_post_requests_works_as_get
     post('/v1/missing-domain.test.json')
 
     assert_equal(404, response.status)
@@ -47,7 +47,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     refute(response_json.has_key?('registrant'))
   end
 
-  def test_JSON_does_not_include_private_person_contact_data
+  def test_json_does_not_include_private_person_contact_data
     get('/v1/privatedomain.test.json')
 
     response_json = JSON.parse(response.body)
@@ -56,7 +56,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('Private Person', response_json['registrant'])
   end
 
-  def test_JSON_includes_legal_person_contacts_data
+  def test_json_includes_legal_person_contacts_data
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
@@ -80,7 +80,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal(expected_tech_contacts, response_json['tech_contacts'])
   end
 
-  def test_JSON_all_fields_are_present
+  def test_json_all_fields_are_present
     expected_response = {
       'admin_contacts': [{'changed': 'Not Disclosed',
                           'email': 'Not Disclosed',
