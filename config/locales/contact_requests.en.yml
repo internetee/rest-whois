@@ -17,6 +17,11 @@ en:
 
     # Contact email
     contact_request_email_subject: 'Email to domain owner and/or contact'
+    contact_email_recipients_instructions: |
+      Select the recipients of your email and enter the text.
+      Message is limited to 2000 characters.
+      All HTML tags are stripped automatically.
+
     contact_request_email_heading: |
       Message forwarded to owner and contacts through Internet.ee WHOIS.
       We recommend not to click any links inside the message body.

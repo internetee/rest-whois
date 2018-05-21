@@ -39,9 +39,8 @@ class ContactRequest < ActiveRecord::Base
 
   def mark_as_sent
     return unless sendable?
-
     self.status = STATUS_SENT
-    save
+    save!
   end
 
   def confirm_email
