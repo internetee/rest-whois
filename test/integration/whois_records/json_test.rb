@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
+  def setup
+    @original_whitelist_ip = ENV['whitelist_ip']
+  end
+
+  def teardown
+    ENV['whitelist_ip'] = @original_whitelist_ip
+  end
+
   # By default, all requests are done from 127.0.0.1, which is inside the
   # whitelist
   def test_json_does_not_include_disclosed_field_when_not_on_whitelist
@@ -30,6 +38,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_includes_disclosed_field_when_on_whitelist
+    ENV['whitelist_ip'] = '127.0.0.1'
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
@@ -57,6 +66,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_includes_legal_person_contacts_data
+    ENV['whitelist_ip'] = '127.0.0.1'
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
