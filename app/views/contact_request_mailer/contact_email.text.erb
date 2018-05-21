@@ -1,7 +1,7 @@
 <%= I18n.t('contact_requests.contact_request_email_heading') -%>
 
 ========================================================================
-<%= strip_tags(@unsafe_body) %>
+<%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
 ========================================================================
 
 <%= I18n.t('contact_requests.contact_request_email_footer') -%>

@@ -9,7 +9,8 @@ class ContactRequestTest < ActiveSupport::TestCase
     @whois_record = whois_records(:privately_owned)
     @contact_request = ContactRequest.new(
       whois_record: @whois_record,
-      email: 'contact-me-here@email.com'
+      email: 'contact-me-here@email.com',
+      name: 'Test User'
     )
   end
 
@@ -26,7 +27,11 @@ class ContactRequestTest < ActiveSupport::TestCase
 
     contact_request = ContactRequest.new(whois_record: @whois_record,
                                          email: 'contact-me-here@email.com')
+    refute(contact_request.valid?)
 
+    contact_request = ContactRequest.new(whois_record: @whois_record,
+                                         email: 'contact-me-here@email.com',
+                                         name: 'Test User')
     assert(contact_request.valid?)
   end
 
@@ -91,7 +96,7 @@ class ContactRequestTest < ActiveSupport::TestCase
     @contact_request.confirm_email
 
     body = 'some message text'
-    recipients = %w[domain_owner tech_contacts]
+    recipients = %w[admin_contacts]
 
     @contact_request.send_contact_email(body: body, recipients: recipients)
     assert(@contact_request.completed_or_expired?)
@@ -99,10 +104,25 @@ class ContactRequestTest < ActiveSupport::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['no-reply@internet.ee'], mail.from)
-    assert_equal(['owner@privatedomain.test', 'tech-contact@privatedomain.test'], mail.to)
+    assert_equal(['owner@privatedomain.test', 'admin-contact@privatedomain.test'], mail.to)
     assert_equal(['contact-me-here@email.com'], mail.reply_to)
     assert_equal('Email to domain owner and/or contact', mail.subject)
     assert_match('some message text', mail.body.to_s)
+  end
+
+  def test_send_contact_email_only_to_tech_contact
+    @contact_request.save
+    @contact_request.confirm_email
+
+    body = 'some message text'
+    recipients = %w[tech_contacts]
+
+    @contact_request.send_contact_email(body: body, recipients: recipients)
+    assert(@contact_request.completed_or_expired?)
+    assert_equal(ContactRequest::STATUS_SENT, @contact_request.status)
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal(['tech-contact@privatedomain.test'], mail.to)
   end
 
   def test_send_contact_email_does_nothing_when_not_sendable

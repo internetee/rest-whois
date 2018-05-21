@@ -8,6 +8,7 @@ class ContactRequest < ActiveRecord::Base
 
   validates :whois_record, presence: true
   validates :email, presence: true
+  validates :name, presence: true
   validates :status, inclusion: { in: STATUSES }
 
   attr_readonly :secret,
@@ -22,33 +23,32 @@ class ContactRequest < ActiveRecord::Base
     ContactRequestMailer.confirmation_email(self).deliver_now
   end
 
-  def send_contact_email(body: "", recipients: [])
-    if mark_as_sent
-      recipients_emails = extract_emails_for_recipients(recipients)
-      return if recipients_emails.empty?
+  def send_contact_email(body: '', recipients: [])
+    return unless mark_as_sent
+    recipients_emails = extract_emails_for_recipients(recipients)
+    return if recipients_emails.empty?
 
-      ContactRequestMailer.contact_email(
-        contact_request: self,
-        recipients: recipients_emails,
-        mail_body: body
-      ).deliver_now
+    ContactRequestMailer.contact_email(
+      contact_request: self,
+      recipients: recipients_emails,
+      mail_body: body
+    ).deliver_now
 
-      self
-    end
+    self
   end
 
   def mark_as_sent
-    if sendable?
-      self.status = STATUS_SENT
-      save
-    end
+    return unless sendable?
+
+    self.status = STATUS_SENT
+    save
   end
 
   def confirm_email
-    if confirmable?
-      self.status = STATUS_CONFIRMED
-      save
-    end
+    return unless confirmable?
+
+    self.status = STATUS_CONFIRMED
+    save
   end
 
   def completed_or_expired?
@@ -59,14 +59,13 @@ class ContactRequest < ActiveRecord::Base
 
   def extract_emails_for_recipients(recipients)
     emails = []
+    if recipients.include?('admin_contacts')
+      emails << whois_record.json['email']
+    end
 
     recipients.map do |recipient_type|
-      if recipient_type == 'domain_owner'
-        emails << whois_record.json['email']
-      else
-        whois_record.json[recipient_type].each do |recipient|
-          emails << recipient['email']
-        end
+      whois_record.json[recipient_type].each do |recipient|
+        emails << recipient['email']
       end
     end
 

@@ -20,15 +20,28 @@ ActiveRecord::Schema.define(version: 20180515105348) do
     t.integer  "whois_record_id",                 null: false
     t.string   "secret",                          null: false
     t.string   "email",                           null: false
+    t.string   "name",                            null: false
     t.datetime "valid_to",                        null: false
     t.string   "status",          default: "new", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.inet     "ip_address"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "contact_requests", ["email"], name: "index_contact_requests_on_email", using: :btree
+  add_index "contact_requests", ["ip_address"], name: "index_contact_requests_on_ip_address", using: :btree
   add_index "contact_requests", ["secret"], name: "index_contact_requests_on_secret", unique: true, using: :btree
   add_index "contact_requests", ["whois_record_id"], name: "index_contact_requests_on_whois_record_id", using: :btree
+
+  create_table "domains", force: :cascade do |t|
+    t.string   "name"
+    t.text     "whois_body"
+    t.json     "whois_json"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
 
   create_table "whois_records", force: :cascade do |t|
     t.string   "name"

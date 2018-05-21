@@ -58,7 +58,44 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(read_fixture('stripped_contact_request_email.erb').join, email.body.to_s)
   end
 
-  def test_contact_request_email_cuts_off_message_at_1000_characters
-    skip
+  def test_character_limit_constants_defaults_to_2000
+    assert_equal(2000, ContactRequestMailer::CHARACTER_LIMIT)
+  end
+
+  def test_contact_request_email_cuts_off_message_at_2000_characters
+    body = <<-TEXT.squish
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+    mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+    quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+    rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+    tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
+    ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+    laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+    ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus,
+    sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Lo
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+    mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+    quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+    rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+    tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
+    ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+    laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+    ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus,
+    sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Lo
+
+    >--- This line should be skipped ----<
+    TEXT
+
+    email = ContactRequestMailer.contact_email(
+      contact_request: @contact_request,
+      recipients: ['admin@privatedomain.com', 'owner@private_domain.com'],
+      mail_body: body
+    ).deliver_now
+
+    refute_match('This line should be skipped', email.body.to_s)
   end
 end

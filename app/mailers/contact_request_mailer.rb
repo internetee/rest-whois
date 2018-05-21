@@ -1,4 +1,6 @@
 class ContactRequestMailer < ApplicationMailer
+  CHARACTER_LIMIT = (Figaro.env.mailer_character_limit || 2000).to_i
+
   def confirmation_email(contact_request)
     @contact_request = contact_request
     recipients = contact_request.email

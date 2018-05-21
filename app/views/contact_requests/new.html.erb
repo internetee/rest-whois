@@ -6,7 +6,9 @@
 <%= form_for(@contact_request) do |f| %>
   <p>
     <%= f.label I18n.t('contact_requests.email') %><br>
-    <%= f.email_field :email %>
+    <%= f.email_field :email %><br>
+    <%= f.label I18n.t('contact_requests.name') %><br>
+    <%= f.text_field :name %>
     <%= f.hidden_field :whois_record_id %>
   </p>
   <%= f.submit t(:submit) %>
