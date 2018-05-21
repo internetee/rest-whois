@@ -30,6 +30,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_includes_disclosed_field_when_on_whitelist
+    ENV['whitelist_ip'] = '127.0.0.1'
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
@@ -57,6 +58,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_includes_legal_person_contacts_data
+    ENV['whitelist_ip'] = '127.0.0.1'
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
