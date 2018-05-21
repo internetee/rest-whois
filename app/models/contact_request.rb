@@ -22,8 +22,19 @@ class ContactRequest < ActiveRecord::Base
     ContactRequestMailer.confirmation_email(self).deliver_now
   end
 
-  def send_contact_email(body)
-    # no-op
+  def send_contact_email(body: "", recipients: [])
+    if mark_as_sent
+      recipients_emails = extract_emails_for_recipients(recipients)
+      return if recipients_emails.empty?
+
+      ContactRequestMailer.contact_email(
+        contact_request: self,
+        recipients: recipients_emails,
+        mail_body: body
+      ).deliver_now
+
+      self
+    end
   end
 
   def mark_as_sent
@@ -45,6 +56,22 @@ class ContactRequest < ActiveRecord::Base
   end
 
   private
+
+  def extract_emails_for_recipients(recipients)
+    emails = []
+
+    recipients.map do |recipient_type|
+      if recipient_type == 'domain_owner'
+        emails << whois_record.json['email']
+      else
+        whois_record.json[recipient_type].each do |recipient|
+          emails << recipient['email']
+        end
+      end
+    end
+
+    emails
+  end
 
   def sendable?
     status == STATUS_CONFIRMED && still_valid?

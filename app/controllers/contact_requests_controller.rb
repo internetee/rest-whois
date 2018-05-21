@@ -30,9 +30,10 @@ class ContactRequestsController < ApplicationController
   def update
     set_contact_request
     email_body = params[:email_body]
+    recipients = params[:recipients]
+    p recipients
 
-
-    if @contact_request.send_email(email_body, recipients)
+    if @contact_request.send_email(body: email_body, recipients: recipients)
      redirect_to(@contact_request, notice: I18n.t('contact_requests.successfully_created'))
     end
   end

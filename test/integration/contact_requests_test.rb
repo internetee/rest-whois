@@ -29,9 +29,9 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     visit('/contact_requests/new?domain=privatedomain.test')
     assert(find_field('contact_request[email]'))
     text = begin
-    "You will receive an one time link to confirm your email, and then send a message to the owner or administrator " \
-    "of the domain.\n" \
-    "The link expires in 24 hours."
+      'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
+      "of the domain.\n" \
+      'The link expires in 24 hours.'
     end
 
     assert_text(text)
@@ -55,7 +55,6 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     expected_link = 'example.com/contact_request'
     expected_disclaimer = 'This link expires in 24 hours'
 
-
     assert_match(expected_heading,    friendly_mail_body)
     assert_match(expected_body,       friendly_mail_body)
     assert_match(expected_link,       friendly_mail_body)
@@ -63,15 +62,14 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
   end
 
   def test_fullfill_an_contact_request_delivery
-    skip("In progress")
     visit(contact_request_path(@valid_contact_request.secret))
 
-    check('domain_owner')
-    check('administrative_contact')
+    check(option: 'domain_owner')
+    check(option: 'admin_contacts')
 
     body = begin
-      "<p>Some text with <a href='example.com'>link</a>.</p>\n" \
-      "Next Line is Preserved"
+      "<p>Message text with <a href='example.com'>link</a>.</p>\n" \
+      'There is a next line character before this one.'
     end
 
     fill_in('email_body', with: body)
@@ -88,7 +86,6 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     expected_body = 'Click the link below to send an email to owner of privatedomain.test.'
     expected_link = 'example.com/contact_request'
     expected_disclaimer = 'This link expires in 24 hours'
-
 
     assert_match(expected_heading,    friendly_mail_body)
     assert_match(expected_body,       friendly_mail_body)

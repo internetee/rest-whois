@@ -24,11 +24,13 @@ class ContactRequestMailerTest < ActionMailer::TestCase
       "I have an amazing business opportunity. Please contact me at my_email@test.com.\n" \
       "\n" \
       "Best regards,\n" \
-      "John Smith"
+      'John Smith'
     end
-    email = ContactRequestMailer
-            .contact_request_email(@contact_request, ['admin@privatedomain.com', 'owner@private_domain.com'], body)
-            .deliver_now
+    email = ContactRequestMailer.contact_email(
+      contact_request: @contact_request,
+      recipients: ['admin@privatedomain.com', 'owner@private_domain.com'],
+      mail_body: body
+    ).deliver_now
 
     refute(ActionMailer::Base.deliveries.empty?)
     assert_equal(['no-reply@internet.ee'], email.from)
@@ -42,9 +44,11 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     body = begin
       "<p>Hello <a href='https://malicious-link.com'>there</a></p>"
     end
-    email = ContactRequestMailer
-            .contact_request_email(@contact_request, ['admin@privatedomain.com', 'owner@private_domain.com'], body)
-            .deliver_now
+    email = ContactRequestMailer.contact_email(
+      contact_request: @contact_request,
+      recipients: ['admin@privatedomain.com', 'owner@private_domain.com'],
+      mail_body: body
+    ).deliver_now
 
     refute(ActionMailer::Base.deliveries.empty?)
     assert_equal(['no-reply@internet.ee'], email.from)
@@ -52,5 +56,9 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['email@example.com'], email.reply_to)
     assert_equal('Email to domain owner and/or contact', email.subject)
     assert_equal(read_fixture('stripped_contact_request_email.erb').join, email.body.to_s)
+  end
+
+  def test_contact_request_email_cuts_off_message_at_1000_characters
+    skip
   end
 end

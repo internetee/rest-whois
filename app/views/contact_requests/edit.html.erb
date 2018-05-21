@@ -2,10 +2,10 @@
 
 <%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
   <p><%= I18n.t('contact_requests.contact_email_recipients_instructions')%></p>
-  <%- contacts = [:domain_owner, :administrative_contact, :technical_contact] -%>
+  <%- contacts = [:domain_owner, :admin_contacts, :tech_contacts] -%>
   <%- contacts.each do |contact| %>
     <%= label_tag(contact) %>
-    <%= check_box_tag("contacts[]", contact) %><br>
+    <%= check_box_tag("recipients[]", contact) %><br>
   <% end %>
 
   <%= label_tag(:email_body) %><br>

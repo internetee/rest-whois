@@ -9,7 +9,7 @@ class ContactRequestTest < ActiveSupport::TestCase
     @whois_record = whois_records(:privately_owned)
     @contact_request = ContactRequest.new(
       whois_record: @whois_record,
-      email: "contact-me-here@email.com"
+      email: 'contact-me-here@email.com'
     )
   end
 
@@ -25,14 +25,14 @@ class ContactRequestTest < ActiveSupport::TestCase
     refute(contact_request.valid?)
 
     contact_request = ContactRequest.new(whois_record: @whois_record,
-                                         email: "contact-me-here@email.com")
+                                         email: 'contact-me-here@email.com')
 
     assert(contact_request.valid?)
   end
 
   def test_new_request_has_default_status_new
     contact_request = ContactRequest.new
-    assert_equal("new", contact_request.status)
+    assert_equal('new', contact_request.status)
   end
 
   def test_new_request_generates_random_124_character_secret_on_creation
@@ -42,7 +42,7 @@ class ContactRequestTest < ActiveSupport::TestCase
 
   def test_secret_cannot_be_changed
     @contact_request.save
-    @contact_request.update!(secret: "foo")
+    @contact_request.update!(secret: 'foo')
     @contact_request.reload
 
     refute_equal('foo', @contact_request.secret)
@@ -50,7 +50,7 @@ class ContactRequestTest < ActiveSupport::TestCase
 
   def test_valid_to_cannot_be_changed
     @contact_request.save
-    new_date = Time.parse("2018-01-01 00:00 UTC")
+    new_date = Time.parse('2018-01-01 00:00 UTC')
     @contact_request.update!(valid_to: new_date)
     @contact_request.reload
 
@@ -84,5 +84,37 @@ class ContactRequestTest < ActiveSupport::TestCase
   def test_completed_or_expired_when_contact_request_is_old
     expired_request = contact_requests(:expired)
     assert(expired_request.completed_or_expired?)
+  end
+
+  def test_send_contact_email_updates_status_and_calls_mailer
+    @contact_request.save
+    @contact_request.confirm_email
+
+    body = 'some message text'
+    recipients = %w[domain_owner tech_contacts]
+
+    @contact_request.send_contact_email(body: body, recipients: recipients)
+    assert(@contact_request.completed_or_expired?)
+    assert_equal(ContactRequest::STATUS_SENT, @contact_request.status)
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal(['no-reply@internet.ee'], mail.from)
+    assert_equal(['owner@privatedomain.test', 'tech-contact@privatedomain.test'], mail.to)
+    assert_equal(['contact-me-here@email.com'], mail.reply_to)
+    assert_equal('Email to domain owner and/or contact', mail.subject)
+    assert_match('some message text', mail.body.to_s)
+  end
+
+  def test_send_contact_email_does_nothing_when_not_sendable
+    @contact_request.save
+    refute(@contact_request.send_contact_email)
+  end
+
+  def test_send_contact_email_does_nothing_when_recipients_are_empty
+    @contact_request.save
+    @contact_request.confirm_email
+
+    assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
+    refute(@contact_request.send_contact_email)
   end
 end
