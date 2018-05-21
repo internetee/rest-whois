@@ -12,7 +12,7 @@ gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 
 # views
 gem 'haml-rails', '~> 0.9.0'
-gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 # load env
 gem 'figaro', '~> 1.1.0'

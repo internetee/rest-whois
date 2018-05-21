@@ -1,6 +1,6 @@
 required = %w(
-  recaptcha_public_key
-  recaptcha_private_key
+  recaptcha_site_key
+  recaptcha_secret_key
 )
 
 Figaro.require_keys(required)
