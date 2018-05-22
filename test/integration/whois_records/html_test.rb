@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
-  def test_HTML_returns_404_for_missing_domains
+  def test_html_returns_404_for_missing_domains
     visit('/v1/missing-domain.test')
 
     assert_equal(404, page.status_code)
@@ -24,7 +24,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
-  def test_HTML_has_disclaimer_text
+  def test_html_has_disclaimer_text
     visit('/v1/privatedomain.test')
 
     assert_text(
@@ -42,7 +42,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
-  def test_HTML_for_private_person_does_not_contain_personal_data
+  def test_html_for_private_person_does_not_contain_personal_data
     visit('/v1/privatedomain.test')
     assert_text(
       <<-TEXT.squish
@@ -65,7 +65,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
-  def test_HTML_for_company_with_failed_captcha
+  def test_html_for_company_with_failed_captcha
     # Setup
     Recaptcha.configuration.skip_verify_env.delete("test")
     headers = page.driver.options[:headers]
@@ -115,7 +115,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     Recaptcha.configuration.skip_verify_env = ['test', 'cucumber']
   end
 
-  def test_HTML_for_company_with_whitelist_IP
+  def test_html_for_company_with_whitelist_ip
     visit('/v1/company-domain.test')
 
     assert_text(
