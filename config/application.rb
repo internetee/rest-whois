@@ -26,5 +26,19 @@ module RestWhois
 
     # Mailer configuration
     config.action_mailer.default_url_options = { host: ENV['mailer_host'] }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+
+    config.action_mailer.smtp_settings = {
+      address:              ENV['smtp_address'],
+      port:                 ENV['smtp_port'],
+      enable_starttls_auto: ENV['smtp_enable_starttls_auto'] == 'true',
+      user_name:            ENV['smtp_user_name'],
+      password:             ENV['smtp_password'],
+      authentication:       ENV['smtp_authentication'],
+      domain:               ENV['smtp_domain'],
+      openssl_verify_mode:  ENV['smtp_openssl_verify_mode']
+    }
   end
 end
