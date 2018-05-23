@@ -16,16 +16,6 @@ ActiveRecord::Schema.define(version: 20150113113236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "domains", force: :cascade do |t|
-    t.string   "name"
-    t.text     "whois_body"
-    t.json     "whois_json"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
-
   create_table "whois_records", force: :cascade do |t|
     t.string   "name"
     t.text     "body"
