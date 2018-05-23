@@ -1,0 +1,57 @@
+Domain:
+name:       <%= json['name'] %>
+<%- for st in Array(json['status']) -%>
+status:     <%= st %>
+<%- end -%>
+registered: <%= json['registered'].to_s.tr('T',' ').sub('+', ' +') %>
+changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+expire:     <%= json['expire'].to_s.tr('T',' ').sub('+', ' +') %>
+outzone:    <%= json['outzone'].to_s.tr('T',' ').sub('+', ' +') %>
+delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
+
+Registrant:
+name:       <%= json['registrant'] %>
+org id:     <%= json['registrant_reg_no'] %>
+country:    <%= json['registrant_ident_country_code'] %>
+email:      <%= json['email'] %>
+changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+
+<%- if json['admin_contacts'].present? -%>
+Administrative contact:
+<%- for contact in json['admin_contacts'] -%>
+name:       <%= contact['name'] %>
+email:      <%= contact['email'] %>
+changed:    <%= contact['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+<%- end -%>
+<%- end -%>
+
+<%- if json['tech_contacts'].present? -%>
+Technical contact:
+<%- for contact in json['tech_contacts'] -%>
+name:       <%= contact['name'] %>
+email:      <%= contact['email'] %>
+changed:    <%= contact['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+<%- end -%>
+<%- end -%>
+
+Registrar:
+name:       <%= json['registrar'] %>
+url:        <%= json['registrar_website'] %>
+phone:      <%= json['registrar_phone'] %>
+changed:    <%= json['registrar_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+
+<%- if json['nameservers'].present? -%>
+Name servers:
+<%- for server in json['nameservers'] -%>
+nserver:   <%= server %>
+<%- end -%>
+changed:   <%= json['nameservers_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+
+<%- end -%>
+<%- if json['dnssec_keys'].present? -%>
+DNSSEC:
+<%- for key in json['dnssec_keys'] -%>
+dnskey:   <%= key %>
+<%- end -%>
+changed:  <%= json['dnssec_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+<%- end -%>
