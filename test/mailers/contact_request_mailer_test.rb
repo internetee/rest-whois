@@ -13,7 +13,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     refute(ActionMailer::Base.deliveries.empty?)
     assert_equal(['no-reply@internet.ee'], email.from)
     assert_equal(['email@example.com'], email.to)
-    assert_equal('Send an email to privatedomain.test domain owner', email.subject)
+    assert_equal('E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена', email.subject)
     assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s)
   end
 
