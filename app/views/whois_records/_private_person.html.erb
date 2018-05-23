@@ -1,3 +1,4 @@
+<%- sensitive_data_placeholder = 'Not Disclosed' %>
 Domain:
 name:       <%= json['name'] %>
 <%- for st in Array(json['status']) -%>
@@ -11,24 +12,24 @@ delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
 
 Registrant:
 name:       Private Person
-email:      Not Disclosed
-changed:    Not Disclosed
+email:      <%= show_sensitive_data ? json['email'] : sensitive_data_placeholder %>
+changed:    <%= show_sensitive_data ? json['changed'].to_s.tr('T',' ').sub('+', ' +') : sensitive_data_placeholder %>
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:
 <%- for contact in json['admin_contacts'] -%>
-name:       Not Disclosed
-email:      Not Disclosed
-changed:    Not Disclosed
+name:       <%= show_sensitive_data ? contact['name'] : sensitive_data_placeholder %>
+email:      <%= show_sensitive_data ? contact['email'] : sensitive_data_placeholder %>
+changed:    <%= show_sensitive_data ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : sensitive_data_placeholder %>
 <%- end -%>
 <%- end -%>
 
 <%- if json['tech_contacts'].present? -%>
 Technical contact:
 <%- for contact in json['tech_contacts'] -%>
-name:       Not Disclosed
-email:      Not Disclosed
-changed:    Not Disclosed
+name:       <%= show_sensitive_data ? contact['name'] : sensitive_data_placeholder %>
+email:      <%= show_sensitive_data ? contact['email'] : sensitive_data_placeholder %>
+changed:    <%= show_sensitive_data ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : sensitive_data_placeholder %>
 <%- end -%>
 <%- end -%>
 

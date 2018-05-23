@@ -3,20 +3,11 @@ require 'test_helper'
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def setup
     @original_whitelist_ip = ENV['whitelist_ip']
+    ENV['whitelist_ip'] = ''
   end
 
   def teardown
     ENV['whitelist_ip'] = @original_whitelist_ip
-  end
-
-  # By default, all requests are done from 127.0.0.1, which is inside the
-  # whitelist
-  def test_json_does_not_include_disclosed_field_when_not_on_whitelist
-    get('/v1/company-domain.test.json', {}, { 'REMOTE_ADDR': '1.2.3.4' })
-
-    response_json = JSON.parse(response.body)
-    assert_equal('1.2.3.4', request.remote_ip)
-    assert_equal('Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json['email'])
   end
 
   def test_json_returns_404_for_missing_domains
@@ -35,15 +26,6 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body)
     assert_equal('Domain not found.', response_json['error'])
     assert_equal('missing-domain.test', response_json['name'])
-  end
-
-  def test_json_includes_disclosed_field_when_on_whitelist
-    ENV['whitelist_ip'] = '127.0.0.1'
-    get('/v1/company-domain.test.json')
-
-    response_json = JSON.parse(response.body)
-    assert_equal('127.0.0.1', request.remote_ip)
-    assert_equal('owner@company-domain.test', response_json['email'])
   end
 
   def test_discarded_returns_minimal_json
@@ -66,7 +48,6 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_includes_legal_person_contacts_data
-    ENV['whitelist_ip'] = '127.0.0.1'
     get('/v1/company-domain.test.json')
 
     response_json = JSON.parse(response.body)
@@ -124,5 +105,20 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get('/v1/privatedomain.test.json')
     response_json = JSON.parse(response.body)
     assert_equal(expected_response, response_json)
+  end
+
+  def test_show_sensitive_data_when_ip_is_in_whitelist
+    ENV['whitelist_ip'] = '127.0.0.1'
+    get '/v1/company-domain.test', format: :json
+
+    response_json = JSON.parse(response.body)
+    assert_equal 'owner@company-domain.test', response_json['email']
+  end
+
+  def test_hide_sensitive_data_when_ip_is_not_in_whitelist
+    get '/v1/company-domain.test', format: :json
+
+    response_json = JSON.parse(response.body)
+    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json['email']
   end
 end
