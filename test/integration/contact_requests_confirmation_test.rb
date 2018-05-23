@@ -40,7 +40,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   end
 
   def test_new_request_fails_if_that_is_not_a_private_domain
-    visit('/contact_requests/new?domain_name=company-domain.test')
+    visit(new_contact_request_path(params: { domain_name: 'company-domain.test' }))
     assert_equal(403, page.status_code)
     assert(page.body.empty?)
   end
@@ -52,7 +52,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   end
 
   def test_create_a_email_confirmation_delivery
-    visit('/contact_requests/new?domain_name=privatedomain.test')
+    visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
     fill_in('contact_request[name]', with: 'Test User')
     click_link_or_button('Submit')
@@ -76,7 +76,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
 
   # Locale tests start here
   def test_en_locale_in_confirmation_form
-    visit('/contact_requests/new?domain_name=privatedomain.test')
+    visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     text = begin
       'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
       "of the domain.\n" \
