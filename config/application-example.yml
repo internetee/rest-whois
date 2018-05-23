@@ -1,6 +1,6 @@
 whitelist_ip: '127.0.0.1'
-recaptcha_public_key: 'add-your-own-public-key'
-recaptcha_private_key: 'add-your-own-private-key'
+recaptcha_site_key: test
+recaptcha_secret_key: test
 
 # You can use `rake secret` to generate a secure secret key.
 # Your secret key is used for verifying the integrity of signed cookies.
