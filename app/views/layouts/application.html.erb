@@ -14,6 +14,9 @@
     </head>
     <body>
         <%= render 'shared/flash' %>
+        <%- other_locales.each do |locale| %>
+            <%= link_to locale, { locale: locale } %>
+        <% end %>
         <%= yield %>
     </body>
 </html>

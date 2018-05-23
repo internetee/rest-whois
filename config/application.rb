@@ -24,6 +24,9 @@ module RestWhois
     config.active_record.raise_in_transactional_callbacks = true
     config.secret_key_base = Figaro.env.secret_key_base
 
+    # Fallback to default locale if text is missing
+    config.i18n.fallbacks = true
+
     # Mailer configuration
     config.action_mailer.default_url_options = { host: ENV['mailer_host'] }
     config.action_mailer.delivery_method = :smtp

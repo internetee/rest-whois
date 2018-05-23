@@ -11,10 +11,10 @@ class ContactRequestMailer < ApplicationMailer
   end
 
   def contact_email(contact_request:, recipients:, mail_body:)
-    reply_to     = contact_request.email
+    @contact_request = contact_request
     @unsafe_body = mail_body
     mail(to: recipients,
          subject: I18n.t('contact_requests.contact_request_email_subject', domain: @domain),
-         reply_to: reply_to)
+         reply_to: @contact_request.email)
   end
 end

@@ -10,7 +10,7 @@ en:
     confirmation_reminder: 'Please complete your email within 24 hours.'
 
     # Confirmation email
-    confirmation_email_subject: 'Send an email to %{domain} domain owner'
+    confirmation_email_subject: 'E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена'
     confirmation_email_heading: 'Confirm your email'
     confirmation_email_text: 'Click the link below to send an email to owner of %{domain}.'
     confirmation_email_disclaimer: 'This link expires in 24 hours.'

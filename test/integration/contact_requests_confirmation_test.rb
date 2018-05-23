@@ -51,19 +51,6 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     assert(page.body.empty?)
   end
 
-  def test_confirmation_form_is_rendered_correctly
-    visit('/contact_requests/new?domain_name=privatedomain.test')
-    assert(find_field('contact_request[email]'))
-    assert(find_field('contact_request[name]'))
-    text = begin
-      'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
-      "of the domain.\n" \
-      'The link expires in 24 hours.'
-    end
-
-    assert_text(text)
-  end
-
   def test_create_a_email_confirmation_delivery
     visit('/contact_requests/new?domain_name=privatedomain.test')
     fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
@@ -78,14 +65,44 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     assert_equal('Send an email to privatedomain.test domain owner', mail.subject)
 
     friendly_mail_body = mail.body.to_s
-    expected_heading = 'Confirm your email'
-    expected_body = 'Click the link below to send an email to owner of privatedomain.test.'
+    expected_body = 'Please click the link below to confirm your email address and access the contact form.'
     expected_link = 'example.com/contact_request'
-    expected_disclaimer = 'This link expires in 24 hours'
+    expected_disclaimer = 'Link expires in 24 hours.'
 
-    assert_match(expected_heading,    friendly_mail_body)
     assert_match(expected_body,       friendly_mail_body)
     assert_match(expected_link,       friendly_mail_body)
     assert_match(expected_disclaimer, friendly_mail_body)
+  end
+
+  # Locale tests start here
+  def test_en_locale_in_confirmation_form
+    visit('/contact_requests/new?domain_name=privatedomain.test')
+    text = begin
+      'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
+      "of the domain.\n" \
+      'The link expires in 24 hours.'
+    end
+
+    assert_text(text)
+  end
+
+  def test_et_locale_in_confirmation_form
+    visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'et' }))
+    text = <<-TEXT.squish
+    Saadame Teie sisestatud e-posti aadressile kinnituskirja, mis sisaldab ühekordset unikaalset
+    linki. Link suunab teid kirja vormile, kust saate oma teate saata valitud .ee domeeni
+    kontaktidele (domeeni omanik, haldus- ja tehniline kontakt).
+    TEXT
+    assert_text(text)
+  end
+
+  def test_ru_locale_in_confirmation_form
+    visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'ru' }))
+    text = <<-TEXT.squish
+    На указанный вами адрес электронной почты будет отправлено письмо с уникальной ссылкой, пройдя
+    по которой вы сможете запросить данные владельца и административного или технического контактов
+    домена.
+    TEXT
+    assert_text(text)
   end
 end

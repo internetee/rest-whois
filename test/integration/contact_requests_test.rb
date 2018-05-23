@@ -28,15 +28,23 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_equal('Email to domain owner and/or contact', mail.subject)
 
     friendly_mail_body = mail.body.to_s
-    expected_heading = 'We recommend not to click any links inside the message body.'
-    expected_body_1 = "Message text with link.\n"
+    expected_heading = 'You are listed as the contact person for the domain privatedomain.test'
+    expected_body_1 = "Message text with link."
     expected_body_2 = "There is a next line character before this one."
-    expected_disclaimer = "Internet.EE is not the author of this email.\n"
+    expected_disclaimer = "Eesti Interneti Sihtasutus"
 
     assert_match(expected_heading, friendly_mail_body)
     assert_match(expected_body_1, friendly_mail_body)
     assert_match(expected_body_2, friendly_mail_body)
     assert_match(expected_disclaimer, friendly_mail_body)
+  end
+
+  def test_et_locale_in_contact_email_form
+    visit(contact_request_path(@valid_contact_request.secret, params: { locale: 'et' }))
+
+    assert_text('Teate pikkus on piiratud 2000 märgiga.')
+    assert_text('Kõik HTMLi märgendid eemaldatakse automaatselt.')
+    assert_text('Vali kellele soovid teate saata ja sisesta oma sõnum.')
   end
 
   def test_request_replay_returns_403
