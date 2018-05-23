@@ -11,8 +11,8 @@ gem 'pg', '~> 0.19.0'
 gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 
 # views
-gem 'haml-rails', '~> 0.9.0'
 gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
+gem 'jbuilder' # For cleaner JSON views
 
 # load env
 gem 'figaro', '~> 1.1.0'
@@ -23,14 +23,16 @@ group :development, :test do
 
   # dev tools
   gem 'unicorn'
-
-  # dev tools
   gem 'spring',  '~> 1.3.3'
   gem 'rubocop'
 
   # improved errors
   gem 'better_errors',     '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.7.2'
+
+  # Test helpers
+  gem 'webmock'
+  gem 'capybara'
 
   # deploy
   gem 'mina', '~> 0.3.8' # for fast deployment

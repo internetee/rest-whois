@@ -1,0 +1,12 @@
+<pre>
+  <%= render partial: "whois", locals: { json: @whois_record.json } %>
+</pre>
+<% if @verified.blank? %>
+    <div class="full_info_form" style="padding: 20px 0 0 24px">
+        <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
+            <%= recaptcha_tags %>
+            <br/>
+            <%= submit_tag 'View full whois info', name: nil %>
+        <% end %>
+    </div>
+<% end %>
