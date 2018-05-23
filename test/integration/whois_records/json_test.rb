@@ -47,30 +47,6 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('Private Person', response_json['registrant'])
   end
 
-  def test_json_includes_legal_person_contacts_data
-    get('/v1/company-domain.test.json')
-
-    response_json = JSON.parse(response.body)
-    assert_equal('127.0.0.1', request.remote_ip)
-    assert_equal('owner@company-domain.test', response_json['email'])
-    assert_equal('test', response_json['registrant'])
-
-    expected_admin_contacts = [
-      { 'name': 'Admin Contact',
-        'email': 'admin-contact@company-domain.test',
-        'changed': '2018-04-25T14:10:41+03:00' }.with_indifferent_access
-    ]
-
-    expected_tech_contacts = [
-      { 'name': 'Tech Contact',
-        'email': 'tech-contact@company-domain.test',
-        'changed': '2018-04-25T14:10:41+03:00' }.with_indifferent_access
-    ]
-
-    assert_equal(expected_admin_contacts, response_json['admin_contacts'])
-    assert_equal(expected_tech_contacts, response_json['tech_contacts'])
-  end
-
   def test_json_all_fields_are_present
     expected_response = {
       'admin_contacts': [{'changed': 'Not Disclosed',
@@ -107,18 +83,97 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal(expected_response, response_json)
   end
 
-  def test_show_sensitive_data_when_ip_is_in_whitelist
+  def test_show_sensitive_data_of_private_entity_registrant_when_ip_is_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.1'
-    get '/v1/company-domain.test', format: :json
 
-    response_json = JSON.parse(response.body)
-    assert_equal 'owner@company-domain.test', response_json['email']
+    get '/v1/privatedomain.test', format: :json
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'owner@privatedomain.test', response_json[:email]
+    assert_equal 'test', response_json[:registrant]
+
+    expected_admin_contacts = [
+      { name: 'Admin Contact',
+        email: 'admin-contact@privatedomain.test',
+        changed: '2018-04-25T14:10:41+03:00' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Tech Contact',
+        email: 'tech-contact@privatedomain.test',
+        changed: '2018-04-25T14:10:41+03:00' }
+    ]
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_hide_sensitive_data_when_ip_is_not_in_whitelist
-    get '/v1/company-domain.test', format: :json
+  def test_show_sensitive_data_of_legal_entity_registrant_when_ip_is_in_whitelist
+    ENV['whitelist_ip'] = '127.0.0.1'
 
-    response_json = JSON.parse(response.body)
-    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json['email']
+    get '/v1/company-domain.test', format: :json
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'owner@company-domain.test', response_json[:email]
+    assert_equal 'test', response_json[:registrant]
+
+    expected_admin_contacts = [
+      { name: 'Admin Contact',
+        email: 'admin-contact@company-domain.test',
+        changed: '2018-04-25T14:10:41+03:00' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Tech Contact',
+        email: 'tech-contact@company-domain.test',
+        changed: '2018-04-25T14:10:41+03:00' }
+    ]
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
+  end
+
+  def test_hide_sensitive_data_of_private_entity_registrant_when_ip_is_not_in_whitelist
+    ENV['whitelist_ip'] = '127.0.0.2'
+
+    get '/v1/privatedomain.test', format: :json
+
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Private Person', response_json[:registrant]
+
+    expected_admin_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
+  end
+
+  def test_hide_sensitive_data_of_legal_entity_registrant_when_ip_is_not_in_whitelist
+    ENV['whitelist_ip'] = '127.0.0.2'
+
+    get '/v1/company-domain.test', format: :json
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
+
+    expected_admin_contacts = [
+      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+    ]
+
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 end
