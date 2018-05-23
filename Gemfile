@@ -23,7 +23,6 @@ group :development, :test do
 
   # dev tools
   gem 'unicorn'
-  gem 'spring',  '~> 1.3.3'
   gem 'rubocop'
 
   # improved errors
