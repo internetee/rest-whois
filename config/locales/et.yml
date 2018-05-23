@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 et:
-  hello: "Hello world"
-  submit: Submit
+  # hello: "Hello world"
+  # submit: Submit
   admin_contacts: Registreerija ja halduskontaktid
   tech_contacts: Tehniline kontakt(id)

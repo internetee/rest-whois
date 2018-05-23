@@ -1,3 +1,38 @@
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(40px, auto);
+}
+
+.grid-container .header {
+  grid-row: 1 / 1;
+  grid-column: 2 / 5;
+}
+
+.grid-container .main {
+  grid-row: 2 / 4;
+  grid-column: 2 / 4;
+}
+
+.grid-container .right {
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+h1, h2, h2, h3, a, a:visited {
+  color: #008fd7;
+}
+
+a:hover {
+  color: #f69240;
+}
+
 form header {
   margin: 0 0 20px 0;
 }
@@ -8,6 +43,7 @@ form header div {
 form header h2 {
   margin: 0 0 5px 0;
 }
+
 form > div {
   clear: both;
   overflow: hidden;

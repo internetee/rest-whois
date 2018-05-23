@@ -17,6 +17,6 @@
   <fieldset>
     <%= label_tag(:email_body, I18n.t('contact_requests.email_body')) %><br>
     <%= text_area_tag(:email_body, "", size: "130x14", class: 'contact-request') %>
-  </fieldset>
+  </fieldset><br>
   <%= submit_tag(I18n.t('submit')) %>
 <% end %>
