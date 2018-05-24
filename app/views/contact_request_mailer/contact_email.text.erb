@@ -1,5 +1,5 @@
 Lugupeetud domeeni <%= @domain %> kontakt
-Eesti Interneti SA annab teada, et huvitatud isik soovib domeeniga privatedomain.test seotud kontakti(de)ga
+Eesti Interneti SA annab teada, et huvitatud isik soovib domeeniga <%= @domain %> seotud kontakti(de)ga
 ühendust võtta ja edastab Teile alljärgneva teate:
 
 <%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
@@ -20,7 +20,7 @@ Eesti Interneti Sihtasutus
 
 You are listed as the contact person for the domain <%= @domain %>
 Eesti Interneti SA hereby informs you that an interested person wishes to contact the contact person(s) for the domain
-privatedomain.test, and is also forwarding the following message:
+<%= @domain %>, and is also forwarding the following message:
 
 <%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
 
