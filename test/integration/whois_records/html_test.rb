@@ -55,33 +55,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
-  def test_show_sensitive_data_of_private_entity_when_captcha_is_solved
-    with_captcha_test_keys do
-      visit '/v1/privatedomain.test'
-      click_button 'View full whois info'
-    end
-
-    assert_text(
-      <<-TEXT.squish
-        Registrant:
-        name:    test
-        email:   owner@privatedomain.test
-        changed: 2018-04-25 14:10:41 +03:00
-  
-        Administrative contact:
-        name:       Admin Contact
-        email:      admin-contact@privatedomain.test
-        changed:    2018-04-25 14:10:41 +03:00
-  
-        Technical contact:
-        name:       Tech Contact
-        email:      tech-contact@privatedomain.test
-        changed:    2018-04-25 14:10:41 +03:00
-    TEXT
-    )
-    assert_no_button 'View full whois info'
-  end
-
   def test_show_sensitive_data_of_legal_entity_when_captcha_is_solved
     with_captcha_test_keys do
       visit '/v1/company-domain.test'
@@ -111,6 +84,33 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     assert_no_button 'View full whois info'
   end
 
+  def test_hide_sensitive_data_of_private_entity_when_captcha_is_solved
+    with_captcha_test_keys do
+      visit '/v1/privatedomain.test'
+      click_button 'View full whois info'
+    end
+
+    assert_text(
+      <<-TEXT.squish
+        Registrant:
+        name:    Private Person
+        email:   Not Disclosed
+        changed: Not Disclosed
+  
+        Administrative contact:
+        name:       Not Disclosed
+        email:      Not Disclosed
+        changed:    Not Disclosed
+  
+        Technical contact:
+        name:       Not Disclosed
+        email:      Not Disclosed
+        changed:    Not Disclosed
+      TEXT
+    )
+    assert_no_button 'View full whois info'
+  end
+
   def test_hide_sensitive_data_if_private_entity_when_captcha_is_unsolved
     visit '/v1/privatedomain.test'
 
@@ -125,7 +125,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-        
         
         Technical contact:
         name:       Not Disclosed
@@ -147,7 +146,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         country: EE
         email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
         changed: 2018-04-25 14:10:41 +03:00
-
 
         Administrative contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
@@ -179,8 +177,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Admin Contact
         email:      admin-contact@privatedomain.test
         changed:    2018-04-25 14:10:41 +03:00
-  
-  
+ 
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@privatedomain.test
@@ -203,7 +200,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         country: EE
         email:   owner@company-domain.test
         changed: 2018-04-25 14:10:41 +03:00
-
 
         Administrative contact:
         name:       Admin Contact
@@ -235,8 +231,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-        
-        
+       
         Technical contact:
         name:       Not Disclosed
         email:      Not Disclosed
@@ -259,7 +254,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         country: EE
         email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
         changed: 2018-04-25 14:10:41 +03:00
-
 
         Administrative contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS

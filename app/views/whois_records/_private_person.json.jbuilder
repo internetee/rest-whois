@@ -19,22 +19,22 @@ json.registrar_changed whois_record.json['registrar_changed']
 json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
-json.email (show_sensitive_data ? whois_record.json['email'] : 'Not Disclosed')
-json.registrant (show_sensitive_data ? whois_record.json['registrant'] : 'Private Person')
+json.email (ip_in_whitelist ? whois_record.json['email'] : 'Not Disclosed')
+json.registrant (ip_in_whitelist ? whois_record.json['registrant'] : 'Private Person')
 
 json.tech_contacts do
   json.array!(whois_record.json['tech_contacts']) do |contact|
-    json.name (show_sensitive_data ? contact['name'] : 'Not Disclosed')
-    json.email (show_sensitive_data ? contact['email'] : 'Not Disclosed')
-    json.changed (show_sensitive_data ? contact['changed'] : 'Not Disclosed')
+    json.name (ip_in_whitelist ? contact['name'] : 'Not Disclosed')
+    json.email (ip_in_whitelist ? contact['email'] : 'Not Disclosed')
+    json.changed (ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
   end
 end
 
 json.admin_contacts do
   json.array!(whois_record.json['admin_contacts']) do |contact|
-    json.name (show_sensitive_data ? contact['name'] : 'Not Disclosed')
-    json.email (show_sensitive_data ? contact['email'] : 'Not Disclosed')
-    json.changed (show_sensitive_data ? contact['changed'] : 'Not Disclosed')
+    json.name (ip_in_whitelist ? contact['name'] : 'Not Disclosed')
+    json.email (ip_in_whitelist ? contact['email'] : 'Not Disclosed')
+    json.changed (ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
   end
 end
 

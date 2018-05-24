@@ -1,6 +1,7 @@
 <pre>
   <%= render partial: "whois", locals: { json: @whois_record.json,
-                                         show_sensitive_data: @show_sensitive_data } %>
+                                         show_sensitive_data: @show_sensitive_data,
+                                         ip_in_whitelist: ip_in_whitelist? } %>
 </pre>
 <% if !@show_sensitive_data %>
       <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>

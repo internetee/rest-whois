@@ -1,4 +1,6 @@
 class WhoisRecordsController < ApplicationController
+  helper_method :ip_in_whitelist?
+
   def show
     domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
