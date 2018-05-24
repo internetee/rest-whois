@@ -10,3 +10,6 @@
         <% end %>
     </div>
 <% end %>
+<% if @whois_record.contactable? %>
+  <%= link_to I18n.t('whois_records.contact_owner'), new_contact_request_url({ domain_name: @whois_record.name }) %>
+<% end -%>
