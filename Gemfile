@@ -11,7 +11,7 @@ gem 'pg', '~> 0.19.0'
 gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 
 # views
-gem 'recaptcha', '~> 1.1.0', require: 'recaptcha/rails'
+gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jbuilder' # For cleaner JSON views
 
 # assets

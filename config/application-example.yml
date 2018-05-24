@@ -1,6 +1,6 @@
 whitelist_ip: '127.0.0.1'
-recaptcha_public_key: 'add-your-own-public-key'
-recaptcha_private_key: 'add-your-own-private-key'
+recaptcha_site_key: test
+recaptcha_secret_key: test
 
 # Variables for mailer
 mailer_from_address: 'no-reply@internet.ee'

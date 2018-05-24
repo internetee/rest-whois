@@ -128,7 +128,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    recaptcha (1.1.2)
+    recaptcha (4.8.0)
       json
     rubocop (0.56.0)
       parallel (~> 1.10)
@@ -190,7 +190,7 @@ DEPENDENCIES
   pg (~> 0.19.0)
   pry (~> 0.10.1)
   rails (~> 4.2.7.1)
-  recaptcha (~> 1.1.0)
+  recaptcha
   rubocop
   sass-rails
   simpleidn (= 0.0.7)
