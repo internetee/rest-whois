@@ -51,6 +51,6 @@ class WhoisRecordsController < ApplicationController
   end
 
   def captcha_solved?
-    verify_recaptcha if request.format.html?
+    verify_recaptcha
   end
 end
