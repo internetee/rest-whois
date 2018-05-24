@@ -39,3 +39,17 @@ This e-mail was forwarded automatically by Eesti Interneti SA system. Please do 
 
 Yours sincerely,
 Eesti Interneti SA
+
+--------------------------------------------------------------------------------
+
+Уважаемый контакт домена privatedomain.test,
+У <%= @contact_request.name %> (<%= @contact_request.email %>) есть для вас сообщение:
+
+<%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
+
+Вступивший в силу 25 мая 2018 года закон о защите личных данных не позволяет раскрывать личные данные частных лиц. Eesti Interneti SA позволяет связаться с контактами домена через свой сайт
+Eesti Interneti SA не проверяет подлинность сообщения и не устанавливает личность отправителя
+Вы не обязаны отвечать на данное письмо
+
+С уважением,
+Eesti Interneti SA

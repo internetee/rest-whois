@@ -7,6 +7,7 @@ et:
     email: 'Teie e-posti aadress:'
     name: 'Teie nimi:'
     successfully_created: 'Kinnituskirja saatmine õnnestus”. Kontrollige oma e-kirju, saatsime Teile ühekordse lingi kirja saatmise vormile.'
+    gdpr_disclaimer: "Eesti interneti SA töötleb Teie sisestatud andmeid vastavalt isikuandmete kasutamise alustele. Andmete sisestamisel kinnitate, et nõustute enda isikuandmete töötlemisega. Täpsemalt lugege selle kohta <a href='https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused'>siit.</a>"
 
     # Contact email creation view.
     contact_form: 'Contact Form'

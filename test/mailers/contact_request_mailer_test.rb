@@ -14,7 +14,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['no-reply@internet.ee'], email.from)
     assert_equal(['email@example.com'], email.to)
     assert_equal('E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена', email.subject)
-    assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s)
+    assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s.rstrip)
   end
 
   def test_contact_request_email
@@ -37,7 +37,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['admin@privatedomain.com', 'owner@private_domain.com'], email.to)
     assert_equal(['email@example.com'], email.reply_to)
     assert_equal('Email to domain owner and/or contact', email.subject)
-    assert_equal(read_fixture('contact_request_email.erb').join, email.body.to_s)
+    assert_equal(read_fixture('contact_request_email.erb').join, email.body.to_s.rstrip)
   end
 
   def test_contact_request_email_strips_html_tags_from_body
@@ -55,7 +55,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['admin@privatedomain.com', 'owner@private_domain.com'], email.to)
     assert_equal(['email@example.com'], email.reply_to)
     assert_equal('Email to domain owner and/or contact', email.subject)
-    assert_equal(read_fixture('stripped_contact_request_email.erb').join, email.body.to_s)
+    assert_equal(read_fixture('stripped_contact_request_email.erb').join, email.body.to_s.rstrip)
   end
 
   def test_character_limit_constants_defaults_to_2000
@@ -96,6 +96,6 @@ class ContactRequestMailerTest < ActionMailer::TestCase
       mail_body: body
     ).deliver_now
 
-    refute_match('This line should be skipped', email.body.to_s)
+    refute_match('This line should be skipped', email.body.to_s.rstrip)
   end
 end

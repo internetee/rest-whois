@@ -8,6 +8,7 @@ en:
     successfully_created: 'Contact request created. Check your email for a link to the one-time contact form.'
     confirmation_sent: 'We sent a confirmation request to %{email}'
     confirmation_reminder: 'Please complete your email within 24 hours.'
+    gdpr_disclaimer: "Estonian Internet Foundation is processing your personal data according to the objectives set out in the Data Protection Policy. By entering the data, you confirm that you agree to the processing of your personal data. See more <a href='https://www.internet.ee/domains/eif-s-data-protection-policy'>here</a>."
 
     # Email headings
     confirmation_email_subject: 'E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена'

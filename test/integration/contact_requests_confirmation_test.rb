@@ -83,6 +83,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
       'The link expires in 24 hours.'
     end
 
+    assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
     assert_text(text)
   end
 
@@ -93,6 +94,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     linki. Link suunab teid kirja vormile, kust saate oma teate saata valitud .ee domeeni
     kontaktidele (domeeni omanik, haldus- ja tehniline kontakt).
     TEXT
+    assert(has_link?(href: 'https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused'))
     assert_text(text)
   end
 
@@ -104,5 +106,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     домена.
     TEXT
     assert_text(text)
+    # TODO: Fix the link when correct
+    assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end
 end

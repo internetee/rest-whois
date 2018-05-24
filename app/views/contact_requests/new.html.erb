@@ -7,11 +7,12 @@
 
 <div class='form'>
   <%= form_for(@contact_request) do |f| %>
-      <%= f.label I18n.t('contact_requests.email') %><br>
-      <%= f.email_field :email %><br>
-      <%= f.label I18n.t('contact_requests.name') %><br>
-      <%= f.text_field :name %>
-      <%= f.hidden_field :whois_record_id %><br><br>
+    <%= f.label I18n.t('contact_requests.email') %><br>
+    <%= f.email_field :email %><br>
+    <%= f.label I18n.t('contact_requests.name') %><br>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :whois_record_id %><br><br>
     <%= f.submit t(:submit) %>
   <% end %>
 </div>
+<p><%= I18n.t('contact_requests.gdpr_disclaimer').html_safe %></p>

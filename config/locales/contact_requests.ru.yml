@@ -7,13 +7,17 @@ ru:
     email: 'Электронная почта:'
     name: 'Имя:'
     successfully_created: 'Заявка на связь с владельцем домена принята. На вашу электронную почту была выслана ссылка, которая поможет вам связаться с владельцем домена.'
+    gdpr_disclaimer: "Eesti Interneti SA обрабатывает данные в соответствии с законом о защите личных данных. Предоставляя свои данные, вы даете согласие на их <a href='https://www.internet.ee/domains/eif-s-data-protection-policy'>обработку.</a>"
+
+    confirmation_email_subject: 'E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена'
+    contact_request_email_subject: 'Email to domain owner and/or contact'
 
     # Contact email creation view.
-    contact_form: 'Contact Form'
+    contact_form: 'Форма обратной связи'
     email_body: 'Email Body'
     contact_email_recipients_instructions: |
-      Message is limited to 2000 characters.
-      All HTML tags are stripped automatically.
-      Select the recipients of your email and enter the text.
+      Максимальная длина сообщения 2000 символов.
+      HTML не поддерживается и будет удален автоматически.
+      Получатели сообщения:
 
-    successfully_sent: 'Your email has been sent.'
+    successfully_sent: 'Спасибо, ваше сообщение отправлено!'

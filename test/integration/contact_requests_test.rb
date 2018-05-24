@@ -61,6 +61,7 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_text('Message is limited to 2000 characters.')
     assert_text('All HTML tags are stripped automatically.')
     assert_text('Select the recipients of your email and enter the text.')
+    assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end
 
   def test_et_locale_in_contact_email_form
@@ -69,10 +70,14 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_text('Teate pikkus on piiratud 2000 märgiga.')
     assert_text('Kõik HTMLi märgendid eemaldatakse automaatselt.')
     assert_text('Vali kellele soovid teate saata ja sisesta oma sõnum.')
+    assert(has_link?(href: 'https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused'))
   end
 
   def test_ru_locale_in_contact_email_form
-    skip
     visit(contact_request_path(@valid_contact_request.secret, params: { locale: 'ru' }))
+    assert_text('Максимальная длина сообщения 2000 символов.')
+    assert_text('HTML не поддерживается и будет удален автоматически.')
+    assert_text('Получатели сообщения:')
+    assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end
 end
