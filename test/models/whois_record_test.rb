@@ -12,6 +12,12 @@ class WhoisRecordTest < ActiveSupport::TestCase
     assert(@private_domain.private_person?)
   end
 
+  def test_contactable_returns_a_boolean
+    refute(@legal_domain.contactable?)
+    refute(@discarded_domain.contactable?)
+    assert(@private_domain.contactable?)
+  end
+
   def test_partial_name_for_private_person
     assert_equal('private_person', @private_domain.partial_name)
     assert_equal('private_person', @private_domain.partial_name(true))

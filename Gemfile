@@ -14,6 +14,10 @@ gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jbuilder' # For cleaner JSON views
 
+# assets
+gem 'sass-rails'
+gem 'uglifier'
+
 # load env
 gem 'figaro', '~> 1.1.0'
 
@@ -26,11 +30,6 @@ group :development, :test do
   gem 'spring',  '~> 1.3.3'
   gem 'rubocop'
 
-  # improved errors
-  gem 'better_errors',     '~> 2.0.0'
-  gem 'binding_of_caller', '~> 0.7.2'
-
-  # Test helpers
   gem 'webmock'
   gem 'capybara'
 

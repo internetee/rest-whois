@@ -35,3 +35,5 @@ json.admin_contacts do
     json.changed 'Not Disclosed'
   end
 end
+
+json.contact_form_link new_contact_request_url({ domain_name: whois_record.name })
