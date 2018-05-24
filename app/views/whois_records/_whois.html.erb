@@ -3,7 +3,8 @@
 <%- end -%>
 Estonia .ee Top Level Domain WHOIS server
 
-<%= render partial: @whois_record.partial_name(@whitelist || @verified), locals: { json: @whois_record.json } -%>
+<%= render partial: @whois_record.partial_name(show_sensitive_data), locals: { json: @whois_record.json,
+                                                                     show_sensitive_data: show_sensitive_data} -%>
 
 Estonia .ee Top Level Domain WHOIS server
 More information at http://internet.ee

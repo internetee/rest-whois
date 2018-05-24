@@ -10,25 +10,25 @@ outzone:    <%= json['outzone'].to_s.tr('T',' ').sub('+', ' +') %>
 delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
 
 Registrant:
-name:       Private Person
-email:      Not Disclosed
-changed:    Not Disclosed
+name:       <%= show_sensitive_data ? json['registrant'] : 'Private Person' %>
+email:      <%= show_sensitive_data ? json['email'] : 'Not Disclosed' %>
+changed:    <%= show_sensitive_data ? json['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:
 <%- for contact in json['admin_contacts'] -%>
-name:       Not Disclosed
-email:      Not Disclosed
-changed:    Not Disclosed
+name:       <%= show_sensitive_data ? contact['name'] : 'Not Disclosed' %>
+email:      <%= show_sensitive_data ? contact['email'] : 'Not Disclosed' %>
+changed:    <%= show_sensitive_data ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
 <%- end -%>
 <%- end -%>
 
 <%- if json['tech_contacts'].present? -%>
 Technical contact:
 <%- for contact in json['tech_contacts'] -%>
-name:       Not Disclosed
-email:      Not Disclosed
-changed:    Not Disclosed
+name:       <%= show_sensitive_data ? contact['name'] : 'Not Disclosed' %>
+email:      <%= show_sensitive_data ? contact['email'] : 'Not Disclosed' %>
+changed:    <%= show_sensitive_data ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
 <%- end -%>
 <%- end -%>
 

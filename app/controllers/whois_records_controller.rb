@@ -3,7 +3,7 @@ class WhoisRecordsController < ApplicationController
     domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
-    set_captcha_and_whitelist
+    @show_sensitive_data = (ip_in_whitelist? || captcha_solved?)
     log_message(params, @whois_record)
 
     respond_to do |format|
@@ -29,24 +29,28 @@ class WhoisRecordsController < ApplicationController
 
   private
 
-  def set_captcha_and_whitelist
-    @whitelist = true if request.remote_ip == ENV['whitelist_ip']
-
-    @verified = verify_recaptcha if request.format == 'html'
-  end
-
   def log_message(params, whois_record)
     if whois_record
       Rails.logger.warn(
         "Requested: #{params[:id]}; " \
         "Record found with id: #{@whois_record.id}; " \
-        "Captcha result: #{@verified ? 'yes' : 'no'}; ip: #{request.remote_ip};"
+        "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
     else
       Rails.logger.warn(
         "Requested: #{params[:id]}; Record not found; " \
-        "Captcha result: #{@verified ? 'yes' : 'no'}; ip: #{request.remote_ip};"
+        "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
     end
+  end
+
+  def ip_in_whitelist?
+    return unless ENV['whitelist_ip'].present?
+    whitelist = ENV['whitelist_ip'].split(',').map(&:strip)
+    whitelist.include?(request.remote_ip)
+  end
+
+  def captcha_solved?
+    verify_recaptcha
   end
 end
