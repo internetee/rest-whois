@@ -7,15 +7,13 @@ gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jbuilder'
 
-# assets
 gem 'sass-rails'
 gem 'uglifier'
 
-# load env
 gem 'figaro', '~> 1.1.0'
 
 group :development, :test do
-  gem 'pry', '~> 0.10.1'
+  gem 'pry'
   gem 'unicorn'
   gem 'rubocop'
 
