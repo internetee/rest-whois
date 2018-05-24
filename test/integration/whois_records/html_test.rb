@@ -111,7 +111,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     assert_no_button 'View full whois info'
   end
 
-  def test_hide_sensitive_data_if_private_entity_when_captcha_is_unsolved
+  def test_hide_sensitive_data_of_private_entity_when_captcha_is_unsolved
     visit '/v1/privatedomain.test'
 
     assert_text(
@@ -135,7 +135,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     assert_button 'View full whois info'
   end
 
-  def test_hide_sensitive_data_if_legal_entity_when_captcha_is_unsolved
+  def test_hide_sensitive_data_of_legal_entity_when_captcha_is_unsolved
     visit '/v1/company-domain.test'
 
     assert_text(
