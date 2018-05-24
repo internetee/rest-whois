@@ -12,7 +12,7 @@ delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
 Registrant:
 name:       <%= ip_in_whitelist ? json['registrant'] : 'Private Person' %>
 email:      <%= ip_in_whitelist ? json['email'] : 'Not Disclosed' %>
-changed:    <%= ip_in_whitelist ? json['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
+changed:    <%= ip_in_whitelist ? json['registrant_changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:
