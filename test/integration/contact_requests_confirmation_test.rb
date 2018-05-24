@@ -28,15 +28,26 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     assert_text(text)
   end
 
-  def test_link_from_whois_record_page_does_not_exists_for_legal_owners
-    visit("v1/company-domain.test")
-    refute(has_link?('Contact owner'))
-  end
-
   def test_new_request_fails_if_there_is_no_domain_name_passed
     assert_raise ActiveRecord::RecordNotFound do
       visit(new_contact_request_path)
     end
+  end
+
+  def test_link_from_whois_record_page_does_not_exists_for_discarded_domains
+    visit("v1/discarded-domain.test")
+    refute(has_link?('Contact owner'))
+  end
+
+  def test_new_request_fails_if_that_is_a_discarded_domain
+    visit(new_contact_request_path(params: { domain_name: 'discarded-domain.test' }))
+    assert_equal(403, page.status_code)
+    assert(page.body.empty?)
+  end
+
+  def test_link_from_whois_record_page_does_not_exists_for_legal_owners
+    visit("v1/company-domain.test")
+    refute(has_link?('Contact owner'))
   end
 
   def test_new_request_fails_if_that_is_not_a_private_domain

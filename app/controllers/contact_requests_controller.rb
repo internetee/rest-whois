@@ -5,7 +5,7 @@ class ContactRequestsController < ApplicationController
 
   def new
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
-    return head(:forbidden) unless whois_record.private_person?
+    return head(:forbidden) unless whois_record.contactable?
 
     @contact_request = ContactRequest.new(whois_record: whois_record)
   end
