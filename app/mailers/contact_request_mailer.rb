@@ -6,6 +6,8 @@ class ContactRequestMailer < ApplicationMailer
     @contact_request = contact_request
     recipients = contact_request.email
     @domain    = contact_request.whois_record.name
+
+    Rails.logger.warn("Confirmation email sent to #{recipients}.")
     mail(to: recipients,
          subject: I18n.t('contact_requests.confirmation_email_subject', domain: @domain))
   end
@@ -15,6 +17,7 @@ class ContactRequestMailer < ApplicationMailer
     @unsafe_body     = mail_body
     @domain          = contact_request.whois_record.name
 
+    Rails.logger.warn("Contact email sent to #{recipients} from #{@contact_request.email}.")
     mail(to: recipients,
          subject: I18n.t('contact_requests.contact_request_email_subject', domain: @domain),
          reply_to: @contact_request.email)

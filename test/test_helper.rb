@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'capybara/minitest'
 require 'webmock/minitest'
 require 'support/captcha_helpers'
+require 'support/logging_helpers'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
