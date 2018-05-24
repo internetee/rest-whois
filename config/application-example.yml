@@ -1,4 +1,4 @@
-whitelist_ip: '127.0.0.1'
+whitelist_ip: '127.0.0.1, 127.0.0.2'
 recaptcha_site_key: test
 recaptcha_secret_key: test
 

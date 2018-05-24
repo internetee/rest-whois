@@ -46,7 +46,8 @@ class WhoisRecordsController < ApplicationController
 
   def ip_in_whitelist?
     return unless ENV['whitelist_ip'].present?
-    ENV['whitelist_ip'] == request.remote_ip
+    whitelist = ENV['whitelist_ip'].split(',').map(&:strip)
+    whitelist.include?(request.remote_ip)
   end
 
   def captcha_solved?
