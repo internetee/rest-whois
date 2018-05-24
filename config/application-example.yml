@@ -1,4 +1,9 @@
 whitelist_ip: '127.0.0.1, 127.0.0.2'
+
+# With the following test keys,
+# you will always get No CAPTCHA and all verification requests will pass.
+# Site key: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+# Secret key: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 recaptcha_site_key: test
 recaptcha_secret_key: test
 
