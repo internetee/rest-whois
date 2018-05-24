@@ -187,7 +187,7 @@ DEPENDENCIES
   jbuilder
   mina (~> 0.3.8)
   pg (~> 0.19.0)
-  pry (~> 0.10.1)
+  pry
   rails (~> 4.2.7.1)
   recaptcha
   rubocop
