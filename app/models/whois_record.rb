@@ -15,6 +15,10 @@ class WhoisRecord < ActiveRecord::Base
     end
   end
 
+  def contactable?
+    !discarded_blocked_or_reserved? && private_person?
+  end
+
   private
 
   def discarded_blocked_or_reserved?

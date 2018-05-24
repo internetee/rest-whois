@@ -80,7 +80,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
       'status': ['inactive'],
       'tech_contacts': [{'changed': 'Not Disclosed',
                          'email': 'Not Disclosed',
-                         'name': 'Not Disclosed'}]
+                         'name': 'Not Disclosed'}],
+      'contact_form_link': 'http://www.example.com/contact_requests/new?domain_name=privatedomain.test&locale=en'
     }.with_indifferent_access
 
     get('/v1/privatedomain.test.json')

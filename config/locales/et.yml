@@ -19,8 +19,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
-  submit: Submit
-  admin_contacts: "Owner and administrative contacts"
-  tech_contacts: "Technical contacts"
+et:
+  # hello: "Hello world"
+  # submit: Submit
+  admin_contacts: Registreerija ja halduskontaktid
+  tech_contacts: Tehniline kontakt(id)

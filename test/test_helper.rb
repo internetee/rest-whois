@@ -21,7 +21,7 @@ class ActionDispatch::IntegrationTest
   include AbstractController::Translation
 
   # By default, skip Recaptcha tests
-  Recaptcha.configuration.skip_verify_env = ['test', 'cucumber']
+  Recaptcha.configuration.skip_verify_env = %w[test cucumber]
 
   teardown do
     WebMock.reset!
