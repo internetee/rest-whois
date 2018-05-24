@@ -1,13 +1,18 @@
 require 'test_helper'
 
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
+  include CaptchaHelpers
+
   def setup
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
+    stub_request(:get, /google.com\/recaptcha/).to_return(body: '{}')
+    enable_captcha
   end
 
   def teardown
     ENV['whitelist_ip'] = @original_whitelist_ip
+    disable_captcha
   end
 
   def test_json_returns_404_for_missing_domains
@@ -81,6 +86,50 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get('/v1/privatedomain.test.json')
     response_json = JSON.parse(response.body)
     assert_equal(expected_response, response_json)
+  end
+
+  def test_hide_sensitive_data_of_private_entity_registrant_when_captcha_is_unsolved
+    get '/v1/privatedomain.test', format: :json
+
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Private Person', response_json[:registrant]
+
+    expected_admin_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
+  end
+
+  def test_hide_sensitive_data_of_legal_entity_registrant_when_captcha_is_unsolved
+    get '/v1/company-domain.test', format: :json
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
+
+    expected_admin_contacts = [
+      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+    ]
+
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
   def test_show_sensitive_data_of_private_entity_registrant_when_ip_is_in_whitelist

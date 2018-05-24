@@ -1,16 +1,17 @@
 require 'test_helper'
 
 class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
+  include CaptchaHelpers
+
   def setup
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
-    stub_request(:get, /google.com\/recaptcha/).to_return(body: '{}')
-    Recaptcha.configuration.skip_verify_env.delete('test')
+    enable_captcha
   end
 
   def teardown
     ENV['whitelist_ip'] = @original_whitelist_ip
-    Recaptcha.configuration.skip_verify_env.push('test')
+    disable_captcha
   end
 
   def test_html_returns_404_for_missing_domains
@@ -54,19 +55,16 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
-  def test_show_sensitive_data_when_captcha_is_solved
-    # Allow Recaptcha gem reach Google to switch to test mode so that captcha as always solved
-    WebMock.reset!
-    WebMock.allow_net_connect!
-    Recaptcha.with_configuration(site_key: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-                                 secret_key: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe') do
+  def test_show_sensitive_data_of_private_entity_when_captcha_is_solved
+    with_captcha_test_keys do
       visit '/v1/privatedomain.test'
+      click_button 'View full whois info'
     end
 
     assert_text(
       <<-TEXT.squish
         Registrant:
-        name:    Private Person
+        name:    test
         email:   owner@privatedomain.test
         changed: 2018-04-25 14:10:41 +03:00
   
@@ -75,7 +73,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         email:      admin-contact@privatedomain.test
         changed:    2018-04-25 14:10:41 +03:00
   
-  
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@privatedomain.test
@@ -83,8 +80,13 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     TEXT
     )
     assert_no_button 'View full whois info'
+  end
 
-    visit '/v1/company-domain.test'
+  def test_show_sensitive_data_of_legal_entity_when_captcha_is_solved
+    with_captcha_test_keys do
+      visit '/v1/company-domain.test'
+      click_button 'View full whois info'
+    end
 
     assert_text(
       <<-TEXT.squish
@@ -95,7 +97,6 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         email:   owner@company-domain.test
         changed: 2018-04-25 14:10:41 +03:00
 
-
         Administrative contact:
         name:       Admin Contact
         email:      admin-contact@company-domain.test
@@ -105,11 +106,9 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Tech Contact
         email:      tech-contact@company-domain.test
         changed:    2018-04-25 14:10:41 +03:00
-    TEXT
+      TEXT
     )
     assert_no_button 'View full whois info'
-
-    WebMock.disable_net_connect!
   end
 
   def test_hide_sensitive_data_if_private_entity_when_captcha_is_unsolved
@@ -132,7 +131,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-      TEXT
+    TEXT
     )
     assert_button 'View full whois info'
   end
