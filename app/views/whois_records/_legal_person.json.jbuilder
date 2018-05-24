@@ -10,7 +10,7 @@ json.nameservers_changed whois_record.json['nameservers_changed']
 json.outzone whois_record.json['outzone']
 json.registered whois_record.json['registered']
 
-json.registrant_changed whois_record.json['registrant_changed']
+json.registrant_changed 'Not Disclosed - Visit www.internet.ee for webbased WHOIS'
 json.registrant_kind whois_record.json['registrant_kind']
 
 json.registrar whois_record.json['registrar']

@@ -68,7 +68,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   owner@company-domain.test
-        changed: 2018-04-25 14:10:41 +03:00
+        changed: 2018-04-25 14:10:39 +03:00
 
         Administrative contact:
         name:       Admin Contact
@@ -145,7 +145,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed: 2018-04-25 14:10:41 +03:00
+        changed: Not Disclosed - Visit www.internet.ee for webbased WHOIS
 
         Administrative contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
@@ -199,7 +199,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   owner@company-domain.test
-        changed: 2018-04-25 14:10:41 +03:00
+        changed: 2018-04-25 14:10:39 +03:00
 
         Administrative contact:
         name:       Admin Contact
@@ -253,7 +253,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed: 2018-04-25 14:10:41 +03:00
+        changed: Not Disclosed - Visit www.internet.ee for webbased WHOIS
 
         Administrative contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS

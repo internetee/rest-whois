@@ -43,15 +43,6 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     refute(response_json.has_key?('registrant'))
   end
 
-  def test_json_does_not_include_private_person_contact_data
-    get('/v1/privatedomain.test.json')
-
-    response_json = JSON.parse(response.body)
-    assert_equal('127.0.0.1', request.remote_ip)
-    assert_equal('Not Disclosed', response_json['email'])
-    assert_equal('Private Person', response_json['registrant'])
-  end
-
   def test_json_all_fields_are_present
     expected_response = {
       'admin_contacts': [{'changed': 'Not Disclosed',
@@ -70,11 +61,11 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
       'outzone': nil,
       'registered': '2018-04-25T14:10:41+03:00',
       'registrant': 'Private Person',
-      'registrant_changed': '2018-04-25T14:10:39+03:00',
+      'registrant_changed': 'Not Disclosed',
       'registrant_kind': 'priv',
       'registrar': 'test',
       'registrar_address': 'test, test, test, test',
-      'registrar_changed': '2018-04-25T14:10:39+03:00',
+      'registrar_changed': '2018-04-25T14:10:30+03:00',
       'registrar_phone': nil,
       'registrar_website': nil,
       'status': ['inactive'],
@@ -94,8 +85,9 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'Not Disclosed', response_json[:email]
     assert_equal 'Private Person', response_json[:registrant]
+    assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Not Disclosed', response_json[:registrant_changed]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed',
@@ -117,6 +109,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+                 response_json[:registrant_changed]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
@@ -139,8 +133,9 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get '/v1/privatedomain.test', format: :json
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'owner@privatedomain.test', response_json[:email]
     assert_equal 'test', response_json[:registrant]
+    assert_equal 'owner@privatedomain.test', response_json[:email]
+    assert_equal '2018-04-25T14:10:39+03:00', response_json[:registrant_changed]
 
     expected_admin_contacts = [
       { name: 'Admin Contact',
@@ -162,8 +157,9 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get '/v1/company-domain.test', format: :json
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'owner@company-domain.test', response_json[:email]
     assert_equal 'test', response_json[:registrant]
+    assert_equal 'owner@company-domain.test', response_json[:email]
+    assert_equal '2018-04-25T14:10:39+03:00', response_json[:registrant_changed]
 
     expected_admin_contacts = [
       { name: 'Admin Contact',
@@ -186,8 +182,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'Not Disclosed', response_json[:email]
     assert_equal 'Private Person', response_json[:registrant]
+    assert_equal 'Not Disclosed', response_json[:email]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed',
@@ -211,6 +207,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+                 response_json[:registrant_changed]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
