@@ -89,7 +89,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal(expected_response, response_json)
   end
 
-  def test_hide_sensitive_data_of_private_entity_registrant_when_captcha_is_unsolved
+  def test_hide_sensitive_data_of_private_entity_when_captcha_is_unsolved
     get '/v1/privatedomain.test', format: :json
 
     response_json = JSON.parse(response.body, symbolize_names: true)
@@ -112,7 +112,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_hide_sensitive_data_of_legal_entity_registrant_when_captcha_is_unsolved
+  def test_hide_sensitive_data_of_legal_entity_when_captcha_is_unsolved
     get '/v1/company-domain.test', format: :json
     response_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -133,7 +133,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_show_sensitive_data_of_private_entity_registrant_when_ip_is_in_whitelist
+  def test_show_sensitive_data_of_private_entity_when_ip_is_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.1'
 
     get '/v1/privatedomain.test', format: :json
@@ -156,7 +156,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_show_sensitive_data_of_legal_entity_registrant_when_ip_is_in_whitelist
+  def test_show_sensitive_data_of_legal_entity_when_ip_is_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.1'
 
     get '/v1/company-domain.test', format: :json
@@ -179,7 +179,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_hide_sensitive_data_of_private_entity_registrant_when_ip_is_not_in_whitelist
+  def test_hide_sensitive_data_of_private_entity_when_ip_is_not_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.2'
 
     get '/v1/privatedomain.test', format: :json
@@ -204,7 +204,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
 
-  def test_hide_sensitive_data_of_legal_entity_registrant_when_ip_is_not_in_whitelist
+  def test_hide_sensitive_data_of_legal_entity_when_ip_is_not_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.2'
 
     get '/v1/company-domain.test', format: :json
