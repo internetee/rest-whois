@@ -14,7 +14,7 @@ name:       <%= json['registrant'] %>
 org id:     <%= json['registrant_reg_no'] %>
 country:    <%= json['registrant_ident_country_code'] %>
 email:      <%= json['email'] %>
-changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
+changed:    <%= json['registrant_changed'].to_s.tr('T',' ').sub('+', ' +') %>
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:

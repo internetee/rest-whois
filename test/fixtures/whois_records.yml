@@ -79,7 +79,7 @@ privately_owned:
     registrant_kind: priv
     registrar: test
     registrar_address: "test, test, test, test"
-    registrar_changed: "2018-04-25T14:10:39+03:00"
+    registrar_changed: "2018-04-25T14:10:30+03:00"
     registrar_phone: ~
     registrar_website: ~
     status:
@@ -176,7 +176,7 @@ legally_owned:
     registrant_kind: org
     registrar: test
     registrar_address: "test, test, test, test"
-    registrar_changed: "2018-04-25T14:10:39+03:00"
+    registrar_changed: "2018-04-25T14:10:30+03:00"
     registrar_phone: ~
     registrar_website: ~
     status:
