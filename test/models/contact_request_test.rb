@@ -91,6 +91,23 @@ class ContactRequestTest < ActiveSupport::TestCase
     assert(expired_request.completed_or_expired?)
   end
 
+  def test_send_contact_email_makes_emails_unique
+    whois_record_with_dupe_emails = whois_records(:with_duplicate_domain_contacts)
+    not_unique_contact_request = ContactRequest.new(
+      whois_record: whois_record_with_dupe_emails,
+      email: 'contact-me-here@email.com',
+      name: 'Test User'
+    )
+    not_unique_contact_request.save
+    not_unique_contact_request.confirm_email
+
+    body = 'some message text'
+    recipients = %w[admin_contacts tech_contacts]
+    not_unique_contact_request.send_contact_email(body: body, recipients: recipients)
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal(['duplicate@domain.test'], mail.to)
+  end
+
   def test_send_contact_email_updates_status_and_calls_mailer
     @contact_request.save
     @contact_request.confirm_email
