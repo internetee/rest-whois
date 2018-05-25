@@ -24,3 +24,5 @@ en:
   submit: Submit
   admin_contacts: "Owner and administrative contacts"
   tech_contacts: "Technical contacts"
+  search: Search by domain name
+  domain_name: Domain Name

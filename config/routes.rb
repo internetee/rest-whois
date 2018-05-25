@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'root#index'
   resources :contact_requests, only: [:new, :create, :update, :show, :edit], param: :secret
+  resources :whois_records, only: :show, param: :name,
+            constraints: { name: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
 
   scope '/v1' do
     get '*id', to: 'whois_records#show', constraints: { id: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
