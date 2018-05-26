@@ -1,3 +1,8 @@
+if ENV['GENERATE_TEST_COVERAGE_REPORT']
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
