@@ -6,3 +6,4 @@
 /vendor/bundle
 config/database.yml
 config/application.yml
+.rubocop.yml
