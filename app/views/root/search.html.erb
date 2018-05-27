@@ -1,0 +1,5 @@
+<%= form_tag search_domain_path do  %>
+  <%= label_tag(:id, I18n.t('Search domain')) %>
+  <%= text_field_tag :id %>
+  <%= submit_tag I18n.t('Submit')  %>
+<% end %>
