@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :contact_requests, only: [:new, :create, :update, :show, :edit], param: :secret
 
   scope '/v1' do
-    get '*id', to: 'whois_records#show', constraints: { id: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
-    post '*id', to: 'whois_records#show', constraints: { id: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
+    get ':name', to: 'whois_records#show', constraints: { name: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
+    post ':name', to: 'whois_records#show', constraints: { name: /([^\/]+?)(?=\.json|\.html|$|\/)/ }
   end
 end
