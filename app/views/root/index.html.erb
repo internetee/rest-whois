@@ -1,7 +1,7 @@
 <h2>'Welcome to rest whois server! More information at http://internet.ee'</h2>
 
-<%= form_tag(root_path, method: :get) do %>
+<%= form_tag(search_whois_records_path) do %>
     <p><%= I18n.t(:search) %></p>
-    <%= text_field(:whois_record, :domain_name) %>
+    <%= text_field_tag(:domain_name, nil, placeholder: "example.ee") %>
     <%= submit_tag(I18n.t(:submit)) %>
 <% end %>

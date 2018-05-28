@@ -29,6 +29,18 @@ class WhoisRecordsController < ApplicationController
     end
   end
 
+  def search
+    domain_name = SimpleIDN.to_unicode(params[:domain_name].to_s).downcase
+    @whois_record = WhoisRecord.find_by(name: domain_name)
+
+    if @whois_record
+      redirect_to "/v1/#{@whois_record.name}"
+    else
+      render text: "Domain not found: #{CGI::escapeHTML(domain_name)}",
+             status: :not_found
+    end
+  end
+
   private
 
   def log_message(params, whois_record)
