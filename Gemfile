@@ -21,3 +21,7 @@ group :development, :test do
   gem 'capybara'
   gem 'mina', '~> 0.3.8'
 end
+
+group :test do
+  gem 'simplecov', require: false
+end
