@@ -1,2 +1,5 @@
 ru:
   # submit:
+  search: "Otsing"
+  search_by_domain_name: "Domeeninimi järgi otsing"
+  domain_name: "Domeeni nimi"
