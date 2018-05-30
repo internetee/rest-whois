@@ -1,8 +1,9 @@
 class WhoisRecordsController < ApplicationController
   helper_method :ip_in_whitelist?
+  helper_method :contact_form_default_locale
 
   def show
-    domain_name = SimpleIDN.to_unicode(params[:id].to_s).downcase
+    domain_name = SimpleIDN.to_unicode(params[:name].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
     @show_sensitive_data = (ip_in_whitelist? || captcha_solved?)
@@ -46,13 +47,13 @@ class WhoisRecordsController < ApplicationController
   def log_message(params, whois_record)
     if whois_record
       Rails.logger.warn(
-        "Requested: #{params[:id]}; " \
+        "Requested: #{params[:name]}; " \
         "Record found with id: #{@whois_record.id}; " \
         "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
     else
       Rails.logger.warn(
-        "Requested: #{params[:id]}; Record not found; " \
+        "Requested: #{params[:name]}; Record not found; " \
         "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
     end
@@ -66,5 +67,9 @@ class WhoisRecordsController < ApplicationController
 
   def captcha_solved?
     verify_recaptcha
+  end
+
+  def contact_form_default_locale
+    :et
   end
 end

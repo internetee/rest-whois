@@ -14,3 +14,8 @@ expired:
   <<: *defaults
   valid_to: "2018-01-01 00:00 UTC"
   secret: "c52db228289d5cf6c4e109a0cbf9679856dd628a833a48f72762c1da4aa6061851c66ef7032b9182f9c456e8bbbe4efc1bbb7f94507130e166b388ffd0138315"
+
+with_duplicate_contact_emails:
+  <<: *defaults
+  whois_record: with_duplicate_domain_contacts
+  secret: "c52db228289d5cf6c4e109a0cbf9679856dd628a833a48f72762c1da4aa6061851c66ef7032b9182f9c456e8bbbe4efc1bbb7f94507130e166b388ffd0138316"

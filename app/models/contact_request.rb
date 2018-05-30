@@ -68,7 +68,7 @@ class ContactRequest < ActiveRecord::Base
       end
     end
 
-    emails
+    emails.uniq
   end
 
   def sendable?
