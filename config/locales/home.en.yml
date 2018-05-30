@@ -1,4 +1,5 @@
 en:
   home:
-    index:
-      search_btn: Search
+    domain_search_form:
+      header: WHOIS lookup
+      search_btn: Lookup

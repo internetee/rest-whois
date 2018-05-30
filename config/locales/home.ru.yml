@@ -1,4 +1,5 @@
 ru:
   home:
-    index:
+    domain_search_form:
+      header: Поиск по домену
       search_btn: Поиск
