@@ -1,12 +1,12 @@
 ru:
   contact_requests:
-    link_request_form:
-      submit_btn: Получить ссылку
-
     edit:
       header: Форма обратной связи
 
-    form:
+    link_request_form:
+      submit_btn: Получить ссылку
+
+    contact_form:
       message: Сообщение
       send_btn: Отправить
 

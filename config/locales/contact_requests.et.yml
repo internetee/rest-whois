@@ -1,12 +1,12 @@
 et:
   contact_requests:
-    link_request_form:
-      submit_btn: Saada link
-
     edit:
       header: Kontaktvorm
 
-    form:
+    link_request_form:
+      submit_btn: Saada link
+
+    contact_form:
       message: Sõnum
       send_btn: Saada
 

@@ -1,12 +1,12 @@
 en:
   contact_requests:
-    link_request_form:
-      submit_btn: Get a link
-
     edit:
       header: Contact Form
 
-    form:
+    link_request_form:
+      submit_btn: Get a link
+
+    contact_form:
       message: Message
       send_btn: Send
 
