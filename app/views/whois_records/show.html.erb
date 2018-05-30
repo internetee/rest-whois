@@ -3,15 +3,18 @@
                                          show_sensitive_data: @show_sensitive_data,
                                          ip_in_whitelist: ip_in_whitelist? } %>
 </pre>
+
 <% if !@show_sensitive_data %>
       <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
           <%= recaptcha_tags %>
           <br/>
-          <%= submit_tag 'View full whois info', name: nil %>
+          <%= submit_tag t('.show_sensitive_data_btn'), name: nil %>
       <% end %>
 <% end %>
 
 <% if @whois_record.contactable? %>
-    <%= link_to t('whois_records.contact_owner'),
-                new_contact_request_path({ domain_name: @whois_record.name }) %>
+    <p>
+        <%= link_to t('.contact_owner_btn'),
+                    new_contact_request_path({ domain_name: @whois_record.name }) %>
+    </p>
 <% end -%>

@@ -1,3 +1,5 @@
 et:
   whois_records:
-    contact_owner: Võta ühendust omanikuga
+    show:
+      show_sensitive_data_btn:  Näita täielikku infot
+      contact_owner_btn: Võta ühendust omanikuga

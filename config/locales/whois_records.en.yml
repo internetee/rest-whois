@@ -1,3 +1,5 @@
 en:
   whois_records:
-    contact_owner: Contact owner
+    show:
+      show_sensitive_data_btn: Show full WHOIS info
+      contact_owner_btn: Contact owner
