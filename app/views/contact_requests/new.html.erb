@@ -7,9 +7,9 @@
 
 <div class='form'>
     <%= form_for(@contact_request) do |f| %>
-        <%= f.label I18n.t('contact_requests.email') %><br>
+        <%= f.label I18n.t('contact_requests.email'), nil, for: nil %><br>
         <%= f.email_field :email, autofocus: true %><br>
-        <%= f.label I18n.t('contact_requests.name') %><br>
+        <%= f.label I18n.t('contact_requests.name'), nil, for: nil %><br>
         <%= f.text_field :name %>
         <%= f.hidden_field :whois_record_id %><br><br>
         <%= f.submit t(:submit) %>
