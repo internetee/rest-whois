@@ -5,7 +5,7 @@
         <%= stylesheet_link_tag 'application' %>
         <title>REST WHOIS for .ee domains</title>
     </head>
-    <body>
+    <body class="<%= body_css_class %>">
         <div class="grid-container">
             <div class="header">
                 <%- other_locales.each do |locale| %>

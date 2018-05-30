@@ -5,21 +5,26 @@
 <% end %>
 
 <%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
-    <fieldset>
-        <%- contacts = [:admin_contacts, :tech_contacts] -%>
-        <%- contacts.each do |contact| %>
-            <%= check_box_tag "recipients[]", contact, false, id: nil %>
-            <%= label_tag contact, t(contact), for: nil %>
-            <br>
-        <% end %>
-    </fieldset>
+    <ul class="recipient-container">
+        <li>
+            <label>
+                <%= check_box_tag "recipients[]", :admin_contacts, false, id: nil %>
+                <%= t(:admin_contacts) %>
+            </label>
+        </li>
 
-    <br><br>
-    <fieldset>
-        <%= label_tag :email_body, t('.message'), for: :email_body %><br>
-        <%= text_area_tag :email_body, "", size: "130x14", autofocus: true %>
-    </fieldset><br>
-    <%= submit_tag t('.send_btn') %>
+        <li>
+            <label>
+                <%= check_box_tag "recipients[]", :tech_contacts, false, id: nil %>
+                <%= t(:tech_contacts) %>
+            </label>
+        </li>
+    </ul>
+    <p>
+        <%= label_tag :email_body, t('.message'), for: :email_body %>:<br>
+        <%= text_area_tag :email_body, "", class: 'message-field', autofocus: true %>
+    </p>
+    <p><%= submit_tag t('.send_btn') %></p>
 <% end %>
 
 <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
