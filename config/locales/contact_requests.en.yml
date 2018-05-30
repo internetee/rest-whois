@@ -4,6 +4,7 @@ en:
       submit_btn: Get a link
 
     edit:
+      header: Contact Form
       message: Message
       send_btn: Send
 

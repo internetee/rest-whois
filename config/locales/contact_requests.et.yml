@@ -4,6 +4,7 @@ et:
       submit_btn: Saada link
 
     edit:
+      header: Kontaktvorm
       message: Sõnum
       send_btn: Saada
 
@@ -27,7 +28,6 @@ et:
       <a href="https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused">siit.</a>
 
     # Contact email creation view.
-    contact_form: Contact Form
     contact_email_recipients_instructions: |
       Teate pikkus on piiratud 2000 märgiga.
       Kõik HTMLi märgendid eemaldatakse automaatselt.

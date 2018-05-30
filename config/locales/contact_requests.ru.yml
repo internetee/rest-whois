@@ -4,6 +4,7 @@ ru:
       submit_btn: Получить ссылку
 
     edit:
+      header: Форма обратной связи
       message: Сообщение
       send_btn: Отправить
 
@@ -30,7 +31,6 @@ ru:
     contact_request_email_subject: Email to domain owner and/or contact
 
     # Contact email creation view.
-    contact_form: Форма обратной связи
     contact_email_recipients_instructions: |
       Максимальная длина сообщения 2000 символов.
       HTML не поддерживается и будет удален автоматически.
