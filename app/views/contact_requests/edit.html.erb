@@ -1,4 +1,5 @@
 <h1><%= t '.header' %></h1>
+
 <%- instructions = t('contact_requests.contact_email_recipients_instructions').split(/\n/) -%>
 <%- instructions.each do |instruction_line| %>
     <p><%= instruction_line %></p>
@@ -22,7 +23,7 @@
     </ul>
     <p>
         <%= label_tag :email_body, t('.message'), for: :email_body %>:<br>
-        <%= text_area_tag :email_body, "", class: 'message-field', autofocus: true %>
+        <%= text_area_tag :email_body, '', class: 'message-field', autofocus: true %>
     </p>
     <p><%= submit_tag t('.send_btn') %></p>
 <% end %>
