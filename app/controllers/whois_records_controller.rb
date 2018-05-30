@@ -14,7 +14,7 @@ class WhoisRecordsController < ApplicationController
         if @whois_record
           render :show, status: :ok
         else
-          render json: { name: domain_name, error: "Domain not found." },
+          render json: { name: domain_name, error: 'Domain not found.' },
                  status: :not_found
         end
       end
@@ -23,7 +23,7 @@ class WhoisRecordsController < ApplicationController
         if @whois_record
           render :show, status: :ok
         else
-          render text: "Domain not found: #{CGI::escapeHTML(domain_name)}",
+          render text: "Domain not found: #{CGI.escapeHTML(domain_name)}",
                  status: :not_found
         end
       end
@@ -37,7 +37,7 @@ class WhoisRecordsController < ApplicationController
     if @whois_record
       redirect_to "/v1/#{@whois_record.name}"
     else
-      render text: "Domain not found: #{CGI::escapeHTML(domain_name)}",
+      render text: "Domain not found: #{CGI.escapeHTML(domain_name)}",
              status: :not_found
     end
   end

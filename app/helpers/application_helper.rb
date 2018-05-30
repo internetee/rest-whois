@@ -1,6 +1,6 @@
 module ApplicationHelper
   def allowed_locales
-    [:et, :en, :ru]
+    %i[et en ru]
   end
 
   def other_locales

@@ -22,6 +22,7 @@ plugins:
   rubocop:
     enabled: true
 exclude_patterns:
+  - "bin/"
   - "config/"
   - "db/"
   - "vendor/"
