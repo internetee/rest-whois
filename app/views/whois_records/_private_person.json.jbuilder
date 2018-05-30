@@ -38,4 +38,5 @@ json.admin_contacts do
   end
 end
 
-json.contact_form_link new_contact_request_url({ domain_name: whois_record.name })
+json.contact_form_link new_contact_request_url({ domain_name: whois_record.name,
+                                                 locale: contact_form_default_locale })
