@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  whois_record_name_constraint = /([^\/]+?)(?=\.json|\.html|$|\/)/
   root 'home#index'
   resources :contact_requests, only: [:new, :create, :update, :show, :edit], param: :secret
 
@@ -10,7 +9,11 @@ Rails.application.routes.draw do
   end
 
   scope '/v1' do
-    get ':name', to: 'whois_records#show', constraints: { name: whois_record_name_constraint }
-    post ':name', to: 'whois_records#show', constraints: { name: whois_record_name_constraint }
+    whois_record_name_constraint = /([^\/]+?)(?=\.json|\.html|$|\/)/
+
+    constraints name: whois_record_name_constraint do
+      get ':name', to: 'whois_records#show'
+      post ':name', to: 'whois_records#show'
+    end
   end
 end
