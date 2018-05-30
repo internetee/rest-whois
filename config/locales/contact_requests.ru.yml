@@ -1,6 +1,6 @@
 ru:
   contact_requests:
-    new:
+    link_request_form:
       submit_btn: Получить ссылку
 
     edit:

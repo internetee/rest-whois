@@ -1,6 +1,6 @@
 en:
   contact_requests:
-    new:
+    link_request_form:
       submit_btn: Get a link
 
     edit:

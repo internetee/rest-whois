@@ -6,16 +6,7 @@
 </div>
 
 <div class="form">
-    <%= form_for(@contact_request) do |f| %>
-        <%= f.label t('contact_requests.email'), nil, for: nil %><br>
-        <%= f.email_field :email, required: true, autofocus: true %><br>
-
-        <%= f.label t('contact_requests.name'), nil, for: nil %><br>
-        <%= f.text_field :name, required: true %>
-
-        <%= f.hidden_field :whois_record_id %><br><br>
-        <%= f.submit t('.submit_btn') %>
-    <% end %>
+    <%= render 'link_request_form' %>
 </div>
 
 <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>

@@ -1,6 +1,6 @@
 et:
   contact_requests:
-    new:
+    link_request_form:
       submit_btn: Saada link
 
     edit:
