@@ -1,7 +1,7 @@
 et:
   contact_requests:
     new:
-      submit_btn: Saada linki
+      submit_btn: Saada link
 
     edit:
       message: Sõnum
