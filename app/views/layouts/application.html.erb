@@ -3,24 +3,20 @@
     <head>
         <meta charset="utf-8">
         <%= stylesheet_link_tag 'application' %>
-
-        <title>
-            REST WHOIS for .ee domains
-        </title>
+        <title>REST WHOIS for .ee domains</title>
     </head>
     <body>
-        <div class='grid-container'>
-            <div class='header'>
+        <div class="grid-container">
+            <div class="header">
                 <%- other_locales.each do |locale| %>
                     <%= link_to locale, params.merge!({ locale: locale }) %>
                 <% end %>
             </div>
-            <div class='main'>
+            <div class="main">
                 <%= render 'shared/flash' %>
                 <%= yield %>
             </div>
-            <div class='right'>
-            </div>
+            <div class="right"></div>
         </div>
     </body>
 </html>
