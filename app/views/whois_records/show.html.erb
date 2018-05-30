@@ -1,5 +1,5 @@
 <pre>
-  <%= render partial: "whois", locals: { json: @whois_record.json,
+  <%= render partial: 'whois', locals: { json: @whois_record.json,
                                          show_sensitive_data: @show_sensitive_data,
                                          ip_in_whitelist: ip_in_whitelist? } %>
 </pre>
@@ -10,6 +10,7 @@
           <%= submit_tag 'View full whois info', name: nil %>
       <% end %>
 <% end %>
+
 <% if @whois_record.contactable? %>
-  <%= link_to t('whois_records.contact_owner'), new_contact_request_url({ domain_name: @whois_record.name }) %>
+    <%= link_to t('whois_records.contact_owner'), new_contact_request_url({ domain_name: @whois_record.name }) %>
 <% end -%>
