@@ -16,7 +16,8 @@
     </ul>
     <p>
         <%= label_tag :email_body, t('.message'), for: :email_body %>:<br>
-        <%= text_area_tag :email_body, '', class: 'message-field', autofocus: true %>
+        <%= text_area_tag :email_body, '', class: 'message-field', required: true,
+                          autofocus: true %>
     </p>
     <p><%= submit_tag t('.send_btn') %></p>
 <% end %>
