@@ -16,7 +16,7 @@
 
     <br><br>
     <fieldset>
-        <%= label_tag(:email_body, t('contact_requests.email_body')) %><br>
+        <%= label_tag :email_body, t('.message'), for: :email_body %><br>
         <%= text_area_tag(:email_body, "", size: "130x14", class: 'contact-request') %>
     </fieldset><br>
     <%= submit_tag t('.send_btn') %>

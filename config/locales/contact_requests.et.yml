@@ -4,6 +4,7 @@ et:
       submit_btn: Saada linki
 
     edit:
+      message: Sõnum
       send_btn: Saada
 
     # Confirmation email creation view
@@ -27,7 +28,6 @@ et:
 
     # Contact email creation view.
     contact_form: Contact Form
-    email_body: Email Body
     contact_email_recipients_instructions: |
       Teate pikkus on piiratud 2000 märgiga.
       Kõik HTMLi märgendid eemaldatakse automaatselt.

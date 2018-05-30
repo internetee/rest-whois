@@ -4,6 +4,7 @@ en:
       submit_btn: Get a link
 
     edit:
+      message: Message
       send_btn: Send
 
     confirmation_email_form: 'Confirm your email'
@@ -32,7 +33,6 @@ en:
 
     # Contact email creation view.
     contact_form: Contact Form
-    email_body: Email Body
     contact_email_recipients_instructions: |
       Message is limited to 2000 characters.
       All HTML tags are stripped automatically.

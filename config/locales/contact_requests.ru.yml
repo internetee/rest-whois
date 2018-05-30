@@ -4,6 +4,7 @@ ru:
       submit_btn: Получить ссылку
 
     edit:
+      message: Сообщение
       send_btn: Отправить
 
     # Confirmation email creation view
@@ -30,7 +31,6 @@ ru:
 
     # Contact email creation view.
     contact_form: Форма обратной связи
-    email_body: Email Body
     contact_email_recipients_instructions: |
       Максимальная длина сообщения 2000 символов.
       HTML не поддерживается и будет удален автоматически.

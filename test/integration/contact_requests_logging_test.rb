@@ -31,7 +31,7 @@ class ContactRequestsLoggingTest < ActionDispatch::IntegrationTest
       "<p>Message text with <a href='example.com'>link</a>.</p>\n" \
       'There is a next line character before this one.'
     end
-    fill_in('email_body', with: body)
+    fill_in('Message', with: body)
     click_link_or_button 'Send'
 
     assert(TestLogger.log.include?('Email sent to privatedomain.test contacts from email@example.com (IP: 127.0.0.1)'))
