@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   scope '/v1' do
-    get ':name', to: 'whois_records#show', constraints: { id: whois_record_name_constraint }
-    post ':name', to: 'whois_records#show', constraints: { id: whois_record_name_constraint }
+    get ':name', to: 'whois_records#show', constraints: { name: whois_record_name_constraint }
+    post ':name', to: 'whois_records#show', constraints: { name: whois_record_name_constraint }
   end
 end
