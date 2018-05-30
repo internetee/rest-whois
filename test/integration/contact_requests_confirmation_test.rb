@@ -77,7 +77,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
 
     friendly_mail_body = mail.body.to_s
     expected_body = 'Please click the link below to confirm your email address and access the contact form.'
-    expected_link = 'example.com/contact_request'
+    expected_link = 'example.test/contact_request'
     expected_disclaimer = 'Link expires in 24 hours.'
 
     assert_match(expected_body,       friendly_mail_body)
