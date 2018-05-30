@@ -5,11 +5,11 @@
 </pre>
 
 <% if !@show_sensitive_data %>
-      <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
-          <%= recaptcha_tags %>
-          <br/>
-          <%= submit_tag t('.show_sensitive_data_btn'), name: nil %>
-      <% end %>
+    <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
+        <%= recaptcha_tags %>
+        <br/>
+        <%= submit_tag t('.show_sensitive_data_btn'), name: nil %>
+    <% end %>
 <% end %>
 
 <% if @whois_record.contactable? %>
