@@ -12,5 +12,6 @@
 <% end %>
 
 <% if @whois_record.contactable? %>
-    <%= link_to t('whois_records.contact_owner'), new_contact_request_path({ domain_name: @whois_record.name }) %>
+    <%= link_to t('whois_records.contact_owner'),
+                new_contact_request_path({ domain_name: @whois_record.name }) %>
 <% end -%>
