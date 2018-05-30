@@ -5,6 +5,8 @@ ru:
 
     edit:
       header: Форма обратной связи
+
+    form:
       message: Сообщение
       send_btn: Отправить
 

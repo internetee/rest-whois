@@ -1,0 +1,22 @@
+<%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
+    <ul class="recipient-container">
+        <li>
+            <label>
+                <%= check_box_tag "recipients[]", :admin_contacts, false, id: nil %>
+                <%= t(:admin_contacts) %>
+            </label>
+        </li>
+
+        <li>
+            <label>
+                <%= check_box_tag "recipients[]", :tech_contacts, false, id: nil %>
+                <%= t(:tech_contacts) %>
+            </label>
+        </li>
+    </ul>
+    <p>
+        <%= label_tag :email_body, t('.message'), for: :email_body %>:<br>
+        <%= text_area_tag :email_body, '', class: 'message-field', autofocus: true %>
+    </p>
+    <p><%= submit_tag t('.send_btn') %></p>
+<% end %>

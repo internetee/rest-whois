@@ -5,6 +5,8 @@ en:
 
     edit:
       header: Contact Form
+
+    form:
       message: Message
       send_btn: Send
 

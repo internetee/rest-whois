@@ -5,6 +5,8 @@ et:
 
     edit:
       header: Kontaktvorm
+
+    form:
       message: Sõnum
       send_btn: Saada
 
