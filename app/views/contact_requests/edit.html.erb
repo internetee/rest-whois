@@ -1,23 +1,25 @@
 <h1><%= t('contact_requests.contact_form') %></h1>
 <%- instructions = I18n.t('contact_requests.contact_email_recipients_instructions').split(/\n/) -%>
 <%- instructions.each do |instruction_line| %>
-  <p><%= instruction_line %></p>
+    <p><%= instruction_line %></p>
 <% end %>
-<%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
-  <fieldset>
-    <%- contacts = [:admin_contacts, :tech_contacts] -%>
-    <%- contacts.each do |contact| %>
-      <%= check_box_tag("recipients[]", contact) %>
-      <%= label_tag(contact, I18n.t(contact)) %>
-      <br>
-    <% end %>
-  </fieldset>
 
-  <br><br>
-  <fieldset>
-    <%= label_tag(:email_body, I18n.t('contact_requests.email_body')) %><br>
-    <%= text_area_tag(:email_body, "", size: "130x14", class: 'contact-request') %>
-  </fieldset><br>
-  <%= submit_tag(I18n.t('submit')) %>
+<%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
+    <fieldset>
+        <%- contacts = [:admin_contacts, :tech_contacts] -%>
+        <%- contacts.each do |contact| %>
+            <%= check_box_tag("recipients[]", contact) %>
+            <%= label_tag(contact, I18n.t(contact)) %>
+            <br>
+        <% end %>
+    </fieldset>
+
+    <br><br>
+    <fieldset>
+        <%= label_tag(:email_body, I18n.t('contact_requests.email_body')) %><br>
+        <%= text_area_tag(:email_body, "", size: "130x14", class: 'contact-request') %>
+    </fieldset><br>
+    <%= submit_tag(I18n.t('submit')) %>
 <% end %>
-<p><%= I18n.t('contact_requests.gdpr_disclaimer').html_safe %></p>
+
+<p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>

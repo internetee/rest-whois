@@ -111,12 +111,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
 
   def test_ru_locale_in_confirmation_form
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'ru' }))
-    text = <<-TEXT.squish
-    На указанный вами адрес электронной почты будет отправлено письмо с уникальной ссылкой, пройдя
-    по которой вы сможете запросить данные владельца и административного или технического контактов
-    домена.
-    TEXT
-    assert_text(text)
+    assert_text t('contact_requests.instructions', locale: :ru)
     # TODO: Fix the link when correct
     assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end

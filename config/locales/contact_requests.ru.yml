@@ -1,25 +1,33 @@
 ru:
   contact_requests:
     # Confirmation email creation view
-    confirmation_email_form: 'Подтверждение адреса электронной почты'
+    confirmation_email_form: Подтверждение адреса электронной почты
     instructions: >-
       На указанный вами адрес будет выслано письмо с уникальной ссылкой, пройдя по которой вы
       сможете связаться с администратором, административными или техническими контактами домена.
-    link_expiration: 'Ссылка действительна 24 часа.'
-    email: 'Электронная почта:'
-    name: 'Имя:'
-    successfully_created: 'Заявка на связь с владельцем домена принята. На вашу электронную почту была выслана ссылка, которая поможет вам связаться с владельцем домена.'
-    gdpr_disclaimer: "Eesti Interneti SA обрабатывает данные в соответствии с законом о защите личных данных. Предоставляя свои данные, вы даете согласие на их <a href='https://www.internet.ee/domains/eif-s-data-protection-policy'>обработку.</a>"
+    link_expiration: Ссылка действительна 24 часа.
+    email: Электронная почта
+    name: Имя
+    successfully_created: >-
+      Заявка на связь с владельцем домена принята. На вашу электронную почту была выслана ссылка,
+      которая поможет вам связаться с владельцем домена.
+    gdpr_disclaimer_html: >-
+      Eesti Interneti SA обрабатывает данные в соответствии с законом о защите личных данных.
+      Предоставляя свои данные, вы даете согласие на их
+      <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">обработку.</a>
 
-    confirmation_email_subject: 'E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена'
-    contact_request_email_subject: 'Email to domain owner and/or contact'
+    confirmation_email_subject: >-
+      E-posti aadressi kinnituskiri
+      / Email address confirmation
+      / Запрос данных владельца домена
+    contact_request_email_subject: Email to domain owner and/or contact
 
     # Contact email creation view.
-    contact_form: 'Форма обратной связи'
-    email_body: 'Email Body'
+    contact_form: Форма обратной связи
+    email_body: Email Body
     contact_email_recipients_instructions: |
       Максимальная длина сообщения 2000 символов.
       HTML не поддерживается и будет удален автоматически.
       Получатели сообщения:
 
-    successfully_sent: 'Спасибо, ваше сообщение отправлено!'
+    successfully_sent: Спасибо, ваше сообщение отправлено!

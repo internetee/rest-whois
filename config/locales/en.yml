@@ -20,10 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  submit: "Submit"
-  admin_contacts: "Owner and administrative contacts"
-  tech_contacts: "Technical contacts"
-  search: "Search"
-  search_by_domain_name: "Search by domain name"
-  domain_name: "Domain Name"
+  hello: Hello world
+  submit: Submit
+  admin_contacts: Owner and administrative contacts
+  tech_contacts: Technical contacts
+  search: Search
+  search_by_domain_name: Search by domain name
+  domain_name: Domain Name
