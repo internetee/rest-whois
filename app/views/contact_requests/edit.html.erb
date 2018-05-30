@@ -8,8 +8,8 @@
     <fieldset>
         <%- contacts = [:admin_contacts, :tech_contacts] -%>
         <%- contacts.each do |contact| %>
-            <%= check_box_tag("recipients[]", contact) %>
-            <%= label_tag(contact, t(contact)) %>
+            <%= check_box_tag "recipients[]", contact, false, id: nil %>
+            <%= label_tag contact, t(contact), for: nil %>
             <br>
         <% end %>
     </fieldset>
