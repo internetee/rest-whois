@@ -18,7 +18,7 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
       'There is a next line character before this one.'
     end
     fill_in('email_body', with: body)
-    click_link_or_button('Submit')
+    click_link_or_button 'Send'
 
     assert_text('Your email has been sent.')
 
@@ -46,7 +46,7 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     check(option: 'admin_contacts')
     body = 'Old mail body'
     fill_in('email_body', with: body) # Fill in all the form fields
-    click_link_or_button('Submit')
+    click_link_or_button 'Send'
     assert_text('Your email has been sent.') # Successfully send an email
 
     # Visit the page again, and get an error code

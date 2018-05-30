@@ -1,5 +1,11 @@
 et:
   contact_requests:
+    new:
+      submit_btn: Saada linki
+
+    edit:
+      send_btn: Saada
+
     # Confirmation email creation view
     confirmation_email_form: >-
       .ee domeeniga seotud kontaktidele kirja saatmiseks kinnita oma e-posti aadress

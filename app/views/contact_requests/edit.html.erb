@@ -19,7 +19,7 @@
         <%= label_tag(:email_body, t('contact_requests.email_body')) %><br>
         <%= text_area_tag(:email_body, "", size: "130x14", class: 'contact-request') %>
     </fieldset><br>
-    <%= submit_tag t('submit') %>
+    <%= submit_tag t('.send_btn') %>
 <% end %>
 
 <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>

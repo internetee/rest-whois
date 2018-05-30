@@ -1,5 +1,11 @@
 ru:
   contact_requests:
+    new:
+      submit_btn: Получить ссылку
+
+    edit:
+      send_btn: Отправить
+
     # Confirmation email creation view
     confirmation_email_form: Подтверждение адреса электронной почты
     instructions: >-

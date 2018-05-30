@@ -66,7 +66,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
     fill_in('contact_request[name]', with: 'Test User')
-    click_link_or_button('Submit')
+    click_link_or_button 'Get a link'
 
     assert_text('Contact request created. Check your email for a link to the one-time contact form.')
 

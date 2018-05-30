@@ -1,5 +1,11 @@
 en:
   contact_requests:
+    new:
+      submit_btn: Get a link
+
+    edit:
+      send_btn: Send
+
     confirmation_email_form: 'Confirm your email'
     instructions: >-
       You will receive an one time link to confirm your email, and then send a message to the owner
