@@ -1,0 +1,9 @@
+en:
+  contact_request_mailer:
+    confirmation_email:
+      subject: >-
+        E-posti aadressi kinnituskiri
+        / Email address confirmation
+        / Запрос данных владельца домена
+    contact_email:
+      subject: Email to domain owner and/or contact

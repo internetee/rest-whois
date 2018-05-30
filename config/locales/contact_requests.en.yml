@@ -1,22 +1,30 @@
 en:
   contact_requests:
+    new:
+      header: Confirm your email
+      help: >-
+        You will receive an one time link to confirm your email, and then send a message to the
+        owner or administrator of the domain.
+      link_expiration: The link expires in 24 hours.
+
     edit:
       header: Contact Form
+      help: |
+        Message is limited to 2000 characters.
+        All HTML tags are stripped automatically.
 
     link_request_form:
+      email: Your email address
+      name: Your name
       submit_btn: Get a link
 
     contact_form:
+      recipients: Recipients
+      admin_contacts: Owner and administrative contacts
+      tech_contacts: Technical contacts
       message: Message
       send_btn: Send
 
-    confirmation_email_form: 'Confirm your email'
-    instructions: >-
-      You will receive an one time link to confirm your email, and then send a message to the owner
-      or administrator of the domain.
-    link_expiration: The link expires in 24 hours.
-    email: Your email address
-    name: Your name
     successfully_created: >-
       Contact request created. Check your email for a link to the one-time contact form.
     confirmation_sent: We sent a confirmation request to %{email}
@@ -27,18 +35,5 @@ en:
       processing of your personal data. See more
       <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">here</a>.
 
-    # Email headings
-    confirmation_email_subject: >-
-      E-posti aadressi kinnituskiri
-      / Email address confirmation
-      / Запрос данных владельца домена
-    contact_request_email_subject: Email to domain owner and/or contact
-
-    # Contact email creation view.
     contact_form: Contact Form
-    contact_email_recipients_instructions: |
-      Message is limited to 2000 characters.
-      All HTML tags are stripped automatically.
-      Select the recipients of your email and enter the text.
-
     successfully_sent: Your email has been sent.

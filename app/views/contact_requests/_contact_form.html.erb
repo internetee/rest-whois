@@ -1,16 +1,17 @@
 <%= form_for @contact_request, { url: contact_request_path(@contact_request.secret) } do |f| %>
+    <label><%= t '.recipients' %>:</label>
     <ul class="recipient-container">
         <li>
             <label>
                 <%= check_box_tag "recipients[]", :admin_contacts, false, id: nil %>
-                <%= t(:admin_contacts) %>
+                <%= t('.admin_contacts') %>
             </label>
         </li>
 
         <li>
             <label>
                 <%= check_box_tag "recipients[]", :tech_contacts, false, id: nil %>
-                <%= t(:tech_contacts) %>
+                <%= t('.tech_contacts') %>
             </label>
         </li>
     </ul>

@@ -1,25 +1,32 @@
 et:
   contact_requests:
+    new:
+      header: .ee domeeniga seotud kontaktidele kirja saatmiseks kinnita oma e-posti aadress
+      help: >-
+        Saadame Teie sisestatud e-posti aadressile kinnituskirja, mis sisaldab ühekordset unikaalset
+        linki. Link suunab teid kirja vormile, kust saate oma teate saata valitud .ee domeeni
+        kontaktidele (domeeni omanik, haldus- ja tehniline kontakt).
+      link_expiration: Link kehtib 24 tundi.
+
     edit:
       header: Kontaktvorm
+      help: |
+        Teate pikkus on piiratud 2000 märgiga.
+        Kõik HTMLi märgendid eemaldatakse automaatselt.
 
     link_request_form:
+      email: Teie e-posti aadress
+      name: Teie nimi
       submit_btn: Saada link
 
     contact_form:
+      recipients: Saajad
+      admin_contacts: Registreerija ja halduskontaktid
+      tech_contacts: Tehniline kontakt(id)
       message: Sõnum
       send_btn: Saada
 
     # Confirmation email creation view
-    confirmation_email_form: >-
-      .ee domeeniga seotud kontaktidele kirja saatmiseks kinnita oma e-posti aadress
-    instructions: >-
-      Saadame Teie sisestatud e-posti aadressile kinnituskirja, mis sisaldab ühekordset unikaalset
-      linki. Link suunab teid kirja vormile, kust saate oma teate saata valitud .ee domeeni
-      kontaktidele (domeeni omanik, haldus- ja tehniline kontakt).
-    link_expiration: Link kehtib 24 tundi.
-    email: Teie e-posti aadress
-    name: Teie nimi
     successfully_created: >-
       Kinnituskirja saatmine õnnestus”. Kontrollige oma e-kirju, saatsime Teile ühekordse lingi
       kirja saatmise vormile.
@@ -30,9 +37,4 @@ et:
       <a href="https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused">siit.</a>
 
     # Contact email creation view.
-    contact_email_recipients_instructions: |
-      Teate pikkus on piiratud 2000 märgiga.
-      Kõik HTMLi märgendid eemaldatakse automaatselt.
-      Vali kellele soovid teate saata ja sisesta oma sõnum.
-
     successfully_sent: Teie teade on saadetud.

@@ -1,8 +1,8 @@
 <h1><%= t '.header' %></h1>
 
-<%- instructions = t('contact_requests.contact_email_recipients_instructions').split(/\n/) -%>
-<%- instructions.each do |instruction_line| %>
-    <p><%= instruction_line %></p>
+<%- help = t('.help').split(/\n/) -%>
+<%- help.each do |line| %>
+    <p><%= line %></p>
 <% end %>
 
 <%= render 'contact_form' %>

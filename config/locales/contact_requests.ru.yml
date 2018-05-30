@@ -1,23 +1,31 @@
 ru:
   contact_requests:
+    new:
+      header: Подтверждение адреса электронной почты
+      help: >-
+        На указанный вами адрес будет выслано письмо с уникальной ссылкой, пройдя по которой вы
+        сможете связаться с администратором, административными или техническими контактами домена.
+      link_expiration: Ссылка действительна 24 часа.
+
     edit:
       header: Форма обратной связи
+      help: |
+        Максимальная длина сообщения 2000 символов.
+        HTML не поддерживается и будет удален автоматически.
 
     link_request_form:
+      email: Электронная почта
+      name: Имя
       submit_btn: Получить ссылку
 
     contact_form:
+      recipients: Получатели
+      admin_contacts: Владелец и административные контакты
+      tech_contacts: Технические контакты
       message: Сообщение
       send_btn: Отправить
 
     # Confirmation email creation view
-    confirmation_email_form: Подтверждение адреса электронной почты
-    instructions: >-
-      На указанный вами адрес будет выслано письмо с уникальной ссылкой, пройдя по которой вы
-      сможете связаться с администратором, административными или техническими контактами домена.
-    link_expiration: Ссылка действительна 24 часа.
-    email: Электронная почта
-    name: Имя
     successfully_created: >-
       Заявка на связь с владельцем домена принята. На вашу электронную почту была выслана ссылка,
       которая поможет вам связаться с владельцем домена.
@@ -25,17 +33,5 @@ ru:
       Eesti Interneti SA обрабатывает данные в соответствии с законом о защите личных данных.
       Предоставляя свои данные, вы даете согласие на их
       <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">обработку.</a>
-
-    confirmation_email_subject: >-
-      E-posti aadressi kinnituskiri
-      / Email address confirmation
-      / Запрос данных владельца домена
-    contact_request_email_subject: Email to domain owner and/or contact
-
-    # Contact email creation view.
-    contact_email_recipients_instructions: |
-      Максимальная длина сообщения 2000 символов.
-      HTML не поддерживается и будет удален автоматически.
-      Получатели сообщения:
 
     successfully_sent: Спасибо, ваше сообщение отправлено!
