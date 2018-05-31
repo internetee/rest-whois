@@ -46,13 +46,13 @@ class WhoisRecordsController < ApplicationController
 
   def log_message(params, whois_record)
     if whois_record
-      Rails.logger.warn(
+      logger.warn(
         "Requested: #{params[:name]}; " \
         "Record found with id: #{@whois_record.id}; " \
         "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
     else
-      Rails.logger.warn(
+      logger.warn(
         "Requested: #{params[:name]}; Record not found; " \
         "Captcha result: #{captcha_solved? ? 'yes' : 'no'}; ip: #{request.remote_ip};"
       )
