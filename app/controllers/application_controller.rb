@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
   def allowed_locales
-    [:et, :en, :ru]
+    %i[et en ru]
   end
 end
