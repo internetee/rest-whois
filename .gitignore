@@ -4,8 +4,8 @@
 /coverage/
 /.bundle
 /vendor/bundle
-config/database.yml
-config/application.yml
+/config/database.yml
+/config/application.yml
 
 # Do not commit one. Instead, download the latest from https://github.com/internetee/style-guide.
 .rubocop.yml
