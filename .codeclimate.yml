@@ -7,8 +7,6 @@ plugins:
     enabled: true
   bundler-audit:
     enabled: true
-  csslint:
-    enabled: true
   duplication:
     enabled: true
     config:
