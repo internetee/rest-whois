@@ -7,7 +7,7 @@
 <% if !@show_sensitive_data %>
     <%= form_for @whois_record, url: whois_record_path(@whois_record.name), method: :get do |f| %>
         <%= hidden_field_tag 'locale', locale %>
-        <%= recaptcha_tags %>
+        <div class="recaptcha"><%= recaptcha_tags %></div>
         <br/>
         <%= submit_tag t('.show_sensitive_data_btn'), name: nil %>
     <% end %>
