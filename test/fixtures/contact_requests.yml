@@ -3,7 +3,7 @@ defaults: &defaults
   email: "email@example.com"
   secret: "c57db228289d5cf6c4e109a0cbf9679856dd628a833a48f72762c1da4aa6061851c66ef7032b9182f9c456e8bbbe4efc1bbb7f94507130e166b388ffd0138315"
   whois_record: privately_owned
-  valid_to: <%= Time.now + 24.hours %>
+  valid_to: <%= Time.zone.now + 24.hours %>
   name: Test User
 
 valid:

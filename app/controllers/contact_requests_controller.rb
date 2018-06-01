@@ -47,7 +47,7 @@ class ContactRequestsController < ApplicationController
   private
 
   def set_contact_request
-    @contact_request = ContactRequest.find_by_secret(params[:secret])
+    @contact_request = ContactRequest.find_by(secret: params[:secret])
   end
 
   def set_ip_address

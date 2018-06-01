@@ -58,9 +58,7 @@ class ContactRequest < ActiveRecord::Base
 
   def extract_emails_for_recipients(recipients)
     emails = []
-    if recipients.include?('admin_contacts')
-      emails << whois_record.json['email']
-    end
+    emails << whois_record.json['email'] if recipients.include?('admin_contacts')
 
     recipients.map do |recipient_type|
       whois_record.json[recipient_type].each do |recipient|
@@ -80,7 +78,7 @@ class ContactRequest < ActiveRecord::Base
   end
 
   def still_valid?
-    valid_to >= Time.now
+    valid_to >= Time.zone.now
   end
 
   def create_random_secret
@@ -88,6 +86,6 @@ class ContactRequest < ActiveRecord::Base
   end
 
   def set_valid_to_at_24_hours_from_now
-    self.valid_to = (Time.now + 24.hours)
+    self.valid_to = (Time.zone.now + 24.hours)
   end
 end
