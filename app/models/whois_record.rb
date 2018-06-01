@@ -22,7 +22,7 @@ class WhoisRecord < ActiveRecord::Base
   private
 
   def discarded_blocked_or_reserved?
-    !([BLOCKED, RESERVED, DISCARDED] & json['status'].empty?)
+    !(([BLOCKED, RESERVED, DISCARDED] & json['status']).empty?)
   end
 
   def partial_for_private_person(authorized)
