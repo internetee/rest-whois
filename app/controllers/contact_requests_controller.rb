@@ -24,7 +24,7 @@ class ContactRequestsController < ApplicationController
   end
 
   def show
-    redirect_to edit_contact_request_path if @contact_request.confirm_email
+    redirect_to edit_contact_request_url if @contact_request.confirm_email
   end
 
   def edit; end
