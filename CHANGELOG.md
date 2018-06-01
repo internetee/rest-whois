@@ -1,4 +1,4 @@
-30.05.2018
+31.05.2018
 * Estonian language default in private registrant contact forms [#74](https://github.com/internetee/rest-whois/issues/74)
 * Remove duplicate email addresses from email headers [#65](https://github.com/internetee/rest-whois/issues/65)
 * Ruby version update to 2.3.7 [#55](https://github.com/internetee/rest-whois/issues/55)
