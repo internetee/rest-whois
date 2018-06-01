@@ -35,7 +35,7 @@ class WhoisRecordsController < ApplicationController
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
     if @whois_record
-      redirect_to "/v1/#{@whois_record.name}"
+      redirect_to whois_record_url(@whois_record.name)
     else
       render text: "Domain not found: #{CGI.escapeHTML(domain_name)}",
              status: :not_found

@@ -5,7 +5,7 @@
 </pre>
 
 <% if !@show_sensitive_data %>
-    <%= form_for @whois_record, url: "/v1/#{@whois_record.name}", method: :get do |f| %>
+    <%= form_for @whois_record, url: whois_record_path(@whois_record.name), method: :get do |f| %>
         <%= hidden_field_tag 'locale', locale %>
         <%= recaptcha_tags %>
         <br/>

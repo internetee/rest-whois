@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     whois_record_name_constraint = /([^\/]+?)(?=\.json|\.html|$|\/)/
 
     constraints name: whois_record_name_constraint do
-      get ':name', to: 'whois_records#show'
+      get ':name', to: 'whois_records#show', as: 'whois_record'
       post ':name', to: 'whois_records#show'
     end
   end
