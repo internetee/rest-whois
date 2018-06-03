@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="<%= locale %>">
-    <head>
-        <meta charset="utf-8">
-        <title>REST WHOIS for .ee domains</title>
-        <%= stylesheet_link_tag 'application' %>
-    </head>
-    <body class="<%= body_css_class %>">
-        <div class="grid-container">
-            <div class="header">
-                <%- other_locales.each do |locale| %>
-                    <%= link_to locale, params.merge!({ locale: locale }) %>
-                <% end %>
-            </div>
-            <div class="main">
-                <%= render 'flash_messages' %>
-                <%= yield %>
-            </div>
-            <div class="right"></div>
+<head>
+    <meta charset="utf-8">
+    <title>REST WHOIS for .ee domains</title>
+    <%= stylesheet_link_tag 'application' %>
+</head>
+<body class="<%= body_css_class %>">
+    <div class="grid-container">
+        <div class="header">
+            <%- other_locales.each do |locale| %>
+                <%= link_to locale, params.merge!({ locale: locale }) %>
+            <% end %>
         </div>
-    </body>
+        <div class="main">
+            <%= render 'flash_messages' %>
+            <%= yield %>
+        </div>
+        <div class="right"></div>
+    </div>
+</body>
 </html>
