@@ -12,7 +12,6 @@ gem 'figaro', '~> 1.1.0'
 
 group :development, :test do
   gem 'pry'
-  gem 'rubocop'
   gem 'unicorn'
 
   gem 'capybara'
