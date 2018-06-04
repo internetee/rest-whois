@@ -1,18 +1,12 @@
-<h1><%= I18n.t('contact_requests.confirmation_email_form')%></h1>
+<h1><%= t '.header' %></h1>
 
-<div class="instructions">
-  <p><%= I18n.t('contact_requests.instructions') %>
-  <p><%= I18n.t('contact_requests.link_expiration') %>
+<div>
+    <p><%= t '.help' %>
+    <p><%= t '.link_expiration' %>
 </div>
 
-<div class='form'>
-  <%= form_for(@contact_request) do |f| %>
-    <%= f.label I18n.t('contact_requests.email') %><br>
-    <%= f.email_field :email %><br>
-    <%= f.label I18n.t('contact_requests.name') %><br>
-    <%= f.text_field :name %>
-    <%= f.hidden_field :whois_record_id %><br><br>
-    <%= f.submit t(:submit) %>
-  <% end %>
+<div class="form">
+    <%= render 'link_request_form' %>
 </div>
-<p><%= I18n.t('contact_requests.gdpr_disclaimer').html_safe %></p>
+
+<p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>

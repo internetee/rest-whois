@@ -66,7 +66,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
     fill_in('contact_request[name]', with: 'Test User')
-    click_link_or_button('Submit')
+    click_link_or_button 'Get a link'
 
     assert_text('Contact request created. Check your email for a link to the one-time contact form.')
 
@@ -77,7 +77,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
 
     friendly_mail_body = mail.body.to_s
     expected_body = 'Please click the link below to confirm your email address and access the contact form.'
-    expected_link = 'example.com/contact_request'
+    expected_link = 'example.test/contact_request'
     expected_disclaimer = 'Link expires in 24 hours.'
 
     assert_match(expected_body,       friendly_mail_body)
@@ -111,12 +111,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
 
   def test_ru_locale_in_confirmation_form
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'ru' }))
-    text = <<-TEXT.squish
-    На указанный вами адрес электронной почты будет отправлено письмо с уникальной ссылкой, пройдя
-    по которой вы сможете запросить данные владельца и административного или технического контактов
-    домена.
-    TEXT
-    assert_text(text)
+    assert_text t('contact_requests.new.help', locale: :ru)
     # TODO: Fix the link when correct
     assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end

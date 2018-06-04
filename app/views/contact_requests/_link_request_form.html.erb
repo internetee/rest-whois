@@ -1,0 +1,10 @@
+<%= form_for(@contact_request) do |f| %>
+    <%= f.label t('.email'), nil, for: nil %><br>
+    <%= f.email_field :email, required: true, autofocus: true %><br>
+
+    <%= f.label t('.name'), nil, for: nil %><br>
+    <%= f.text_field :name, required: true %>
+
+    <%= f.hidden_field :whois_record_id %><br><br>
+    <%= f.submit t('.submit_btn') %>
+<% end %>

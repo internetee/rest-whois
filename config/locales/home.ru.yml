@@ -1,0 +1,5 @@
+ru:
+  home:
+    domain_search_form:
+      header: Whois сервис
+      search_btn: Поиск

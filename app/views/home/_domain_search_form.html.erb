@@ -1,0 +1,6 @@
+<%= form_tag(search_whois_records_path) do %>
+    <h1><%= t '.header' %></h1>
+    <%= text_field_tag :domain_name, nil, placeholder: "example.ee", required: true,
+                       autofocus: true %>
+    <%= submit_tag t('.search_btn') %>
+<% end %>

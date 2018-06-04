@@ -58,7 +58,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
   def test_show_sensitive_data_of_legal_entity_when_captcha_is_solved
     with_captcha_test_keys do
       visit '/v1/company-domain.test'
-      click_button 'View full whois info'
+      click_button 'Show full WHOIS info'
     end
 
     assert_text(
@@ -81,13 +81,13 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    2018-04-25 14:10:41 +03:00
       TEXT
     )
-    assert_no_button 'View full whois info'
+    assert_no_button 'Show full WHOIS info'
   end
 
   def test_hide_sensitive_data_of_private_entity_when_captcha_is_solved
     with_captcha_test_keys do
       visit '/v1/privatedomain.test'
-      click_button 'View full whois info'
+      click_button 'Show full WHOIS info'
     end
 
     assert_text(
@@ -108,7 +108,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    Not Disclosed
       TEXT
     )
-    assert_no_button 'View full whois info'
+    assert_no_button 'Show full WHOIS info'
   end
 
   def test_hide_sensitive_data_of_private_entity_when_captcha_is_unsolved
@@ -132,7 +132,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    Not Disclosed
     TEXT
     )
-    assert_button 'View full whois info'
+    assert_button 'Show full WHOIS info'
   end
 
   def test_hide_sensitive_data_of_legal_entity_when_captcha_is_unsolved
@@ -158,7 +158,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
     TEXT
     )
-    assert_button 'View full whois info'
+    assert_button 'Show full WHOIS info'
   end
 
   def test_show_sensitive_data_of_private_entity_when_ip_is_in_whitelist
@@ -184,7 +184,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    2018-04-25 14:10:41 +03:00
     TEXT
     )
-    assert_no_button 'View full whois info'
+    assert_no_button 'Show full WHOIS info'
   end
 
   def test_show_sensitive_data_of_legal_entity_when_ip_is_in_whitelist
@@ -212,7 +212,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    2018-04-25 14:10:41 +03:00
     TEXT
     )
-    assert_no_button 'View full whois info'
+    assert_no_button 'Show full WHOIS info'
   end
 
   def test_hide_sensitive_data_of_private_entity_when_ip_is_not_in_whitelist
@@ -238,7 +238,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    Not Disclosed
     TEXT
     )
-    assert_button 'View full whois info'
+    assert_button 'Show full WHOIS info'
   end
 
   def test_hide_sensitive_data_of_legal_entity_when_ip_is_not_in_whitelist
@@ -266,7 +266,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
     TEXT
     )
-    assert_button 'View full whois info'
+    assert_button 'Show full WHOIS info'
   end
 
   def test_multiple_entries_in_ip_whitelist
