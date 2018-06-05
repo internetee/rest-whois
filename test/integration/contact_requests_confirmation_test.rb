@@ -42,6 +42,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   def test_new_request_fails_if_that_is_a_discarded_domain
     assert_raise ActiveRecord::RecordNotFound do
       visit(new_contact_request_path(params: { domain_name: 'discarded-domain.test' }))
+      assert_equal(404, page.status_code)
     end
   end
 
@@ -53,12 +54,14 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   def test_new_request_fails_if_that_is_not_a_private_domain
     assert_raise ActiveRecord::RecordNotFound do
       visit(new_contact_request_path(params: { domain_name: 'company-domain.test' }))
+      assert_equal(404, page.status_code)
     end
   end
 
   def test_expired_contact_request_fails
     assert_raise ActiveRecord::RecordNotFound do
       visit(contact_request_path(@expired_contact_request.secret))
+      assert_equal(404, page.status_code)
     end
   end
 
