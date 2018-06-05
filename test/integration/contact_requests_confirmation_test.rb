@@ -40,9 +40,9 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   end
 
   def test_new_request_fails_if_that_is_a_discarded_domain
-    visit(new_contact_request_path(params: { domain_name: 'discarded-domain.test' }))
-    assert_equal(403, page.status_code)
-    assert(page.body.empty?)
+    assert_raise ActiveRecord::RecordNotFound do
+      visit(new_contact_request_path(params: { domain_name: 'discarded-domain.test' }))
+    end
   end
 
   def test_link_from_whois_record_page_does_not_exists_for_legal_owners
@@ -51,15 +51,15 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
   end
 
   def test_new_request_fails_if_that_is_not_a_private_domain
-    visit(new_contact_request_path(params: { domain_name: 'company-domain.test' }))
-    assert_equal(403, page.status_code)
-    assert(page.body.empty?)
+    assert_raise ActiveRecord::RecordNotFound do
+      visit(new_contact_request_path(params: { domain_name: 'company-domain.test' }))
+    end
   end
 
-  def test_expired_contact_request_returns_403_with_empty_body
-    visit(contact_request_path(@expired_contact_request.secret))
-    assert_equal(403, page.status_code)
-    assert(page.body.empty?)
+  def test_expired_contact_request_fails
+    assert_raise ActiveRecord::RecordNotFound do
+      visit(contact_request_path(@expired_contact_request.secret))
+    end
   end
 
   def test_create_a_email_confirmation_delivery

@@ -39,7 +39,7 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_match(expected_disclaimer, friendly_mail_body)
   end
 
-  def test_request_replay_returns_403
+  def test_request_replay_fails
     # Visit the page once
     visit(contact_request_path(@valid_contact_request.secret))
 
@@ -50,9 +50,10 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_text('Your email has been sent.') # Successfully send an email
 
     # Visit the page again, and get an error code
-    visit(contact_request_path(@valid_contact_request.secret))
-    assert_equal(403, page.status_code)
-    assert(page.body.empty?)
+    assert_raise ActiveRecord::RecordNotFound do
+      visit(contact_request_path(@valid_contact_request.secret))
+      assert_equal(404, page.status_code)
+    end
   end
 
   # Locale tests start here

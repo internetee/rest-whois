@@ -5,8 +5,7 @@ class ContactRequestsController < ApplicationController
 
   def new
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
-    return head(:forbidden) unless whois_record.contactable?
-
+    raise ActiveRecord::RecordNotFound unless whois_record.contactable?
     @contact_request = ContactRequest.new(whois_record: whois_record)
   end
 
@@ -56,7 +55,8 @@ class ContactRequestsController < ApplicationController
   end
 
   def check_for_replay
-    return head(:forbidden) if @contact_request.completed_or_expired?
+    return unless @contact_request.completed_or_expired?
+    raise ActiveRecord::RecordNotFound
   end
 
   def contact_request_params
