@@ -10,6 +10,10 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'figaro', '~> 1.1.0'
 
+group :development do
+  gem 'puma'
+end
+
 group :development, :test do
   gem 'pry'
   gem 'rubocop'
