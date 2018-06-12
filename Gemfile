@@ -16,7 +16,6 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'rubocop'
   gem 'unicorn'
 
   gem 'capybara'
