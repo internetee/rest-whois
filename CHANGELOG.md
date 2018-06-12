@@ -1,3 +1,14 @@
+12.06.2018
+* added search bar for rest-whois html view [#77](https://github.com/internetee/rest-whois/pull/77)
+* UI fixes in private registrant contact forms [#54](https://github.com/internetee/rest-whois/issues/54)
+* Spelled out internationalisation options in registrant contact forms [#73](https://github.com/internetee/rest-whois/issues/73)
+* Return error 404 for requests and reserver/blocked/deleteCandidate domains [#86](https://github.com/internetee/rest-whois/pull/86)
+* add Puma gem and config [#88](https://github.com/internetee/rest-whois/issues/88)
+* removed Rubocop gem [#83](https://github.com/internetee/rest-whois/pull/83)
+* Rails version update to 4.2.10 [#87](https://github.com/internetee/rest-whois/pull/87)
+* ES6 compression enabled [#81](https://github.com/internetee/rest-whois/pull/81)
+* config fix for staging environment [#82](https://github.com/internetee/rest-whois/pull/82)
+
 31.05.2018
 * Estonian language default in private registrant contact forms [#74](https://github.com/internetee/rest-whois/issues/74)
 * Remove duplicate email addresses from email headers [#65](https://github.com/internetee/rest-whois/issues/65)
