@@ -9,7 +9,7 @@
     <div class="grid-container">
         <div class="header">
             <%- other_locales.each do |locale| %>
-                <%= link_to locale, params.merge!({ locale: locale }) %>
+                <%= link_to I18n.t(locale), params.merge!({ locale: locale }) %>
             <% end %>
         </div>
         <div class="main">
