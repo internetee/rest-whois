@@ -1,9 +1,9 @@
 default: &default
-  host: localhost
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  username:
+  pool: <%= ENV.fetch("APP_DB_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("APP_DBHOST") { "localhost" } %>
+  username: <%= ENV.fetch("APP_DBUSER") { "postgres" } %>
   password:
 
 development:
