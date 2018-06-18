@@ -13,7 +13,7 @@
     <% end %>
 <% end %>
 
-<% if @whois_record.contactable? %>
+<% if @whois_record.contactable? && @show_sensitive_data %>
     <p>
         <%= link_to t('.contact_owner_btn'),
                     new_contact_request_path({ domain_name: @whois_record.name }) %>

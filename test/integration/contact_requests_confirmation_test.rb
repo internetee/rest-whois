@@ -1,21 +1,32 @@
 require 'test_helper'
 
 class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
+  include CaptchaHelpers
+
   def setup
     super
 
     @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
     @expired_contact_request = contact_requests(:expired)
+
+    @original_whitelist_ip = ENV['whitelist_ip']
+    ENV['whitelist_ip'] = ''
+    enable_captcha
   end
 
   def teardown
     super
+
+    ENV['whitelist_ip'] = @original_whitelist_ip
+    disable_captcha
   end
 
-  def test_link_from_whois_record_page
-    visit("v1/privatedomain.test")
-    click_link_or_button("Contact owner")
+  def test_link_from_whois_record_page_is_visible_after_captcha
+    with_captcha_test_keys do
+      visit("v1/privatedomain.test")
+      click_link_or_button("Contact owner")
+    end
 
     assert(find_field('contact_request[email]'))
     assert(find_field('contact_request[name]'))
@@ -26,6 +37,11 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     end
 
     assert_text(text)
+  end
+
+  def test_link_from_whois_record_page_does_not_exists_when_captcha_is_unsolved
+    visit("v1/privatedomain.test")
+    refute(has_link?('Contact owner'))
   end
 
   def test_new_request_fails_if_there_is_no_domain_name_passed
