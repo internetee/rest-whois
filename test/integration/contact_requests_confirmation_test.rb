@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
-  include CaptchaHelpers
-
   def setup
     super
 
