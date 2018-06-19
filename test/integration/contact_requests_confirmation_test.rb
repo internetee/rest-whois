@@ -76,7 +76,7 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['no-reply@internet.ee'], mail.from)
     assert_equal(['i-want-to-contact-you@domain.com'], mail.to)
-    assert_equal('E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена', mail.subject)
+    assert_equal('Email address confirmation', mail.subject)
 
     friendly_mail_body = mail.body.to_s
     expected_body = 'Please click the link below to confirm your email address and access the contact form.'

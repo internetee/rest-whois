@@ -5,17 +5,18 @@ class ContactRequestMailer < ApplicationMailer
   def confirmation_email(contact_request)
     @contact_request = contact_request
     recipients = contact_request.email
-    @domain    = contact_request.whois_record.name
+    @domain = contact_request.whois_record.name
+    @locale = I18n.locale
 
     logger.warn("Confirmation email sent to #{recipients}.")
 
-    mail(to: recipients)
+    mail(to: recipients, subject: I18n.t('contact_request_mailer.confirmation_email.subject'))
   end
 
   def contact_email(contact_request:, recipients:, mail_body:)
     @contact_request = contact_request
-    @unsafe_body     = mail_body
-    @domain          = contact_request.whois_record.name
+    @unsafe_body = mail_body
+    @domain = contact_request.whois_record.name
 
     logger.warn("Contact email sent to #{recipients} from #{@contact_request.email}.")
 
