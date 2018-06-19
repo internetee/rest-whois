@@ -52,7 +52,7 @@ module RestWhois
         'Content-Security-Policy' => "default-src 'self';" \
           "style-src 'self' 'unsafe-inline';" \
           "script-src https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;" \
-          "frame-src https://www.google.com/recaptcha/",
+          "frame-src 'self' https://www.google.com/recaptcha/",
     }
   end
 end
