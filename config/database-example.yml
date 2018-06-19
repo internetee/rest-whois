@@ -14,6 +14,12 @@ test:
   <<: *default
   database: rest_whois_test
 
-production:
+# Our production environment use two separate databases for different models.
+# WhoisRecord are read-only, while ContactRequests need write access to
+production_read_only:
+  <<: *default
+  database: rest_whois_production
+
+production_write:
   <<: *default
   database: rest_whois_production
