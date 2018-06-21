@@ -1,5 +1,7 @@
 class WhoisRecord < ActiveRecord::Base
-  establish_connection :production_read_only if Rails.env.production?
+  if Rails.env.production?
+    establish_connection "read_#{Rails.env}".to_sym
+  end
 
   BLOCKED = 'Blocked'.freeze
   RESERVED = 'Reserved'.freeze

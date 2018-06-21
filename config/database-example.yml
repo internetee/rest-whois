@@ -16,10 +16,10 @@ test:
 
 # Our production environment use two separate databases for different models.
 # WhoisRecord are read-only, while ContactRequests need write access to
-production_read_only:
+read_production:
   <<: *default
   database: rest_whois_production
 
-production_write:
+write_production:
   <<: *default
   database: rest_whois_production

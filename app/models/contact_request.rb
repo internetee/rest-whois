@@ -1,5 +1,7 @@
 class ContactRequest < ActiveRecord::Base
-  establish_connection :production_write if Rails.env.production?
+  if Rails.env.production?
+    establish_connection "write_#{Rails.env}".to_sym
+  end
 
   STATUS_NEW       = 'new'.freeze
   STATUS_CONFIRMED = 'confirmed'.freeze
