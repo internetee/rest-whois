@@ -1,8 +1,4 @@
 class WhoisRecord < ActiveRecord::Base
-  if Rails.env.production?
-    establish_connection "read_#{Rails.env}".to_sym
-  end
-
   BLOCKED = 'Blocked'.freeze
   RESERVED = 'Reserved'.freeze
   DISCARDED = 'deleteCandidate'.freeze

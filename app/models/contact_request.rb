@@ -1,7 +1,11 @@
 class ContactRequest < ActiveRecord::Base
-  if Rails.env.production?
-    establish_connection "write_#{Rails.env}".to_sym
+  def self.connect_to_write_database_if_defined
+    if Rails.configuration.database_configuration["write_#{Rails.env}"]
+      establish_connection "write_#{Rails.env}".to_sym
+    end
   end
+
+  connect_to_write_database_if_defined
 
   STATUS_NEW       = 'new'.freeze
   STATUS_CONFIRMED = 'confirmed'.freeze
