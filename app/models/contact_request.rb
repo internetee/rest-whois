@@ -1,4 +1,4 @@
-class ContactRequest < ActiveRecord::Base
+class ContactRequest < ApplicationRecord
   def self.connect_to_write_database_if_defined
     return unless Rails.configuration.database_configuration["write_#{Rails.env}"]
     establish_connection "write_#{Rails.env}".to_sym
