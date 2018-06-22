@@ -4,12 +4,16 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
   include CaptchaHelpers
 
   def setup
+    super
+
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
     enable_captcha
   end
 
   def teardown
+    super
+
     ENV['whitelist_ip'] = @original_whitelist_ip
     disable_captcha
   end
@@ -55,6 +59,20 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     )
   end
 
+  def test_contact_form_link_is_visible_when_captcha_is_solved
+    with_captcha_test_keys do
+      visit('/v1/privatedomain.test')
+      click_button 'Show full WHOIS info'
+    end
+
+    assert(has_link?('Contact owner'))
+  end
+
+  def test_contact_form_link_is_visible_when_captcha_is_unsolved
+    visit("v1/privatedomain.test")
+    refute(has_link?('Contact owner'))
+  end
+
   def test_show_sensitive_data_of_legal_entity_when_captcha_is_solved
     with_captcha_test_keys do
       visit '/v1/company-domain.test'
@@ -74,7 +92,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Admin Contact
         email:      admin-contact@company-domain.test
         changed:    2018-04-25 14:10:41 +03:00
-  
+
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@company-domain.test
@@ -96,12 +114,12 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    Private Person
         email:   Not Disclosed
         changed: Not Disclosed
-  
+
         Administrative contact:
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-  
+
         Technical contact:
         name:       Not Disclosed
         email:      Not Disclosed
@@ -120,12 +138,12 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    Private Person
         email:   Not Disclosed
         changed: Not Disclosed
-        
+
         Administrative contact:
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-        
+
         Technical contact:
         name:       Not Disclosed
         email:      Not Disclosed
@@ -151,7 +169,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
         email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
         changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
-  
+
         Technical contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
         email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
@@ -172,12 +190,12 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    test
         email:   owner@privatedomain.test
         changed: 2018-04-25 14:10:39 +03:00
-  
+
         Administrative contact:
         name:       Admin Contact
         email:      admin-contact@privatedomain.test
         changed:    2018-04-25 14:10:41 +03:00
- 
+
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@privatedomain.test
@@ -205,7 +223,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Admin Contact
         email:      admin-contact@company-domain.test
         changed:    2018-04-25 14:10:41 +03:00
-  
+
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@company-domain.test
@@ -226,12 +244,12 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    Private Person
         email:   Not Disclosed
         changed: Not Disclosed
-        
+
         Administrative contact:
         name:       Not Disclosed
         email:      Not Disclosed
         changed:    Not Disclosed
-       
+
         Technical contact:
         name:       Not Disclosed
         email:      Not Disclosed
@@ -259,7 +277,7 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
         email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
         changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
-  
+
         Technical contact:
         name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
         email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS

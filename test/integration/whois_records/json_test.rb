@@ -4,6 +4,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   include CaptchaHelpers
 
   def setup
+    super
+
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
     stub_request(:get, /google.com\/recaptcha/).to_return(body: '{}')
@@ -11,6 +13,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def teardown
+    super
+
     ENV['whitelist_ip'] = @original_whitelist_ip
     disable_captcha
   end

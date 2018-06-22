@@ -13,21 +13,6 @@ class ContactRequestsConfirmationTest < ActionDispatch::IntegrationTest
     super
   end
 
-  def test_link_from_whois_record_page
-    visit("v1/privatedomain.test")
-    click_link_or_button("Contact owner")
-
-    assert(find_field('contact_request[email]'))
-    assert(find_field('contact_request[name]'))
-    text = begin
-      'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
-      "of the domain.\n" \
-      'The link expires in 24 hours.'
-    end
-
-    assert_text(text)
-  end
-
   def test_new_request_fails_if_there_is_no_domain_name_passed
     assert_raise ActiveRecord::RecordNotFound do
       visit(new_contact_request_path)
