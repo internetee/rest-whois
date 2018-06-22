@@ -1,9 +1,17 @@
 en:
   contact_request_mailer:
     confirmation_email:
-      subject: >-
-        E-posti aadressi kinnituskiri
-        / Email address confirmation
-        / Запрос данных владельца домена
+      subject: Email address confirmation
+      body: |
+        Hello!
+
+        Please confirm your email address in order to send your message to the contact of %{domain} domain name.
+
+        Please click the link below to confirm your email address and access the contact form.
+      footer: |
+        Link expires in 24 hours.
+
+        Best regards,
+        Estonian Internet Foundation
     contact_email:
       subject: Email to domain owner and/or contact

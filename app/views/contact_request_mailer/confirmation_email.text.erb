@@ -1,40 +1,4 @@
-Tere!
+<%= I18n.t('contact_request_mailer.confirmation_email.body', domain: @domain) %>
+<%= contact_request_url(@contact_request.secret, locale: @locale) %>
 
-Sõnumi edastamiseks domeeni <%= @domain %> kontaktile kinnitage palun oma e-posti aadress.
-
-E-posti aadressi kinnitamiseks ja sõnumi edastamiseks vajutage alljärgnevale lingile:
-
-<%= contact_request_url(@contact_request.secret) %>
-
-Link aegub 24 tunniga.
-
-Lugupidamisega
-Eesti Interneti SA
-
---------------------------------------------------------------------------------
-Hello!
-
-Please confirm your email address in order to send your message to the contact of <%= @domain %> domain name.
-
-Please click the link below to confirm your email address and access the contact form.
-
-<%= contact_request_url(@contact_request.secret) %>
-
-Link expires in 24 hours.
-
-Best regards,
-Estonian Internet Foundation
-
---------------------------------------------------------------------------------
-Здравствуйте,
-
-Спасибо за ваш запрос!
-
-Данная ссылка поможет вам связаться с владельцем домена:
-
-<%= contact_request_url(@contact_request.secret) %>
-
-Ссылка действительна в течение 24 часов.
-
-С уважением,
-Eesti Interneti SA
+<%= I18n.t('contact_request_mailer.confirmation_email.footer') %>

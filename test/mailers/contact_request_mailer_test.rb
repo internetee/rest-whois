@@ -6,6 +6,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
   end
 
   def test_confirmation_email
+    I18n.locale = I18n.default_locale
     email = ContactRequestMailer
             .confirmation_email(@contact_request)
             .deliver_now
@@ -13,8 +14,23 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     refute(ActionMailer::Base.deliveries.empty?)
     assert_equal(['no-reply@internet.ee'], email.from)
     assert_equal(['email@example.com'], email.to)
-    assert_equal('E-posti aadressi kinnituskiri / Email address confirmation / Запрос данных владельца домена', email.subject)
+    assert_equal('Email address confirmation', email.subject)
     assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s.rstrip)
+  end
+
+  def test_confirmation_email_can_be_localized
+    I18n.locale = :et
+    email = ContactRequestMailer
+            .confirmation_email(@contact_request)
+            .deliver_now
+
+    refute(ActionMailer::Base.deliveries.empty?)
+    assert_equal(['no-reply@internet.ee'], email.from)
+    assert_equal(['email@example.com'], email.to)
+    assert_equal('E-posti aadressi kinnituskiri', email.subject)
+    assert_equal(read_fixture('localized_confirmation_email.erb').join, email.body.to_s.rstrip)
+
+    I18n.locale = I18n.default_locale
   end
 
   def test_contact_request_email
