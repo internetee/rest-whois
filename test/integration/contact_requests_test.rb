@@ -28,7 +28,7 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     assert_equal('Email to domain owner and/or contact', mail.subject)
 
     friendly_mail_body = mail.body.to_s
-    expected_heading = 'You are listed as the contact person for the domain privatedomain.test'
+    expected_heading = 'Dear contact of privatedomain.test domain name'
     expected_body_1 = "Message text with link."
     expected_body_2 = "There is a next line character before this one."
     expected_disclaimer = "Eesti Interneti Sihtasutus"

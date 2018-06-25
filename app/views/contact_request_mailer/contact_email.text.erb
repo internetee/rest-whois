@@ -1,38 +1,46 @@
 Lugupeetud domeeni <%= @domain %> kontakt
-Eesti Interneti SA annab teada, et huvitatud isik soovib domeeniga <%= @domain %> seotud kontakti(de)ga
-ühendust võtta ja edastab Teile alljärgneva teate:
+
+Eesti Interneti SA (EIS) annab teada, et domeeniga <%= @domain %> seotud kontakti(de)ga soovitakse ühendust võtta ja
+edastame Teile selle teate.
+
+See kiri jõuab Teieni, sest andmekaitse üldmäärus ei luba domeeni otsingus avalikustada eraisiku andmeid. EIS võimaldab
+www.internet.ee veebilehe kaudu domeeni kontakti(de)ga ühenduse võtmist. EIS ei taga edastatud teate ehtsust ja saatja
+autentsust. Teil puudub kohustus saatja teatele vastata.
+
+Juhul, kui otsustate teatele vastata, ei ole EIS kirjavahetuse osapooleks ning edaspidine suhtlus on Teie ja huvitatud
+isiku omavaheline sõnumivahetus.
+
+Teile edastatud teade:
 
 <%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
 
 Teate saatja nimi: <%= @contact_request.name %>
 Teate edastaja e-postiaadress: <%= @contact_request.email %>
 
-25. mail 2018 jõustunud andmekaitse üldmäärus ei luba avalikustada eraisiku andmeid. Eesti Interneti SA võimaldab
-www.internet.ee veebilehe kaudu domeeni kontakti(de)ga ühenduse võtmist. Eesti Interneti SA ei taga edastatud
-teate ehtsust ja saatja autentsust. Teil puudub kohustus saatja teatele vastata.
-Juhul, kui otsustate teatele vastata, ei ole Eesti Interneti SA kirjavahetuse osapooleks ning edaspidine suhtlus
-on Teie ja huvitatud isiku omavaheline sõnumivahetus.
-
 Lugupidamisega
 Eesti Interneti Sihtasutus
 
 --------------------------------------------------------------------------------
 
-You are listed as the contact person for the domain <%= @domain %>
-Eesti Interneti SA hereby informs you that an interested person wishes to contact the contact person(s) for the domain
-<%= @domain %>, and is also forwarding the following message:
+Dear contact of <%= @domain %> domain name
+
+Estonian Internet Foundation (EIF) informs you that an interested person wishes to contact the contact person(s) for
+the domain <%= @domain %>, and is forwarding the message below.
+
+You received this letter because the General Data Protection Regulation does not permit the disclosure of private
+individuals’ data. EIF enables you to communicate with the domain contact person(s) through its website www.internet.ee.
+EIF is not liable for ensuring the authenticity of the message or the sender. You have no obligation to respond to
+the message.
+
+If you decide to respond to the e-mail, EIF will not be a party to the communication, and further communication will be
+between you and the interested person.
+
+Message from the interested person:
 
 <%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
 
 Sender: <%= @contact_request.name %>
 Sender’s email: <%= @contact_request.email %>
-
-The General Data Protection Regulation, which came into force on 25 May 2018, does not permit the disclosure of private
-individuals’ data. Eesti Interneti SA enables you to communicate with the domain contact person(s) through its website
-www.internet.ee. Eesti Interneti SA is not liable for ensuring the authenticity of the message or the sender. You have
-no obligation to respond to the message.
-If you decide to respond to the e-mail, Eesti Interneti SA will not be a party to the communication, and further
-communication will be between you and the interested person.
 
 Yours sincerely,
 Eesti Interneti SA
@@ -40,13 +48,17 @@ Eesti Interneti SA
 --------------------------------------------------------------------------------
 
 Уважаемый контакт домена <%= @domain %>,
-У <%= @contact_request.name %> (<%= @contact_request.email %>) есть для вас сообщение:
+Eesti Interneti SA (EIS) уведомляет Вас о новом сообщении.
+Вы являетесь получателем, т.к. закон о защите данных не позволяет публиковать данные частных лиц. Вместо этого, EIS позволяет связаться с контактами домена через свой сайт.
+EIS не проверяет подлинность сообщения и не устанавливает личность отправителя;
+Вы не обязаны отвечать на данное письмо;
+В случае ответа на сообщение, EIS не является третьей стороной, и вся дальнейшая переписка ведется исключительно между вами и отправителем;
+
+Отправитель: <%= @contact_request.name %>, <%= @contact_request.email %>
+
+Сообщение:
 
 <%= strip_tags(@unsafe_body).slice(0, ContactRequestMailer::CHARACTER_LIMIT) %>
-
-Вступивший в силу 25 мая 2018 года закон о защите личных данных не позволяет раскрывать личные данные частных лиц. Eesti Interneti SA позволяет связаться с контактами домена через свой сайт
-Eesti Interneti SA не проверяет подлинность сообщения и не устанавливает личность отправителя
-Вы не обязаны отвечать на данное письмо
 
 С уважением,
 Eesti Interneti SA
