@@ -1,4 +1,11 @@
 class ContactRequest < ActiveRecord::Base
+  def self.connect_to_write_database_if_defined
+    return unless Rails.configuration.database_configuration["write_#{Rails.env}"]
+    establish_connection "write_#{Rails.env}".to_sym
+  end
+
+  connect_to_write_database_if_defined
+
   STATUS_NEW       = 'new'.freeze
   STATUS_CONFIRMED = 'confirmed'.freeze
   STATUS_SENT      = 'sent'.freeze
