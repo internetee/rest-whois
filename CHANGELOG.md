@@ -1,3 +1,13 @@
+26.06.2018
+* Email address confirmation emails are now localised depneding on UI language setting (email in 1 language instear of three) [#91](https://github.com/internetee/rest-whois/issues/91)
+* Link in the email address confirmation form points now to the contact form in respective language [#84](https://github.com/internetee/rest-whois/issues/84)
+* GDPR disclaimer is brough from bottom to top in the forwarded email template [#92](https://github.com/internetee/rest-whois/issues/92)
+* Contact private registrant link is moved behind captcha [#72](https://github.com/internetee/rest-whois/issues/72)
+* Contact registrant fuctionality now uses separate db instance and whosi data comes from read-only db [#93](https://github.com/internetee/rest-whois/issues/93)
+* Rails updated to 5.0.7 [#85](https://github.com/internetee/rest-whois/issues/85)
+* Sprockets gem updated to 3.7.2 [#99](https://github.com/internetee/rest-whois/pull/99)
+* docker config added [#95](https://github.com/internetee/rest-whois/pull/95)
+
 12.06.2018
 * added search bar for rest-whois html view [#77](https://github.com/internetee/rest-whois/pull/77)
 * UI fixes in private registrant contact forms [#54](https://github.com/internetee/rest-whois/issues/54)
