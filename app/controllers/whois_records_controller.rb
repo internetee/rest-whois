@@ -23,7 +23,7 @@ class WhoisRecordsController < ApplicationController
         if @whois_record
           render :show, status: :ok
         else
-          render text: "Domain not found: #{CGI.escapeHTML(domain_name)}",
+          render plain: "Domain not found: #{CGI.escapeHTML(domain_name)}",
                  status: :not_found
         end
       end
@@ -37,7 +37,7 @@ class WhoisRecordsController < ApplicationController
     if @whois_record
       redirect_to whois_record_url(@whois_record.name)
     else
-      render text: "Domain not found: #{CGI.escapeHTML(domain_name)}",
+      render plain: "Domain not found: #{CGI.escapeHTML(domain_name)}",
              status: :not_found
     end
   end

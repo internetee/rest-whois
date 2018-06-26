@@ -1,4 +1,4 @@
-class WhoisRecord < ActiveRecord::Base
+class WhoisRecord < ApplicationRecord
   BLOCKED = 'Blocked'.freeze
   RESERVED = 'Reserved'.freeze
   DISCARDED = 'deleteCandidate'.freeze
