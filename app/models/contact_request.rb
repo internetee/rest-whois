@@ -58,8 +58,7 @@ class ContactRequest < ApplicationRecord
   end
 
   def completed_or_expired?
-    return false unless whois_record_exists?
-    status == STATUS_SENT || !still_valid?
+    status == STATUS_SENT || !still_valid? || !whois_record_exists?
   end
 
   private

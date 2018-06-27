@@ -56,6 +56,16 @@ class ContactRequestsTest < ActionDispatch::IntegrationTest
     end
   end
 
+  def test_request_fails_when_whois_record_was_deleted
+    @private_domain.destroy
+
+    # Visit the page after the corresponding whois_record was deleted
+    assert_raise ActiveRecord::RecordNotFound do
+      visit(contact_request_path(@valid_contact_request.secret))
+      assert_equal(404, page.status_code)
+    end
+  end
+
   # Locale tests start here
   def test_en_locale_in_contact_email_form
     visit(contact_request_path(@valid_contact_request.secret))

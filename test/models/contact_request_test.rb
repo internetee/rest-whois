@@ -164,10 +164,10 @@ class ContactRequestTest < ActiveSupport::TestCase
   end
 
   def test_completed_or_expired_returns_false_when_whois_record_is_deleted
-    whois_record_id = @whois_record.id
     @contact_request.save
     @whois_record.delete
+    @contact_request.reload
 
-    refute(@contact_request.completed_or_expired?)
+    assert(@contact_request.completed_or_expired?)
   end
 end
