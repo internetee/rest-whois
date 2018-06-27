@@ -154,4 +154,20 @@ class ContactRequestTest < ActiveSupport::TestCase
     assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
     refute(@contact_request.send_contact_email)
   end
+
+  def test_removing_whois_record_does_not_remove_contact_requests
+    whois_record_id = @whois_record.id
+    @contact_request.save
+    @whois_record.delete
+
+    refute(@contact_request.whois_record.persisted?)
+  end
+
+  def test_completed_or_expired_returns_false_when_whois_record_is_deleted
+    whois_record_id = @whois_record.id
+    @contact_request.save
+    @whois_record.delete
+
+    refute(@contact_request.completed_or_expired?)
+  end
 end
