@@ -12,6 +12,7 @@ class ContactRequest < ApplicationRecord
   STATUSES         = [STATUS_NEW, STATUS_CONFIRMED, STATUS_SENT].freeze
 
   belongs_to :whois_record
+
   validates :whois_record, presence: true
   validates :email, presence: true
   validates :name, presence: true

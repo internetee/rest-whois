@@ -1,6 +1,4 @@
 class WhoisRecord < ApplicationRecord
-  has_many :contact_requests, dependent: :delete_all
-
   BLOCKED = 'Blocked'.freeze
   RESERVED = 'Reserved'.freeze
   DISCARDED = 'deleteCandidate'.freeze
