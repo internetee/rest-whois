@@ -58,7 +58,7 @@ class ContactRequest < ApplicationRecord
   end
 
   def completed_or_expired?
-    status == STATUS_SENT || !still_valid?
+    status == STATUS_SENT || !still_valid? || !whois_record_exists?
   end
 
   private
@@ -77,15 +77,19 @@ class ContactRequest < ApplicationRecord
   end
 
   def sendable?
-    status == STATUS_CONFIRMED && still_valid?
+    status == STATUS_CONFIRMED && still_valid? && whois_record_exists?
   end
 
   def confirmable?
-    status == STATUS_NEW && still_valid?
+    status == STATUS_NEW && still_valid? && whois_record_exists?
   end
 
   def still_valid?
     valid_to >= Time.zone.now
+  end
+
+  def whois_record_exists?
+    whois_record.present?
   end
 
   def create_random_secret
