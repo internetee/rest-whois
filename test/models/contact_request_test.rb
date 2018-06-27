@@ -154,4 +154,11 @@ class ContactRequestTest < ActiveSupport::TestCase
     assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
     refute(@contact_request.send_contact_email)
   end
+
+  def test_destroying_whois_records_destroys_contact_requests
+    @contact_request.save
+    @whois_record.destroy
+
+    refute(ContactRequest.find_by(whois_record_id: @whois_record.id))
+  end
 end
