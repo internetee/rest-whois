@@ -1,3 +1,6 @@
+27.06.2018
+* Domain registrations with contact request records are now released at delete_at date [#103](https://github.com/internetee/rest-whois/issues/103)
+
 26.06.2018
 * Email address confirmation emails are now localised depneding on UI language setting (email in 1 language instear of three) [#91](https://github.com/internetee/rest-whois/issues/91)
 * Link in the email address confirmation form points now to the contact form in respective language [#84](https://github.com/internetee/rest-whois/issues/84)
