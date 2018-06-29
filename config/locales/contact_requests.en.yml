@@ -37,5 +37,4 @@ en:
 
     successfully_sent: Your email has been sent.
     smtp_error: >-
-      There was a problem sending your email, for example the email address does not exist.
-      Please try again.
+      SMTP server error. Please check your email address and try again.
