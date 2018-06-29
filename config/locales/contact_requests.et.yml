@@ -38,3 +38,6 @@ et:
 
     # Contact email creation view.
     successfully_sent: Teie teade on saadetud.
+    smtp_error: >-
+      E-posti aadressi kinnitamine ebaõnnestus. Palun kontrollige oma e-posti aadressi ja
+      proovige uuesti.

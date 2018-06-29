@@ -36,3 +36,5 @@ en:
       <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">here</a>.
 
     successfully_sent: Your email has been sent.
+    smtp_error: >-
+      Email confirmation failed. Please check your email address and try again.
