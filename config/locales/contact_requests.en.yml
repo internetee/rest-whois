@@ -36,3 +36,6 @@ en:
       <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">here</a>.
 
     successfully_sent: Your email has been sent.
+    smtp_error: >-
+      There was a problem sending your email, for example the email address does not exist.
+      Please try again.

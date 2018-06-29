@@ -38,3 +38,5 @@ et:
 
     # Contact email creation view.
     successfully_sent: Teie teade on saadetud.
+    smtp_error: >-
+      SMTP serveri viga. Palun kontrollige oma e-posti aadress ja proovi uuesti.
