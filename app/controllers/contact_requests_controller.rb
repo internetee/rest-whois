@@ -21,7 +21,7 @@ class ContactRequestsController < ApplicationController
       render(:new)
     end
   rescue Net::SMTPServerBusy
-    redirect_to(:root, error: I18n.t('contact_requests.smtp_error'))
+    redirect_to(:root, alert: I18n.t('contact_requests.smtp_error'))
   end
 
   def show
@@ -41,7 +41,7 @@ class ContactRequestsController < ApplicationController
       )
       redirect_to(:root, notice: I18n.t('contact_requests.successfully_sent'))
     else
-      redirect_to(:root, error: I18n.t('contact_requests.something_went_wrong'))
+      redirect_to(:root, alert: I18n.t('contact_requests.something_went_wrong'))
     end
   end
 
