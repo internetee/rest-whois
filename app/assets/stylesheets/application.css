@@ -1,7 +1,7 @@
 /* ...
-*= require_self
-*= require_tree .
-*/
+ *= require_self
+ *= require_tree .
+ */
 
 .grid-container {
     display: grid;
@@ -34,4 +34,25 @@ h1, h2, h2, h3, a, a:visited {
 
 a:hover {
     color: #f69240;
+}
+
+#flash-alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+#flash-success {
+    padding: 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+#flash-notice {
+    padding: 20px;
+    background-color: #ff9800;
+    color: #fff;
+    margin-bottom: 15px;
 }
