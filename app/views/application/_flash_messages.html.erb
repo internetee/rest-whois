@@ -1,5 +1,11 @@
 <div id="flash">
-    <% flash.each do |key, value| -%>
-        <div id="flash-<%= key %>"><%=h value %></div>
+    <% if flash[:notice] %>
+        <div id="flash-notice"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:success] %>
+        <div id="flash-success"><%= flash[:success] %></div>
+    <% end %>
+    <% if flash[:error] || flash[:alert] %>
+        <div id="flash-alert"><%= flash[:error] || flash[:alert] %></div>
     <% end %>
 </div>

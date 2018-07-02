@@ -36,23 +36,23 @@ a:hover {
     color: #f69240;
 }
 
-#flash-alert, #flash-recaptcha_error, #flash-error {
+#flash-alert {
     padding: 20px;
     background-color: #f44336;
-    color: white;
+    color: #fff;
     margin-bottom: 15px;
 }
 
 #flash-success {
     padding: 20px;
     background-color: #4CAF50;
-    color: white;
+    color: #fff;
     margin-bottom: 15px;
 }
 
 #flash-notice {
     padding: 20px;
     background-color: #ff9800;
-    color: white;
+    color: #fff;
     margin-bottom: 15px;
 }
