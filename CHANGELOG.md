@@ -1,3 +1,6 @@
+02.07.2018
+* Improved SMTP error handling on invalid email address in contact registrant form [#53](https://github.com/internetee/rest-whois/issues/53)
+
 27.06.2018
 * Domain registrations with contact request records are now released at delete_at date [#103](https://github.com/internetee/rest-whois/issues/103)
 
