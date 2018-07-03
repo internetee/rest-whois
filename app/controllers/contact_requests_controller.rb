@@ -20,7 +20,8 @@ class ContactRequestsController < ApplicationController
     else
       render(:new)
     end
-  rescue Net::SMTPServerBusy
+  rescue Net::SMTPServerBusy => e
+    logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
     redirect_to(:root, alert: I18n.t('contact_requests.smtp_error'))
   end
 
