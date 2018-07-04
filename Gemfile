@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'figaro', '~> 1.1.0'
 gem 'jbuilder'
 gem 'pg', '~> 1.0.0'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.2.0'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'sass-rails'
 gem 'simpleidn', '0.0.7' # For Punycode
