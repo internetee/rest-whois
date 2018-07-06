@@ -1,3 +1,8 @@
+06.07.2018
+* Rails updgrade to 5.2 [#111](https://github.com/internetee/rest-whois/pull/111)
+* Pg gem upgrade to 1.0 [#112](https://github.com/internetee/rest-whois/pull/112)
+* Additional improvements to SMTP error logging [#53](https://github.com/internetee/rest-whois/issues/53) / [#110](https://github.com/internetee/rest-whois/pull/110)
+
 02.07.2018
 * Improved SMTP error handling on invalid email address in contact registrant form [#53](https://github.com/internetee/rest-whois/issues/53)
 
