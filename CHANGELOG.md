@@ -1,3 +1,7 @@
+05.09.2018
+* Rails upgrade to 5.2.1 [#116](https://github.com/internetee/rest-whois/pull/116)
+* Ruby upgrade to 2.4.4 [#117](https://github.com/internetee/rest-whois/pull/117)
+
 06.07.2018
 * Rails updgrade to 5.2 [#111](https://github.com/internetee/rest-whois/pull/111)
 * Pg gem upgrade to 1.0 [#112](https://github.com/internetee/rest-whois/pull/112)
