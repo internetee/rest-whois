@@ -22,7 +22,7 @@ module RestWhois
     config.secret_key_base = Figaro.env.secret_key_base
 
     # Fallback to default locale if text is missing
-    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [:en]
 
     # Mailer configuration
     config.action_mailer.default_url_options = { host: ENV['mailer_host'] }
