@@ -1,3 +1,6 @@
+15.10.2018
+* Nokogiri update to 1.8.5 [#121](https://github.com/internetee/rest-whois/pull/121)
+
 05.09.2018
 * Rails upgrade to 5.2.1 [#116](https://github.com/internetee/rest-whois/pull/116)
 * Ruby upgrade to 2.4.4 [#117](https://github.com/internetee/rest-whois/pull/117)
