@@ -10,7 +10,7 @@ class ContactRequestMailer < ApplicationMailer
 
     logger.warn("Confirmation email sent to #{recipients}.")
 
-    mail(to: recipients, subject: I18n.t('contact_request_mailer.confirmation_email.subject'))
+    mail(to: recipients, subject: t('contact_request_mailer.confirmation_email.subject'))
   end
 
   def contact_email(contact_request:, recipients:, mail_body:)
