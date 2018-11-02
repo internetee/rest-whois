@@ -12,6 +12,7 @@ gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 gem 'uglifier'
 
 group :development do
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'puma'
 end
 
