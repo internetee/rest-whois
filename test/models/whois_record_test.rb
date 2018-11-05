@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class WhoisRecordTest < ActiveSupport::TestCase
   def setup
     super
