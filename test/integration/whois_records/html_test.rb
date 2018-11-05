@@ -162,18 +162,18 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    test
         org id:  123
         country: EE
-        email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed: Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        email:   Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed: Not Disclosed - Visit www.internet.ee for web-based WHOIS
 
         Administrative contact:
-        name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        name:       Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        email:      Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed:    Not Disclosed - Visit www.internet.ee for web-based WHOIS
 
         Technical contact:
-        name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        name:       Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        email:      Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed:    Not Disclosed - Visit www.internet.ee for web-based WHOIS
     TEXT
     )
     assert_button 'Show full WHOIS info'
@@ -270,18 +270,18 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         name:    test
         org id:  123
         country: EE
-        email:   Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed: Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        email:   Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed: Not Disclosed - Visit www.internet.ee for web-based WHOIS
 
         Administrative contact:
-        name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        name:       Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        email:      Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed:    Not Disclosed - Visit www.internet.ee for web-based WHOIS
 
         Technical contact:
-        name:       Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        email:      Not Disclosed - Visit www.internet.ee for webbased WHOIS
-        changed:    Not Disclosed - Visit www.internet.ee for webbased WHOIS
+        name:       Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        email:      Not Disclosed - Visit www.internet.ee for web-based WHOIS
+        changed:    Not Disclosed - Visit www.internet.ee for web-based WHOIS
     TEXT
     )
     assert_button 'Show full WHOIS info'
