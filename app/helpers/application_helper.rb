@@ -1,10 +1,6 @@
 module ApplicationHelper
-  def allowed_locales
+  def available_locales
     %i[et en ru]
-  end
-
-  def other_locales
-    allowed_locales - [I18n.locale]
   end
 
   def body_css_class
