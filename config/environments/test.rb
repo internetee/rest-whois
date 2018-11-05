@@ -13,8 +13,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Configure static file server for tests with Cache-Control for performance.
-  config.serve_static_files   = true
-  config.static_cache_control = 'public, max-age=3600'
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -29,15 +29,16 @@ Rails.application.configure do
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
+  config.action_mailer.default_url_options = { host: 'example.test' }
   config.action_mailer.delivery_method = :test
 
   # Randomize the order test cases are executed.
   config.active_support.test_order = :random
 
-  # Print deprecation notices to the stderr.
-  config.active_support.deprecation = :stderr
+  # Raise on deprecation errors
+  config.active_support.deprecation = :raise
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new(ENV['app_name'] || 'rest-whois'))
+  config.logger = ActiveSupport::Logger.new(nil)
 end

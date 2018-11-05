@@ -1,0 +1,4 @@
+<%= I18n.t('contact_request_mailer.confirmation_email.body', domain: @domain) %>
+<%= contact_request_url(@contact_request.secret, locale: @locale) %>
+
+<%= I18n.t('contact_request_mailer.confirmation_email.footer') %>

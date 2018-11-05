@@ -1,0 +1,10 @@
+<h1><%= t '.header' %></h1>
+
+<%- help = t('.help').split(/\n/) -%>
+<%- help.each do |line| %>
+    <p><%= line %></p>
+<% end %>
+
+<%= render 'contact_form' %>
+
+<p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>

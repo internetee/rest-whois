@@ -1,0 +1,5 @@
+Domain:
+name:       <%= json['name'] %>
+<%- for st in Array(json['status']) -%>
+status:     <%= st %>
+<%- end -%>

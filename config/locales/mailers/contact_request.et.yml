@@ -1,0 +1,15 @@
+et:
+  contact_request_mailer:
+    confirmation_email:
+      subject: E-posti aadressi kinnituskiri
+      body: |
+        Tere!
+
+        Sõnumi edastamiseks domeeni %{domain} kontaktile kinnitage palun oma e-posti aadress.
+
+        E-posti aadressi kinnitamiseks ja sõnumi edastamiseks vajutage alljärgnevale lingile:
+      footer: |
+        Link aegub 24 tunniga.
+
+        Lugupidamisega
+        Eesti Interneti SA

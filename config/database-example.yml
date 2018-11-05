@@ -1,27 +1,27 @@
 default: &default
-  host: localhost
   adapter: postgresql
   encoding: unicode
-  pool: 5
-  username: registry
-  password: registry_pwd
+  pool: <%= ENV.fetch("APP_DB_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("APP_DBHOST") { "localhost" } %>
+  username: <%= ENV.fetch("APP_DBUSER") { "postgres" } %>
+  password:
 
 development:
   <<: *default
-  database: registry_whois_development
+  database: rest_whois_development
 
 test:
   <<: *default
-  database: registry_whois_test
-
-alpha:
-  <<: *default
-  database: registry_whois_alpha
-
-staging:
-  <<: *default
-  database: registry_whois_staging
+  database: rest_whois_test
 
 production:
   <<: *default
-  database: registry_whois_development
+  database: rest_whois_production
+
+# Our production environment use two separate databases for different models. WhoisRecord are
+# read-only, while ContactRequests need write access. To enable access to second database,
+# ucommment the following lines.
+# You can also define write_development, or write_test databases, depending on your needs
+# write_production:
+#   <<: *default
+#   database: rest_whois_production

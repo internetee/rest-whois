@@ -1,0 +1,40 @@
+en:
+  contact_requests:
+    new:
+      header: Confirm your email
+      help: >-
+        You will receive an one time link to confirm your email, and then send a message to the
+        owner or administrator of the domain.
+      link_expiration: The link expires in 24 hours.
+
+    edit:
+      header: Contact Form
+      help: |
+        Message is limited to 2000 characters.
+        All HTML tags are stripped automatically.
+
+    link_request_form:
+      email: Your email address
+      name: Your name
+      submit_btn: Get a link
+
+    contact_form:
+      recipients: Recipients
+      admin_contacts: Owner and administrative contacts
+      tech_contacts: Technical contacts
+      message: Message
+      send_btn: Send
+
+    successfully_created: >-
+      Contact request created. Check your email for a link to the one-time contact form.
+    confirmation_sent: We sent a confirmation request to %{email}
+    confirmation_reminder: Please complete your email within 24 hours.
+    gdpr_disclaimer_html: >-
+      Estonian Internet Foundation is processing your personal data according to the objectives set
+      out in the Data Protection Policy. By entering the data, you confirm that you agree to the
+      processing of your personal data. See more
+      <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">here</a>.
+
+    successfully_sent: Your email has been sent.
+    smtp_error: >-
+      Email confirmation failed. Please check your email address and try again.
