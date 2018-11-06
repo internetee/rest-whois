@@ -86,17 +86,17 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   owner@company-domain.test
-        changed: 2018-04-25 14:10:39 +03:00
+        changed: 2018-04-25 14:10:39 +00:00
 
         Administrative contact:
         name:       Admin Contact
         email:      admin-contact@company-domain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
 
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@company-domain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
       TEXT
     )
     assert_no_button 'Show full WHOIS info'
@@ -189,17 +189,17 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         Registrant:
         name:    test
         email:   owner@privatedomain.test
-        changed: 2018-04-25 14:10:39 +03:00
+        changed: 2018-04-25 14:10:39 +00:00
 
         Administrative contact:
         name:       Admin Contact
         email:      admin-contact@privatedomain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
 
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@privatedomain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
     TEXT
     )
     assert_no_button 'Show full WHOIS info'
@@ -217,17 +217,17 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
         org id:  123
         country: EE
         email:   owner@company-domain.test
-        changed: 2018-04-25 14:10:39 +03:00
+        changed: 2018-04-25 14:10:39 +00:00
 
         Administrative contact:
         name:       Admin Contact
         email:      admin-contact@company-domain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
 
         Technical contact:
         name:       Tech Contact
         email:      tech-contact@company-domain.test
-        changed:    2018-04-25 14:10:41 +03:00
+        changed:    2018-04-25 14:10:41 +00:00
     TEXT
     )
     assert_no_button 'Show full WHOIS info'

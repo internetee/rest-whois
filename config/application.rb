@@ -54,5 +54,7 @@ module RestWhois
           "script-src https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;" \
           "frame-src 'self' https://www.google.com/recaptcha/",
     }
+
+    config.active_support.parse_json_times = true
   end
 end

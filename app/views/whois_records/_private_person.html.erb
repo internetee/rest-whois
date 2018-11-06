@@ -3,23 +3,23 @@ name:       <%= json['name'] %>
 <%- for st in Array(json['status']) -%>
 status:     <%= st %>
 <%- end -%>
-registered: <%= json['registered'].to_s.tr('T',' ').sub('+', ' +') %>
-changed:    <%= json['changed'].to_s.tr('T',' ').sub('+', ' +') %>
-expire:     <%= json['expire'].to_s.tr('T',' ').sub('+', ' +') %>
-outzone:    <%= json['outzone'].to_s.tr('T',' ').sub('+', ' +') %>
-delete:     <%= json['delete'].to_s.tr('T',' ').sub('+', ' +') %>
+registered: <%= l json['registered'] %>
+changed:    <%= l json['changed'] %>
+expire:     <%= l json['expire'] %>
+outzone:    <%= l json['outzone'] %>
+delete:     <%= l json['delete'] %>
 
 Registrant:
 name:       <%= ip_in_whitelist ? json['registrant'] : 'Private Person' %>
 email:      <%= ip_in_whitelist ? json['email'] : 'Not Disclosed' %>
-changed:    <%= ip_in_whitelist ? json['registrant_changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
+changed:    <%= ip_in_whitelist ? l(json['registrant_changed']) : 'Not Disclosed' %>
 
 <%- if json['admin_contacts'].present? -%>
 Administrative contact:
 <%- for contact in json['admin_contacts'] -%>
 name:       <%= ip_in_whitelist ? contact['name'] : 'Not Disclosed' %>
 email:      <%= ip_in_whitelist ? contact['email'] : 'Not Disclosed' %>
-changed:    <%= ip_in_whitelist ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
+changed:    <%= ip_in_whitelist ? l(contact['changed']) : 'Not Disclosed' %>
 <%- end -%>
 <%- end -%>
 
@@ -28,7 +28,7 @@ Technical contact:
 <%- for contact in json['tech_contacts'] -%>
 name:       <%= ip_in_whitelist ? contact['name'] : 'Not Disclosed' %>
 email:      <%= ip_in_whitelist ? contact['email'] : 'Not Disclosed' %>
-changed:    <%= ip_in_whitelist ? contact['changed'].to_s.tr('T',' ').sub('+', ' +') : 'Not Disclosed' %>
+changed:    <%= ip_in_whitelist ? l(contact['changed']) : 'Not Disclosed' %>
 <%- end -%>
 <%- end -%>
 
@@ -36,14 +36,14 @@ Registrar:
 name:       <%= json['registrar'] %>
 url:        <%= json['registrar_website'] %>
 phone:      <%= json['registrar_phone'] %>
-changed:    <%= json['registrar_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+changed:    <%= l json['registrar_changed'] %>
 
 <%- if json['nameservers'].present? -%>
 Name servers:
 <%- for server in json['nameservers'] -%>
 nserver:   <%= server %>
 <%- end -%>
-changed:   <%= json['nameservers_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+changed:   <%= l json['nameservers_changed'] %>
 
 <%- end -%>
 <%- if json['dnssec_keys'].present? -%>
@@ -51,5 +51,5 @@ DNSSEC:
 <%- for key in json['dnssec_keys'] -%>
 dnskey:   <%= key %>
 <%- end -%>
-changed:  <%= json['dnssec_changed'].to_s.tr('T',' ').sub('+', ' +') %>
+changed:  <%= l json['dnssec_changed'] %>
 <%- end -%>

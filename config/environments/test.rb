@@ -45,4 +45,6 @@ Rails.application.configure do
   config.action_view.raise_on_missing_translations = true
 
   config.logger = ActiveSupport::Logger.new(nil)
+
+  config.time_zone = 'UTC'
 end
