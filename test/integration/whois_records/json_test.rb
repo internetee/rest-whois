@@ -112,19 +112,19 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get '/v1/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
-    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
                  response_json[:registrant_changed]
 
     expected_admin_contacts = [
-      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+      { name: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS' }
     ]
     expected_tech_contacts = [
-      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+      { name: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS' }
     ]
 
     assert_equal expected_admin_contacts, response_json[:admin_contacts]
@@ -210,19 +210,19 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     get '/v1/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
-    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS', response_json[:email]
-    assert_equal 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
                  response_json[:registrant_changed]
 
     expected_admin_contacts = [
-      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+      { name: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS' }
     ]
     expected_tech_contacts = [
-      { name: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        email: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS',
-        changed: 'Not Disclosed - Visit www.internet.ee for webbased WHOIS' }
+      { name: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        email: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
+        changed: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS' }
     ]
 
     assert_equal expected_admin_contacts, response_json[:admin_contacts]
