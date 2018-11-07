@@ -1,51 +1,5 @@
 ---
 privately_owned:
-  body: |
-      The information obtained through .ee WHOIS is subject to database
-      protection according to the Estonian Copyright Act and international
-      conventions. All rights are reserved to Estonian Internet Foundation.
-      Search results may not be used for commercial, advertising, recompilation,
-      repackaging, redistribution, reuse, obscuring or other similar activities.
-      Downloading of information about domain names for the creation of your own
-      database is not permitted. If any of the information from .ee WHOIS is
-      transferred to a third party, it must be done in its entirety. This server
-      must not be used as a backend for a search engine.
-
-      Estonia .ee Top Level Domain WHOIS server
-
-      Domain:
-      name:       privatedomain.test
-      status:     inactive
-      registered: 2018-04-25 14:10:41 +03:00
-      changed:    2018-04-25 14:10:41 +03:00
-      expire:     2018-07-25
-      outzone:
-      delete:
-
-      Registrant:
-      name:    Private Person
-      email:   Not Disclosed
-      changed: Not Disclosed
-
-      Administrative contact:
-      name:       Not Disclosed
-      email:      Not Disclosed
-      changed:    Not Disclosed
-
-
-      Technical contact:
-      name:       Not Disclosed
-      email:      Not Disclosed
-      changed:    Not Disclosed
-
-      Registrar:
-      name:       test
-      url:
-      phone:
-      changed:    2018-04-25 14:10:39 +03:00
-
-      Estonia .ee Top Level Domain WHOIS server
-      More information at http://internet.ee
   json:
     admin_contacts:
       -
@@ -83,54 +37,6 @@ privately_owned:
 
 
 legally_owned:
-  body: |
-      The information obtained through .ee WHOIS is subject to database
-      protection according to the Estonian Copyright Act and international
-      conventions. All rights are reserved to Estonian Internet Foundation.
-      Search results may not be used for commercial, advertising, recompilation,
-      repackaging, redistribution, reuse, obscuring or other similar activities.
-      Downloading of information about domain names for the creation of your own
-      database is not permitted. If any of the information from .ee WHOIS is
-      transferred to a third party, it must be done in its entirety. This server
-      must not be used as a backend for a search engine.
-
-      Estonia .ee Top Level Domain WHOIS server
-
-      Domain:
-      name:       company-domain.test
-      status:     inactive
-      registered: 2018-04-25 14:10:41 +03:00
-      changed:    2018-04-25 14:10:41 +03:00
-      expire:     2018-07-25
-      outzone:
-      delete:
-
-      Registrant:
-      name:    Private Person
-      email:   Not Disclosed
-      org id:  123
-      country: EE
-      changed: Not Disclosed
-
-      Administrative contact:
-      name:       Not Disclosed
-      email:      Not Disclosed
-      changed:    Not Disclosed
-
-
-      Technical contact:
-      name:       Not Disclosed
-      email:      Not Disclosed
-      changed:    Not Disclosed
-
-      Registrar:
-      name:       test
-      url:
-      phone:
-      changed:    2018-04-25 14:10:39 +03:00
-
-      Estonia .ee Top Level Domain WHOIS server
-      More information at http://internet.ee
   json:
     admin_contacts:
       -
@@ -169,15 +75,6 @@ legally_owned:
   name: company-domain.test
 
 discarded:
-  body: |
-      Estonia .ee Top Level Domain WHOIS server
-
-      Domain:
-      name:       discarded-domain.test
-      status:     deleteCandidate
-
-      Estonia .ee Top Level Domain WHOIS server
-      More information at http://internet.ee
   json:
     name: discarded-domain.test
     status:
