@@ -19,7 +19,33 @@ class WhoisRecord < ApplicationRecord
     !discarded_blocked_or_reserved? && private_person?
   end
 
+  def registrant
+    deserialized_registrant
+  end
+
+  def admin_contacts
+    json['admin_contacts'].map { |serialized_contact| deserialized_contact(serialized_contact) }
+  end
+
+  def tech_contacts
+    json['tech_contacts'].map { |serialized_contact| deserialized_contact(serialized_contact) }
+  end
+
   private
+
+  def deserialized_registrant
+    Contact.new(name: json['registrant'],
+                type: json['registrant_kind'],
+                email: json['email'],
+                last_update: json['registrant_changed'])
+  end
+
+  def deserialized_contact(serialized_contact)
+    Contact.new(name: serialized_contact['name'],
+                type: nil,
+                email: serialized_contact['email'],
+                last_update: serialized_contact['changed'])
+  end
 
   def discarded_blocked_or_reserved?
     !([BLOCKED, RESERVED, DISCARDED] & json['status']).empty?

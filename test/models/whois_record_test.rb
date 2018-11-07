@@ -34,4 +34,41 @@ class WhoisRecordTest < ActiveSupport::TestCase
     assert_equal('discarded', @discarded_domain.partial_name)
     assert_equal('discarded', @discarded_domain.partial_name(true))
   end
+
+  def test_deserializes_registrant
+    whois_record = WhoisRecord.new(json: { registrant: 'John',
+                                           registrant_kind: 'priv',
+                                           email: 'john@shop.test',
+                                           registrant_changed: '2010-07-05T00:00:00+00:00' })
+    assert_equal Contact.new(name: 'John',
+                             type: 'priv',
+                             email: 'john@shop.test',
+                             last_update: Time.zone.parse('2010-07-05')), whois_record.registrant
+  end
+
+  def test_deserializes_admin_contacts
+    whois_record = WhoisRecord.new(json: { admin_contacts: [{ name: 'John',
+                                                              type: nil,
+                                                              email: 'john@shop.test',
+                                                              changed: '2010-07-05T00:00:00+00:00'
+                                                            }] })
+    assert_equal [Contact.new(name: 'John',
+                              type: nil,
+                              email: 'john@shop.test',
+                              last_update: Time.zone.parse('2010-07-05'))],
+                 whois_record.admin_contacts
+  end
+
+  def test_deserializes_tech_contacts
+    whois_record = WhoisRecord.new(json: { tech_contacts: [{ name: 'John',
+                                                             type: nil,
+                                                             email: 'john@shop.test',
+                                                             changed: '2010-07-05T00:00:00+00:00'
+                                                           }] })
+    assert_equal [Contact.new(name: 'John',
+                              type: nil,
+                              email: 'john@shop.test',
+                              last_update: Time.zone.parse('2010-07-05'))],
+                 whois_record.tech_contacts
+  end
 end
