@@ -1,11 +1,36 @@
 require 'test_helper'
 
 class LocaleSwitchTest < ActionDispatch::IntegrationTest
-  def test_home_page_has_working_locale_links
-    visit root_path
-    assert(has_link?('Eesti'))
-    assert(has_link?('Русский'))
-    click_link_or_button('Eesti')
-    assert(has_link?('English'))
+  setup do
+    @original_default_locale = I18n.default_locale
+  end
+
+  teardown do
+    I18n.default_locale = @original_default_locale
+  end
+
+  def test_default_locale
+    assert_equal :en, I18n.default_locale
+  end
+
+  def test_available_locales
+    visit root_url
+
+    within '.locale-switch' do
+      assert_link 'ET'
+      assert_text 'EN'
+      assert_link 'RU'
+    end
+  end
+
+  def test_current_locale_is_not_clickable
+    I18n.default_locale = :en
+
+    visit root_url
+    click_link_or_button 'ET'
+
+    within '.locale-switch' do
+      assert_no_link 'ET'
+    end
   end
 end
