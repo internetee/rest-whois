@@ -1,1 +1,2 @@
+Disallow: /v1
 Disallow: /contact_requests
