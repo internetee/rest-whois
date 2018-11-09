@@ -8,10 +8,13 @@
 <body class="<%= body_css_class %>">
     <div class="grid-container">
         <div class="header">
-            <%- other_locales.each do |locale| %>
-                <%= link_to I18n.t(locale),
-                    params.permit(:locale, :domain_name).merge({ locale: locale }) %>
-            <% end %>
+            <div class="locale-switch">
+                <% available_locales.each do |available_locale| %>
+                    <%= link_to_if available_locale != locale,
+                                   available_locale.upcase,
+                                   url_for(locale: available_locale) %>
+                <% end %>
+            </div>
         </div>
         <div class="main">
             <%= render 'flash_messages' %>

@@ -16,13 +16,13 @@ class ContactRequestsController < ApplicationController
       @contact_request.send_confirmation_email
       logger.warn("Confirmation request email registered to #{@contact_request.email}" \
         " (IP: #{request.ip})")
-      redirect_to(:root, notice: I18n.t('contact_requests.successfully_created'))
+      redirect_to(:root, notice: t('contact_requests.successfully_created'))
     else
       render(:new)
     end
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
-    redirect_to(:root, alert: I18n.t('contact_requests.smtp_error'))
+    redirect_to(:root, alert: t('contact_requests.smtp_error'))
   end
 
   def show
@@ -40,9 +40,9 @@ class ContactRequestsController < ApplicationController
         "Email sent to #{@contact_request.whois_record.name} contacts " \
         "from #{@contact_request.email} (IP: #{request.ip})"
       )
-      redirect_to(:root, notice: I18n.t('contact_requests.successfully_sent'))
+      redirect_to(:root, notice: t('contact_requests.successfully_sent'))
     else
-      redirect_to(:root, alert: I18n.t('contact_requests.something_went_wrong'))
+      redirect_to(:root, alert: t('contact_requests.something_went_wrong'))
     end
   end
 
