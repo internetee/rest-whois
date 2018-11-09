@@ -1,3 +1,18 @@
+08.11.2018
+* Ruby upgrade to 2.5.3 [#160](https://github.com/internetee/rest-whois/pull/160)
+* Rack upgrade to 2.0.6 (cve-2018-16470, cve-2018-16471) [#206](https://github.com/internetee/rest-whois/pull/158)
+* Loofah upgrade to 2.2.3 (CVE-2018-16468) [#132](https://github.com/internetee/rest-whois/pull/132)
+* disallowed rest-whois queries to be indexed [#136](https://github.com/internetee/rest-whois/pull/136)
+* Test Fixes [#138](https://github.com/internetee/rest-whois/pull/138)
+* Typo fix in status messages [#129](https://github.com/internetee/rest-whois/pull/129)
+* Dockerfile update [#162](https://github.com/internetee/rest-whois/pull/162)
+* CodeClimate config update [#130](https://github.com/internetee/rest-whois/pull/130)
+* Use `t` instead of `I18n.t` [#126](https://github.com/internetee/rest-whois/pull/126)
+* Disabled translation of available locales [#124](https://github.com/internetee/rest-whois/pull/124)
+* Test env logs missing translation errors [#135](https://github.com/internetee/rest-whois/pull/135)
+* Assets added to gitignore [#125](https://github.com/internetee/rest-whois/pull/125)
+* Removed sass gem [#127](https://github.com/internetee/rest-whois/pull/127)
+
 15.10.2018
 * Nokogiri update to 1.8.5 [#121](https://github.com/internetee/rest-whois/pull/121)
 
