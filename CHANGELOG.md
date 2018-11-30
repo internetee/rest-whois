@@ -1,5 +1,5 @@
 03.12.2018
-Rails upgrade to 5.2.1.1 [#167](https://github.com/internetee/rest-whois/pull/167)
+* Rails upgrade to 5.2.1.1 [#167](https://github.com/internetee/rest-whois/pull/167)
 * Removed duplicate Json keys [#140](https://github.com/internetee/rest-whois/pull/140)
 
 08.11.2018
