@@ -15,7 +15,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['no-reply@internet.ee'], email.from)
     assert_equal(['email@example.com'], email.to)
     assert_equal('Email address confirmation', email.subject)
-    assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s.rstrip)
+    assert_equal(read_fixture('confirmation_email.erb').join, email.body.to_s.gsub(/\r/, ""))
   end
 
   def test_confirmation_email_can_be_localized
@@ -28,7 +28,8 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['no-reply@internet.ee'], email.from)
     assert_equal(['email@example.com'], email.to)
     assert_equal('E-posti aadressi kinnituskiri', email.subject)
-    assert_equal(read_fixture('localized_confirmation_email.erb').join, email.body.to_s.rstrip)
+    assert_equal(read_fixture('localized_confirmation_email.erb').join,
+                 email.body.to_s.gsub(/\r/, ""))
 
     I18n.locale = I18n.default_locale
   end
@@ -53,7 +54,8 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['admin@privatedomain.com', 'owner@private_domain.com'], email.to)
     assert_equal(['email@example.com'], email.reply_to)
     assert_equal('Email to domain owner and/or contact', email.subject)
-    assert_equal(read_fixture('contact_request_email.erb').join, email.body.to_s.rstrip)
+    assert_equal(read_fixture('contact_request_email.erb').join,
+                 email.body.to_s.gsub(/\r/, ""))
   end
 
   def test_contact_request_email_strips_html_tags_from_body
@@ -71,7 +73,8 @@ class ContactRequestMailerTest < ActionMailer::TestCase
     assert_equal(['admin@privatedomain.com', 'owner@private_domain.com'], email.to)
     assert_equal(['email@example.com'], email.reply_to)
     assert_equal('Email to domain owner and/or contact', email.subject)
-    assert_equal(read_fixture('stripped_contact_request_email.erb').join, email.body.to_s.rstrip)
+    assert_equal(read_fixture('stripped_contact_request_email.erb').join,
+                 email.body.to_s.gsub(/\r/, ""))
   end
 
   def test_character_limit_constants_defaults_to_2000
