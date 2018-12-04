@@ -1,5 +1,7 @@
 ru:
   whois_records:
     show:
-      show_sensitive_data_btn: Показать полную информацию
       contact_owner_btn: Связаться с владельцем
+
+      captcha:
+        submit_btn: Показать полную информацию

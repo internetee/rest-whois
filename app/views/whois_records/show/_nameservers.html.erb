@@ -1,0 +1,15 @@
+<% if @whois_record.json['nameservers'].present? %>
+    <section class="nameservers">
+        <h2><%= t '.header' %></h2>
+        <ul>
+            <% for server in @whois_record.json['nameservers'] %>
+                <li>nserver: <%= server %></li>
+            <% end %>
+        </ul>
+
+        <dl>
+            <dt><%= Nameserver.human_attribute_name :last_update %></dt>
+            <dd><%= l @whois_record.json['nameservers_changed'], default: nil %></dd>
+        </dl>
+    </section>
+<% end %>

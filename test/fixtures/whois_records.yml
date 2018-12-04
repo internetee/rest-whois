@@ -9,13 +9,17 @@ privately_owned:
     changed: "2018-04-25T14:10:41+00:00"
     delete: "2018-07-25"
     disclaimer: "The information obtained through .ee WHOIS is subject to database protection according to the Estonian Copyright Act and international conventions. All rights are reserved to Estonian Internet Foundation. Search results may not be used for commercial,advertising, recompilation, repackaging, redistribution, reuse, obscuring or other similar activities. Downloading of information about domain names for the creation of your own database is not permitted. If any of the information from .ee WHOIS is transferred to a third party, it must be done in its entirety. This server must not be used as a backend for a search engine."
-    dnssec_changed: "2018-07-25"
-    dnssec_keys: []
+    dnssec_keys:
+      - one
+      - two
+    dnssec_changed: "2010-07-05T00:00:00+00:00"
     email: owner@privatedomain.test
     expire: "2018-07-25"
     name: privatedomain.test
-    nameservers: []
-    nameservers_changed: "2018-07-25"
+    nameservers:
+      - ns1.privatedomain.test
+      - ns2.privatedomain.test
+    nameservers_changed: "2010-07-05T00:00:00+00:00"
     outzone: "2018-07-25"
     registered: "2018-04-25T14:10:41+00:00"
     registrant: test

@@ -1,20 +1,18 @@
 class Contact
-  attr_reader :name
-  attr_reader :type
-  attr_reader :email
-  attr_reader :last_update
+  include ActiveModel::Model
 
-  def initialize(name:, type:, email:, last_update:)
-    @name = name
-    @type = type
-    @email = email
-    @last_update = last_update
+  attr_accessor :name
+  attr_accessor :type
+  attr_accessor :reg_number
+  attr_accessor :email
+  attr_accessor :ident_country
+  attr_accessor :last_update
+
+  def private_person?
+    !legal_person?
   end
 
-  def ==(other)
-    name == other.name &&
-      type == other.type &&
-      email == other.email &&
-      last_update == other.last_update
+  def legal_person?
+    type == 'org'
   end
 end

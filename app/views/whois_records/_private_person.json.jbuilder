@@ -1,4 +1,3 @@
-registrant = RegistrantJSONPresenter.new(@whois_record.registrant, self)
 json.name whois_record.json['name']
 json.changed whois_record.json['changed']
 json.delete whois_record.json['delete']
@@ -10,7 +9,7 @@ json.nameservers_changed whois_record.json['nameservers_changed']
 json.outzone whois_record.json['outzone']
 json.registered whois_record.json['registered']
 
-json.registrant_changed(registrant.last_update)
+json.registrant_changed(ip_in_whitelist ? whois_record.json['registrant_changed'] : 'Not Disclosed')
 json.registrant_kind whois_record.json['registrant_kind']
 
 json.registrar whois_record.json['registrar']
@@ -19,24 +18,22 @@ json.registrar_changed whois_record.json['registrar_changed']
 json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
-json.email(registrant.email)
-json.registrant(registrant.name)
+json.email(ip_in_whitelist ? whois_record.json['email'] : 'Not Disclosed')
+json.registrant(ip_in_whitelist ? whois_record.json['registrant'] : 'Private Person')
 
 json.tech_contacts do
-  json.array!(whois_record.tech_contacts) do |contact|
-    contact = ContactJSONPresenter.new(contact, self)
-    json.name(contact.name)
-    json.email(contact.email)
-    json.changed(contact.last_update)
+  json.array!(whois_record.json['tech_contacts']) do |contact|
+    json.name(ip_in_whitelist ? contact['name'] : 'Not Disclosed')
+    json.email(ip_in_whitelist ? contact['email'] : 'Not Disclosed')
+    json.changed(ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
   end
 end
 
 json.admin_contacts do
-  json.array!(whois_record.admin_contacts) do |contact|
-    contact = ContactJSONPresenter.new(contact, self)
-    json.name(contact.name)
-    json.email(contact.email)
-    json.changed(contact.last_update)
+  json.array!(whois_record.json['admin_contacts']) do |contact|
+    json.name(ip_in_whitelist ? contact['name'] : 'Not Disclosed')
+    json.email(ip_in_whitelist ? contact['email'] : 'Not Disclosed')
+    json.changed(ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
   end
 end
 

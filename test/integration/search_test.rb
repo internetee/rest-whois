@@ -27,6 +27,9 @@ class SearchTest < ActionDispatch::IntegrationTest
     fill_in('domain_name', with: 'privatedomain.test')
     click_link_or_button('Lookup')
     assert_equal(200, page.status_code)
-    assert(has_text?('name: privatedomain.test'))
+
+    within '.domain' do
+      assert_text 'Name privatedomain.test'
+    end
   end
 end

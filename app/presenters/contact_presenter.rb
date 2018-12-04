@@ -1,30 +1,39 @@
 class ContactPresenter
-  def initialize(contact, view)
+  delegate :legal_person?, :reg_number, :ident_country, to: :contact
+
+  def initialize(contact, view, whois_record)
     @contact = contact
     @view = view
+    @whois_record = whois_record
   end
 
   def name
-    if whitelisted_user?
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+
+    if unmasked
       contact.name
     else
-      name_mask
+      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
   def email
-    if whitelisted_user?
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+
+    if unmasked
       contact.email
     else
-      undisclosable_mask
+      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
   def last_update
-    if whitelisted_user?
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+
+    if unmasked
       view.l(contact.last_update, default: nil)
     else
-      undisclosable_mask
+      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
@@ -39,7 +48,7 @@ class ContactPresenter
   end
 
   def name_mask
-    undisclosable_mask
+    contact.private_person? ? undisclosable_mask : disclosable_mask
   end
 
   def whitelisted_user?
@@ -56,4 +65,5 @@ class ContactPresenter
 
   attr_reader :contact
   attr_reader :view
+  attr_reader :whois_record
 end

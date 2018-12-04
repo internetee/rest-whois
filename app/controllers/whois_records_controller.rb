@@ -1,6 +1,7 @@
 class WhoisRecordsController < ApplicationController
   helper_method :ip_in_whitelist?
   helper_method :contact_form_default_locale
+  helper_method :captcha_solved?
 
   def show
     domain_name = SimpleIDN.to_unicode(params[:name].to_s).downcase

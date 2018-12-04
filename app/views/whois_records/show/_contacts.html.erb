@@ -1,0 +1,17 @@
+<ul class="contact-list">
+    <% contacts.each do |contact| %>
+        <% contact = ContactPresenter.new(contact, self, whois_record) %>
+        <li class="contact">
+            <dl>
+                <dt><%= Contact.human_attribute_name :name %></dt>
+                <dd><%= contact.name %></dd>
+
+                <dt><%= Contact.human_attribute_name :email %></dt>
+                <dd><%= contact.email %></dd>
+
+                <dt><%= Contact.human_attribute_name :last_update %></dt>
+                <dd><%= contact.last_update %></dd>
+            </dl>
+        </li>
+    <% end %>
+</ul>

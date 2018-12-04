@@ -1,0 +1,21 @@
+<section class="registrant">
+    <h2><%= t '.header' %></h2>
+    <dl>
+        <dt><%= Contact.human_attribute_name :name %></dt>
+        <dd><%= registrant.name %></dd>
+
+        <% if registrant.legal_person? %>
+            <dt><%= Contact.human_attribute_name :reg_number %></dt>
+            <dd><%= registrant.reg_number %></dd>
+
+            <dt><%= Contact.human_attribute_name :ident_country %></dt>
+            <dd><%= registrant.ident_country %></dd>
+        <% end %>
+
+        <dt><%= Contact.human_attribute_name :email %></dt>
+        <dd><%= registrant.email %></dd>
+
+        <dt><%= Contact.human_attribute_name :last_update %></dt>
+        <dd><%= registrant.last_update %></dd>
+    </dl>
+</section>

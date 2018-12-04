@@ -1,17 +1,35 @@
 require 'test_helper'
 
 class ContactTest < ActiveSupport::TestCase
-  setup do
-    @contact = Contact.new(name: 'test', type: 'priv', email: 'test', last_update: 'test')
+  def test_private_person
+    contact = Contact.new
+
+    contact.type = 'priv'
+    assert contact.private_person?
+
+    contact.type = 'birthday'
+    assert contact.private_person?
+
+    contact.type = 'passport'
+    assert contact.private_person?
+
+    contact.type = 'org'
+    assert_not contact.private_person?
   end
 
-  def test_two_contacts_with_the_same_attributes_are_equal
-    assert_equal Contact.new(name: 'test', type: 'priv', email: 'test', last_update: 'test'),
-                 @contact
-  end
+  def test_legal_person
+    contact = Contact.new
 
-  def test_two_contacts_with_different_attributes_are_not_equal
-    assert_not_equal Contact.new(name: 'other', type: 'priv', email: 'test', last_update: 'test'),
-                     @contact
+    contact.type = 'org'
+    assert contact.legal_person?
+
+    contact.type = 'priv'
+    assert_not contact.legal_person?
+
+    contact.type = 'birthday'
+    assert_not contact.legal_person?
+
+    contact.type = 'passport'
+    assert_not contact.legal_person?
   end
 end
