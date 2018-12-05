@@ -1,7 +1,8 @@
-03.12.2018
+06.12.2018
 * Rails upgrade to 5.2.1.1 [#167](https://github.com/internetee/rest-whois/pull/167)
 * Removed duplicate Json keys [#140](https://github.com/internetee/rest-whois/pull/140)
 * Removed unused disclose Json key [#163](https://github.com/internetee/rest-whois/pull/163)
+* Removed unused `whois_records.body` DB column [#161](https://github.com/internetee/rest-whois/pull/161)
 
 08.11.2018
 * Ruby upgrade to 2.5.3 [#160](https://github.com/internetee/rest-whois/pull/160)
