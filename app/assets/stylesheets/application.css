@@ -1,5 +1,6 @@
 /* ...
  *= require_self
+ *= require bootstrap-reboot.min
  *= require_tree .
  */
 
