@@ -7,7 +7,6 @@ gem 'pg', '~> 1.0.0'
 gem 'rails', '~> 5.2.1'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'simpleidn', '0.0.7' # For Punycode
-gem 'SyslogLogger', '2.0', require: 'syslog/logger'
 gem 'uglifier'
 
 group :development do
