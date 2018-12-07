@@ -1,3 +1,6 @@
+10.12.2018
+* Support system tests [#169](https://github.com/internetee/rest-whois/pull/169)
+
 06.12.2018
 * Rails upgrade to 5.2.1.1 [#167](https://github.com/internetee/rest-whois/pull/167)
 * Removed duplicate Json keys [#140](https://github.com/internetee/rest-whois/pull/140)
