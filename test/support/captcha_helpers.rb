@@ -8,6 +8,7 @@ module CaptchaHelpers
   def disable_captcha
     Recaptcha.configuration.skip_verify_env.push('test')
   end
+  alias_method :solve_captcha, :disable_captcha
 
   def with_captcha_test_keys
     # Allow ReCaptcha reach Google
