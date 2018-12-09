@@ -11,7 +11,6 @@ gem 'uglifier'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'puma'
 end
 
 group :development, :test do
@@ -20,6 +19,7 @@ group :development, :test do
 
   gem 'capybara'
   gem 'mina', '~> 0.3.8'
+  gem 'puma'
   gem 'webmock'
 end
 
