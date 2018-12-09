@@ -17,7 +17,7 @@ module CaptchaHelpers
                                  secret_key: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe') do
       yield
     end
-    WebMock.disable_net_connect!
+    WebMock.disable_net_connect!(allow_localhost: true) # `allow_localhost` is required by Selenium
   end
 
   def assert_no_captcha

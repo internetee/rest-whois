@@ -1,6 +1,6 @@
 require 'test_helper'
 
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true) # `allow_localhost` is required by Selenium
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   Capybara.register_driver(:headless_chrome) do |app|
