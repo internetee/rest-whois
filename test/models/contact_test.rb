@@ -32,4 +32,12 @@ class ContactTest < ActiveSupport::TestCase
     contact.type = 'passport'
     assert_not contact.legal_person?
   end
+
+  def test_discloses_attributes
+    contact = Contact.new(disclosed_attributes: [])
+    assert_not contact.attribute_disclosed?(:name)
+
+    contact.disclosed_attributes = %w[name]
+    assert contact.attribute_disclosed?(:name)
+  end
 end

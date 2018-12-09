@@ -76,7 +76,8 @@ class WhoisRecordTest < ActiveSupport::TestCase
                                            registrant_reg_no: '1234',
                                            email: 'john@shop.test',
                                            registrant_ident_country_code: 'US',
-                                           registrant_changed: '2010-07-05T00:00:00+00:00' })
+                                           registrant_changed: '2010-07-05T00:00:00+00:00',
+                                           registrant_disclosed_attributes: %w[name] })
 
     assert_equal 'John', whois_record.registrant.name
     assert_equal 'priv', whois_record.registrant.type
@@ -84,29 +85,34 @@ class WhoisRecordTest < ActiveSupport::TestCase
     assert_equal 'john@shop.test', whois_record.registrant.email
     assert_equal 'US', whois_record.registrant.ident_country
     assert_equal Time.zone.parse('2010-07-05'), whois_record.registrant.last_update
+    assert_equal %w[name], whois_record.registrant.disclosed_attributes
   end
 
   def test_deserializes_admin_contacts
     whois_record = WhoisRecord.new(json: { admin_contacts: [{ name: 'John',
                                                               email: 'john@shop.test',
-                                                              changed: '2010-07-05T00:00:00+00:00'
+                                                              changed: '2010-07-05T00:00:00+00:00',
+                                                              disclosed_attributes: %w[name]
                                                             }] })
 
     contact = whois_record.admin_contacts.first
     assert_equal 'John', contact.name
     assert_equal 'john@shop.test', contact.email
     assert_equal Time.zone.parse('2010-07-05'), contact.last_update
+    assert_equal %w[name], contact.disclosed_attributes
   end
 
   def test_deserializes_tech_contacts
     whois_record = WhoisRecord.new(json: { tech_contacts: [{ name: 'John',
                                                              email: 'john@shop.test',
-                                                             changed: '2010-07-05T00:00:00+00:00'
+                                                             changed: '2010-07-05T00:00:00+00:00',
+                                                             disclosed_attributes: %w[name]
                                                            }] })
 
     contact = whois_record.tech_contacts.first
     assert_equal 'John', contact.name
     assert_equal 'john@shop.test', contact.email
     assert_equal Time.zone.parse('2010-07-05'), contact.last_update
+    assert_equal %w[name], contact.disclosed_attributes
   end
 end

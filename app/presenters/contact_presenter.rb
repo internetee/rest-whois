@@ -8,7 +8,8 @@ class ContactPresenter
   end
 
   def name
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?) ||
+               contact.attribute_disclosed?(:name)
 
     if unmasked
       contact.name
@@ -18,10 +19,13 @@ class ContactPresenter
   end
 
   def email
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?) ||
+               (contact.attribute_disclosed?(:email) && captcha_solved?)
 
     if unmasked
       contact.email
+    elsif contact.attribute_disclosed?(:email) && captcha_unsolved?
+      disclosable_mask
     else
       whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
     end
