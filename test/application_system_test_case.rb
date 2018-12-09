@@ -14,4 +14,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   driven_by :headless_chrome
   Capybara.server = :puma, { Silent: true }
+
+  def whitelist_current_ip
+    ENV['whitelist_ip'] = '127.0.0.1'
+  end
 end

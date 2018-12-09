@@ -19,4 +19,9 @@ module CaptchaHelpers
     end
     WebMock.disable_net_connect!
   end
+
+  def assert_no_captcha
+    assert_no_css '.captcha'
+    assert_no_button 'Show full WHOIS info'
+  end
 end
