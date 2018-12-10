@@ -1,6 +1,6 @@
 require 'test_helper'
 
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true) # `allow_localhost` is required by Selenium
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   # Custom driver is needed for Travis
@@ -16,4 +16,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   driven_by :headless_chrome
   Capybara.server = :puma, { Silent: true }
+
+  def whitelist_current_ip
+    ENV['whitelist_ip'] = '127.0.0.1'
+  end
 end

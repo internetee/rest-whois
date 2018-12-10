@@ -13,6 +13,8 @@ require 'capybara/minitest'
 require 'webmock/minitest'
 require 'support/captcha_helpers'
 
+Capybara.default_normalize_ws = true
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
