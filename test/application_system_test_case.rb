@@ -3,6 +3,8 @@ require 'test_helper'
 WebMock.disable_net_connect!(allow_localhost: true)
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  # Custom driver is needed for Travis
+  # https://docs.travis-ci.com/user/chrome#sandboxing
   Capybara.register_driver(:headless_chrome) do |app|
     options = ::Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
