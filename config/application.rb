@@ -21,10 +21,10 @@ module RestWhois
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     config.i18n.default_locale = :en
 
-    config.secret_key_base = Figaro.env.secret_key_base
-
     # Fallback to default locale if text is missing
     config.i18n.fallbacks = [:en]
+
+    config.secret_key_base = Figaro.env.secret_key_base
 
     # Mailer configuration
     config.action_mailer.default_url_options = { host: ENV['mailer_host'] }
