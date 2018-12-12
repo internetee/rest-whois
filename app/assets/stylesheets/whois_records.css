@@ -1,0 +1,55 @@
+dl {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+dt {
+    font-weight: bold;
+    padding-top: 1em;
+    width: 20%;
+}
+
+dt:after {
+    content: ": "
+}
+
+dd {
+    display: flex;
+    padding-top: 1em;
+    margin: 0;
+}
+
+dd + dd {
+    padding-top: 0;
+    width: 100%;
+}
+
+dt + dd:not(:nth-child(2)),
+dt:first-child + dd:nth-child(2) {
+    width: 80%;
+}
+
+dd + dd::before {
+    content: "";
+    padding-top: 0;
+    width: 20%;
+}
+
+.whois-records-show-page ul {
+    list-style-position: inside;
+    padding-left: 0;
+    margin: 0;
+}
+
+.whois-records-show-page .contact-list {
+    list-style: none;
+}
+
+.whois-records-show-page .contact-list .contact {
+    border-top: #ccc solid 1px;
+}
+
+.whois-records-show-page .contact-list .contact:first-child {
+    border-top: none;
+}

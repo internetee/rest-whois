@@ -1,16 +1,34 @@
-<pre>
-  <%= render partial: 'whois', locals: { json: @whois_record.json,
-                                         show_sensitive_data: @show_sensitive_data,
-                                         ip_in_whitelist: ip_in_whitelist? } %>
-</pre>
+<h1><%= t '.header' %></h1>
+
+<p><%= @whois_record.disclaimer %></p>
+
+<%= render 'whois_records/show/domain', domain: @whois_record.domain %>
+
+<% if @whois_record.domain.registered? %>
+    <%= render 'whois_records/show/registrant',
+               registrant: RegistrantPresenter.new(@whois_record.registrant, self, @whois_record) %>
+
+    <%= render partial: 'whois_records/show/contacts',
+               layout: 'whois_records/show/admin_contacts',
+               locals: { contacts: @whois_record.admin_contacts,
+                         whois_record: @whois_record } %>
+
+    <%= render partial: 'whois_records/show/contacts',
+               layout: 'whois_records/show/tech_contacts',
+               locals: { contacts: @whois_record.tech_contacts,
+                         whois_record: @whois_record } %>
+
+    <%= render 'whois_records/show/registrar', registrar: @whois_record.registrar %>
+    <%= render 'whois_records/show/nameservers' %>
+    <%= render 'whois_records/show/dnssec_keys' %>
+<% end %>
+
+<p>More information at http://internet.ee</p>
 
 <% if !@show_sensitive_data %>
-    <%= form_for @whois_record, url: whois_record_path(@whois_record.name), method: :get do |f| %>
-        <%= hidden_field_tag 'locale', locale %>
-        <div class="recaptcha"><%= recaptcha_tags %></div>
-        <br/>
-        <%= submit_tag t('.show_sensitive_data_btn'), name: nil %>
-    <% end %>
+    <section class="captcha">
+        <%= render 'whois_records/show/captcha' %>
+    </section>
 <% end %>
 
 <% if @show_sensitive_data && @whois_record.contactable? %>
@@ -18,4 +36,4 @@
         <%= link_to t('.contact_owner_btn'),
                     new_contact_request_path({ domain_name: @whois_record.name }) %>
     </p>
-<% end -%>
+<% end %>

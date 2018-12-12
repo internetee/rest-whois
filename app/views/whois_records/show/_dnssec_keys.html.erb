@@ -1,0 +1,15 @@
+<% if @whois_record.json['dnssec_keys'].present? %>
+    <section class="dnssec_keys">
+        <h2><%= t '.header' %></h2>
+        <ul>
+            <% for key in @whois_record.json['dnssec_keys'] %>
+                <li>dnskey: <%= key %></li>
+            <% end %>
+        </ul>
+
+        <dl>
+            <dt><%= DnssecKey.human_attribute_name :last_update %></dt>
+            <dd><%= l @whois_record.json['dnssec_changed'], default: nil %></dd>
+        </dl>
+    </section>
+<% end %>

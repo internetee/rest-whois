@@ -1,5 +1,29 @@
 en:
   whois_records:
     show:
-      show_sensitive_data_btn: Show full WHOIS info
+      header: Estonia .ee Top Level Domain WHOIS server
       contact_owner_btn: Contact owner
+
+      domain:
+        header: Domain
+
+      registrant:
+        header: Registrant
+
+      admin_contacts:
+        header: Administrative contacts
+
+      tech_contacts:
+        header: Technical contacts
+
+      registrar:
+        header: Registrar
+
+      nameservers:
+        header: Nameservers
+
+      dnssec_keys:
+        header: DNSSEC
+
+      captcha:
+        submit_btn: Show full WHOIS info

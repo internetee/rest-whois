@@ -1,0 +1,26 @@
+<section class="domain">
+    <h2><%= t '.header' %></h2>
+    <dl>
+        <dt><%= Domain.human_attribute_name :name %></dt>
+        <dd><%= domain.name %></dd>
+
+        <%= render 'whois_records/show/statuses', statuses: domain.statuses %>
+
+        <% if domain.registered? %>
+            <dt><%= Domain.human_attribute_name :registered %></dt>
+            <dd><%= l domain.registered, default: nil %></dd>
+
+            <dt><%= Domain.human_attribute_name :changed %></dt>
+            <dd><%= l domain.changed, default: nil %></dd>
+
+            <dt><%= Domain.human_attribute_name :expire %></dt>
+            <dd><%= l domain.expire, default: nil %></dd>
+
+            <dt><%= Domain.human_attribute_name :outzone %></dt>
+            <dd><%= l domain.outzone, default: nil %></dd>
+
+            <dt><%= Domain.human_attribute_name :delete %></dt>
+            <dd><%= l domain.delete, default: nil %></dd>
+        <% end %>
+    </dl>
+</section>
