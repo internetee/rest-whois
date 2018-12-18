@@ -4,9 +4,7 @@ class ContactRequestsTest < ApplicationSystemTestCase
   def setup
     super
 
-    @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
-    @expired_contact_request = contact_requests(:expired)
   end
 
   def test_create_an_contact_email_delivery

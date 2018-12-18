@@ -6,7 +6,6 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
 
     @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
-    @expired_contact_request = contact_requests(:expired)
   end
 
   def test_request_replay_fails

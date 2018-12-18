@@ -2,18 +2,6 @@
 require 'application_system_test_case'
 
 class ContactRequestsConfirmationTest < ApplicationSystemTestCase
-  def setup
-    super
-
-    @private_domain = whois_records(:privately_owned)
-    @valid_contact_request = contact_requests(:valid)
-    @expired_contact_request = contact_requests(:expired)
-  end
-
-  def teardown
-    super
-  end
-
   def test_link_from_whois_record_page_does_not_exists_for_discarded_domains
     visit("v1/discarded-domain.test")
     refute(has_link?('Contact owner'))
