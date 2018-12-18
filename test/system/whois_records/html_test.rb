@@ -1,21 +1,17 @@
 require 'application_system_test_case'
 
 class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
-  include CaptchaHelpers
-
   def setup
     super
 
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
-    enable_captcha
   end
 
   def teardown
     super
 
     ENV['whitelist_ip'] = @original_whitelist_ip
-    disable_captcha
   end
 
   def test_missing_domain

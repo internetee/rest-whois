@@ -1,8 +1,6 @@
 require 'application_system_test_case'
 
 class WhoisRecordDetailsDiscardedDomainTest < ApplicationSystemTestCase
-  include CaptchaHelpers
-
   setup do
     @whois_record = whois_records(:privately_owned)
     @whois_record.update!(name: 'discarded.test', json: { name: 'discarded.test',

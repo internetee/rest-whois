@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
-  include CaptchaHelpers
-
   def setup
     super
 

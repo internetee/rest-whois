@@ -1,15 +1,11 @@
 require 'application_system_test_case'
 
 class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
-  include CaptchaHelpers
-
   setup do
     @whois_record = whois_records(:privately_owned)
 
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
-
-    enable_captcha
   end
 
   teardown do
