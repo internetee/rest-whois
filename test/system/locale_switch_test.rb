@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'application_system_test_case'
 
-class LocaleSwitchTest < ActionDispatch::IntegrationTest
+class LocaleSwitchTest < ApplicationSystemTestCase
   setup do
     @original_default_locale = I18n.default_locale
   end

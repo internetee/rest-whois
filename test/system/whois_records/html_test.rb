@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'application_system_test_case'
 
-class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
+class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
   include CaptchaHelpers
 
   def setup
@@ -18,19 +18,14 @@ class PrivatePersonWhoisRecordHTMLTest < ActionDispatch::IntegrationTest
     disable_captcha
   end
 
-  def test_html_returns_404_for_missing_domains
+  def test_missing_domain
     visit('/v1/missing-domain.test')
-
-    assert_equal(404, page.status_code)
     assert_text('Domain not found: missing-domain.test')
   end
 
   def test_contact_form_link_is_visible_when_captcha_is_solved
-    with_captcha_test_keys do
-      visit('/v1/privatedomain.test')
-      click_button 'Show full WHOIS info'
-    end
-
+    solve_captcha
+    visit('/v1/privatedomain.test')
     assert(has_link?('Contact owner'))
   end
 
