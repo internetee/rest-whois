@@ -4,7 +4,7 @@
 
 <%= render 'whois_records/show/domain', domain: @whois_record.domain %>
 
-<% if @whois_record.domain.registered? %>
+<% if @whois_record.domain.registered? && !@whois_record.domain.reserved? %>
     <%= render 'whois_records/show/registrant',
                registrant: RegistrantPresenter.new(@whois_record.registrant, self, @whois_record) %>
 
