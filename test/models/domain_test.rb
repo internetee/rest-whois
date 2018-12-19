@@ -9,6 +9,11 @@ class DomainTest < ActiveSupport::TestCase
     assert_not domain.registered?
   end
 
+  def test_status_reserved
+    # Case does matter; this is how `registry` app generates it.
+    assert_equal 'Reserved', Domain::STATUS_RESERVED
+  end
+
   def test_reserved
     domain = Domain.new(statuses: %w[active])
     assert_not domain.reserved?

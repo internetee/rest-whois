@@ -1,7 +1,6 @@
 class Domain
   include ActiveModel::Model
 
-  # Case does matter; this is how `registry` app generates it.
   STATUS_RESERVED = 'Reserved'
 
   attr_accessor :name
