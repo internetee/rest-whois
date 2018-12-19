@@ -1,8 +1,4 @@
 class WhoisRecord < ApplicationRecord
-  BLOCKED = 'Blocked'.freeze
-  RESERVED = 'Reserved'.freeze
-  DISCARDED = 'deleteCandidate'.freeze
-
   store_accessor :json, %i[disclaimer]
 
   def private_person?
@@ -78,7 +74,9 @@ class WhoisRecord < ApplicationRecord
   end
 
   def discarded_blocked_or_reserved?
-    !([BLOCKED, RESERVED, DISCARDED] & json['status']).empty?
+    !([Domain::STATUS_BLOCKED,
+       Domain::STATUS_RESERVED,
+       Domain::STATUS_DISCARDED] & json['status']).empty?
   end
 
   def partial_for_private_person(authorized)

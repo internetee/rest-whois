@@ -82,7 +82,7 @@ discarded:
   json:
     name: discarded-domain.test
     status:
-      - deleteCandidate
+      - <%= Domain::STATUS_DISCARDED %>
   name: discarded-domain.test
 
 with_duplicate_domain_contacts:

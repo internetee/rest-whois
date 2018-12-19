@@ -1,7 +1,9 @@
 class Domain
   include ActiveModel::Model
 
-  STATUS_RESERVED = 'Reserved'
+  STATUS_BLOCKED = 'Blocked'.freeze
+  STATUS_RESERVED = 'Reserved'.freeze
+  STATUS_DISCARDED = 'deleteCandidate'.freeze
 
   attr_accessor :name
   attr_accessor :statuses
@@ -12,7 +14,7 @@ class Domain
   attr_accessor :delete
 
   def registered?
-    statuses.exclude?('deleteCandidate')
+    statuses.exclude?(STATUS_DISCARDED)
   end
 
   def reserved?

@@ -4,7 +4,7 @@ class WhoisRecordDetailsDiscardedDomainTest < ApplicationSystemTestCase
   setup do
     @whois_record = whois_records(:privately_owned)
     @whois_record.update!(name: 'discarded.test', json: { name: 'discarded.test',
-                                                          status: %w[deleteCandidate] })
+                                                          status: [Domain::STATUS_DISCARDED] })
   end
 
   def test_domain_details
