@@ -1,4 +1,5 @@
 20.12.2018
+* Enable user disclosable attributes [#174](https://github.com/internetee/rest-whois/pull/174)
 * Refactor disclosable contact attributes - blocked and reserved domain handling [#179](https://github.com/internetee/rest-whois/pull/179)
 * Added build padge to github rest-whois project [#178](https://github.com/internetee/rest-whois/pull/178)
 * Support system tests [#169](https://github.com/internetee/rest-whois/pull/169)
