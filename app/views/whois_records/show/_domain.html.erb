@@ -6,7 +6,7 @@
 
         <%= render 'whois_records/show/statuses', statuses: domain.statuses %>
 
-        <% if domain.registered? %>
+        <% if domain.active? %>
             <dt><%= Domain.human_attribute_name :registered %></dt>
             <dd><%= l domain.registered, default: nil %></dd>
 

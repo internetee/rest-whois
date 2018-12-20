@@ -1,16 +1,12 @@
 require 'application_system_test_case'
 
 class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
-  include CaptchaHelpers
-
   setup do
     @whois_record = whois_records(:privately_owned)
     @whois_record.update!(json: @whois_record.json.merge({ registrant_kind: 'org' }))
 
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
-
-    enable_captcha
   end
 
   teardown do

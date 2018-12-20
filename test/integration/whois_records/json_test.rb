@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
-  include CaptchaHelpers
-
   def setup
     super
 
@@ -42,7 +40,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     response_json = JSON.parse(response.body)
     assert_equal('discarded-domain.test', response_json['name'])
-    assert_equal(['deleteCandidate'], response_json['status'])
+    assert_equal([Domain::STATUS_DISCARDED], response_json['status'])
     refute(response_json.has_key?('admin_contact'))
     refute(response_json.has_key?('registrant'))
   end

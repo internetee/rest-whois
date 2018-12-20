@@ -1,10 +1,10 @@
 require 'application_system_test_case'
 
-class WhoisRecordDetailsDiscardedDomainTest < ApplicationSystemTestCase
+class WhoisRecordDetailsReservedDomainTest < ApplicationSystemTestCase
   setup do
     @whois_record = whois_records(:privately_owned)
     @whois_record.update!(name: 'shop.test', json: { name: 'shop.test',
-                                                     status: [Domain::STATUS_DISCARDED] })
+                                                     status: [Domain::STATUS_RESERVED] })
   end
 
   def test_domain_details
@@ -12,7 +12,7 @@ class WhoisRecordDetailsDiscardedDomainTest < ApplicationSystemTestCase
 
     within '.domain' do
       assert_text 'Name shop.test'
-      assert_text 'Statuses deleteCandidate'
+      assert_text 'Statuses Reserved'
 
       assert_no_text 'Registered'
       assert_no_text 'Changed'

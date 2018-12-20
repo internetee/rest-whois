@@ -3,6 +3,8 @@ require 'test_helper'
 WebMock.disable_net_connect!(allow_localhost: true) # `allow_localhost` is required by Selenium
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  include CaptchaHelpers
+
   # Custom driver is needed for Travis
   # https://docs.travis-ci.com/user/chrome#sandboxing
   Capybara.register_driver(:headless_chrome) do |app|
@@ -19,5 +21,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def whitelist_current_ip
     ENV['whitelist_ip'] = '127.0.0.1'
+  end
+
+  setup do
+    enable_captcha
   end
 end

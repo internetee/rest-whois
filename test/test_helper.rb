@@ -23,12 +23,15 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
+  include CaptchaHelpers
+
   include Capybara::DSL
   include Capybara::Minitest::Assertions
   include AbstractController::Translation
 
-  # By default, skip Recaptcha tests
-  Recaptcha.configuration.skip_verify_env = %w[test cucumber]
+  setup do
+    enable_captcha
+  end
 
   teardown do
     WebMock.reset!
