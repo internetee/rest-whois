@@ -1,4 +1,5 @@
-10.12.2018
+20.12.2018
+* Refactor disclosable contact attributes [#179](https://github.com/internetee/rest-whois/pull/179)
 * Support system tests [#169](https://github.com/internetee/rest-whois/pull/169)
 
 06.12.2018
