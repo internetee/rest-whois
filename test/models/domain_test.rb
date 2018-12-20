@@ -16,30 +16,25 @@ class DomainTest < ActiveSupport::TestCase
     assert_equal 'deleteCandidate', Domain::STATUS_DISCARDED
   end
 
-  def test_registered_when_not_discarded
-    domain = Domain.new
-
-    domain.statuses = [Domain::STATUS_DISCARDED]
-    assert_not domain.registered?
-
-    domain.statuses = %w[active]
-    assert domain.registered?
+  def test_active
+    domain = Domain.new(statuses: %w[ok])
+    assert domain.active?
   end
 
-  def test_registered
-    domain = Domain.new(statuses: %w[active])
-    assert domain.registered?
-
-    domain.statuses = [Domain::STATUS_DISCARDED]
-    assert_not domain.registered?
+  def test_inactive_when_blocked
+    domain = Domain.new(statuses: [Domain::STATUS_BLOCKED])
+    assert_not domain.active?
   end
 
-  def test_reserved
-    domain = Domain.new(statuses: %w[active])
-    assert_not domain.reserved?
+  # A domain in `rest-whois` app can  either be registered or reserved, but in general,
+  # a reserved domain _can_ be registered
+  def test_inactive_when_reserved
+    domain = Domain.new(statuses: [Domain::STATUS_RESERVED])
+    assert_not domain.active?
+  end
 
-    domain.statuses = [Domain::STATUS_RESERVED]
-
-    assert domain.reserved?
+  def test_inactive_when_discarded
+    domain = Domain.new(statuses: [Domain::STATUS_DISCARDED])
+    assert_not domain.active?
   end
 end

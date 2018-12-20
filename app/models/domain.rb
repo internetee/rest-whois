@@ -5,6 +5,9 @@ class Domain
   STATUS_RESERVED = 'Reserved'.freeze
   STATUS_DISCARDED = 'deleteCandidate'.freeze
 
+  INACTIVE_STATUSES = [STATUS_BLOCKED, STATUS_RESERVED, STATUS_DISCARDED].freeze
+  private_constant :INACTIVE_STATUSES
+
   attr_accessor :name
   attr_accessor :statuses
   attr_accessor :registered
@@ -13,11 +16,7 @@ class Domain
   attr_accessor :outzone
   attr_accessor :delete
 
-  def registered?
-    statuses.exclude?(STATUS_DISCARDED)
-  end
-
-  def reserved?
-    statuses.include?(STATUS_RESERVED)
+  def active?
+    (statuses & INACTIVE_STATUSES).empty?
   end
 end
