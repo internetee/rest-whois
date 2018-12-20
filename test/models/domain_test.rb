@@ -16,6 +16,16 @@ class DomainTest < ActiveSupport::TestCase
     assert_equal 'deleteCandidate', Domain::STATUS_DISCARDED
   end
 
+  def test_registered_when_not_discarded
+    domain = Domain.new
+
+    domain.statuses = [Domain::STATUS_DISCARDED]
+    assert_not domain.registered?
+
+    domain.statuses = %w[active]
+    assert domain.registered?
+  end
+
   def test_registered
     domain = Domain.new(statuses: %w[active])
     assert domain.registered?
