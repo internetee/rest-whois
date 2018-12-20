@@ -1,3 +1,5 @@
+registrant = RegistrantPresenter.new(@whois_record.registrant, self, whois_record)
+
 json.name whois_record.json['name']
 json.changed whois_record.json['changed']
 json.delete whois_record.json['delete']
@@ -18,22 +20,24 @@ json.registrar_changed whois_record.json['registrar_changed']
 json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
-json.email(ip_in_whitelist ? whois_record.json['email'] : 'Not Disclosed')
-json.registrant(ip_in_whitelist ? whois_record.json['registrant'] : 'Private Person')
+json.email(registrant.email)
+json.registrant(registrant.name)
 
 json.tech_contacts do
-  json.array!(whois_record.json['tech_contacts']) do |contact|
-    json.name(ip_in_whitelist ? contact['name'] : 'Not Disclosed')
-    json.email(ip_in_whitelist ? contact['email'] : 'Not Disclosed')
-    json.changed(ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
+  json.array!(whois_record.tech_contacts) do |contact|
+    contact_presenter = ContactPresenter.new(contact, self, whois_record)
+    json.name(contact_presenter.name)
+    json.email(contact_presenter.email)
+    json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end
 
 json.admin_contacts do
-  json.array!(whois_record.json['admin_contacts']) do |contact|
-    json.name(ip_in_whitelist ? contact['name'] : 'Not Disclosed')
-    json.email(ip_in_whitelist ? contact['email'] : 'Not Disclosed')
-    json.changed(ip_in_whitelist ? contact['changed'] : 'Not Disclosed')
+  json.array!(whois_record.admin_contacts) do |contact|
+    contact_presenter = ContactPresenter.new(contact, self, whois_record)
+    json.name(contact_presenter.name)
+    json.email(contact_presenter.email)
+    json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end
 

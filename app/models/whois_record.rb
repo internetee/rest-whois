@@ -62,7 +62,8 @@ class WhoisRecord < ApplicationRecord
                 reg_number: json['registrant_reg_no'],
                 email: json['email'],
                 ident_country: json['registrant_ident_country_code'],
-                last_update: json['registrant_changed'])
+                last_update: json['registrant_changed'],
+                disclosed_attributes: json['registrant_disclosed_attributes'])
   end
 
   def deserialize_contact(serialized_contact)
@@ -70,7 +71,8 @@ class WhoisRecord < ApplicationRecord
                 type: nil,
                 reg_number: nil,
                 email: serialized_contact['email'],
-                last_update: serialized_contact['changed'])
+                last_update: serialized_contact['changed'],
+                disclosed_attributes: serialized_contact['disclosed_attributes'])
   end
 
   def discarded_blocked_or_reserved?

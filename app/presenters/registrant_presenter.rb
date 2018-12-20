@@ -1,6 +1,7 @@
 class RegistrantPresenter < ContactPresenter
   def name
-    unmasked = whitelisted_user? || whois_record.registrant.legal_person?
+    unmasked = whitelisted_user? || whois_record.registrant.legal_person? ||
+               contact.attribute_disclosed?(:name)
 
     if unmasked
       contact.name
