@@ -1,19 +1,13 @@
 require 'test_helper'
 
 class DomainTest < ActiveSupport::TestCase
-  def test_status_blocked
+  def test_statuses
     # Case does matter; this is how `registry` app generates it.
     assert_equal 'Blocked', Domain::STATUS_BLOCKED
-  end
-
-  def test_status_reserved
-    # Case does matter; this is how `registry` app generates it.
     assert_equal 'Reserved', Domain::STATUS_RESERVED
-  end
-
-  def test_status_discarded
-    # Case does matter; this is how `registry` app generates it.
     assert_equal 'deleteCandidate', Domain::STATUS_DISCARDED
+    assert_equal 'AtAuction', Domain::STATUS_AT_AUCTION
+    assert_equal 'PendingRegistration', Domain::STATUS_PENDING_REGISTRATION
   end
 
   def test_active
@@ -35,6 +29,16 @@ class DomainTest < ActiveSupport::TestCase
 
   def test_inactive_when_discarded
     domain = Domain.new(statuses: [Domain::STATUS_DISCARDED])
+    assert_not domain.active?
+  end
+
+  def test_inactive_when_at_auction
+    domain = Domain.new(statuses: [Domain::STATUS_AT_AUCTION])
+    assert_not domain.active?
+  end
+
+  def test_inactive_when_pending_registration
+    domain = Domain.new(statuses: [Domain::STATUS_PENDING_REGISTRATION])
     assert_not domain.active?
   end
 end
