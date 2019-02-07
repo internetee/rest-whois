@@ -12,7 +12,7 @@
                 <% available_locales.each do |available_locale| %>
                     <%= link_to_if available_locale != locale,
                                    available_locale.upcase,
-                                   url_for(locale: available_locale) %>
+                                   url_for(params.permit!.merge(locale: available_locale)) %>
                 <% end %>
             </div>
         </div>

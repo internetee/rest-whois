@@ -48,6 +48,13 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
     assert_text(text)
   end
 
+  def test_locale_switch_does_not_break_the_contact_form
+    visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
+    click_link_or_button('ET')
+
+    assert(page.has_link?(href: 'https://www.internet.ee/domeenid/eis-i-isikuandmete-kasutamise-alused'))
+  end
+
   def test_et_locale_in_confirmation_form
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'et' }))
     text = <<-TEXT.squish
