@@ -3,6 +3,11 @@ class ContactRequestsController < ApplicationController
   before_action :check_for_replay, only: %i[edit update show]
   before_action :set_ip_address, only: [:update]
 
+  rescue_from ActionController::UnknownFormat do
+    logger.warn("The unlucky customer was using format of: #{request.format}")
+    raise
+  end
+
   def new
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
     raise ActiveRecord::RecordNotFound unless whois_record.contactable?
@@ -26,7 +31,11 @@ class ContactRequestsController < ApplicationController
   end
 
   def show
-    redirect_to edit_contact_request_url if @contact_request.confirm_email
+    if @contact_request.confirm_email
+      redirect_to edit_contact_request_url
+    else
+      redirect_to root_url, alert: t('contact_requests.already_used')
+    end
   end
 
   def edit; end

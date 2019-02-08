@@ -25,6 +25,13 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
+  def test_opening_link_twice_redirects_you_to_root_with_notice_that_this_link_has_been_used
+    visit(contact_request_path(@valid_contact_request.secret))
+    visit(contact_request_path(@valid_contact_request.secret))
+
+    assert(page.has_css?('div#flash-alert', text: 'This one-time link has been already used.'))
+  end
+
   def test_request_fails_when_whois_record_was_deleted
     @private_domain.destroy
 
