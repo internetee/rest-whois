@@ -26,7 +26,14 @@ class ContactRequestsController < ApplicationController
   end
 
   def show
-    redirect_to edit_contact_request_url if @contact_request.confirm_email
+    if @contact_request.confirm_email
+      redirect_to edit_contact_request_url
+    else
+      redirect_to root_url, alert: t('contact_requests.already_used')
+    end
+  rescue ActionController::UnknownFormat
+    logger.warn("The unlucky customer was using format of: #{request.format}")
+    raise
   end
 
   def edit; end
