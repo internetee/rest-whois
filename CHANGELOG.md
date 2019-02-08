@@ -2,6 +2,7 @@
 * Enable user disclosable attributes [#174](https://github.com/internetee/rest-whois/pull/174)
 * Refactor disclosable contact attributes - blocked and reserved domain handling [#179](https://github.com/internetee/rest-whois/pull/179)
 * Fixed language switch error in registrant contact form [#184](https://github.com/internetee/rest-whois/pull/184)
+* Second click on unique registrant contact form link directs users to new search form with proper notification [#186](https://github.com/internetee/rest-whois/pull/186)
 * Added build padge to github rest-whois project [#178](https://github.com/internetee/rest-whois/pull/178)
 * Support system tests [#169](https://github.com/internetee/rest-whois/pull/169)
 
