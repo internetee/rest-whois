@@ -39,4 +39,4 @@ en:
     smtp_error: >-
       Email confirmation failed. Please check your email address and try again.
 
-    already_used: 'This request has been already used.'
+    already_used: 'This one-time link has been already used.'

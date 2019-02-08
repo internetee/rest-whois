@@ -41,3 +41,5 @@ et:
     smtp_error: >-
       E-posti aadressi kinnitamine ebaõnnestus. Palun kontrollige oma e-posti aadressi ja
       proovige uuesti.
+
+    already_confirmed: 'Unikaalne link on juba kasutatud'
