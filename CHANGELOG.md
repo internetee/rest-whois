@@ -1,3 +1,6 @@
+20.03.2019
+* Rails update to 5.2.2.1 [#188](https://github.com/internetee/rest-whois/pull/188)
+
 11.02.2019
 * Enable user disclosable attributes [#174](https://github.com/internetee/rest-whois/pull/174)
 * Refactor disclosable contact attributes - blocked and reserved domain handling [#179](https://github.com/internetee/rest-whois/pull/179)
