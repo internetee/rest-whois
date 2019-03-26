@@ -6,15 +6,15 @@ class WhoisRecord < ApplicationRecord
   end
 
   def partial_name(authorized = false)
-    if discarded_blocked_or_reserved?
-      'discarded'
-    else
+    if domain.active?
       partial_for_private_person(authorized)
+    else
+      'discarded'
     end
   end
 
   def contactable?
-    !discarded_blocked_or_reserved? && private_person?
+    domain.active? && private_person?
   end
 
   def domain
@@ -73,12 +73,6 @@ class WhoisRecord < ApplicationRecord
                 email: serialized_contact['email'],
                 last_update: serialized_contact['changed'],
                 disclosed_attributes: serialized_contact['disclosed_attributes'])
-  end
-
-  def discarded_blocked_or_reserved?
-    !([Domain::STATUS_BLOCKED,
-       Domain::STATUS_RESERVED,
-       Domain::STATUS_DISCARDED] & json['status']).empty?
   end
 
   def partial_for_private_person(authorized)

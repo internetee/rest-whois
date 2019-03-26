@@ -107,6 +107,18 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
     assert_equal 'john@inbox.test', response.parsed_body['tech_contacts'].first['email']
   end
 
+  def test_domain_at_auction
+    @whois_record.update!(name: 'auction.test', json: { name: 'auction.test',
+                                                        status: [Domain::STATUS_AT_AUCTION],
+                                                        disclaimer: 'test' })
+
+    get whois_record_path(name: @whois_record.name), as: :json
+
+    assert_response :ok
+    assert_equal ({ 'name' => 'auction.test', 'status' => [Domain::STATUS_AT_AUCTION],
+                    'disclaimer' => 'test' }), response.parsed_body
+  end
+
   private
 
   def disclosable_mask
