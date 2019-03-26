@@ -1,3 +1,6 @@
+26.03.2019
+* Fixed handling domains at auction in json view [#192](https://github.com/internetee/rest-whois/pull/192)
+
 25.03.2019
 * Rails update to 5.2.2.1 [#188](https://github.com/internetee/rest-whois/pull/188)
 * Added statuses for domainauctions [#182](https://github.com/internetee/rest-whois/pull/182)
