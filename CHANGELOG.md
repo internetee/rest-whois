@@ -1,3 +1,6 @@
+05.04.2019
+* Code clarification for internationalization ["191](https://github.com/internetee/rest-whois/pull/191)
+
 26.03.2019
 * Fixed handling domains at auction in json view [#192](https://github.com/internetee/rest-whois/pull/192)
 
