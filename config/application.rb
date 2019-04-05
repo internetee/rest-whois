@@ -20,9 +20,7 @@ module RestWhois
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     config.i18n.default_locale = :en
-
-    # Fallback to default locale if text is missing
-    config.i18n.fallbacks = [:en]
+    config.i18n.fallbacks = [I18n.default_locale]
 
     config.secret_key_base = Figaro.env.secret_key_base
 
