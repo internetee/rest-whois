@@ -1,3 +1,6 @@
+10.05.2019
+* Registrar postal address is removed [#198](https://github.com/internetee/rest-whois/pull/198)
+
 23.04.2019
 * Nokogiri update to 1.10.3 (CVE-2019-11068) [#196](https://github.com/internetee/rest-whois/pull/196)
 * Rails update to 5.2.3 [#196](https://github.com/internetee/rest-whois/pull/196)
