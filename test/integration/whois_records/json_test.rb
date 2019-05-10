@@ -66,7 +66,6 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
       'registrant_changed': 'Not Disclosed',
       'registrant_kind': 'priv',
       'registrar': 'test',
-      'registrar_address': 'test, test, test, test',
       'registrar_changed': '2018-04-25T14:10:30+00:00',
       'registrar_phone': nil,
       'registrar_website': nil,

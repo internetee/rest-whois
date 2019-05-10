@@ -26,7 +26,6 @@ privately_owned:
     registrant_changed: "2018-04-25T14:10:39+00:00"
     registrant_kind: priv
     registrar: test
-    registrar_address: "test, test, test, test"
     registrar_changed: "2018-04-25T14:10:30+00:00"
     registrar_phone: ~
     registrar_website: ~
@@ -65,7 +64,6 @@ legally_owned:
     registrant_changed: "2018-04-25T14:10:39+00:00"
     registrant_kind: org
     registrar: test
-    registrar_address: "test, test, test, test"
     registrar_changed: "2018-04-25T14:10:30+00:00"
     registrar_phone: ~
     registrar_website: ~
@@ -108,7 +106,6 @@ with_duplicate_domain_contacts:
     registrant_changed: "2018-04-25T14:10:39+00:00"
     registrant_kind: priv
     registrar: test
-    registrar_address: "test, test, test, test"
     registrar_changed: "2018-04-25T14:10:30+00:00"
     registrar_phone: ~
     registrar_website: ~
