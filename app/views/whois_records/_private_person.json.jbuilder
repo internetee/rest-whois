@@ -15,7 +15,6 @@ json.registrant_changed(ip_in_whitelist ? whois_record.json['registrant_changed'
 json.registrant_kind whois_record.json['registrant_kind']
 
 json.registrar whois_record.json['registrar']
-json.registrar_address whois_record.json['registrar_address']
 json.registrar_changed whois_record.json['registrar_changed']
 json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
