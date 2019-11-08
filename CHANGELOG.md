@@ -1,3 +1,7 @@
+08.11.2019
+* Bump rubyzip to 1.3.0 [#204](https://github.com/internetee/rest-whois/pull/204)
+* Bump loofah gem to 2.3.1 [#203](https://github.com/internetee/rest-whois/pull/203)
+
 10.05.2019
 * Registrar postal address is removed [#198](https://github.com/internetee/rest-whois/pull/198)
 
