@@ -1,3 +1,6 @@
+08.11.2019
+* Autoupdate of loofah gem to 2.3.1 [#203](https://github.com/internetee/rest-whois/pull/203)
+
 10.05.2019
 * Registrar postal address is removed [#198](https://github.com/internetee/rest-whois/pull/198)
 
