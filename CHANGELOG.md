@@ -1,3 +1,8 @@
+06.01.2019
+* Bump puma gem to 3.12.2 [#206](https://github.com/internetee/rest-whois/pull/206)
+* Upgrade Bundler yo 2.0.2 [#207](https://github.com/internetee/rest-whois/pull/207)
+* Bump rack to 2.0.8 [#208](https://github.com/internetee/rest-whois/pull/208)
+
 08.11.2019
 * Bump rubyzip to 1.3.0 [#204](https://github.com/internetee/rest-whois/pull/204)
 * Bump loofah gem to 2.3.1 [#203](https://github.com/internetee/rest-whois/pull/203)
