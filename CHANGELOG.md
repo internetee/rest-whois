@@ -1,3 +1,7 @@
+04.03.2020
+* Bump puma gem to 3.12.3 [#211](https://github.com/internetee/rest-whois/pull/211)
+* Bump rake gem to 13.0.1 [#212](https://github.com/internetee/rest-whois/pull/212)
+
 06.01.2019
 * Bump puma gem to 3.12.2 [#206](https://github.com/internetee/rest-whois/pull/206)
 * Upgrade Bundler yo 2.0.2 [#207](https://github.com/internetee/rest-whois/pull/207)
