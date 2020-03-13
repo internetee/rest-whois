@@ -62,6 +62,7 @@ class WhoisRecordsController < ApplicationController
 
   def ip_in_whitelist?
     return if ENV['whitelist_ip'].blank?
+
     whitelist = ENV['whitelist_ip'].split(',').map(&:strip)
     whitelist.include?(request.remote_ip)
   end

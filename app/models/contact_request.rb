@@ -1,6 +1,7 @@
 class ContactRequest < ApplicationRecord
   def self.connect_to_write_database_if_defined
     return unless Rails.configuration.database_configuration["write_#{Rails.env}"]
+
     establish_connection "write_#{Rails.env}".to_sym
   end
 
@@ -32,6 +33,7 @@ class ContactRequest < ApplicationRecord
 
   def send_contact_email(body: '', recipients: [])
     return unless mark_as_sent
+
     recipients_emails = extract_emails_for_recipients(recipients)
     return if recipients_emails.empty?
 
@@ -46,6 +48,7 @@ class ContactRequest < ApplicationRecord
 
   def mark_as_sent
     return unless sendable?
+
     self.status = STATUS_SENT
     save!
   end
