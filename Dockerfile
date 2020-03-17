@@ -1,4 +1,4 @@
-FROM internetee/ruby:2.5
+FROM internetee/ruby:2.6
 MAINTAINER maciej.szlosarczyk@internet.ee
 
 RUN mkdir -p /opt/webapps/app/tmp/pids
