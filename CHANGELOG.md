@@ -1,3 +1,6 @@
+17.03.2020
+* Ruby upgrade to 2.6.5 [#216](https://github.com/internetee/rest-whois/issues/216)
+
 04.03.2020
 * Bump rake gem to 13.0.1 [#212](https://github.com/internetee/rest-whois/pull/212)
 * Bump puma gem to 3.12.4 [#213](https://github.com/internetee/rest-whois/pull/213)
