@@ -19,6 +19,11 @@ class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
     assert_text('Domain not found: missing-domain.test')
   end
 
+  def test_invalid_domain
+    visit('/v1/1.test')
+    assert_text('Domain name policy error: 1.test')
+  end
+
   def test_contact_form_link_is_visible_when_captcha_is_solved
     solve_captcha
     visit('/v1/privatedomain.test')

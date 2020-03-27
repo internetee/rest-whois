@@ -46,11 +46,11 @@ class WhoisRecordsController < ApplicationController
 
   def invalid_data_body(domain_name, json: false)
     if domain_valid_format?(domain_name)
-      return 'Domain not found' if json
+      return 'Domain not found.' if json
 
       "Domain not found: #{CGI.escapeHTML(domain_name)}"
     else
-      return 'Domain name policy error' if json
+      return 'Domain name policy error.' if json
 
       "Domain name policy error: #{CGI.escapeHTML(domain_name)}"
     end
