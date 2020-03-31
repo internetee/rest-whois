@@ -13,7 +13,7 @@ class WhoisRecordsController < ApplicationController
     respond_to do |format|
       format.json do
         if @whois_record
-          render :show, status: :ok if @whois_record
+          render :show, status: :ok
         else
           render json: { name: domain_name,
                          error: invalid_data_body(domain_name, json: true) },
