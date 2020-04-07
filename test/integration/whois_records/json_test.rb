@@ -31,7 +31,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     assert_equal(404, response.status)
     response_json = JSON.parse(response.body)
-    assert_equal('Domain name policy error.', response_json['error'])
+    assert_includes(response_json['error'], 'Policy error')
     assert_equal('1.test', response_json['name'])
   end
 

@@ -46,11 +46,13 @@ class WhoisRecordsController < ApplicationController
 
   def invalid_data_body(domain_name, json: false)
     escaped_domain = CGI.escapeHTML(domain_name)
-    prefix = json ? '.' : ": #{escaped_domain}"
+    prefix = json ? '.' : ": #{escaped_domain}."
 
     return ('Domain not found' + prefix) if domain_valid_format?(domain_name)
 
-    'Domain name policy error' + prefix
+    'Policy error' + prefix + " Please study \"Requirements for the \
+registration of a Domain Name\" of .ee domain regulations. \
+https://www.internet.ee/domains/ee-domain-regulation#registration-of-domain-names"
   end
 
   def domain_valid_format?(domain_name)
