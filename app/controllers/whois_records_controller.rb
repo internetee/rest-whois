@@ -51,7 +51,7 @@ class WhoisRecordsController < ApplicationController
     return ('Domain not found' + prefix) if domain_valid_format?(domain_name)
 
     'Policy error' + prefix + ' Please study "Requirements for the ' \
-    'registration of a Domain Name\" of .ee domain regulations. ' \
+    'registration of a Domain Name" of .ee domain regulations. ' \
     'https://www.internet.ee/domains/ee-domain-regulation#registration-of-domain-names'
   end
 
