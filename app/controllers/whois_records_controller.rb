@@ -15,7 +15,8 @@ class WhoisRecordsController < ApplicationController
         if @whois_record
           render :show, status: :ok
         else
-          render json: { name: domain_name, error: 'Domain not found.' },
+          render json: { name: domain_name,
+                         error: invalid_data_body(domain_name, json: true) },
                  status: :not_found
         end
       end
@@ -24,8 +25,7 @@ class WhoisRecordsController < ApplicationController
         if @whois_record
           render :show, status: :ok
         else
-          render plain: "Domain not found: #{CGI.escapeHTML(domain_name)}",
-                 status: :not_found
+          render plain: invalid_data_body(domain_name), status: :not_found
         end
       end
     end
@@ -38,12 +38,30 @@ class WhoisRecordsController < ApplicationController
     if @whois_record
       redirect_to whois_record_url(@whois_record.name)
     else
-      render plain: "Domain not found: #{CGI.escapeHTML(domain_name)}",
-             status: :not_found
+      render plain: invalid_data_body(domain_name), status: :not_found
     end
   end
 
   private
+
+  def invalid_data_body(domain_name, json: false)
+    escaped_domain = CGI.escapeHTML(domain_name)
+    prefix = json ? '.' : ": #{escaped_domain}."
+
+    return ('Domain not found' + prefix) if domain_valid_format?(domain_name)
+
+    'Policy error' + prefix + " Please study \"Requirements for the \
+registration of a Domain Name\" of .ee domain regulations. \
+https://www.internet.ee/domains/ee-domain-regulation#registration-of-domain-names"
+  end
+
+  def domain_valid_format?(domain_name)
+    domain_name_regexp = /\A[a-z0-9\-\u00E4\u00F5\u00F6\u00FC\u0161\u017E]{2,61}\.
+    ([a-z0-9\-\u00E4\u00F5\u00F6\u00FC\u0161\u017E]{2,61}\.)?[a-z0-9]{1,61}\z/x
+
+    formatted_domain_name = domain_name.strip.downcase
+    (formatted_domain_name =~ domain_name_regexp) != nil
+  end
 
   def log_message(params, whois_record)
     if whois_record

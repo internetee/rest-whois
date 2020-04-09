@@ -26,6 +26,15 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal('missing-domain.test', response_json['name'])
   end
 
+  def test_json_has_policy_error_on_invalid_domains
+    get('/v1/1.test.json')
+
+    assert_equal(404, response.status)
+    response_json = JSON.parse(response.body)
+    assert_includes(response_json['error'], 'Policy error')
+    assert_equal('1.test', response_json['name'])
+  end
+
   def test_post_requests_works_as_get
     post('/v1/missing-domain.test.json')
 
