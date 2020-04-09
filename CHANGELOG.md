@@ -1,3 +1,6 @@
+09.04.2020
+* Better error message for 1 letter and invalid domain searches [#202](https://github.com/internetee/rest-whois/issues/202)
+
 17.03.2020
 * Ruby upgrade to 2.6.5 [#216](https://github.com/internetee/rest-whois/issues/216)
 
