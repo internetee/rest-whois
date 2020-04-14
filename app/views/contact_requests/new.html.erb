@@ -1,12 +1,15 @@
-<h1><%= t '.header' %></h1>
-
-<div>
-    <p><%= t '.help' %>
-    <p><%= t '.link_expiration' %>
-</div>
-
-<div class="form">
-    <%= render 'link_request_form' %>
-</div>
-
-<p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
+<article class="page--detail" data-search-indexing-allowed="true">
+    <header class="page--header" style="background-image: url(<%= asset_path('hero-eis.jpg') %>)">
+        <div class="u-container">
+            <h1><%= t '.header' %></h1>
+            <p><%= t '.help' %></p>
+            <p><%= t '.link_expiration' %></p>
+        </div>
+    </header>
+    <div class="page--content">
+        <div class="page--body u-content-styles">
+            <%= render 'link_request_form' %>
+            <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
+        </div>
+    </div>
+</article>

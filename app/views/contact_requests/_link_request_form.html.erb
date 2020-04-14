@@ -1,10 +1,23 @@
 <%= form_for(@contact_request) do |f| %>
-    <%= f.label t('.email'), nil, for: nil %><br>
-    <%= f.email_field :email, required: true, autofocus: true %><br>
-
-    <%= f.label t('.name'), nil, for: nil %><br>
-    <%= f.text_field :name, required: true %>
-
-    <%= f.hidden_field :whois_record_id %><br><br>
-    <%= f.submit t('.submit_btn') %>
+    <div class="form_area">
+        <div class="form_fields">
+            <div class="form_field form_field_required">
+                <%= f.label t('.email'), nil, for: nil, :class => "form_field_label" %>
+                <%= f.email_field :email,
+                                  required: true,
+                                  autofocus: true,
+                                  :class => "form_field_textfield form_field_size_medium" %>
+            </div>
+            <div class="form_field form_field_required">
+                <%= f.label t('.name'), nil, for: nil, :class => "form_field_label" %>
+                <%= f.text_field :name,
+                                 required: true,
+                                 :class => "form_field_textfield form_field_size_medium" %>
+            </div>
+            <%= f.hidden_field :whois_record_id %>
+        </div>
+        <div class="form_submit">
+            <%= f.submit t('.submit_btn') %>
+        </div>
+    </div>
 <% end %>
