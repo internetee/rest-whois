@@ -52,7 +52,9 @@ module RestWhois
         'Referrer-Policy' => 'strict-origin-when-cross-origin',
         'Content-Security-Policy' => "default-src 'self';" \
           "style-src 'self' 'unsafe-inline';" \
-          "script-src https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;" \
+          'script-src https://www.recaptcha.net/recaptcha/ ' \
+          'https://www.google.com/recaptcha/ ' \
+          'https://www.gstatic.com/recaptcha/;' \
           "frame-src 'self' https://www.google.com/recaptcha/",
     }
 
