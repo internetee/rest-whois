@@ -21,7 +21,9 @@ class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
 
   def test_invalid_domain
     visit('/v1/1.test')
-    assert_text('Domain name policy error: 1.test')
+    assert_text 'Policy error: 1.test. Please study'
+    assert_text 'Requirements for the registration of a Domain Name'
+    assert_text 'https://www.internet.ee/domains/ee-domain-regulation#registration-of-domain-names'
   end
 
   def test_contact_form_link_is_visible_when_captcha_is_solved
@@ -31,7 +33,7 @@ class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
   end
 
   def test_contact_form_link_is_visible_when_captcha_is_unsolved
-    visit("v1/privatedomain.test")
+    visit('v1/privatedomain.test')
     refute(has_link?('Contact owner'))
   end
 

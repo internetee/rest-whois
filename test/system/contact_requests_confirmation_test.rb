@@ -40,7 +40,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     text = begin
       'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
-      "of the domain. " \
+      'of the domain. ' \
       'The link expires in 24 hours.'
     end
 
@@ -68,7 +68,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
 
   def test_ru_locale_in_confirmation_form
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'ru' }))
-    assert_text t('contact_requests.new.help', locale: :ru)
+    assert_text I18n.t('contact_requests.new.help', locale: :ru)
     # TODO: Fix the link when correct
     assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end
