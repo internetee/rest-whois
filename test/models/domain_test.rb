@@ -11,7 +11,7 @@ class DomainTest < ActiveSupport::TestCase
   end
 
   def test_active
-    domain = Domain.new(statuses: %w[ok])
+    domain = Domain.new(statuses: %w[ok], registered: Time.now)
     assert domain.active?
   end
 
@@ -22,9 +22,14 @@ class DomainTest < ActiveSupport::TestCase
 
   # A domain in `rest-whois` app can  either be registered or reserved, but in general,
   # a reserved domain _can_ be registered
-  def test_inactive_when_reserved
+  def test_inactive_when_reserved_and_unregistered
     domain = Domain.new(statuses: [Domain::STATUS_RESERVED])
     assert_not domain.active?
+  end
+
+  def test_active_when_reserved_and_registered
+    domain = Domain.new(statuses: [Domain::STATUS_RESERVED], registered: Time.now)
+    assert domain.active?
   end
 
   def test_inactive_when_discarded
@@ -35,6 +40,16 @@ class DomainTest < ActiveSupport::TestCase
   def test_inactive_when_at_auction
     domain = Domain.new(statuses: [Domain::STATUS_AT_AUCTION])
     assert_not domain.active?
+  end
+
+  def test_inactive_when_disputed_and_unregistered
+    domain = Domain.new(statuses: [Domain::STATUS_DISPUTED])
+    assert_not domain.active?
+  end
+
+  def test_active_when_disputed_and_registered
+    domain = Domain.new(statuses: [Domain::STATUS_DISPUTED], registered: Time.now)
+    assert domain.active?
   end
 
   def test_inactive_when_pending_registration

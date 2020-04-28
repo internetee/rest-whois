@@ -6,9 +6,11 @@ class Domain
   STATUS_DISCARDED = 'deleteCandidate'.freeze
   STATUS_AT_AUCTION = 'AtAuction'.freeze
   STATUS_PENDING_REGISTRATION = 'PendingRegistration'.freeze
+  STATUS_DISPUTED = 'Disputed'.freeze
 
-  INACTIVE_STATUSES = [STATUS_BLOCKED, STATUS_RESERVED, STATUS_DISCARDED,
+  INACTIVE_STATUSES = [STATUS_BLOCKED, STATUS_DISCARDED,
                        STATUS_AT_AUCTION, STATUS_PENDING_REGISTRATION].freeze
+  
   private_constant :INACTIVE_STATUSES
 
   attr_accessor :name
@@ -20,6 +22,8 @@ class Domain
   attr_accessor :delete
 
   def active?
+    return false if registered.blank?
+
     (statuses & INACTIVE_STATUSES).empty?
   end
 end
