@@ -9,7 +9,10 @@ Bundler.require(*Rails.groups)
 module RestWhois
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 6.0
+
+    # Authorize all hosts
+    config.hosts.clear
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -49,7 +52,9 @@ module RestWhois
         'Referrer-Policy' => 'strict-origin-when-cross-origin',
         'Content-Security-Policy' => "default-src 'self';" \
           "style-src 'self' 'unsafe-inline';" \
-          "script-src https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;" \
+          'script-src https://www.recaptcha.net/recaptcha/ ' \
+          'https://www.google.com/recaptcha/ ' \
+          'https://www.gstatic.com/recaptcha/;' \
           "frame-src 'self' https://www.google.com/recaptcha/",
     }
 

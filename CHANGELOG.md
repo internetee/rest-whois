@@ -1,3 +1,6 @@
+15.04.2020
+* Upgrade Rails to 6.0 and solve actionview security issue [#219](https://github.com/internetee/rest-whois/issues/219)
+
 09.04.2020
 * Better error message for 1 letter and invalid domain searches [#202](https://github.com/internetee/rest-whois/issues/202)
 
@@ -10,7 +13,7 @@
 
 06.01.2019
 * Bump puma gem to 3.12.2 [#206](https://github.com/internetee/rest-whois/pull/206)
-* Upgrade Bundler yo 2.0.2 [#207](https://github.com/internetee/rest-whois/pull/207)
+* Upgrade Bundler to 2.0.2 [#207](https://github.com/internetee/rest-whois/pull/207)
 * Bump rack to 2.0.8 [#208](https://github.com/internetee/rest-whois/pull/208)
 
 08.11.2019
