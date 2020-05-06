@@ -68,7 +68,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
 
   def test_ru_locale_in_confirmation_form
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test', locale: 'ru' }))
-    assert_text t('contact_requests.new.help', locale: :ru)
+    assert_text I18n.t('contact_requests.new.help', locale: :ru)
     # TODO: Fix the link when correct
     assert(has_link?(href: 'https://www.internet.ee/domains/eif-s-data-protection-policy'))
   end
