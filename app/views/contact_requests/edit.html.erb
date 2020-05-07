@@ -1,10 +1,17 @@
-<h1><%= t '.header' %></h1>
-
-<%- help = t('.help').split(/\n/) -%>
-<%- help.each do |line| %>
-    <p><%= line %></p>
-<% end %>
-
-<%= render 'contact_form' %>
-
-<p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
+<article class="page--detail" data-search-indexing-allowed="true">
+    <header class="page--header" style="background-image: url(<%= asset_path('hero-eis.jpg') %>)">
+        <div class="u-container">
+            <h1><%= t '.header' %></h1>
+            <p><%- help = t('.help').split(/\n/) -%></p>
+            <%- help.each do |line| %>
+                <p><%= line %></p>
+            <% end %>
+        </div>
+    </header>
+    <div class="page--content">
+        <div class="page--body u-content-styles">
+            <%= render 'contact_form' %>
+            <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
+        </div>
+    </div>
+</article>

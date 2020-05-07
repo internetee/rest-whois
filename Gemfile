@@ -6,6 +6,7 @@ gem 'jbuilder'
 gem 'pg', '~> 1.0.0'
 gem 'rails', '~> 6.0.0'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'sassc-rails'
 gem 'simpleidn', '0.0.7' # For Punycode
 gem 'uglifier'
 
