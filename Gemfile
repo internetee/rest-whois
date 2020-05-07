@@ -19,6 +19,7 @@ group :development, :test do
   gem 'unicorn'
 
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'mina', '~> 0.3.8'
   gem 'puma'
   gem 'webmock'
