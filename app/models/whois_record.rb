@@ -39,6 +39,7 @@ class WhoisRecord < ApplicationRecord
 
   private
 
+  # rubocop:disable Metrics/AbcSize
   def deserialize_domain
     Domain.new(name: json['name'],
                statuses: json['status'],
@@ -46,8 +47,10 @@ class WhoisRecord < ApplicationRecord
                changed: json['changed'],
                expire: json['expire'],
                outzone: json['outzone'],
-               delete: json['delete'])
+               delete: json['delete'],
+               registration_deadline: json['registration_deadline'])
   end
+  # rubocop:enable Metrics/AbcSize
 
   def deserialize_registrar
     Registrar.new(name: json['registrar'],

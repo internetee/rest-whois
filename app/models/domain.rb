@@ -18,6 +18,7 @@ class Domain
   attr_accessor :expire
   attr_accessor :outzone
   attr_accessor :delete
+  attr_accessor :registration_deadline
 
   def active?
     (statuses & INACTIVE_STATUSES).empty?
