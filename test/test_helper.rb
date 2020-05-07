@@ -31,7 +31,6 @@ class ActionDispatch::IntegrationTest
 
   setup do
     enable_captcha
-    Capybara.javascript_driver = :webkit
   end
 
   teardown do
