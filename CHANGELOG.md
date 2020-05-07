@@ -1,3 +1,6 @@
+07.05.2020
+* New UI design for registrant contact forms (https://github.com/internetee/rest-whois/tree/contact-form-styling) [#224](https://github.com/internetee/rest-whois/issues/224)
+
 15.04.2020
 * Upgrade Rails to 6.0 and solve actionview security issue [#219](https://github.com/internetee/rest-whois/issues/219)
 
