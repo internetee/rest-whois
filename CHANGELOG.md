@@ -1,3 +1,6 @@
+11.05.2020
+* Auction process due dates are now available over whois and rest-whois [#228](https://github.com/internetee/rest-whois/pull/228)
+
 07.05.2020
 * New UI design for registrant contact forms (https://github.com/internetee/rest-whois/tree/contact-form-styling) [#224](https://github.com/internetee/rest-whois/issues/224)
 
