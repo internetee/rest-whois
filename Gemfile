@@ -15,10 +15,10 @@ group :development do
 end
 
 group :development, :test do
+  gem 'apparition'
+  gem 'capybara'
   gem 'pry'
   gem 'unicorn'
-
-  gem 'capybara'
   gem 'mina', '~> 0.3.8'
   gem 'puma'
   gem 'webmock'

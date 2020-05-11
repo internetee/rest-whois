@@ -1,22 +1,17 @@
 require 'test_helper'
+require 'capybara/apparition'
 
 WebMock.disable_net_connect!(allow_localhost: true) # `allow_localhost` is required by Selenium
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include CaptchaHelpers
 
-  # Custom driver is needed for Travis
-  # https://docs.travis-ci.com/user/chrome#sandboxing
-  Capybara.register_driver(:headless_chrome) do |app|
-    options = ::Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--window-size=1400,1400')
-
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  # Moved from Selenium to Apparition driver due to Selenium intentionally lacks page.status
+  Capybara.register_driver(:headless_apparition) do |app|
+    Capybara::Apparition::Driver.new(app)
   end
 
-  driven_by :headless_chrome
+  driven_by :headless_apparition
   Capybara.server = :puma, { Silent: true }
 
   def whitelist_current_ip
