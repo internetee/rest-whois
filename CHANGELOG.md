@@ -1,3 +1,6 @@
+22.05.2020
+* New disputed status for domains in disputed domains list [#29](https://github.com/internetee/rest-whois/issues/29)
+
 11.05.2020
 * Auction process due dates are now available over whois and rest-whois [#228](https://github.com/internetee/rest-whois/pull/228)
 
