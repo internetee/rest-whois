@@ -40,7 +40,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
     visit(new_contact_request_path(params: { domain_name: 'privatedomain.test' }))
     text = begin
       'You will receive an one time link to confirm your email, and then send a message to the owner or administrator ' \
-      "of the domain. " \
+      'of the domain. ' \
       'The link expires in 24 hours.'
     end
 
