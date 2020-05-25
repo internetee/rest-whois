@@ -1,3 +1,6 @@
+25.05.2020
+* Bump puma to 4.3.5 [#229](https://github.com/internetee/rest-whois/pull/229)
+
 22.05.2020
 * New disputed status for domains in disputed domains list [#29](https://github.com/internetee/rest-whois/issues/29)
 
