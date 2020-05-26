@@ -25,6 +25,13 @@ en:
       message: Message
       send_btn: Send
 
+    completed:
+      header: Contact request created!
+      help: >-
+        Check your email for a link to the one-time contact form.
+      link_explanation: Click the link below to go back to previous page
+      back: Back to previous page
+
     successfully_created: >-
       Contact request created. Check your email for a link to the one-time contact form.
     confirmation_sent: We sent a confirmation request to %{email}

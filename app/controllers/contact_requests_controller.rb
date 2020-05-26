@@ -22,7 +22,7 @@ class ContactRequestsController < ApplicationController
       @contact_request.send_confirmation_email
       logger.warn("Confirmation request email registered to #{@contact_request.email}" \
         " (IP: #{request.ip})")
-      redirect_to(:root, notice: t('contact_requests.successfully_created'))
+      render :completed
     else
       render(:new)
     end
