@@ -9,6 +9,11 @@ class ContactRequestsController < ApplicationController
   end
 
   def new
+    referer = request.referer || root_url
+    puts "REFERER IS SET TO #{referer}"
+
+    session[:referer] = referer
+
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
     raise ActiveRecord::RecordNotFound unless whois_record.contactable?
 
@@ -29,6 +34,11 @@ class ContactRequestsController < ApplicationController
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
     redirect_to(:root, alert: t('contact_requests.smtp_error'))
+  end
+
+  def redirect_to_referer
+    referer = session[:referer] || root_url
+    redirect_to referer
   end
 
   def show

@@ -8,13 +8,13 @@
   </header>
   <div class="page--content">
     <div class="page--body u-content-styles">
-      <form>
+    <%= form_tag redirect_to_referer_path, method: :post do %>
         <div class="form_area" style="box-shadow: none;">
           <div class="form_submit">
             <%= submit_tag t('.back'), style: 'width: 100%;' %>
           </div>
         </div>
-      </form>
+      <% end %>
       <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
     </div>
   </div>
