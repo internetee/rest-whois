@@ -10,10 +10,7 @@ class ContactRequestsController < ApplicationController
 
   def new
     referer = request.referer || root_url
-    puts "REFERER IS SET TO #{referer}"
-
     session[:referer] = referer
-
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
     raise ActiveRecord::RecordNotFound unless whois_record.contactable?
 
@@ -38,7 +35,10 @@ class ContactRequestsController < ApplicationController
 
   def redirect_to_referer
     referer = session[:referer] || root_url
-    redirect_to referer
+
+    respond_to do |format|
+      format.html { redirect_to referer }
+    end
   end
 
   def show
