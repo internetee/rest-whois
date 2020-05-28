@@ -25,11 +25,18 @@ en:
       message: Message
       send_btn: Send
 
-    completed:
+    request_completed:
+      header: Your email has been sent!
+      help: >-
+        Thank you! We've forwarded your message to selected contact(s)
+      link_explanation: Click the link below to close this page
+      back: Back to previous page
+
+    confirmation_completed:
       header: Contact request created!
       help: >-
         Check your email for a link to the one-time contact form.
-      link_explanation: Click the link below to go back to previous page
+      link_explanation: Click the link below to close this page
       back: Back to previous page
 
     successfully_created: >-

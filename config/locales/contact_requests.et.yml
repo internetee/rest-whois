@@ -26,12 +26,19 @@ et:
       message: Sõnum
       send_btn: Saada
 
-    completed:
+    confirmation_completed:
       header: Kinnituskiri edukalt saadetud!
       help: >-
         Kontrollige oma e-kirju, saatsime Teile ühekordse lingi kirja saatmise vormile.
-      link_explanation: Vajutage allolevat linki, et minna tagasi eelmisele lehele
-      back: Tagasi eelmisele lehele
+      link_explanation: Vajutage allolevat linki, et minna tagasi pealehele
+      back: Tagasi pealehele
+
+    request_completed:
+      header: Teie teade on edastatud!
+      help: >-
+        Aitäh! Edastasime teate Teie poolt valitud kontaktidele.
+      link_explanation: Vajutage allolevat linki, et minna tagasi pealehele
+      back: Tagasi pealehele
 
     # Confirmation email creation view
     successfully_created: >-

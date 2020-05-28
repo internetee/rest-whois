@@ -1,0 +1,21 @@
+<article class="page--detail" data-search-indexing-allowed="true">
+  <header class="page--header" style="background-image: url(<%= asset_path('hero-eis.jpg') %>)">
+    <div class="u-container">
+      <h1><%= t '.header' %></h1>
+      <p><%= t '.help' %></p>
+      <p><%= t '.link_explanation' %></p>
+    </div>
+  </header>
+  <div class="page--content">
+    <div class="page--body u-content-styles">
+    <%= form_tag redirect_to_referer_path, method: :post do %>
+        <div class="form_area" style="box-shadow: none;">
+          <div class="form_submit">
+            <%= submit_tag t('.back'), style: 'width: 100%;' %>
+          </div>
+        </div>
+      <% end %>
+      <p><%= t 'contact_requests.gdpr_disclaimer_html' %></p>
+    </div>
+  </div>
+</article>
