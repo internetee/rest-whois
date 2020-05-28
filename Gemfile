@@ -4,7 +4,7 @@ gem 'bootsnap', require: false
 gem 'figaro', '~> 1.1.0'
 gem 'jbuilder'
 gem 'pg', '~> 1.0.0'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'sassc-rails'
 gem 'simpleidn', '0.0.7' # For Punycode
@@ -26,5 +26,5 @@ end
 
 group :test do
   gem 'selenium-webdriver'
-  gem 'simplecov', require: false
+  gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end
