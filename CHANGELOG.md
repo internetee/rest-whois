@@ -1,3 +1,6 @@
+28.05.2020
+* Upgraded Rails gemset to 6.0.3.1 [#231](https://github.com/internetee/rest-whois/pull/231)
+
 25.05.2020
 * Bump puma to 4.3.5 [#229](https://github.com/internetee/rest-whois/pull/229)
 
