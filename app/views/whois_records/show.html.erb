@@ -25,7 +25,7 @@
 
 <p>More information at http://internet.ee</p>
 
-<% if !@show_sensitive_data %>
+<% if !@show_sensitive_data && @whois_record.contactable? %>
     <section class="captcha">
         <%= render 'whois_records/show/captcha' %>
     </section>
