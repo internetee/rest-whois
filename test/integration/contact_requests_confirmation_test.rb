@@ -15,12 +15,11 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
     end
   end
 
-  def test_redirects_to_referer_path_when_button_clicked
-    referer_url = 'http://referer.test/'
+  def test_redirects_to_main_path_when_button_clicked
+    main_url = 'https://internet.ee/'
+    ENV['main_page_url'] = main_url
 
-    Capybara.current_session.driver.header 'Referer', referer_url
-
-    stub_request(:any, referer_url).to_return(body: 'Success')
+    stub_request(:any, main_url).to_return(body: 'Success')
 
     visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
 
@@ -31,6 +30,6 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
     assert_text('Check your email for a link to the one-time contact form.')
 
     click_link_or_button 'Back to previous page'
-    assert_equal referer_url, current_url
+    assert_equal main_url, current_url
   end
 end

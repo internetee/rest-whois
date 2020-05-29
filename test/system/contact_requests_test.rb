@@ -19,7 +19,7 @@ class ContactRequestsTest < ApplicationSystemTestCase
     fill_in('Message', with: body)
     click_link_or_button 'Send'
 
-    assert_text('Your email has been sent.')
+    assert_text('Your email has been sent!')
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['no-reply@internet.ee'], mail.from)

@@ -16,7 +16,7 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
     body = 'Old mail body'
     fill_in('Message', with: body) # Fill in all the form fields
     click_link_or_button 'Send'
-    assert_text('Your email has been sent.') # Successfully send an email
+    assert_text('Your email has been sent!') # Successfully send an email
 
     # Visit the page again, and get an error code
     assert_raise ActiveRecord::RecordNotFound do

@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   resources :contact_requests, only: %i[new create update show edit],
                                param: :secret
 
-  post 'contact_requests/redirect_to_referer', controller: :contact_requests,
-                                               action: :redirect_to_referer,
-                                               as: 'redirect_to_referer'
+  post 'contact_requests/redirect_to_main', controller: :contact_requests,
+                                            action: :redirect_to_main,
+                                            as: 'redirect_to_main'
 
   resources :whois_records, only: [] do
     collection do

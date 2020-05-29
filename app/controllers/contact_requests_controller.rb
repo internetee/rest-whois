@@ -9,8 +9,6 @@ class ContactRequestsController < ApplicationController
   end
 
   def new
-    referer = request.referer || ENV.fetch('main_page_url') { root_url }
-    session[:referer] = referer
     whois_record = WhoisRecord.find_by!(name: params[:domain_name])
     raise ActiveRecord::RecordNotFound unless whois_record.contactable?
 
@@ -33,8 +31,8 @@ class ContactRequestsController < ApplicationController
     redirect_to(:root, alert: t('contact_requests.smtp_error'))
   end
 
-  def redirect_to_referer
-    referer = session[:referer] || ENV.fetch('main_page_url') { root_url }
+  def redirect_to_main
+    referer = ENV.fetch('main_page_url') { root_url }
     respond_to do |format|
       format.html { redirect_to referer }
     end
