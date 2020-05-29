@@ -1,3 +1,6 @@
+29.05.2020
+* Registrant contact form now enables configuring the redirect address [#225](https://github.com/internetee/rest-whois/issues/225)
+
 28.05.2020
 * Upgraded Rails gemset to 6.0.3.1 [#231](https://github.com/internetee/rest-whois/pull/231)
 
