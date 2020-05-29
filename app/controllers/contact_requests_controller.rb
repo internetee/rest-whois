@@ -22,13 +22,20 @@ class ContactRequestsController < ApplicationController
       @contact_request.send_confirmation_email
       logger.warn("Confirmation request email registered to #{@contact_request.email}" \
         " (IP: #{request.ip})")
-      redirect_to(:root, notice: t('contact_requests.successfully_created'))
+      render :confirmation_completed
     else
       render(:new)
     end
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
     redirect_to(:root, alert: t('contact_requests.smtp_error'))
+  end
+
+  def redirect_to_main
+    referer = ENV.fetch('main_page_url') { root_url }
+    respond_to do |format|
+      format.html { redirect_to referer }
+    end
   end
 
   def show
@@ -50,7 +57,7 @@ class ContactRequestsController < ApplicationController
         "Email sent to #{@contact_request.whois_record.name} contacts " \
         "from #{@contact_request.email} (IP: #{request.ip})"
       )
-      redirect_to(:root, notice: t('contact_requests.successfully_sent'))
+      render :request_completed
     else
       redirect_to(:root, alert: t('contact_requests.something_went_wrong'))
     end

@@ -18,7 +18,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
     fill_in('contact_request[name]', with: 'Test User')
     click_link_or_button 'Get a link'
 
-    assert_text('Contact request created. Check your email for a link to the one-time contact form.')
+    assert_text('Check your email for a link to the one-time contact form.')
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['no-reply@internet.ee'], mail.from)

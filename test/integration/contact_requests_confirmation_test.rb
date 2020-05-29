@@ -14,4 +14,22 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
       assert_response :not_found
     end
   end
+
+  def test_redirects_to_main_path_when_button_clicked
+    main_url = 'https://internet.ee/'
+    ENV['main_page_url'] = main_url
+
+    stub_request(:any, main_url).to_return(body: 'Success')
+
+    visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
+
+    fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
+    fill_in('contact_request[name]', with: 'Test User')
+    click_link_or_button 'Get a link'
+
+    assert_text('Check your email for a link to the one-time contact form.')
+
+    click_link_or_button 'Back to previous page'
+    assert_equal main_url, current_url
+  end
 end
