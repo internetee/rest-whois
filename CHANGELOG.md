@@ -1,4 +1,5 @@
 29.05.2020
+* Removed recaptcha check from domains without registrant [#189](https://github.com/internetee/rest-whois/issues/189)
 * Registrant contact form now enables configuring the redirect address [#225](https://github.com/internetee/rest-whois/issues/225)
 
 28.05.2020
