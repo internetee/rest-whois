@@ -1,3 +1,6 @@
+02.06.2020
+* FIxed registration deadline format [#234](https://github.com/internetee/rest-whois/pull/234)
+
 29.05.2020
 * Removed recaptcha check from domains without registrant [#189](https://github.com/internetee/rest-whois/issues/189)
 * Registrant contact form now enables configuring the redirect address [#225](https://github.com/internetee/rest-whois/issues/225)
