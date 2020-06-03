@@ -48,7 +48,9 @@ class WhoisRecord < ApplicationRecord
                expire: json['expire'],
                outzone: json['outzone'],
                delete: json['delete'],
-               registration_deadline: json['registration_deadline'].try(:to_s, :iso8601))
+               registration_deadline: json['registration_deadline']
+                                          .try(:to_datetime)
+                                          .try(:to_s, :iso8601))
   end
   # rubocop:enable Metrics/AbcSize
 

@@ -60,6 +60,22 @@ class WhoisRecordTest < ActiveSupport::TestCase
     assert_equal Time.zone.parse('2010-07-09'), whois_record.domain.registration_deadline
   end
 
+  def test_deserializes_domain_with_old_reg_deadline_format
+    whois_record = WhoisRecord.new(json: { name: 'shop.test',
+                                           status: %w[active],
+                                           registered: '2010-07-05T00:00:00+00:00',
+                                           changed: '2010-07-06T00:00:00+00:00',
+                                           expire: '2010-07-07T00:00:00+00:00',
+                                           outzone: '2010-07-08T00:00:00+00:00',
+                                           delete: '2010-07-09T00:00:00+00:00',
+                                           registration_deadline: '2020-06-09 23:59:59 +0300'})
+
+    assert_equal 'shop.test', whois_record.domain.name
+    assert_equal %w[active], whois_record.domain.statuses
+    assert_equal Time.parse('2020-06-09 23:59:59 +0300').try(:to_datetime).try(:to_s, :iso8601),
+                 whois_record.domain.registration_deadline
+  end
+
   def test_deserializes_registrar
     whois_record = WhoisRecord.new(json: { registrar: 'Bestnames',
                                            registrar_website: 'https://bestnames.test',
