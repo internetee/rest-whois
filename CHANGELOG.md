@@ -1,3 +1,6 @@
+03.06.2020
+* Date format fix [#235](https://github.com/internetee/rest-whois/pull/235)
+
 02.06.2020
 * FIxed registration deadline format [#234](https://github.com/internetee/rest-whois/pull/234)
 
