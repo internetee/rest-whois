@@ -1,3 +1,6 @@
+08.06.2020
+* Bumped Websocket-extensions to 0.1.5 [#236](https://github.com/internetee/rest-whois/pull/236)
+
 03.06.2020
 * Date format fix [#235](https://github.com/internetee/rest-whois/pull/235)
 
