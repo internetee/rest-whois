@@ -1,3 +1,6 @@
+26.06.2020
+* Bumped rack to 2.2.3 [#237](https://github.com/internetee/rest-whois/pull/237)
+
 08.06.2020
 * Bumped Websocket-extensions to 0.1.5 [#236](https://github.com/internetee/rest-whois/pull/236)
 
