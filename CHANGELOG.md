@@ -1,3 +1,6 @@
+29.06.2020
+* Actionpack security update to 6.0.3.2 [#238](https://github.com/internetee/rest-whois/pull/238)
+
 26.06.2020
 * Bumped rack to 2.2.3 [#237](https://github.com/internetee/rest-whois/pull/237)
 
