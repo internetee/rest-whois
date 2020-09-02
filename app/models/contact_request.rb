@@ -64,6 +64,9 @@ class ContactRequest < ApplicationRecord
     status == STATUS_SENT || !still_valid? || !whois_record_exists?
   end
 
+  def confirmable?
+    status == STATUS_NEW && still_valid? && whois_record_exists?
+  end
   private
 
   def extract_emails_for_recipients(recipients)
@@ -81,10 +84,6 @@ class ContactRequest < ApplicationRecord
 
   def sendable?
     status == STATUS_CONFIRMED && still_valid? && whois_record_exists?
-  end
-
-  def confirmable?
-    status == STATUS_NEW && still_valid? && whois_record_exists?
   end
 
   def still_valid?
