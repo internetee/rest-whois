@@ -27,6 +27,12 @@ smtp_enable_starttls_auto: 'true' # 'false'
 # If your mail server requires authentication, please change.
 smtp_authentication: 'plain' # 'plain', 'login', 'cram_md5'
 
+# Variables for Amazon's Simple Email Service
+aws_ses_access_key_id: ''
+aws_ses_secret_access_key: ''
+aws_ses_server: ''
+aws_ses_message_id_domain: ''
+
 main_page_url: https://internet.ee # Main URL where user is redirected to in case of contact requests
 
 # You can use `rake secret` to generate a secure secret key.

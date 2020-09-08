@@ -28,3 +28,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end
+
+gem "aws-ses", "~> 0.7.0"
