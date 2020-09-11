@@ -7,7 +7,7 @@ class BounceBackController < ApplicationController
       verify_sns_handler(json['SubscribeURL'])
     else
       logger.info "AWS has sent us the following bounce notification(s): #{json}"
-      BounceBackMailer.bounce_alert(json).deliver
+      BounceBackMailer.bounce_alert(json).deliver_now if json['bouncedRecipients']
     end
 
     head :ok

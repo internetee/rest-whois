@@ -40,7 +40,6 @@ module RestWhois
       user_name:            ENV['smtp_user_name'],
       password:             ENV['smtp_password'],
       authentication:       ENV['smtp_authentication'],
-      domain:               ENV['smtp_domain'],
       openssl_verify_mode:  ENV['smtp_openssl_verify_mode']
     }
 
