@@ -1,15 +1,15 @@
 ru:
     bounce_back_mailer:
       bounce_alert:
-        subject: Failed to deliver mail to registrant
+        subject: Невозможно доставить почту владельцу домена
         body: |
-          Hello!
+          Привет!
 
-          Unfortunately we have to let you know that for some unknown reason your contact
-          email was bounced and never reached registrant. We're sorry and we feel bad.
+          К сожалению по какой-то неизвестной нам причине ваше письмо, отправленное владельцу домена,
+          было возвращено почтовым сервером и не достигло адресата. Нам очень жаль. Правда.
 
-          There's a chance that domain's registrar might help you contact them instead.
+          Возможно, доменный регистратор может помочь вам связаться с владельцем домена.
         footer: |
 
-          Best regards,
+          С наилучшими пожеланиями,
           Estonian Internet Foundation
