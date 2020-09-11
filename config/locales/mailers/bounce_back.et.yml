@@ -1,0 +1,17 @@
+et:
+    bounce_back_mailer:
+      bounce_alert:
+        subject: Me ei suutnud registreerijale teie kirja edastada.
+        body: |
+          Tere!
+
+          Paraku peame teatama, et ebaselgetel põhjustel me ei suutnud toimetada
+          teie kontaktvormi sisu domeeni registreerijale. Ilmselt oli neil postkast täis
+          või vale e-posti aadress.
+
+          Siiski on võimalus, et registripidaja saab teid aidata registreerijaga
+          ühendust võtmisel.
+        footer: |
+
+          Lugupidamisega
+          Eesti Interneti SA

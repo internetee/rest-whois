@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   scope '/v1' do
+    post 'aws_sns/bounce' => 'bounce_back#bounce'
     whois_record_name_constraint = /([^\/]+?)(?=\.json|\.html|$|\/)/
 
     constraints name: whois_record_name_constraint do
