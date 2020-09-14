@@ -3,6 +3,6 @@ class BounceBackMailer < ApplicationMailer
 
   def bounce_alert(recipient, domain_name)
     @domain = domain_name
-    mail(to: recipient, subject: t('bounce_back_mailer.bounce_alert.subject'))
+    mail(to: recipient, subject: t('bounce_back_mailer.bounce_alert.subject', domain: @domain))
   end
 end

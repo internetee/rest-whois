@@ -66,13 +66,14 @@ class ContactRequest < ApplicationRecord
 
   def self.send_bounce_alert(json)
     contact_request = ContactRequest.find_by(message_id: json['mail']['messageId'])
+    registrant_email = contact_request.whois_record.json['email']
     return unless contact_request
 
     recipients = json['bounce']['bouncedRecipients']
-    bounced = recipients.find { |r| r == contact_request.whois_record.json['email'] }
+    bounced = recipients.find { |r| break true if r['emailAddress'] == registrant_email }
     return unless bounced
 
-    BounceBackMailer.bounce_alert(recipient, domain: contact_request.whois_record.name)
+    BounceBackMailer.bounce_alert(contact_request.email, contact_request.whois_record['name']).deliver_now
   end
 
   def confirmable?
