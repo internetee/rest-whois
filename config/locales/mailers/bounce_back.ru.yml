@@ -1,7 +1,7 @@
 ru:
     bounce_back_mailer:
       bounce_alert:
-        subject: Невозможно доставить почту владельцу домена
+        subject: Невозможно доставить почту владельцу домена %{domain}
         body: |
           Привет!
 

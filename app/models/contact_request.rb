@@ -64,6 +64,16 @@ class ContactRequest < ApplicationRecord
     status == STATUS_SENT || !still_valid? || !whois_record_exists?
   end
 
+  def self.send_bounce_alert(json)
+    contact_request = ContactRequest.find_by(message_id: json['mail']['messageId'])
+    return unless contact_request
+
+    bounced = json['bounce']['bouncedRecipients'].detect {|r| r == contact_request.whois_record.json['email']}
+    return unless bounced
+
+    BounceBackMailer.bounce_alert(recipient, domain: contact_request.whois_record.name)
+  end
+
   private
 
   def extract_emails_for_recipients(recipients)

@@ -1,12 +1,12 @@
 en:
     bounce_back_mailer:
       bounce_alert:
-        subject: Failed to deliver mail to registrant
+        subject: Failed to deliver mail to %{domain}'s registrant
         body: |
           Hello!
 
           Unfortunately we have to let you know that for some unknown reason your contact
-          email was bounced and never reached registrant. We're sorry and we feel bad.
+          email was bounced and never reached %{domain}'s registrant. We're sorry and we feel bad.
 
           There's a chance that registrar might help you contact them instead.
         footer: |
