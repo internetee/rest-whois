@@ -74,6 +74,10 @@ class ContactRequest < ApplicationRecord
     BounceBackMailer.bounce_alert(recipient, domain: contact_request.whois_record.name)
   end
 
+  def confirmable?
+    status == STATUS_NEW && still_valid? && whois_record_exists?
+  end
+
   private
 
   def extract_emails_for_recipients(recipients)
@@ -91,10 +95,6 @@ class ContactRequest < ApplicationRecord
 
   def sendable?
     status == STATUS_CONFIRMED && still_valid? && whois_record_exists?
-  end
-
-  def confirmable?
-    status == STATUS_NEW && still_valid? && whois_record_exists?
   end
 
   def still_valid?

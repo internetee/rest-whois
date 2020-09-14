@@ -1,3 +1,6 @@
+10.09.2020
+* Registrant contact urls are now invalidated on sending a message [#200](https://github.com/internetee/rest-whois/issues/200)
+
 29.06.2020
 * Actionpack security update to 6.0.3.2 [#238](https://github.com/internetee/rest-whois/pull/238)
 

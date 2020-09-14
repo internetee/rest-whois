@@ -39,7 +39,7 @@ class ContactRequestsController < ApplicationController
   end
 
   def show
-    if @contact_request.confirm_email
+    if @contact_request.confirmable?
       redirect_to edit_contact_request_url
     else
       redirect_to root_url, alert: t('contact_requests.already_used')
@@ -51,12 +51,14 @@ class ContactRequestsController < ApplicationController
   def update
     email_body = params[:email_body]
     recipients = params[:recipients]
+    @contact_request.confirm_email
 
     if @contact_request.send_contact_email(body: email_body, recipients: recipients)
       logger.warn(
         "Email sent to #{@contact_request.whois_record.name} contacts " \
         "from #{@contact_request.email} (IP: #{request.ip})"
       )
+
       render :request_completed
     else
       redirect_to(:root, alert: t('contact_requests.something_went_wrong'))
