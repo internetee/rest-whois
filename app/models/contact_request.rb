@@ -68,7 +68,8 @@ class ContactRequest < ApplicationRecord
     contact_request = ContactRequest.find_by(message_id: json['mail']['messageId'])
     return unless contact_request
 
-    bounced = json['bounce']['bouncedRecipients'].detect {|r| r == contact_request.whois_record.json['email']}
+    recipients = json['bounce']['bouncedRecipients']
+    bounced = recipients.find { |r| r == contact_request.whois_record.json['email'] }
     return unless bounced
 
     BounceBackMailer.bounce_alert(recipient, domain: contact_request.whois_record.name)

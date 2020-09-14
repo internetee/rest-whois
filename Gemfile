@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk-ses', '~> 1.34'
 gem 'bootsnap', require: false
 gem 'figaro', '~> 1.1.0'
 gem 'jbuilder'
@@ -28,5 +29,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end
-
-gem "aws-sdk-ses", "~> 1.34"
