@@ -66,14 +66,12 @@ class ContactRequest < ApplicationRecord
 
   def self.send_bounce_alert(json)
     contact_request = ContactRequest.find_by(message_id: json['mail']['messageId'])
-    registrant_email = contact_request.whois_record.json['email']
     return unless contact_request
+    return unless contact_request.registrant_bounced?(json['bounce']['bouncedRecipients'])
 
-    recipients = json['bounce']['bouncedRecipients']
-    bounced = recipients.find { |r| break true if r['emailAddress'] == registrant_email }
-    return unless bounced
-
-    BounceBackMailer.bounce_alert(contact_request.email, contact_request.whois_record['name']).deliver_now
+    BounceBackMailer.bounce_alert(
+      contact_request.email, contact_request.whois_record['name']
+    ).deliver_now
   end
 
   def confirmable?
@@ -113,5 +111,10 @@ class ContactRequest < ApplicationRecord
 
   def set_valid_to_at_24_hours_from_now
     self.valid_to = (Time.zone.now + 24.hours)
+  end
+
+  def registrant_bounced?(bounced_recipients)
+    registrant_email = contact_request.whois_record.json['email']
+    bounced_recipients.find { |r| break true if r['emailAddress'] == registrant_email }
   end
 end
