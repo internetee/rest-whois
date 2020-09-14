@@ -1,4 +1,4 @@
-class AddContactRequestsTable < ActiveRecord::Migration
+class AddContactRequestsTable < ActiveRecord::Migration[5.0]
   def change
     create_table :contact_requests do |t|
       t.integer    :whois_record_id, null: false
