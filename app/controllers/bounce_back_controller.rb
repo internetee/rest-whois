@@ -3,6 +3,7 @@ class BounceBackController < ApplicationController
 
   def bounce
     json = JSON.parse(request.raw_post)
+    puts json
     if json['SubscribeURL']
       verify_sns_handler(json['SubscribeURL'])
     else

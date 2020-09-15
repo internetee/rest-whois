@@ -78,6 +78,11 @@ class ContactRequest < ApplicationRecord
     status == STATUS_NEW && still_valid? && whois_record_exists?
   end
 
+  def registrant_bounced?(bounced_recipients)
+    registrant_email = whois_record.json['email']
+    bounced_recipients.find { |r| break true if r['emailAddress'] == registrant_email }
+  end
+
   private
 
   def extract_emails_for_recipients(recipients)
@@ -111,10 +116,5 @@ class ContactRequest < ApplicationRecord
 
   def set_valid_to_at_24_hours_from_now
     self.valid_to = (Time.zone.now + 24.hours)
-  end
-
-  def registrant_bounced?(bounced_recipients)
-    registrant_email = contact_request.whois_record.json['email']
-    bounced_recipients.find { |r| break true if r['emailAddress'] == registrant_email }
   end
 end
