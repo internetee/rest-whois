@@ -1,3 +1,6 @@
+16.09.2020
+* Rails update to 6.0.3.3 [#242](https://github.com/internetee/rest-whois/pull/242)
+
 10.09.2020
 * Registrant contact urls are now invalidated on sending a message [#200](https://github.com/internetee/rest-whois/issues/200)
 
