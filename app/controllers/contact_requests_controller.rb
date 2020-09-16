@@ -50,7 +50,8 @@ class ContactRequestsController < ApplicationController
 
   def update
     email_body = params[:email_body]
-    recipients = params[:recipients]
+    recipients = params[:recipients] || ['admin_contacts']
+    recipients << 'admin_contacts' unless recipients.include?('admin_contacts')
     @contact_request.confirm_email
 
     if @contact_request.send_contact_email(body: email_body, recipients: recipients)
