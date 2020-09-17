@@ -1,4 +1,6 @@
 class ContactRequest < ApplicationRecord
+  include Concerns::ContactRequest::Bounceable
+
   def self.connect_to_write_database_if_defined
     return unless Rails.configuration.database_configuration["write_#{Rails.env}"]
 
@@ -64,23 +66,8 @@ class ContactRequest < ApplicationRecord
     status == STATUS_SENT || !still_valid? || !whois_record_exists?
   end
 
-  def self.send_bounce_alert(json)
-    contact_request = ContactRequest.find_by(message_id: json['mail']['messageId'])
-    return unless contact_request
-    return unless contact_request.registrant_bounced?(json['bounce']['bouncedRecipients'])
-
-    BounceBackMailer.bounce_alert(
-      contact_request.email, contact_request.whois_record['name']
-    ).deliver_now
-  end
-
   def confirmable?
     status == STATUS_NEW && still_valid? && whois_record_exists?
-  end
-
-  def registrant_bounced?(bounced_recipients)
-    registrant_email = whois_record.json['email']
-    bounced_recipients.find { |r| break true if r['emailAddress'] == registrant_email }
   end
 
   private
