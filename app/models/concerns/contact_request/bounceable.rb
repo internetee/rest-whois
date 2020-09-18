@@ -11,12 +11,27 @@ module Concerns
       class_methods do
         def send_bounce_alert(json)
           contact_request = find_by(message_id: json['mail']['messageId'])
-          return unless contact_request
-          return unless contact_request.registrant_bounced?(json['bounce']['bouncedRecipients'])
+          return unless contact_request&.registrant_bounced?(json['bounce']['bouncedRecipients'])
 
           BounceBackMailer.bounce_alert(
             contact_request.email, contact_request.whois_record['name']
           ).deliver_now
+
+          log_to_registry(json)
+        end
+
+        def log_to_registry(json)
+          uri = URI.parse(ENV['bounces_api_url'])
+          secret = ENV['bounces_api_shared_key']
+
+          header = { 'Content-Type': 'application/json', 'Authorization': "Basic #{secret}" }
+          body = { data: json }
+
+          http = Net::HTTP.new(uri.host, uri.port)
+          request = Net::HTTP::Post.new(uri.request_uri, header)
+          request.body = body.to_json
+
+          http.request(request)
         end
       end
     end
