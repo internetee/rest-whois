@@ -21,6 +21,8 @@ module Concerns
         end
 
         def log_to_registry(json)
+          return unless ENV['bounces_api_url']
+
           uri = URI.parse(ENV['bounces_api_url'])
           secret = ENV['bounces_api_shared_key']
 

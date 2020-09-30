@@ -33,7 +33,7 @@ aws_secret_access_key:
 aws_default_region:
 
 # Registry Bounces API
-bounces_api_url: 'http://registry:3000/api/v1/bounces'
+bounces_api_url:
 bounces_api_shared_key: testkey
 
 main_page_url: https://internet.ee # Main URL where user is redirected to in case of contact requests

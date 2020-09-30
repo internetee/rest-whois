@@ -16,6 +16,8 @@ class ContactRequestTest < ActiveSupport::TestCase
 
   def teardown
     super
+
+    ActionMailer::Base.deliveries.clear
   end
 
   def test_new_request_needs_required_fields
@@ -202,7 +204,7 @@ class ContactRequestTest < ActiveSupport::TestCase
     json['bounce']['bouncedRecipients'][0]['emailAddress'] = 'random@definitelynotvalid.test'
 
     ContactRequest.send_bounce_alert(json)
-    assert_not ActionMailer::Base.deliveries.empty?
+    assert ActionMailer::Base.deliveries.empty?
   end
 
   def verified_aws_bounce_notification

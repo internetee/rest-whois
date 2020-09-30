@@ -22,7 +22,7 @@ class BounceBackTest < ActionDispatch::IntegrationTest
 
   def test_attempts_to_send_bounce_alert_for_bounced_mail
     aws_payload = aws_bounce_notification
-
+    stub_request(:any, "www.example.com")
     # AWS webhook to #bounce for bounced emails
     post aws_sns_bounce_path, params: aws_payload.to_json
     assert_response :success
