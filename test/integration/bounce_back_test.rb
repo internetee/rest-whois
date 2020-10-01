@@ -22,12 +22,27 @@ class BounceBackTest < ActionDispatch::IntegrationTest
 
   def test_attempts_to_send_bounce_alert_for_bounced_mail
     aws_payload = aws_bounce_notification
-    stub_request(:any, "www.example.com")
+    # stub_request(:any, "www.example.com")
     # AWS webhook to #bounce for bounced emails
     post aws_sns_bounce_path, params: aws_payload.to_json
     assert_response :success
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal [@contact_request.email], ActionMailer::Base.deliveries.last.to
+  end
+
+  def test_sends_bounce_alert_to_registry_api
+    registry_bounce_url = 'http://registry.test/bounce'
+
+    # Stub Bounces logging API path
+    ENV["bounces_api_url"] = registry_bounce_url
+    stub_request(:post, registry_bounce_url)
+
+    aws_payload = aws_bounce_notification
+    post aws_sns_bounce_path, params: aws_payload.to_json
+
+    assert_requested :post, registry_bounce_url, times: 1
+
+    ENV["bounces_api_url"] = ''
   end
 
   def aws_verification_payload
