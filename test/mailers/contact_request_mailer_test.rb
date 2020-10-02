@@ -117,4 +117,38 @@ class ContactRequestMailerTest < ActionMailer::TestCase
 
     refute_match('This line should be skipped', email.body.to_s.rstrip)
   end
+
+  def test_attempts_to_send_contact_email_via_aws_ses
+    mail_body = begin
+      "Hi!\n" \
+      "\n" \
+      "I have an amazing business opportunity. Please contact me at my_email@test.com.\n" \
+      "\n" \
+      "Best regards,\n" \
+      'John Smith'
+    end
+
+    Aws.config.update(
+      region: 'us-east-2',
+      credentials: Aws::Credentials.new('123', '123'),
+      stub_responses: {
+        send_email: { message_id: 'TESTING' }}
+    )
+
+    ApplicationMailer.stub(:ses_configured?, true) do
+      ContactRequestMailer.contact_email(
+        contact_request: @contact_request,
+        recipients: ['admin@privatedomain.com', 'owner@private_domain.com'],
+        mail_body: mail_body
+      ).deliver_now
+    end
+
+    assert_equal 'TESTING', @contact_request.message_id
+
+    Aws.config.update(
+      region: nil,
+      credentials: nil,
+      stub_responses: false
+    )
+  end
 end
