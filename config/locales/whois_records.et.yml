@@ -1,7 +1,28 @@
 et:
   whois_records:
     show:
+      header: Eesti .ee tippdomeeni WHOIS server
       contact_owner_btn: Võta ühendust omanikuga
+
+      domain:
+        header: Domeen
+      registrant:
+        header: Registreerija
+
+      admin_contacts:
+        header: Administratiivsed kontaktid
+
+      tech_contacts:
+        header: Tehnilised kontaktid
+
+      registrar:
+        header: Registripidaja
+
+      nameservers:
+        header: Nimeserverid
+
+      dnssec_keys:
+        header: DNSSEC
 
       captcha:
         submit_btn: Näita täielikku infot

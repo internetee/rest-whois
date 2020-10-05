@@ -1,0 +1,6 @@
+et:
+  activemodel:
+    attributes:
+      contact:
+        reg_number: Reg. number
+        ident_country: Riik
