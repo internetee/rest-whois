@@ -1,7 +1,29 @@
 ru:
   whois_records:
     show:
+      header: Эстонский TLD .ee сервер WHOIS
       contact_owner_btn: Связаться с владельцем
 
       captcha:
         submit_btn: Показать полную информацию
+
+      domain:
+        header: Домен
+
+      registrant:
+        header: Владелец домена
+
+      admin_contacts:
+        header: Административные контакты
+
+      tech_contacts:
+        header: Технические контакты
+
+      registrar:
+        header: Регистратор
+
+      nameservers:
+        header: Сервера имен
+
+      dnssec_keys:
+        header: DNSSEC

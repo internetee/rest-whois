@@ -1,0 +1,6 @@
+ru:
+  activemodel:
+    attributes:
+      contact:
+        reg_number: Рег. номер
+        ident_country: Страна
