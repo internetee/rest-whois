@@ -3,6 +3,7 @@ et:
     show:
       header: Eesti .ee tippdomeeni WHOIS server
       contact_owner_btn: Võta ühendust omanikuga
+      more_info: Rohkem infot leiate https://internet.ee
 
       domain:
         header: Domeen

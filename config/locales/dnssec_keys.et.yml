@@ -1,0 +1,5 @@
+et:
+  activemodel:
+    attributes:
+      dnssec_key:
+        last_update: Uuendatud
