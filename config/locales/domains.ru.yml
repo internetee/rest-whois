@@ -1,0 +1,11 @@
+ru:
+  activemodel:
+    attributes:
+      domain:
+        registered: Зарег.
+        changed: Изменен
+        expire: Истекает
+        outzone: Вне зоны
+        delete: Удален
+        statuses: Статусы
+        name: Домен

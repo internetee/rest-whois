@@ -4,3 +4,6 @@ ru:
       contact:
         reg_number: Рег. номер
         ident_country: Страна
+        name: Имя
+        email: Адрес
+        last_update: Обновлен

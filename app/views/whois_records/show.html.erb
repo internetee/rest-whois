@@ -23,7 +23,7 @@
     <%= render 'whois_records/show/dnssec_keys' %>
 <% end %>
 
-<p>More information at http://internet.ee</p>
+<p><%= t '.more_info' %></p>
 
 <% if !@show_sensitive_data && @whois_record.contactable? %>
     <section class="captcha">

@@ -1,0 +1,5 @@
+ru:
+  activemodel:
+    attributes:
+      dnssec_key:
+        last_update: Обновлен

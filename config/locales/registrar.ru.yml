@@ -1,0 +1,8 @@
+ru:
+  activemodel:
+    attributes:
+      registrar:
+        name: Имя
+        website: Сайт
+        phone: Телефон
+        last_update: Обновлен

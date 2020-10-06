@@ -1,0 +1,5 @@
+ru:
+  activemodel:
+    attributes:
+      nameserver:
+        last_update: Обновлен

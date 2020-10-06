@@ -2,6 +2,7 @@ ru:
   whois_records:
     show:
       header: Эстонский TLD .ee сервер WHOIS
+      more_info: Подробнее на http://internet.ee
       contact_owner_btn: Связаться с владельцем
 
       captcha:
