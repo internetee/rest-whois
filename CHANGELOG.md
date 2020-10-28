@@ -1,3 +1,6 @@
+28.10.2020
+* fixed multi language support [#239](https://github.com/internetee/rest-whois/issues/239)
+
 16.09.2020
 * Rails update to 6.0.3.3 [#242](https://github.com/internetee/rest-whois/pull/242)
 
