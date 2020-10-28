@@ -2,6 +2,7 @@ en:
   whois_records:
     show:
       header: Estonia .ee Top Level Domain WHOIS server
+      more_info: More information on http://internet.ee
       contact_owner_btn: Contact owner
 
       domain:

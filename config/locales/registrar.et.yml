@@ -1,0 +1,8 @@
+et:
+  activemodel:
+    attributes:
+      registrar:
+        name: Nimi
+        website: Veebisait
+        phone: Telefon
+        last_update: Uuendatud

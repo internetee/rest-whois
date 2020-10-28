@@ -1,0 +1,5 @@
+ru:
+  masks:
+    disclosable: "Не раскрывается - воспользуйтесь www.internet.ee для WHOIS через web"
+    undisclosable: Не раскрывается
+    undisclosable_registrant_name: Частное лицо

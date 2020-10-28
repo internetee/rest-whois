@@ -1,0 +1,9 @@
+et:
+  activemodel:
+    attributes:
+      contact:
+        reg_number: Reg. number
+        ident_country: Riik
+        name: Nimi
+        email: E-post
+        last_update: Uuendatud
