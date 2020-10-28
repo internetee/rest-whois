@@ -1,5 +1,5 @@
 28.10.2020
-* fixed multi language support [#239](https://github.com/internetee/rest-whois/issues/239)
+* Fixed multi language support [#239](https://github.com/internetee/rest-whois/issues/239)
 
 16.09.2020
 * Rails update to 6.0.3.3 [#242](https://github.com/internetee/rest-whois/pull/242)
@@ -20,7 +20,7 @@
 * Date format fix [#235](https://github.com/internetee/rest-whois/pull/235)
 
 02.06.2020
-* FIxed registration deadline format [#234](https://github.com/internetee/rest-whois/pull/234)
+* Fixed registration deadline format [#234](https://github.com/internetee/rest-whois/pull/234)
 
 29.05.2020
 * Removed recaptcha check from domains without registrant [#189](https://github.com/internetee/rest-whois/issues/189)
