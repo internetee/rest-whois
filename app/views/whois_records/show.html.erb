@@ -1,6 +1,11 @@
 <h1><%= t '.header' %></h1>
-
-<p><%= @whois_record.disclaimer %></p>
+<% disclaimer = @whois_record.disclaimer %>
+<% if disclaimer.is_a?(String) %>
+  <% disclaimer_string = disclaimer %>
+<% elsif disclaimer.is_a?(Hash) %>
+  <% disclaimer_string = disclaimer[I18n.locale.to_s] %>
+<% end %>
+<p><%= disclaimer_string if disclaimer %></p>
 
 <%= render 'whois_records/show/domain', domain: @whois_record.domain %>
 
@@ -23,7 +28,7 @@
     <%= render 'whois_records/show/dnssec_keys' %>
 <% end %>
 
-<p>More information at http://internet.ee</p>
+<p><%= t '.more_info' %></p>
 
 <% if !@show_sensitive_data && @whois_record.contactable? %>
     <section class="captcha">

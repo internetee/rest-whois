@@ -1,0 +1,11 @@
+et:
+  activemodel:
+    attributes:
+      domain:
+        registered: Registreeritud
+        changed: Muudetud
+        expire: Aegub
+        outzone: Tsoonist väljas
+        delete: Kustub
+        statuses: Staatused
+        name: Domeen

@@ -33,6 +33,9 @@ et:
       link_explanation: Vajutage allolevat linki, et minna tagasi pealehele
       back: Tagasi pealehele
 
+    confirmation_sent: Saatsime e-posti kinnituskirja aadressile %{email}
+    confirmation_reminder: Palun kinnitage oma e-posti aadress 24 tunni jooksul.
+
     request_completed:
       header: Teie teade on edastatud!
       help: >-

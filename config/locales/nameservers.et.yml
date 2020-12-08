@@ -1,0 +1,5 @@
+et:
+  activemodel:
+    attributes:
+      nameserver:
+        last_update: Uuendatud
