@@ -11,13 +11,12 @@ module Concerns
       class_methods do
         def send_bounce_alert(json)
           contact_request = find_by(message_id: json['mail']['messageId'])
+          log_to_registry(json)
           return unless contact_request&.registrant_bounced?(json['bounce']['bouncedRecipients'])
 
           BounceBackMailer.bounce_alert(
             contact_request.email, contact_request.whois_record['name']
           ).deliver_now
-
-          log_to_registry(json)
         end
 
         def log_to_registry(json)
