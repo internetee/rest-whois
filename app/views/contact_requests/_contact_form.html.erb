@@ -8,11 +8,6 @@
                     <span class="form_control_indicator form_control_indicator_disabled"></span>
                     <span><%= t('.admin_contacts') %></span>
                 </label>
-                <label>
-                    <%= check_box_tag "recipients[]", :tech_contacts, false, id: 'tech_contacts', :class => "form_field_checkbox" %>
-                    <span class="form_control_indicator"></span>
-                    <span><%= t('.tech_contacts') %></span>
-                </label>
             </div>
             <div class="form_field form_field_required">
                 <%= label_tag :email_body, t('.message') + ':', for: :email_body, :class => "form_field_label" %>
