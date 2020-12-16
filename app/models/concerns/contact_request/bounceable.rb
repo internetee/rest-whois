@@ -29,6 +29,7 @@ module Concerns
           body = { data: json }
 
           http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = true if uri.instance_of?(URI::HTTPS)
           request = Net::HTTP::Post.new(uri.request_uri, header)
           request.body = body.to_json
 
