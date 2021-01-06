@@ -22,4 +22,13 @@ Rails.application.routes.draw do
       post ':name', to: 'whois_records#show'
     end
   end
+
+  scope '/v2' do
+    whois_record_name_constraint = /([^\/]+?)(?=\.json|\.html|$|\/)/
+
+    constraints name: whois_record_name_constraint do
+      get 'whois/:name', to: 'whois_records#show', as: 'whois_record_v2'
+      post 'whois/:name', to: 'whois_records#show'
+    end
+  end
 end
