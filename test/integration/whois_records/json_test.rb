@@ -18,7 +18,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_returns_404_for_missing_domains
-    get('/v1/missing-domain.test.json')
+    get('/v1/whois/missing-domain.test.json')
 
     assert_equal(404, response.status)
     response_json = JSON.parse(response.body)
@@ -27,7 +27,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_json_has_policy_error_on_invalid_domains
-    get('/v1/1.test.json')
+    get('/v1/whois/1.test.json')
 
     assert_equal(404, response.status)
     response_json = JSON.parse(response.body)
@@ -36,7 +36,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_post_requests_works_as_get
-    post('/v1/missing-domain.test.json')
+    post('/v1/whois/missing-domain.test.json')
 
     assert_equal(404, response.status)
     response_json = JSON.parse(response.body)
@@ -45,7 +45,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_discarded_returns_minimal_json
-    get('/v1/discarded-domain.test.json')
+    get('/v1/whois/discarded-domain.test.json')
 
     response_json = JSON.parse(response.body)
     assert_equal('discarded-domain.test', response_json['name'])
@@ -85,13 +85,13 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
       'contact_form_link': 'http://www.example.com/contact_requests/new?domain_name=privatedomain.test&locale=et'
     }.with_indifferent_access
 
-    get('/v1/privatedomain.test.json')
+    get('/v1/whois/privatedomain.test.json')
     response_json = JSON.parse(response.body)
     assert_equal(expected_response, response_json)
   end
 
   def test_hide_sensitive_data_of_private_entity_when_captcha_is_unsolved
-    get '/v1/privatedomain.test', params: { format: :json }
+    get '/v1/whois/privatedomain.test', params: { format: :json }
 
     response_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -115,7 +115,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   end
 
   def test_hide_sensitive_data_of_legal_entity_when_captcha_is_unsolved
-    get '/v1/company-domain.test', params: { format: :json }
+    get '/v1/whois/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
@@ -140,7 +140,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def test_show_sensitive_data_of_private_entity_when_ip_is_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.1'
 
-    get '/v1/privatedomain.test', params: { format: :json }
+    get '/v1/whois/privatedomain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'test', response_json[:registrant]
@@ -164,7 +164,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def test_show_sensitive_data_of_legal_entity_when_ip_is_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.1'
 
-    get '/v1/company-domain.test', params: { format: :json }
+    get '/v1/whois/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'test', response_json[:registrant]
@@ -188,7 +188,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def test_hide_sensitive_data_of_private_entity_when_ip_is_not_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.2'
 
-    get '/v1/privatedomain.test', params: { format: :json }
+    get '/v1/whois/privatedomain.test', params: { format: :json }
 
     response_json = JSON.parse(response.body, symbolize_names: true)
 
@@ -213,7 +213,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def test_hide_sensitive_data_of_legal_entity_when_ip_is_not_in_whitelist
     ENV['whitelist_ip'] = '127.0.0.2'
 
-    get '/v1/company-domain.test', params: { format: :json }
+    get '/v1/whois/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]

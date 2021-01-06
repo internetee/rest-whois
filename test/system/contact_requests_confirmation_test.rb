@@ -3,12 +3,12 @@ require 'application_system_test_case'
 
 class ContactRequestsConfirmationTest < ApplicationSystemTestCase
   def test_link_from_whois_record_page_does_not_exists_for_discarded_domains
-    visit("v1/discarded-domain.test")
+    visit("v1/whois/discarded-domain.test")
     refute(has_link?('Contact owner'))
   end
 
   def test_link_from_whois_record_page_does_not_exists_for_legal_owners
-    visit("v1/company-domain.test")
+    visit("v1/whois/company-domain.test")
     refute(has_link?('Contact owner'))
   end
 
