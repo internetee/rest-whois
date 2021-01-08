@@ -6,10 +6,10 @@ class RegistryConnector
 
   attr_accessor :request
 
-  def self.perform_request(request)
-    @response = Net::HTTP.start(BASE_URL.host, BASE_URL.port,
-                                use_ssl: BASE_URL.scheme == 'https') do |http|
-      http.request(request)
+  def self.perform_request(request, url)
+    @response = Net::HTTP.start(url.host, url.port,
+                                use_ssl: url.scheme == 'https') do |http|
+      http.request(request(url))
     end
 
     @body_as_string = @response.body
@@ -20,16 +20,23 @@ class RegistryConnector
     raise CommunicationError.new(request, @code_as_string)
   end
 
-  def self.request
+  def self.request(url)
     @request ||= Net::HTTP::Post.new(
-      BASE_URL,
+      url,
       'Content-Type': 'application/json',
       "Authorization": BASE_KEY
     )
   end
 
   def self.do_save(data)
+    url = BASE_URL
     request.body = { contact_request: data }.to_json
-    perform_request(request)
+    perform_request(request(url), url)
+  end
+
+  def self.do_update(data)
+    url = URI.join(BASE_URL, "/contact_requests/#{data[:id]}")
+    request.body = { contact_request: data }.to_json
+    perform_request(request(url), url)
   end
 end
