@@ -29,6 +29,16 @@ class ContactRequest < ApplicationRecord
     set_valid_to_at_24_hours_from_now
   end
 
+  def save_to_registry
+    data = {
+      email: email,
+      whois_record_id: whois_record_id,
+      name: name,
+      status: status
+    }
+    RegistryConnector.do_save(data)
+  end
+
   def send_confirmation_email
     ContactRequestMailer.confirmation_email(self).deliver_now
   end
