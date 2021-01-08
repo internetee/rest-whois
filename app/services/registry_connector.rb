@@ -30,7 +30,7 @@ class RegistryConnector
 
   def self.do_save(data)
     url = BASE_URL
-    request.body = { contact_request: data }.to_json
+    request(url).body = { contact_request: data }.to_json
     perform_request(request(url), url)
   end
 
