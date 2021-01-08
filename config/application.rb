@@ -10,6 +10,7 @@ module RestWhois
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.autoloader = :classic
 
     # Authorize all hosts
     config.hosts.clear
@@ -40,7 +41,6 @@ module RestWhois
       user_name:            ENV['smtp_user_name'],
       password:             ENV['smtp_password'],
       authentication:       ENV['smtp_authentication'],
-      domain:               ENV['smtp_domain'],
       openssl_verify_mode:  ENV['smtp_openssl_verify_mode']
     }
 

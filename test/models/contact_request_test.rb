@@ -16,6 +16,8 @@ class ContactRequestTest < ActiveSupport::TestCase
 
   def teardown
     super
+
+    ActionMailer::Base.deliveries.clear
   end
 
   def test_new_request_needs_required_fields
@@ -169,5 +171,66 @@ class ContactRequestTest < ActiveSupport::TestCase
     @contact_request.reload
 
     assert(@contact_request.completed_or_expired?)
+  end
+
+  def test_registrant_bounced_returns_valid_outcome
+    registrant_email = @contact_request.whois_record.json['email']
+
+    admin_tech_contacts = [
+      {"emailAddress": @contact_request.whois_record.json['admin_contacts'][0]['email']},
+      {"emailAddress": @contact_request.whois_record.json['tech_contacts'][0]['email']}
+    ]
+
+    assert_not @contact_request.registrant_bounced? [].as_json
+    assert_not @contact_request.registrant_bounced? [{"emailAddress": "registrant.test"}].as_json
+    assert_not @contact_request.registrant_bounced? [{"emailAddress": @contact_request.whois_record.json['admin_contacts'][0]['email']}].as_json
+    assert_not @contact_request.registrant_bounced? admin_tech_contacts.as_json
+    all_addr = admin_tech_contacts << { "emailAddress": registrant_email}
+
+    assert @contact_request.registrant_bounced?(all_addr.as_json)
+  end
+
+  def test_sends_bounce_email_if_registrant_not_bounced
+    @contact_request.update(message_id: 1234)
+    json = verified_aws_bounce_notification.as_json
+
+    ContactRequest.send_bounce_alert(json)
+    assert_not ActionMailer::Base.deliveries.empty?
+  end
+
+  def test_does_not_send_bounce_email_if_registrant_not_bounced
+    @contact_request.update(message_id: 1234)
+    json = verified_aws_bounce_notification.as_json
+    json['bounce']['bouncedRecipients'][0]['emailAddress'] = 'random@definitelynotvalid.test'
+
+    ContactRequest.send_bounce_alert(json)
+    assert ActionMailer::Base.deliveries.empty?
+  end
+
+  def verified_aws_bounce_notification
+    { "notificationType"=>"Bounce",
+      "bounce"=>{
+        "feedbackId"=>"010f017490c9677b-4dabfd93-8b2e-4ffb-9f57-eeeb41889d5e-000000",
+        "bounceType"=>"Permanent",
+        "bounceSubType"=>"General",
+        "bouncedRecipients"=>[
+          {"emailAddress"=> @whois_record.json['email'], "action"=>"failed", "status"=>"5.1.1", "diagnosticCode"=>"smtp; 550 5.1.1 user unknown"}
+        ],
+        "timestamp"=>"2020-09-15T08:02:32.490Z",
+        "remoteMtaIp"=>"100.24.160.226",
+        "reportingMTA"=>"dsn; xxx.amazonses.com"
+      },
+      "mail"=>{
+        "timestamp"=>"2020-09-15T08:02:32.000Z",
+        "source"=> ENV['mailer_from_address'],
+        "sourceArn"=>"arn:aws:ses:us-east-2:123:identity/#{ENV['mailer_from_address']}",
+        "sourceIp"=>"127.0.0.1", "sendingAccountId"=>"123",
+        "messageId"=>"#{@contact_request.message_id}",
+        "destination"=>[
+          @whois_record.json['email'],
+          @whois_record.json['admin_contacts'][0]['email']
+        ]
+      }
+    }
   end
 end

@@ -692,6 +692,11 @@ body.contact-requests .clearfix:after {
     border-color: #0085CA;
 }
 
+.u-content-styles form .form_area .form_fields .form_field.form_field-checkbox label input:checked + .form_control_indicator_disabled:before {
+    color: #A7A8AA;
+    border-color: #A7A8AA;
+}
+
 .u-content-styles form .form_area .form_fields .form_field.form_field-checkbox label .form_control_indicator {
     display: block;
     -ms-flex: 0 0 20px;

@@ -12,7 +12,6 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
     # Visit the page once
     visit(contact_request_path(@valid_contact_request.secret))
 
-    find(:css, "#admin_contacts").set(true)
     body = 'Old mail body'
     fill_in('Message', with: body) # Fill in all the form fields
     click_link_or_button 'Send'

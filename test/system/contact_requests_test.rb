@@ -10,8 +10,6 @@ class ContactRequestsTest < ApplicationSystemTestCase
   def test_create_an_contact_email_delivery
     visit(contact_request_path(@valid_contact_request.secret))
 
-    check(I18n.t('contact_requests.contact_form.admin_contacts'), allow_label_click: true)
-
     body = begin
       "<p>Message text with <a href='example.com'>link</a>.</p>\n" \
       'There is a next line character before this one.'

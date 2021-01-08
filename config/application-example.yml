@@ -27,6 +27,15 @@ smtp_enable_starttls_auto: 'true' # 'false'
 # If your mail server requires authentication, please change.
 smtp_authentication: 'plain' # 'plain', 'login', 'cram_md5'
 
+# Variables for Amazon SES
+aws_access_key_id:
+aws_secret_access_key:
+aws_default_region:
+
+# Registry Bounces API
+bounces_api_url:
+bounces_api_shared_key: testkey
+
 main_page_url: https://internet.ee # Main URL where user is redirected to in case of contact requests
 
 # You can use `rake secret` to generate a secure secret key.

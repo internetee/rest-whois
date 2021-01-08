@@ -1,4 +1,6 @@
 class ContactRequest < ApplicationRecord
+  include Concerns::ContactRequest::Bounceable
+
   def self.connect_to_write_database_if_defined
     return unless Rails.configuration.database_configuration["write_#{Rails.env}"]
 
@@ -67,6 +69,7 @@ class ContactRequest < ApplicationRecord
   def confirmable?
     status == STATUS_NEW && still_valid? && whois_record_exists?
   end
+
   private
 
   def extract_emails_for_recipients(recipients)
