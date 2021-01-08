@@ -1,3 +1,6 @@
+08.01.2020
+* Added bounced email handling [#115](https://github.com/internetee/rest-whois/issues/115)
+
 28.10.2020
 * Fixed multi language support [#239](https://github.com/internetee/rest-whois/issues/239)
 
