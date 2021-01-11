@@ -101,10 +101,15 @@ class ContactRequestTest < ActiveSupport::TestCase
       name: 'Test User'
     )
     not_unique_contact_request.save
+
+    stub_request(:put, "http://registry:3000/contact_requests/#{not_unique_contact_request.id}").
+      to_return(status: 200, body: "", headers: {})
+
     not_unique_contact_request.confirm_email
 
     body = 'some message text'
     recipients = %w[admin_contacts tech_contacts]
+    not_unique_contact_request.update(status: 'confirmed')
     not_unique_contact_request.send_contact_email(body: body, recipients: recipients)
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['duplicate@domain.test'], mail.to)

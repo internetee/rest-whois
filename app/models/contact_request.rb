@@ -51,7 +51,8 @@ class ContactRequest < ApplicationRecord
   end
 
   def send_contact_email(body: '', recipients: [], ip: nil)
-    return unless mark_as_sent(ip)
+    return unless mark_as_sent(ip: ip)
+
 
     recipients_emails = extract_emails_for_recipients(recipients)
     return if recipients_emails.empty?
@@ -65,13 +66,13 @@ class ContactRequest < ApplicationRecord
     self
   end
 
-  def mark_as_sent(ip)
+  def mark_as_sent(ip: nil)
     return unless sendable?
 
     update_registry_status(status: STATUS_SENT, ip: ip)
   end
 
-  def confirm_email(ip)
+  def confirm_email(ip: nil)
     return unless confirmable?
 
     update_registry_status(status: STATUS_CONFIRMED, ip: ip)
