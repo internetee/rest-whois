@@ -6,8 +6,8 @@ class CommunicationError < StandardError
     @response_code = response_code
 
     @message = <<~TEXT.squish
-        Registry integration error. Request: #{request.uri}, body: #{request.body}
-        Response: #{response_code}
+      Registry integration error. Request: #{request.uri}, body: #{request.body}
+      Response: #{response_code}
     TEXT
 
     super(message)

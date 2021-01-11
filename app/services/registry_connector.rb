@@ -1,15 +1,15 @@
 class RegistryConnector
   HTTP_SUCCESS = '200'.freeze
   HTTP_CREATED = '201'.freeze
-  BASE_URL = URI(ENV['registry_api_url'])
-  BASE_KEY = "Basic #{ENV['registry_api_key']}"
+  BASE_URL = URI(ENV['registry_api_url']).freeze
+  BASE_KEY = "Basic #{ENV['registry_api_key']}".freeze
 
   attr_accessor :request
 
   def self.perform_request(request, url)
     @response = Net::HTTP.start(url.host, url.port,
                                 use_ssl: url.scheme == 'https') do |http|
-      http.request(request(url))
+      http.request(request)
     end
 
     @body_as_string = @response.body
@@ -20,8 +20,8 @@ class RegistryConnector
     raise CommunicationError.new(request, @code_as_string)
   end
 
-  def self.request(url)
-    @request ||= Net::HTTP::Post.new(
+  def self.request(url:, type:)
+    @request ||= request_by_type(type).new(
       url,
       'Content-Type': 'application/json',
       "Authorization": BASE_KEY
@@ -30,13 +30,28 @@ class RegistryConnector
 
   def self.do_save(data)
     url = BASE_URL
-    request(url).body = { contact_request: data }.to_json
-    perform_request(request(url), url)
+    request = request(url: url, type: :post)
+    request.body = { contact_request: data }.to_json
+    perform_request(request, url)
+  rescue CommunicationError
+    false
   end
 
-  def self.do_update(data)
-    url = URI.join(BASE_URL, "/contact_requests/#{data[:id]}")
+  def self.do_update(id:, data:)
+    url = URI.join(BASE_URL, "/contact_requests/#{id}")
+    request = request(url: url, type: :put)
     request.body = { contact_request: data }.to_json
-    perform_request(request(url), url)
+    perform_request(request, url)
+  rescue CommunicationError
+    false
+  end
+
+  def self.request_by_type(type)
+    case type
+    when :post
+      Net::HTTP::Post
+    else
+      Net::HTTP::Put
+    end
   end
 end

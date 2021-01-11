@@ -34,17 +34,24 @@ class ContactRequest < ApplicationRecord
       email: email,
       whois_record_id: whois_record_id,
       name: name,
-      status: status
     }
     RegistryConnector.do_save(data)
+  end
+
+  def update_registry_status(status:, ip:)
+    data = {
+      status: status,
+      ip: ip,
+    }
+    RegistryConnector.do_update(id: self.id, data: data)
   end
 
   def send_confirmation_email
     ContactRequestMailer.confirmation_email(self).deliver_now
   end
 
-  def send_contact_email(body: '', recipients: [])
-    return unless mark_as_sent
+  def send_contact_email(body: '', recipients: [], ip: nil)
+    return unless mark_as_sent(ip)
 
     recipients_emails = extract_emails_for_recipients(recipients)
     return if recipients_emails.empty?
@@ -58,18 +65,16 @@ class ContactRequest < ApplicationRecord
     self
   end
 
-  def mark_as_sent
+  def mark_as_sent(ip)
     return unless sendable?
 
-    self.status = STATUS_SENT
-    save!
+    update_registry_status(status: STATUS_SENT, ip: ip)
   end
 
-  def confirm_email
+  def confirm_email(ip)
     return unless confirmable?
 
-    self.status = STATUS_CONFIRMED
-    save
+    update_registry_status(status: STATUS_CONFIRMED, ip: ip)
   end
 
   def completed_or_expired?
