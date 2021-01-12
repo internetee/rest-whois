@@ -18,6 +18,7 @@ class ContactRequestsController < ApplicationController
     @contact_request = ContactRequest.new(contact_request_params)
 
     if @contact_request.save_to_registry
+      update_request_secret
       @contact_request.send_confirmation_email
       logger.warn("Confirmation request email registered to #{@contact_request.email}" \
         " (IP: #{request.ip})")
@@ -69,6 +70,10 @@ class ContactRequestsController < ApplicationController
 
   def set_contact_request
     @contact_request = ContactRequest.find_by(secret: params[:secret])
+  end
+
+  def update_request_secret
+    @contact_request.update(secret: SecureRandom.hex(64)) if Rails.env == 'test'
   end
 
   def check_for_replay

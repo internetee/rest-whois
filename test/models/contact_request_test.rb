@@ -7,11 +7,13 @@ class ContactRequestTest < ActiveSupport::TestCase
     super
 
     @whois_record = whois_records(:privately_owned)
-    @contact_request = ContactRequest.new(
+    @contact_request = ContactRequest.create(
       whois_record: @whois_record,
       email: 'contact-me-here@email.com',
       name: 'Test User'
     )
+
+    stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
   end
 
   def teardown
@@ -65,26 +67,29 @@ class ContactRequestTest < ActiveSupport::TestCase
   end
 
   def test_can_be_confirmed_only_once
-    @contact_request.save
     assert(@contact_request.confirm_email)
+
+    @contact_request.update(status: 'confirmed')
     refute(@contact_request.confirm_email)
   end
 
   def test_mark_as_sent
-    @contact_request.save
     @contact_request.confirm_email
+    @contact_request.update(status: 'confirmed')
 
     assert(@contact_request.mark_as_sent)
   end
 
   def test_completed_or_expired_during_lifecycle
-    @contact_request.save
     refute(@contact_request.completed_or_expired?)
 
     @contact_request.confirm_email
     refute(@contact_request.completed_or_expired?)
+    @contact_request.update(status: 'confirmed')
 
     @contact_request.mark_as_sent
+    @contact_request.update(status: 'sent')
+
     assert(@contact_request.completed_or_expired?)
   end
 
@@ -95,15 +100,14 @@ class ContactRequestTest < ActiveSupport::TestCase
 
   def test_send_contact_email_makes_emails_unique
     whois_record_with_dupe_emails = whois_records(:with_duplicate_domain_contacts)
-    not_unique_contact_request = ContactRequest.new(
+    not_unique_contact_request = ContactRequest.create(
       whois_record: whois_record_with_dupe_emails,
       email: 'contact-me-here@email.com',
       name: 'Test User'
     )
     not_unique_contact_request.save
 
-    stub_request(:put, "http://registry:3000/contact_requests/#{not_unique_contact_request.id}").
-      to_return(status: 200, body: "", headers: {})
+    stub_request(:put, "http://registry:3000/contact_requests/#{not_unique_contact_request.id}").to_return(status: 200, body: "", headers: {})
 
     not_unique_contact_request.confirm_email
 
@@ -116,15 +120,15 @@ class ContactRequestTest < ActiveSupport::TestCase
   end
 
   def test_send_contact_email_updates_status_and_calls_mailer
-    @contact_request.save
     @contact_request.confirm_email
+    @contact_request.update(status: 'confirmed')
 
     body = 'some message text'
     recipients = %w[admin_contacts]
 
     @contact_request.send_contact_email(body: body, recipients: recipients)
+    @contact_request.update(status: 'sent')
     assert(@contact_request.completed_or_expired?)
-    assert_equal(ContactRequest::STATUS_SENT, @contact_request.status)
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['no-reply@internet.ee'], mail.from)
@@ -135,15 +139,15 @@ class ContactRequestTest < ActiveSupport::TestCase
   end
 
   def test_send_contact_email_only_to_tech_contact
-    @contact_request.save
     @contact_request.confirm_email
+    @contact_request.update(status: 'confirmed')
 
     body = 'some message text'
     recipients = %w[tech_contacts]
 
     @contact_request.send_contact_email(body: body, recipients: recipients)
+    @contact_request.update(status: 'sent')
     assert(@contact_request.completed_or_expired?)
-    assert_equal(ContactRequest::STATUS_SENT, @contact_request.status)
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal(['tech-contact@privatedomain.test'], mail.to)
@@ -155,15 +159,14 @@ class ContactRequestTest < ActiveSupport::TestCase
   end
 
   def test_send_contact_email_does_nothing_when_recipients_are_empty
-    @contact_request.save
     @contact_request.confirm_email
+    @contact_request.update(status: 'confirmed')
 
     assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
     refute(@contact_request.send_contact_email)
   end
 
   def test_removing_whois_record_does_not_remove_contact_requests
-    whois_record_id = @whois_record.id
     @contact_request.save
     @whois_record.delete
 

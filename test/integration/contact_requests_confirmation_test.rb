@@ -2,6 +2,14 @@
 require 'test_helper'
 
 class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTest
+
+  def setup
+    super
+
+    stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: "", headers: {})
+  end
+
   def test_new_request_fails_if_there_is_no_domain_name_passed
     assert_raise ActiveRecord::RecordNotFound do
       get(new_contact_request_path)

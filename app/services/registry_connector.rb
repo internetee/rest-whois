@@ -1,7 +1,7 @@
 class RegistryConnector
   HTTP_SUCCESS = '200'.freeze
   HTTP_CREATED = '201'.freeze
-  BASE_URL = URI(ENV['registry_api_url']).freeze
+  BASE_URL = (URI(ENV['registry_api_url'] || 'http://registry:3000/api/v1/contact_requests/')).freeze
   BASE_KEY = "Basic #{ENV['registry_api_key']}".freeze
 
   attr_accessor :request

@@ -6,6 +6,7 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
 
     @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
+    stub_request(:any, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
   end
 
   def test_request_replay_fails
@@ -16,6 +17,8 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
     fill_in('Message', with: body) # Fill in all the form fields
     click_link_or_button 'Send'
     assert_text('Your email has been sent!') # Successfully send an email
+
+    @valid_contact_request.update(status: ContactRequest::STATUS_SENT)
 
     # Visit the page again, and get an error code
     assert_raise ActiveRecord::RecordNotFound do

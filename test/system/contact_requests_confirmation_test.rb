@@ -2,6 +2,12 @@
 require 'application_system_test_case'
 
 class ContactRequestsConfirmationTest < ApplicationSystemTestCase
+  def setup
+    super
+
+    stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+  end
+
   def test_link_from_whois_record_page_does_not_exists_for_discarded_domains
     visit("v1/discarded-domain.test")
     refute(has_link?('Contact owner'))
