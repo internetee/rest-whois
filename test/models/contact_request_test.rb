@@ -14,6 +14,7 @@ class ContactRequestTest < ActiveSupport::TestCase
     )
 
     stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+    stub_request(:post, "http://registry:3000/api/v1/contact_requests/").to_return(status: 200, body: "", headers: {})
   end
 
   def teardown

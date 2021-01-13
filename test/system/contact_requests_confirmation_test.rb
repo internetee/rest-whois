@@ -6,6 +6,7 @@ class ContactRequestsConfirmationTest < ApplicationSystemTestCase
     super
 
     stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: "", headers: {})
   end
 
   def test_link_from_whois_record_page_does_not_exists_for_discarded_domains

@@ -6,6 +6,7 @@ class ContactRequestsTest < ApplicationSystemTestCase
 
     @valid_contact_request = contact_requests(:valid)
     stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: "", headers: {})
   end
 
   def test_create_an_contact_email_delivery
