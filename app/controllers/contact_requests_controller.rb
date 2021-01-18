@@ -17,7 +17,7 @@ class ContactRequestsController < ApplicationController
   def create
     @contact_request = ContactRequest.new(contact_request_params)
     result = @contact_request.save_to_registry
-    @contact_request = ContactRequest.find_by(id: result['id']) if result
+    @contact_request = result ? ContactRequest.find_by(id: result['id']) : nil
     if @contact_request
       update_request_secret
       @contact_request.send_confirmation_email
@@ -26,7 +26,7 @@ class ContactRequestsController < ApplicationController
         " (IP: #{request.ip})")
       render :confirmation_completed
     else
-      redirect_to(:new, alert: t('contact_requests.registry_link_error'))
+      redirect_to(:root_url, alert: t('contact_requests.registry_link_error'))
     end
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")

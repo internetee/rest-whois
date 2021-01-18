@@ -5,6 +5,7 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
 
   def setup
     super
+    @valid_contact_request = contact_requests(:valid)
 
     stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
     stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
@@ -31,7 +32,7 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
 
     visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
 
-    fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
+    fill_in('contact_request[email]', with: @valid_contact_request.email)
     fill_in('contact_request[name]', with: 'Test User')
     click_link_or_button 'Get a link'
 
