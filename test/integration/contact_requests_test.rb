@@ -6,7 +6,7 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
 
     @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
-    stub_request(:any, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
   end
 
   def test_request_replay_fails

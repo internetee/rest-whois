@@ -15,7 +15,8 @@ class RegistryConnector
     @body_as_string = @response.body
     @code_as_string = @response.code.to_s
 
-    return true if [HTTP_CREATED, HTTP_SUCCESS].include? @code_as_string
+
+    return JSON.parse(@body_as_string) if [HTTP_CREATED, HTTP_SUCCESS].include? @code_as_string
 
     raise CommunicationError.new(request, @code_as_string)
   end
@@ -38,7 +39,7 @@ class RegistryConnector
   end
 
   def self.do_update(id:, data:)
-    url = URI.join(BASE_URL, "/contact_requests/#{id}")
+    url = URI.join(BASE_URL, "#{id}")
     request = request(url: url, type: :put)
     request.body = { contact_request: data }.to_json
     perform_request(request, url)

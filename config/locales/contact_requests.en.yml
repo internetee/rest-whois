@@ -54,3 +54,5 @@ en:
       Email confirmation failed. Please check your email address and try again.
 
     already_used: 'This one-time link has been already used.'
+
+    registry_link_error: Domain registry connect error. Please, try again later

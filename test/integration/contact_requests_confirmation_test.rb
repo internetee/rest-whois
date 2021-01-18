@@ -6,8 +6,8 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
   def setup
     super
 
-    stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
-    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: "", headers: {})
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
   end
 
   def test_new_request_fails_if_there_is_no_domain_name_passed

@@ -13,8 +13,8 @@ class ContactRequestTest < ActiveSupport::TestCase
       name: 'Test User'
     )
 
-    stub_request(:put, /http:\/\/registry:3000\/contact_requests\/\d+/).to_return(status: 200, body: "", headers: {})
-    stub_request(:post, "http://registry:3000/api/v1/contact_requests/").to_return(status: 200, body: "", headers: {})
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @contact_request.to_json, headers: {})
+    stub_request(:post, "http://registry:3000/api/v1/contact_requests/").to_return(status: 200, body: @contact_request.to_json, headers: {})
   end
 
   def teardown
