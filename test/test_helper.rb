@@ -1,4 +1,4 @@
-if ENV['GENERATE_TEST_COVERAGE_REPORT']
+if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
 end
