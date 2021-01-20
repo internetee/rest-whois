@@ -16,7 +16,7 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
   end
 
   def test_redirects_to_main_path_when_button_clicked
-    main_url = 'https://internet.ee/'
+    main_url = 'https://www.internet.ee/'
     ENV['main_page_url'] = main_url
 
     stub_request(:any, main_url).to_return(body: 'Success')
