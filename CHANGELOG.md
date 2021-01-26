@@ -1,4 +1,5 @@
 26.01.2021
+* Updated Ruby to version 2.7.2 [#246](https://github.com/internetee/rest-whois/issues/246)
 * Switched to GitHub Actions for running autotests [#247](https://github.com/internetee/rest-whois/issues/247)
 
 08.01.2020
