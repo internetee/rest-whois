@@ -1,3 +1,6 @@
+26.01.2021
+* Switched to GitHub Actions for running autotests [#247](https://github.com/internetee/rest-whois/issues/247)
+
 08.01.2020
 * Added bounced email handling [#115](https://github.com/internetee/rest-whois/issues/115)
 
