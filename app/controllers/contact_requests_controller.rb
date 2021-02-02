@@ -26,7 +26,7 @@ class ContactRequestsController < ApplicationController
         " (IP: #{request.ip})")
       render :confirmation_completed
     else
-      redirect_to(:root_url, alert: t('contact_requests.registry_link_error'))
+      redirect_to(:root, alert: t('contact_requests.registry_link_error'))
     end
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
