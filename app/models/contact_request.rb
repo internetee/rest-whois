@@ -43,7 +43,7 @@ class ContactRequest < ApplicationRecord
       status: status,
       ip: ip,
     }
-    RegistryConnector.do_update(id: self.id, data: data)
+    RegistryConnector.do_update(id: id, data: data)
   end
 
   def send_confirmation_email

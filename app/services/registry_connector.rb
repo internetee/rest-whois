@@ -15,14 +15,13 @@ class RegistryConnector
     @body_as_string = @response.body
     @code_as_string = @response.code.to_s
 
-
     return JSON.parse(@body_as_string) if [HTTP_CREATED, HTTP_SUCCESS].include? @code_as_string
 
     raise CommunicationError.new(request, @code_as_string)
   end
 
   def self.request(url:, type:)
-    @request ||= request_by_type(type).new(
+    request_by_type(type).new(
       url,
       'Content-Type': 'application/json',
       "Authorization": BASE_KEY
@@ -33,13 +32,14 @@ class RegistryConnector
     url = BASE_URL
     request = request(url: url, type: :post)
     request.body = { contact_request: data }.to_json
+    # binding.pry
     perform_request(request, url)
   rescue CommunicationError
     false
   end
 
   def self.do_update(id:, data:)
-    url = URI.join(BASE_URL, "#{id}")
+    url = URI.join(BASE_URL, id.to_s)
     request = request(url: url, type: :put)
     request.body = { contact_request: data }.to_json
     perform_request(request, url)

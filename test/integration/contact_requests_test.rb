@@ -6,7 +6,12 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
 
     @private_domain = whois_records(:privately_owned)
     @valid_contact_request = contact_requests(:valid)
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
     stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
+  end
+
+  def teardown
+    super
   end
 
   def test_request_replay_fails

@@ -43,20 +43,15 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
   end
 
   def test_redirects_to_main_path_when_no_registry_connection
-    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 500, headers: {})
-    main_url = 'https://internet.ee/'
-    ENV['main_page_url'] = main_url
-
-    stub_request(:any, main_url).to_return(body: 'Success')
+    stub_error = stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 400, headers: {})
 
     visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
 
     fill_in('contact_request[email]', with: @valid_contact_request.email)
-    fill_in('contact_request[name]', with: 'Test User')
+    fill_in('contact_request[name]', with: 'Test User1')
     click_link_or_button 'Get a link'
 
     assert_text('Domain registry connect error. Please, try again later')
-
-    assert_equal root_url(locale: I18n.locale), current_url
+    remove_request_stub(stub_error)
   end
 end
