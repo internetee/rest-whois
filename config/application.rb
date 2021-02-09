@@ -34,6 +34,8 @@ module RestWhois
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true
 
+    config.action_controller.forgery_protection_origin_check = false
+
     config.action_mailer.smtp_settings = {
       address:              ENV['smtp_address'],
       port:                 ENV['smtp_port'],

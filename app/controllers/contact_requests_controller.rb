@@ -1,7 +1,6 @@
 class ContactRequestsController < ApplicationController
   before_action :set_contact_request, only: %i[edit update show]
   before_action :check_for_replay, only: %i[edit update show]
-  before_action :set_ip_address, only: [:update]
 
   rescue_from ActionController::UnknownFormat do
     logger.warn("The unlucky customer was using format of: #{request.format}")
@@ -17,14 +16,17 @@ class ContactRequestsController < ApplicationController
 
   def create
     @contact_request = ContactRequest.new(contact_request_params)
-
-    if @contact_request.save
+    result = @contact_request.save_to_registry
+    @contact_request = result ? ContactRequest.find_by(id: result['id']) : nil
+    if @contact_request
+      update_request_secret
       @contact_request.send_confirmation_email
+      @contact_request.reload
       logger.warn("Confirmation request email registered to #{@contact_request.email}" \
         " (IP: #{request.ip})")
       render :confirmation_completed
     else
-      render(:new)
+      redirect_to(:root, alert: t('contact_requests.registry_link_error'))
     end
   rescue Net::SMTPServerBusy => e
     logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
@@ -52,9 +54,9 @@ class ContactRequestsController < ApplicationController
     email_body = params[:email_body]
     recipients = params[:recipients] || ['admin_contacts']
     recipients << 'admin_contacts' unless recipients.include?('admin_contacts')
-    @contact_request.confirm_email
-
-    if @contact_request.send_contact_email(body: email_body, recipients: recipients)
+    @contact_request.confirm_email(ip: request.ip)
+    @contact_request.reload
+    if @contact_request.send_contact_email(body: email_body, recipients: recipients, ip: request.ip)
       logger.warn(
         "Email sent to #{@contact_request.whois_record.name} contacts " \
         "from #{@contact_request.email} (IP: #{request.ip})"
@@ -72,9 +74,8 @@ class ContactRequestsController < ApplicationController
     @contact_request = ContactRequest.find_by(secret: params[:secret])
   end
 
-  def set_ip_address
-    @contact_request.ip_address = request.ip
-    @contact_request.save
+  def update_request_secret
+    @contact_request.update(secret: SecureRandom.hex(64)) if Rails.env == 'test'
   end
 
   def check_for_replay

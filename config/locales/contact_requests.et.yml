@@ -60,3 +60,5 @@ et:
       proovige uuesti.
 
     already_confirmed: 'Unikaalne link on juba kasutatud'
+
+    registry_link_error: Viga ühendumisel domeeniregistrisse. Palun proovige hiljem uuesti

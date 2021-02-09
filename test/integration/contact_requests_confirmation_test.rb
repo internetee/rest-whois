@@ -2,6 +2,15 @@
 require 'test_helper'
 
 class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTest
+
+  def setup
+    super
+    @valid_contact_request = contact_requests(:valid)
+
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
+    stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 200, body: @valid_contact_request.to_json, headers: {})
+  end
+
   def test_new_request_fails_if_there_is_no_domain_name_passed
     assert_raise ActiveRecord::RecordNotFound do
       get(new_contact_request_path)
@@ -23,7 +32,7 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
 
     visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
 
-    fill_in('contact_request[email]', with: 'i-want-to-contact-you@domain.com')
+    fill_in('contact_request[email]', with: @valid_contact_request.email)
     fill_in('contact_request[name]', with: 'Test User')
     click_link_or_button 'Get a link'
 
@@ -31,5 +40,18 @@ class ContactRequestsConfirmationIntegrationTest < ActionDispatch::IntegrationTe
 
     click_link_or_button 'Back to previous page'
     assert_equal main_url, current_url
+  end
+
+  def test_redirects_to_main_path_when_no_registry_connection
+    stub_error = stub_request(:post, 'http://registry:3000/api/v1/contact_requests/').to_return(status: 400, headers: {})
+
+    visit new_contact_request_path(params: { domain_name: 'privatedomain.test' })
+
+    fill_in('contact_request[email]', with: @valid_contact_request.email)
+    fill_in('contact_request[name]', with: 'Test User1')
+    click_link_or_button 'Get a link'
+
+    assert_text('Domain registry connect error. Please, try again later')
+    remove_request_stub(stub_error)
   end
 end
