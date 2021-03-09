@@ -1,3 +1,6 @@
+09.03.2021
+* Saving AWS message id over API [#252](https://github.com/internetee/rest-whois/pull/252)
+
 09.02.2021
 * Contact requests are now handeled over API [#244](https://github.com/internetee/rest-whois/issues/244)
 
