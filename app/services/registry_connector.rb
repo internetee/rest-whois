@@ -32,7 +32,6 @@ class RegistryConnector
     url = BASE_URL
     request = request(url: url, type: :post)
     request.body = { contact_request: data }.to_json
-    # binding.pry
     perform_request(request, url)
   rescue CommunicationError
     false
