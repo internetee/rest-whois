@@ -42,7 +42,7 @@ class ContactRequestMailer < ApplicationMailer
     @domain = contact_request.whois_record.name
     begin
       resp = Aws::SES::Client.new.send_email(ses_request_body(recipients))
-      contact_request.update(message_id: resp[:message_id])
+      contact_request.update_registry_message_id(resp[:message_id])
       logger.warn("Contact email sent to #{recipients} from #{@contact_request.email}.")
     rescue Aws::SES::Errors::ServiceError => e
       logger.warn("Email not sent. Error message: #{e}")

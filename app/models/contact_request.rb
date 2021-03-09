@@ -46,6 +46,13 @@ class ContactRequest < ApplicationRecord
     RegistryConnector.do_update(id: id, data: data)
   end
 
+  def update_registry_message_id(message_id)
+    data = {
+      message_id: message_id,
+    }
+    RegistryConnector.do_update(id: id, data: data)
+  end
+
   def send_confirmation_email
     ContactRequestMailer.confirmation_email(self).deliver_now
   end

@@ -3,6 +3,7 @@ require 'test_helper'
 class ContactRequestMailerTest < ActionMailer::TestCase
   def setup
     @contact_request = contact_requests(:valid)
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @contact_request.to_json, headers: {})
   end
 
   def test_confirmation_email
@@ -119,6 +120,8 @@ class ContactRequestMailerTest < ActionMailer::TestCase
   end
 
   def test_attempts_to_send_contact_email_via_aws_ses
+    @contact_request.message_id = 'TESTING'
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/).to_return(status: 200, body: @contact_request.to_json, headers: {})
     mail_body = begin
       "Hi!\n" \
       "\n" \
@@ -132,7 +135,7 @@ class ContactRequestMailerTest < ActionMailer::TestCase
       region: 'us-east-2',
       credentials: Aws::Credentials.new('123', '123'),
       stub_responses: {
-        send_email: { message_id: 'TESTING' }}
+        send_email: { message_id: @contact_request.message_id }}
     )
 
     ApplicationMailer.stub(:ses_configured?, true) do
