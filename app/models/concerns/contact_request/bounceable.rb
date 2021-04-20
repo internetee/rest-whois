@@ -15,7 +15,7 @@ module Concerns
           return unless contact_request&.registrant_bounced?(json['bounce']['bouncedRecipients'])
 
           BounceBackMailer.bounce_alert(
-            contact_request.email, contact_request.whois_record['name']
+            contact_request.email, contact_request.whois_record['name'], contact_request.name
           ).deliver_now
         end
 

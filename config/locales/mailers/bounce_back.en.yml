@@ -1,15 +1,19 @@
 en:
     bounce_back_mailer:
       bounce_alert:
-        subject: Failed to deliver mail to %{domain}'s registrant
+        subject: Failed to deliver mail to %{domain} registrant
         body: |
-          Hello!
+          Dear %{sender}!
 
-          Unfortunately we have to let you know that for some unknown reason your contact
-          email was bounced and never reached %{domain}'s registrant. We're sorry and we feel bad.
+          We were unfortunately unable to forward your message to the registrant of the %{domain}.
+          We started a proceeding to fix the contact data of the domain registrant and forwarded your message
+          to the admin contacts of the domain - hopefully they are able to help you.
 
-          There's a chance that registrar might help you contact them instead.
+          If you have any further questions, please contact the Estonian Internet Foundation at info@internet.ee or +372 727 1000.
+
+          We are sorry for the inconvenience.
         footer: |
 
-          Best regards,
+          Sincerely,
           Estonian Internet Foundation
+          https://internet.ee

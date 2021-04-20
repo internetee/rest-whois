@@ -1,17 +1,19 @@
 et:
     bounce_back_mailer:
       bounce_alert:
-        subject: Me ei suutnud %{domain} registreerijale teie kirja edastada.
+        subject: Teate saatmine domeeni %{domain} omanikule ebaõnnestus
         body: |
-          Tere!
+          Lugupeetud %{sender},
 
-          Paraku peame teatama, et ebaselgetel põhjustel me ei suutnud toimetada
-          teie kontaktvormi sisu domeeni %{domain} registreerijale. Ilmselt oli neil postkast täis
-          või vale e-posti aadress.
+          Vabandame ebamugavuste pärast, kuid teie teate saatmine domeeni %{domain}
+          omanikule ebaõnnestus. Seetõttu algatasime menetluse domeeni registreerija
+          kontaktandmete korrastamiseks ning saatsime teie pöördumise edasi ka domeeni
+          halduskontakti(de)le, kes teid loodetavasti samuti aidata saavad.
 
-          Siiski on võimalus, et registripidaja saab teid aidata omanikuga
-          ühendust võtmisel.
+          Lisaküsimuste korral võtke palun ühendust Eesti Interneti Sihtasutusega
+          aadressil info@internet.ee või +372 727 1000.
         footer: |
 
           Lugupidamisega
           Eesti Interneti SA
+          https://internet.ee
