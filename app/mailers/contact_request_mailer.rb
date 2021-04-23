@@ -13,7 +13,9 @@ class ContactRequestMailer < ApplicationMailer
     mail(to: recipients, subject: t('contact_request_mailer.confirmation_email.subject'))
   end
 
-  def contact_email(contact_request:, recipients:, mail_body:)
+  def contact_email(contact_request:, recipients:, mail_body:, raise_error: false)
+    raise ::Net::SMTPFatalError if Rails.env.test? && raise_error
+
     if ApplicationMailer.ses_configured?
       ses_contact_email(
         contact_request: contact_request, recipients: recipients, mail_body: mail_body

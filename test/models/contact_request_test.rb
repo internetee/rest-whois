@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContactRequestTest < ActiveSupport::TestCase
+class ContactRequestTest < ActiveJob::TestCase
   self.use_transactional_tests = true
 
   def setup
@@ -137,6 +137,23 @@ class ContactRequestTest < ActiveSupport::TestCase
     assert_equal(['contact-me-here@email.com'], mail.reply_to)
     assert_equal('Email to domain owner and/or contact', mail.subject)
     assert_match('some message text', mail.body.to_s)
+  end
+
+  def test_send_contact_email_many_times_if_error
+    @contact_request.confirm_email
+    @contact_request.update(status: 'confirmed')
+
+    body = 'some message text'
+    recipients = %w[admin_contacts]
+    contacts = @contact_request.send(:extract_emails_for_recipients, recipients)
+
+    assert_difference 'ActionMailer::Base.deliveries.count', contacts.count do
+      perform_enqueued_jobs do
+        @contact_request.send_contact_email(body: body, recipients: recipients, raise_error: true)
+      end
+    end
+
+    assert_equal ActionMailer::Base.deliveries.map(&:to).flatten, contacts
   end
 
   def test_send_contact_email_only_to_tech_contact
