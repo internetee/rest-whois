@@ -23,11 +23,6 @@ jobs:
           SHORT_SHA=$(git describe --always)
           echo "ghcr.io/internetee/rest-whois:RC_$SHORT_SHA" > TAG
 
-      - name: Set config files for build
-        run: |
-          cp config/database.yml.sample config/database.yml
-          ls -l config/
-
       - name: Build image
         run: |
           docker build -t $(cat TAG) -f Dockerfile.generic .
@@ -38,7 +33,7 @@ jobs:
         run: |
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
           docker push $(cat TAG)
-          docker push $(cat STATIC_TAG)
+
 
   temporarily_disable_deploy:
     runs-on: ubuntu-20.04
@@ -47,7 +42,7 @@ jobs:
       - name: Set variable
         run: echo "is_self-hosted_runner_safe=false" >> $GITHUB_ENV
 
-  deploy:
+  deploy_staging:
     if: github.IS_SELF-HOSTED_RUNNER_SAFE == true
     needs:
       - build
