@@ -34,8 +34,14 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: RAILS_ENV
+              value: staging
             - name: APP_DBHOST
-              value: BLANK_SPACE
+              value: whois-test-db-postgresql.whois-testing.svc.cluster.local
+            - name: recaptcha_site_key
+              value: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+            - name: recaptcha_secret_key
+              value: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
           ports:
             - name: http
               containerPort: 3000
@@ -49,8 +55,9 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           command:
             - bash
-            - c
-            #- "bundle exec rails server -b 0.0.0.0"
+            - -c
+            #- tail -f /dev/null
+            - "bundle exec rails server -b 0.0.0.0"
           volumeMounts:
           - name: database-config
             mountPath: "/opt/webapps/app/config/database.yml"
