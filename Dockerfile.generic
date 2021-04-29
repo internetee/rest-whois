@@ -8,3 +8,4 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 COPY . .
+RUN bundle exec rails assets:precompile
