@@ -62,4 +62,4 @@ jobs:
         run: |
           echo $K_CONFIG | base64 -di > kubeconfig
           export KUBECONFIG=./kubeconfig
-          helm upgrade --install rest-whois-st --set "image.tag=$(cat TAG)" charts --namespace=rest-whois-staging
+          helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" charts --namespace=rwhois-st

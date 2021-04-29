@@ -42,6 +42,13 @@ spec:
               value: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
             - name: recaptcha_secret_key
               value: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+            - name: registry_api_url
+              value: 'https://api.internet.ee/api/v1/contact_requests/'
+            - name: registry_api_key
+              valueFrom:
+                secretKeyRef:
+                  name: registry-api-key
+                  key: api_key
           ports:
             - name: http
               containerPort: 3000
@@ -56,8 +63,8 @@ spec:
           command:
             - bash
             - -c
-            #- tail -f /dev/null
-            - "bundle exec rails server -b 0.0.0.0"
+            - tail -f /dev/null
+            #- "bundle exec rails server -b 0.0.0.0"
           volumeMounts:
           - name: database-config
             mountPath: "/opt/webapps/app/config/database.yml"
@@ -66,4 +73,7 @@ spec:
        - name: database-config
          configMap:
            name: {{ .Values.configmap.database }}
+       - name: registry-api-key
+         secret:
+           secretName: rwhois-st-api-key
 
