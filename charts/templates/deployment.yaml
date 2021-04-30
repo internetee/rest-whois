@@ -38,12 +38,6 @@ spec:
               value: staging
             - name: APP_DBHOST
               value: whois-test-db-postgresql.whois-testing.svc.cluster.local
-            - name: recaptcha_site_key
-              value: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-            - name: recaptcha_secret_key
-              value: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
-            - name: registry_api_url
-              value: 'https://api.internet.ee/api/v1/contact_requests/'
             - name: registry_api_key
               valueFrom:
                 secretKeyRef:
@@ -53,18 +47,17 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 3000
-          #   initialDelaySeconds: 20
-          #   periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           command:
             - bash
             - -c
-            - tail -f /dev/null
-            #- "bundle exec rails server -b 0.0.0.0"
+            - "passenger start"
           volumeMounts:
           - name: database-config
             mountPath: "/opt/webapps/app/config/database.yml"

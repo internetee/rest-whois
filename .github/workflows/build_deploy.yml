@@ -5,13 +5,9 @@ on:
     branches:
     - master
 
-  push:
-    branches:
-    - build-deploy
-
 jobs:
   
-  build:
+  build_staging_image:
     runs-on: ubuntu-20.04
 
     steps:
@@ -25,9 +21,9 @@ jobs:
 
       - name: Setting up application
         env:
-          A_YML: ${{ secrets.APPICATION_YML }}
+          ST_A_YML: ${{ secrets.ST_APPLICATION_YML }}
         run: |
-          echo $A_YML | base64 -di > ./config/application.yml
+          echo $ST_A_YML | base64 -di > ./config/application.yml
 
       - name: Build image
         run: |
@@ -43,7 +39,7 @@ jobs:
 
   temporarily_disable_deploy:
     runs-on: ubuntu-20.04
-    needs: build
+    needs: build_staging_image
     steps:
       - name: Set variable
         run: echo "is_self-hosted_runner_safe=false" >> $GITHUB_ENV
@@ -51,7 +47,7 @@ jobs:
   deploy_staging:
     if: github.IS_SELF-HOSTED_RUNNER_SAFE == true
     needs:
-      - build
+      - build_staging_image
       - temporarily_disable_deploy
     runs-on: [self-hosted, helm-kubectl]
     env:
