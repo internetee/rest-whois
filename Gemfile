@@ -12,6 +12,7 @@ gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.0.7' # For Punycode
 gem 'uglifier'
+gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
