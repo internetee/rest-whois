@@ -23,6 +23,12 @@ jobs:
           SHORT_SHA=$(git describe --always)
           echo "ghcr.io/internetee/rest-whois:RC_$SHORT_SHA" > TAG
 
+      - name: Setting up application
+        env:
+          A_YML: ${{ secrets.APPICATION_YML }}
+        run: |
+          echo $A_YML | base64 -di > ./config/application.yml
+
       - name: Build image
         run: |
           docker build -t $(cat TAG) -f Dockerfile.generic .

@@ -47,7 +47,7 @@ spec:
             - name: registry_api_key
               valueFrom:
                 secretKeyRef:
-                  name: registry-api-key
+                  name: rwhois-st-api-key
                   key: api_key
           ports:
             - name: http
@@ -73,7 +73,7 @@ spec:
        - name: database-config
          configMap:
            name: {{ .Values.configmap.database }}
-       - name: registry-api-key
+       - name: rwhois-st-api-key
          secret:
            secretName: rwhois-st-api-key
 
