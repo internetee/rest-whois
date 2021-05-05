@@ -1,8 +1,6 @@
 name: build and deploy
 
 on:
-  pull_request_target:
-    types: [opened, edited, unassigned]
   pull_request:
     branches:
     - master
@@ -44,7 +42,7 @@ jobs:
     needs: build_staging_image
     steps:
       - name: Set variable
-        run: echo "is_self-hosted_runner_safe=false" >> $GITHUB_ENV
+        run: echo "is_self-hosted_runner_safe=true" >> $GITHUB_ENV
 
   deploy_staging:
     if: github.IS_SELF-HOSTED_RUNNER_SAFE == true
