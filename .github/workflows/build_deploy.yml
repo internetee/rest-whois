@@ -34,6 +34,7 @@ jobs:
         env:
             PASSWORD: ${{ secrets.GHCR }}
         run: |
+          echo $PASSWORD
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
 
 
