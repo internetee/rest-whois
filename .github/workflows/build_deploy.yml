@@ -1,6 +1,8 @@
 name: build and deploy
 
 on:
+  pull_request_target:
+    types: [opened, edited, unassigned]
   pull_request:
     branches:
     - master
@@ -24,6 +26,7 @@ jobs:
           ST_A_YML: ${{ secrets.ST_APPLICATION_YML }}
         run: |
           echo $ST_A_YML | base64 -di > ./config/application.yml
+          cat ./config/application.yml
 
       - name: Build image
         run: |
@@ -34,7 +37,6 @@ jobs:
             PASSWORD: ${{ secrets.GHCR }}
         run: |
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
-          docker push $(cat TAG)
 
 
   temporarily_disable_deploy:
