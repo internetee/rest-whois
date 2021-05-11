@@ -30,16 +30,16 @@ jobs:
         run: |
           echo $ST_A_YML | base64 -di > ./config/application.yml
 
-      - name: Build image
-        run: |
-          docker build -t $(cat TAG) -f Dockerfile.generic .
+      # - name: Build image
+      #   run: |
+      #     docker build -t $(cat TAG) -f Dockerfile.generic .
 
-      - name: Push Docker images to gh container registry
-        env:
-            PASSWORD: ${{ secrets.GHCR }}
-        run: |
-          echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
-          docker push $(cat TAG)
+      # - name: Push Docker images to gh container registry
+      #   env:
+      #       PASSWORD: ${{ secrets.GHCR }}
+      #   run: |
+      #     echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
+      #     docker push $(cat TAG)
 
       - name: Set VPN config
         env:
