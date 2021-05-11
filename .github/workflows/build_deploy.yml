@@ -1,10 +1,6 @@
 name: build and deploy staging
 
 on:
-  push:
-    branches:
-      - staging-continuous-deployment
-
   pull_request:
     branches:
     - master
