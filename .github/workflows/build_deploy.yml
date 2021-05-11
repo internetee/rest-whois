@@ -78,7 +78,7 @@ jobs:
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
-          helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" charts --namespace=rwhois-st
+          helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" rest-whois --namespace=rwhois-st
           helm ls -A
           rm TAG
           rm kubeconfig
