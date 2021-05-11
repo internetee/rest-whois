@@ -22,7 +22,7 @@ jobs:
         run: |
           SHORT_SHA=$(git describe --always)
           echo "ghcr.io/internetee/rest-whois:RC_$SHORT_SHA" > TAG
-          export TAG=$(cat TAG)
+          echo "RC_$SHORT_SHA" > SHORT_TAG
 
       - name: Setting up application
         env:
@@ -71,7 +71,7 @@ jobs:
           chmod 0600 ~/.ssh/key
           ssh-add ~/.ssh/key
           ssh-keyscan 192.168.99.12 > ~/.ssh/known_hosts
-          scp TAG runner@192.168.99.12:/home/runner/TAG
+          scp SHORT_TAG runner@192.168.99.12:/home/runner/TAG
           scp kubeconfig runner@192.168.99.12:/home/runner/kubeconfig
           ssh -T runner@192.168.99.12 << 'EOL'
           bash
