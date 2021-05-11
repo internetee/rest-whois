@@ -76,6 +76,8 @@ jobs:
           ssh -T runner@192.168.99.12 << 'EOL'
           bash
           export KUBECONFIG=./kubeconfig
+          helm repo add eisrepo https://internetee.github.io/helm-charts/
+          helm repo update
           helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" charts --namespace=rwhois-st
           helm ls -A
           rm TAG
