@@ -60,6 +60,7 @@ jobs:
           K_CONFIG: ${{ secrets.KUBE_CONFIG }}
           SSH_KEY: ${{ secrets.EISBOT_SSH_KEY }}
         run: |
+          ls -la
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 15
           # sudo route add -net 192.168.99.00/24 dev tun0
