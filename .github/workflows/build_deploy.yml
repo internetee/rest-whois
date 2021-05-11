@@ -1,5 +1,6 @@
 name: build and deploy staging
 
+
 on:
   pull_request:
     branches:
@@ -19,6 +20,7 @@ jobs:
           SHORT_SHA=$(git describe --always)
           echo "ghcr.io/internetee/rest-whois:RC_$SHORT_SHA" > TAG
           echo "RC_$SHORT_SHA" > SHORT_TAG
+
 
       - name: Setting up application
         env:
@@ -78,3 +80,4 @@ jobs:
           rm TAG
           rm kubeconfig
           EOL
+
