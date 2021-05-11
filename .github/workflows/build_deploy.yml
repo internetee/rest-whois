@@ -73,9 +73,11 @@ jobs:
           ssh-add ~/.ssh/key
           ssh-keyscan 192.168.99.12 > ~/.ssh/known_hosts
           route -n
+          scp TAG runner@192.168.99.12:/home/runner/TAG
           ssh -T runner@192.168.99.12 << 'EOL'
           bash
-          echo $TAG
+          pwd
+          cat TAG
           helm ls -A
           EOL
 
