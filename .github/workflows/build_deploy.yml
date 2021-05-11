@@ -30,16 +30,16 @@ jobs:
         run: |
           echo $ST_A_YML | base64 -di > ./config/application.yml
 
-      # - name: Build image
-      #   run: |
-      #     docker build -t $(cat TAG) -f Dockerfile.generic .
+      - name: Build image
+        run: |
+          docker build -t $(cat TAG) -f Dockerfile.generic .
 
-      # - name: Push Docker images to gh container registry
-      #   env:
-      #       PASSWORD: ${{ secrets.GHCR }}
-      #   run: |
-      #     echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
-      #     docker push $(cat TAG)
+      - name: Push Docker images to gh container registry
+        env:
+            PASSWORD: ${{ secrets.GHCR }}
+        run: |
+          echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
+          docker push $(cat TAG)
 
       - name: Set VPN config
         env:
@@ -60,10 +60,8 @@ jobs:
           K_CONFIG: ${{ secrets.KUBE_CONFIG }}
           SSH_KEY: ${{ secrets.EISBOT_SSH_KEY }}
         run: |
-          ls -la
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 15
-          # sudo route add -net 192.168.99.00/24 dev tun0
           ping -c 2 192.168.99.12
           eval `ssh-agent`
           mkdir -p ~/.ssh
@@ -73,20 +71,13 @@ jobs:
           chmod 0600 ~/.ssh/key
           ssh-add ~/.ssh/key
           ssh-keyscan 192.168.99.12 > ~/.ssh/known_hosts
-          route -n
           scp TAG runner@192.168.99.12:/home/runner/TAG
           scp kubeconfig runner@192.168.99.12:/home/runner/kubeconfig
           ssh -T runner@192.168.99.12 << 'EOL'
           bash
           export KUBECONFIG=./kubeconfig
+          helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" charts --namespace=rwhois-st
           helm ls -A
           rm TAG
           rm kubeconfig
-          ls -la
           EOL
-
-      # - name: Upgrade in rest-whois-staging
-      #   run: |
-      #     echo $K_CONFIG | base64 -di > kubeconfig
-      #     export KUBECONFIG=./kubeconfig
-      #     helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" charts --namespace=rwhois-st
