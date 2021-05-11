@@ -69,16 +69,20 @@ jobs:
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
           echo $SSH_KEY | base64 -di > ~/.ssh/key
+          echo $K_CONFIG | base64 -di > kubeconfig
           chmod 0600 ~/.ssh/key
           ssh-add ~/.ssh/key
           ssh-keyscan 192.168.99.12 > ~/.ssh/known_hosts
           route -n
           scp TAG runner@192.168.99.12:/home/runner/TAG
+          scp kubeconfig runner@192.168.99.12:/home/runner/kubeconfig
           ssh -T runner@192.168.99.12 << 'EOL'
           bash
-          pwd
-          cat TAG
+          export KUBECONFIG=./kubeconfig
           helm ls -A
+          rm TAG
+          rm kubeconfig
+          ls -la
           EOL
 
       # - name: Upgrade in rest-whois-staging
