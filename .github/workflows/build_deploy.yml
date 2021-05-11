@@ -1,6 +1,10 @@
 name: build and deploy staging
 
 on:
+  push:
+    branches:
+      - staging-continuous-deployment
+
   pull_request:
     branches:
     - master
@@ -39,7 +43,7 @@ jobs:
 
       - name: Set VPN config
         env:
-          OVPN: ${{ secrets.OVPN_FOR_VANILLA }}
+          OVPN: ${{ secrets.OVPN }}
           VPN_PWD: ${{ secrets.VPN_PWD }}
           P12: ${{ secrets.P12 }}
         run: |
@@ -58,7 +62,7 @@ jobs:
         run: |
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 15
-          sudo route add -net 192.168.99.00/24 dev tun0
+          # sudo route add -net 192.168.99.00/24 dev tun0
           ping -c 2 192.168.99.12
           eval `ssh-agent`
           mkdir -p ~/.ssh
