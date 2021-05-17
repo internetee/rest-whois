@@ -57,7 +57,10 @@ module RestWhois
           'script-src https://www.recaptcha.net/recaptcha/ ' \
           'https://www.google.com/recaptcha/ ' \
           'https://www.gstatic.com/recaptcha/;' \
-          "frame-src 'self' https://www.google.com/recaptcha/",
+          'img-src www.gstatic.com;'\
+          "frame-src 'self' https://www.google.com/recaptcha/ https://www.google.com https://www.recaptcha.net/recaptcha/;"\
+          "object-src 'none';"\
+          "base-uri 'none';",
     }
 
     config.active_support.parse_json_times = true
