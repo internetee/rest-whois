@@ -39,7 +39,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t $TAG -f Dockerfile.generic .
+          docker build -t $TAG --build-arg RAILS_ENV=staging -f Dockerfile.generic .
 
       - name: Push Docker images to gh container registry
         env:
