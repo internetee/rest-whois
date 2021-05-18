@@ -81,6 +81,8 @@ jobs:
           mkdir -p ~/.ssh
           echo $SSH_KEY | base64 -di > ~/.ssh/key
           chmod 0600 ~/.ssh/key
+          mkdir -p $REPO/$PR_REF
+          cd $REPO/$PR_REF
           echo $K_CONFIG | base64 -di > kubeconfig
           chmod 0600 kubeconfig
 
