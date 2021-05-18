@@ -98,15 +98,13 @@ jobs:
           touch ~/.ssh/known_hosts   
           ssh-add ~/.ssh/key
           ssh-keyscan 192.168.99.12 > ~/.ssh/known_hosts
-          scp SHORT_TAG runner@192.168.99.12:/home/runner/TAG
-          scp kubeconfig runner@192.168.99.12:/home/runner/kubeconfig
-          ssh -T runner@192.168.99.12 << 'EOL'
+          rsync -av "$REPO" runner@192.168.99.12:/home/runner/
+          ssh -T runner@192.168.99.12 << EOSSH
           bash
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
-          helm upgrade --install rwhois-st --set "image.tag=$TAG" eisrepo/rest-whois --namespace=rwhois-st
-          rm TAG
+          helm upgrade --install rwhois-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/rest-whois --n rwhois-st
           rm kubeconfig
-          EOL
+          EOSSH
 
