@@ -3,8 +3,17 @@ name: build and deploy staging
 
 on:
   pull_request:
-    branches:
-    - master
+    paths-ignore:
+      - '**.lock'
+      - 'Gemfile'
+      - '**.md'
+    branches: [master]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+      - unlocked
 
 jobs:
   
@@ -17,9 +26,9 @@ jobs:
 
       - name: Set image tag
         run: |
-          SHORT_SHA=$(git describe --always)
-          echo "ghcr.io/internetee/rest-whois:RC_$SHORT_SHA" > TAG
-          echo "RC_$SHORT_SHA" > SHORT_TAG
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7) #pr-s test commit of merged state
+          echo "TAG=ghcr.io/internetee/auction_center:RC-$SHORT_SHA" >> $GITHUB_ENV
+          echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
 
 
       - name: Setting up application
@@ -30,14 +39,14 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t $(cat TAG) -f Dockerfile.generic .
+          docker build -t $TAG -f Dockerfile.generic .
 
       - name: Push Docker images to gh container registry
         env:
             PASSWORD: ${{ secrets.GHCR }}
         run: |
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
-          docker push $(cat TAG)
+          docker push $TAG
 
       - name: Set deploy config
         env:
@@ -76,7 +85,7 @@ jobs:
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
-          helm upgrade --install rwhois-st --set "image.tag=$(cat TAG)" eisrepo/rest-whois --namespace=rwhois-st
+          helm upgrade --install rwhois-st --set "image.tag=$TAG" eisrepo/rest-whois --namespace=rwhois-st
           rm TAG
           rm kubeconfig
           EOL
