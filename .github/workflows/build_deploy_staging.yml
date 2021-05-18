@@ -48,6 +48,24 @@ jobs:
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
           docker push $TAG
 
+      - name: Get pull request reference number
+        run: |
+          OIFS=$IFS
+          IFS='/'
+          read -a parts <<< "$GITHUB_REF"
+          IFS=OIFS
+          echo "PR_REF=${parts[2]}" >> $GITHUB_ENV
+          echo "Pull request #$PR_REF"
+
+      - name: Get repo name
+        run: |
+          OIFS=$IFS
+          IFS='/'
+          read -a parts <<< "$GITHUB_REPOSITORY"
+          IFS=OIFS
+          echo "REPO=${parts[1]}" >> $GITHUB_ENV
+          echo "Repo $REPO"
+
       - name: Set deploy config
         env:
           OVPN: ${{ secrets.OVPN }}
