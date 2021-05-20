@@ -71,7 +71,7 @@ jobs:
           bash
           cd "$REPO"/"$PR_REF"
           export KUBECONFIG=./kubeconfig
-          helm delete rwhois-st-"$PR_REF" -n auction-staging
+          helm delete rwhois-st-"$PR_REF" -n rwhois-st
           cd ..
           rm -rf "$PR_REF"
           echo "server obs.tld.ee
