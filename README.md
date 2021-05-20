@@ -87,3 +87,7 @@ Add apache config file:
 Deploy from your machine:
 
     mina pr deploy
+
+Data Base
+----------
+The database is shared and all operations are taking place in the registry project. It is not recommended to make operations and migrations within the framework of rest-whois.
