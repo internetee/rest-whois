@@ -247,7 +247,7 @@ DEPENDENCIES
   pry
   puma
   rails (>= 6.0.3.1)
-  recaptcha
+  recaptcha (~> 5.8)
   sassc (~> 2.4)
   sassc-rails
   selenium-webdriver
