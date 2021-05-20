@@ -27,7 +27,7 @@ jobs:
       - name: Set image tag
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7) #pr-s test commit of merged state
-          echo "TAG=ghcr.io/internetee/auction_center:RC-$SHORT_SHA" >> $GITHUB_ENV
+          echo "TAG=ghcr.io/internetee/rest-whois:RC-$SHORT_SHA" >> $GITHUB_ENV
           echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
 
 
@@ -99,10 +99,11 @@ jobs:
           rsync -av "$REPO" runner@192.168.99.12:/home/runner/
           ssh -T runner@192.168.99.12 << EOSSH
           bash
+          cd "$REPO"/"$PR_REF"
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
-          helm upgrade --install rwhois-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/rest-whois --n rwhois-st
+          helm upgrade --install rwhois-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/rest-whois -n rwhois-st
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
