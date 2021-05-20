@@ -1,52 +1,22 @@
-name: build and deploy staging
-
+name: remove-staging-after-pull-request
 
 on:
   pull_request:
+    types: [closed]
     paths-ignore:
-      - '**.lock'
+      - 'Gemfile.lock'
       - 'Gemfile'
-      - '**.md'
-    branches: [master]
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - ready_for_review
-      - unlocked
+      - 'CHANGELOG.md'
+      - 'README.md'
+      - 'yarn.lock'
 
 jobs:
-  
-  build_staging_image:
+  delete-deployment:
     runs-on: ubuntu-20.04
 
     steps:
 
       - uses: actions/checkout@v2
-
-      - name: Set image tag
-        run: |
-          SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7) #pr-s test commit of merged state
-          echo "TAG=ghcr.io/internetee/auction_center:RC-$SHORT_SHA" >> $GITHUB_ENV
-          echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
-
-
-      - name: Setting up application
-        env:
-          ST_A_YML: ${{ secrets.ST_APPLICATION_YML }}
-        run: |
-          echo $ST_A_YML | base64 -di > ./config/application.yml
-
-      - name: Build image
-        run: |
-          docker build -t $TAG --build-arg RAILS_ENV=staging -f Dockerfile.generic .
-
-      - name: Push Docker images to gh container registry
-        env:
-            PASSWORD: ${{ secrets.GHCR }}
-        run: |
-          echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
-          docker push $TAG
 
       - name: Get pull request reference number
         run: |
@@ -61,9 +31,8 @@ jobs:
           read -a parts <<< "$GITHUB_REPOSITORY"
           IFS=OIFS
           echo "REPO=${parts[1]}" >> $GITHUB_ENV
-          echo "Repo $REPO"
 
-      - name: Set deploy config
+      - name: Set vpn config
         env:
           OVPN: ${{ secrets.OVPN }}
           VPN_PWD: ${{ secrets.VPN_PWD }}
@@ -80,14 +49,15 @@ jobs:
           chmod 0600 ~/.ssh/key
           mkdir -p $REPO/$PR_REF
           cd $REPO/$PR_REF
+          echo "$SHORT_SHA" > TAG
           echo $K_CONFIG | base64 -di > kubeconfig
           chmod 0600 kubeconfig
 
       - name: Install Open VPN
         run: sudo apt-get install openvpn
 
-      - name: Deploy from remote server
-        timeout-minutes: 5
+      - name: Delete deployment 
+        timeout-minutes: 2
         run: |
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 20
@@ -99,14 +69,14 @@ jobs:
           rsync -av "$REPO" runner@192.168.99.12:/home/runner/
           ssh -T runner@192.168.99.12 << EOSSH
           bash
+          cd "$REPO"/"$PR_REF"
           export KUBECONFIG=./kubeconfig
-          helm repo add eisrepo https://internetee.github.io/helm-charts/
-          helm repo update
-          helm upgrade --install rwhois-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/rest-whois --n rwhois-st
-          rm kubeconfig
+          helm delete rwhois-st-"$PR_REF" -n auction-staging
+          cd ..
+          rm -rf "$PR_REF"
           echo "server obs.tld.ee
           zone pilv.tld.ee
-          update add rwhois-"$PR_REF".riigi.pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
+          update delete rwhois-"$PR_REF".riigi.pilv.tld.ee.
           send
           " | nsupdate -k ~/Kgh-runner.infra.tld.ee.+165+27011.key
           if [ "$?" -eq "0" ]; then
@@ -115,4 +85,3 @@ jobs:
               echo "CNAME update failed"
           fi
           EOSSH
-
