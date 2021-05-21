@@ -88,6 +88,8 @@ jobs:
 
       - name: Deploy from remote server
         timeout-minutes: 5
+        env:
+          NOTIFICATION_URL: ${{ secrets.NOTIFICATION_URL}}
         run: |
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 20
@@ -116,4 +118,12 @@ jobs:
               echo "CNAME update failed"
           fi
           EOSSH
+
+          curl -i -X POST --data-urlencode 'payload={
+            "text": "#### Build and deploy from pull request has ben succesful :tada:\n
+            | Project    | Branch                 | :net:                                      |
+            |:-----------|:----------------------:|:------------------------------------------:|
+            | '$REPO'    |'${{ github.head_ref }}'| https://rhwois-'$PR_REF'.riigi.pilv.tld.ee |
+            "
+            }' $NOTIFICATION_URL
 
