@@ -120,10 +120,10 @@ jobs:
           EOSSH
 
           curl -i -X POST --data-urlencode 'payload={
-            "text": "#### Build and deploy from pull request has ben succesful :tada:\n
+            "text": "##### Build and deploy from pull request has been succesful :tada:\n
             | Project    | Branch                 | :net:                                      |
             |:-----------|:----------------------:|:------------------------------------------:|
-            | '$REPO'    |'${{ github.head_ref }}'| https://rhwois-'$PR_REF'.riigi.pilv.tld.ee |
+            | **'$REPO'**|'${{ github.head_ref }}'| https://rwhois-'$PR_REF'.riigi.pilv.tld.ee |
             "
             }' $NOTIFICATION_URL
 
