@@ -86,7 +86,7 @@ class WhoisRecordsController < ApplicationController
   end
 
   def captcha_solved?
-    @captcha_solved ||= verify_recaptcha
+    @captcha_solved ||= verify_hcaptcha
   end
 
   def contact_form_default_locale

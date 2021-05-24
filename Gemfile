@@ -8,6 +8,7 @@ gem 'mimemagic', '~> 0.3.10'
 gem 'pg', '~> 1.0.0'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'hcaptcha'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.0.7' # For Punycode

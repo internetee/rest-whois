@@ -53,11 +53,10 @@ module RestWhois
         'X-Permitted-Cross-Domain-Policies' => 'none',
         'Referrer-Policy' => 'strict-origin-when-cross-origin',
         'Content-Security-Policy' => "default-src 'self';" \
-          "style-src 'self' 'unsafe-inline';" \
-          'script-src https://www.recaptcha.net/recaptcha/ ' \
-          'https://www.google.com/recaptcha/ ' \
-          'https://www.gstatic.com/recaptcha/;' \
-          "frame-src 'self' https://www.google.com/recaptcha/",
+          "style-src 'self' 'unsafe-eval' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com;" \
+          "script-src 'unsafe-eval' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com;" \
+          "frame-src 'self' 'unsafe-eval' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com;" \
+          "connect-src 'unsafe-eval' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com"
     }
 
     config.active_support.parse_json_times = true
