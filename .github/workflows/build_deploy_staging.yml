@@ -88,8 +88,6 @@ jobs:
 
       - name: Deploy from remote server
         timeout-minutes: 5
-        env:
-          NOTIFICATION_URL: ${{ secrets.NOTIFICATION_URL}}
         run: |
           sudo openvpn --config config.ovpn --askpass client.pwd --auth-nocache --daemon&
           sleep 20
@@ -119,6 +117,11 @@ jobs:
           fi
           EOSSH
 
+      - name: Notify developers
+        timeout-minutes: 1
+        env:
+          NOTIFICATION_URL: ${{ secrets.NOTIFICATION_URL}}
+        run: |
           curl -i -X POST --data-urlencode 'payload={
             "text": "##### Build and deploy from pull request has been succesful :tada:\n
             | Project    | Branch                 | :net:                                      |
@@ -126,4 +129,3 @@ jobs:
             | **'$REPO'**|'${{ github.head_ref }}'| https://rwhois-'$PR_REF'.riigi.pilv.tld.ee |
             "
             }' $NOTIFICATION_URL
-
