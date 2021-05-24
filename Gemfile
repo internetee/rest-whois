@@ -15,7 +15,7 @@ gem 'uglifier'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.0.5', '< 3.6'
 end
 
 group :development, :test do
