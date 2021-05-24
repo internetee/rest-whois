@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'aws-sdk-ses', '~> 1.38'
 gem 'bootsnap', require: false
-gem 'figaro', '~> 1.1.0'
+gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.3.10'
 gem 'pg', '~> 1.2.3'
