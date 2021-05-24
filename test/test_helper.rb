@@ -23,15 +23,15 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  include CaptchaHelpers
+  # include CaptchaHelpers
 
   include Capybara::DSL
   include Capybara::Minitest::Assertions
   include AbstractController::Translation
 
-  setup do
-    enable_captcha
-  end
+  # setup do
+  #   enable_captcha
+  # end
 
   teardown do
     WebMock.reset!

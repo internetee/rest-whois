@@ -18,7 +18,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     ENV['whitelist_ip'] = '127.0.0.1'
   end
 
-  setup do
-    enable_captcha
-  end
+  # setup do
+  #   enable_captcha
+  # end
 end
