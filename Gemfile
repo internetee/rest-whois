@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'aws-sdk-ses', '~> 1.34'
+gem 'aws-sdk-ses', '~> 1.38'
 gem 'bootsnap', require: false
 gem 'figaro', '~> 1.1.0'
 gem 'jbuilder'

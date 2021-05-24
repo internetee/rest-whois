@@ -61,17 +61,17 @@ GEM
     apparition (0.6.0)
       capybara (~> 3.13, < 4)
       websocket-driver (>= 0.6.5)
-    aws-eventstream (1.1.0)
-    aws-partitions (1.368.0)
-    aws-sdk-core (3.105.0)
+    aws-eventstream (1.1.1)
+    aws-partitions (1.461.0)
+    aws-sdk-core (3.114.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-ses (1.34.0)
-      aws-sdk-core (~> 3, >= 3.99.0)
+    aws-sdk-ses (1.38.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.2.2)
+    aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -234,7 +234,7 @@ PLATFORMS
 
 DEPENDENCIES
   apparition
-  aws-sdk-ses (~> 1.34)
+  aws-sdk-ses (~> 1.38)
   bootsnap
   capybara
   figaro (~> 1.1.0)
