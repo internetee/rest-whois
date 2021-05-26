@@ -9,6 +9,8 @@ whitelist_ip: '127.0.0.1, 127.0.0.2'
 # Secret key: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 recaptcha_site_key: test
 recaptcha_secret_key: test
+hcaptcha_site_key: '96010e6d-8aa5-4a54-8d86-d899136c154b'
+hcaptcha_secret_key:  '0xDeECA859Ba41f5638f0BADFF685Ed7B53d26bC21'
 
 registry_api_url: 'http://registry:3000/api/v1/contact_requests/'
 registry_api_key: 'testkey'

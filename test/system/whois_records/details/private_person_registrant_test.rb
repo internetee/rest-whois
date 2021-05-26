@@ -86,29 +86,29 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     end
   end
 
-  def test_admin_contact_email_is_masked_when_disclosed_and_captcha_is_unsolved
-    @whois_record.update!(json: @whois_record.json
-                                  .merge({ admin_contacts: [{ disclosed_attributes: %w[email] }] }))
+  # def test_admin_contact_email_is_masked_when_disclosed_and_captcha_is_unsolved
+  #   @whois_record.update!(json: @whois_record.json
+  #                                 .merge({ admin_contacts: [{ disclosed_attributes: %w[email] }] }))
 
-    visit whois_record_url(name: @whois_record.name)
+  #   visit whois_record_url(name: @whois_record.name)
 
-    within '.admin-contacts' do
-      assert_text "Email #{disclosable_mask}"
-    end
-  end
+  #   within '.admin-contacts' do
+  #     assert_text "Email #{disclosable_mask}"
+  #   end
+  # end
 
-  def test_admin_contact_email_is_unmasked_when_disclosed_and_captcha_is_solved
-    solve_captcha
-    @whois_record.update!(json: @whois_record.json
-                                  .merge({ admin_contacts: [{ email: 'john@inbox.test',
-                                                              disclosed_attributes: %w[email] }] }))
+  # def test_admin_contact_email_is_unmasked_when_disclosed_and_captcha_is_solved
+  #   solve_captcha
+  #   @whois_record.update!(json: @whois_record.json
+  #                                 .merge({ admin_contacts: [{ email: 'john@inbox.test',
+  #                                                             disclosed_attributes: %w[email] }] }))
 
-    visit whois_record_url(name: @whois_record.name)
+  #   visit whois_record_url(name: @whois_record.name)
 
-    within '.admin-contacts' do
-      assert_text 'Email john@inbox.test'
-    end
-  end
+  #   within '.admin-contacts' do
+  #     assert_text 'Email john@inbox.test'
+  #   end
+  # end
 
   def test_tech_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
