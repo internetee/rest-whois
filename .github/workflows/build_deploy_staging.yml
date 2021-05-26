@@ -109,7 +109,7 @@ jobs:
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
-          update add rwhois-"$PR_REF".riigi.pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
+          update add rwhois-"$PR_REF".pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
           send
           " | nsupdate -k ~/Kgh-runner.infra.tld.ee.+165+27011.key
           if [ "$?" -eq "0" ]; then
@@ -128,6 +128,6 @@ jobs:
             "text": "##### Build and deploy from pull request has been succesful :tada:\n
             | Project    | Branch                 | :net:                                      |
             |:-----------|:----------------------:|:------------------------------------------:|
-            | **'$REPO'**|'${{ github.head_ref }}'| https://rwhois-'$PR_REF'.riigi.pilv.tld.ee |
+            | **'$REPO'**|'${{ github.head_ref }}'| https://rwhois-'$PR_REF'.pilv.tld.ee       |
             "
             }' $NOTIFICATION_URL
