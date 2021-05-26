@@ -1,3 +1,9 @@
+26.05.2021
+* Bump pry to 0.14.1 [#280](https://github.com/internetee/rest-whois/pull/280)
+* Bump figaro to 1.2.0 [#281](https://github.com/internetee/rest-whois/pull/281)
+* Bump listen to 3.5.1 [#282](https://github.com/internetee/rest-whois/pull/282)
+* Bump aws-sdk-ses to 1.38.0 [#283](https://github.com/internetee/rest-whois/pull/283)
+
 20.05.2021
 * Fixed for Recaptcha [#262](https://github.com/internetee/rest-whois/issues/262)
 * Mimemagic version fix [#255](https://github.com/internetee/rest-whois/pull/255)
