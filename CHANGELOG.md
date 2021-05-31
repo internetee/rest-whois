@@ -1,3 +1,7 @@
+31.05.2021
+* Bump unicorn to 6.0.0 [#292](https://github.com/internetee/rest-whois/pull/292)
+* Bump puma to 5.3.2 [#292](https://github.com/internetee/rest-whois/pull/293)
+
 26.05.2021
 * Bump pry to 0.14.1 [#280](https://github.com/internetee/rest-whois/pull/280)
 * Bump figaro to 1.2.0 [#281](https://github.com/internetee/rest-whois/pull/281)
