@@ -9,7 +9,7 @@
 
         <dl>
             <dt><%= Nameserver.human_attribute_name :last_update %></dt>
-            <dd><%= l @whois_record.json['nameservers_changed'], default: nil %></dd>
+            <dd><%= l @whois_record.json['nameservers_changed']&.to_datetime, default: nil %></dd>
         </dl>
     </section>
 <% end %>

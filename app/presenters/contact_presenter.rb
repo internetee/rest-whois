@@ -30,7 +30,7 @@ class ContactPresenter
     unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
 
     if unmasked
-      view.l(contact.last_update, default: nil)
+      view.l(contact.last_update.to_datetime, default: nil)
     else
       whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
     end

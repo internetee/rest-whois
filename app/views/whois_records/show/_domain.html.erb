@@ -7,19 +7,19 @@
         <%= render 'whois_records/show/statuses', statuses: domain.statuses %>
         <% if domain.active? %>
             <dt><%= Domain.human_attribute_name :registered %></dt>
-            <dd><%= l domain.registered, default: nil %></dd>
+            <dd><%= l domain.registered&.to_datetime, default: nil %></dd>
 
             <dt><%= Domain.human_attribute_name :changed %></dt>
-            <dd><%= l domain.changed, default: nil %></dd>
+            <dd><%= l domain.changed&.to_datetime, default: nil %></dd>
 
             <dt><%= Domain.human_attribute_name :expire %></dt>
-            <dd><%= l domain.expire, default: nil %></dd>
+            <dd><%= l domain.expire&.to_datetime, default: nil %></dd>
 
             <dt><%= Domain.human_attribute_name :outzone %></dt>
-            <dd><%= l domain.outzone, default: nil %></dd>
+            <dd><%= l domain.outzone&.to_datetime, default: nil %></dd>
 
             <dt><%= Domain.human_attribute_name :delete %></dt>
-            <dd><%= l domain.delete, default: nil %></dd>
+            <dd><%= l domain.delete&.to_datetime, default: nil %></dd>
         <% else %>
           <% if domain.registration_deadline.present? %>
             <dt><%= Domain.human_attribute_name :registration_deadline %></dt>
