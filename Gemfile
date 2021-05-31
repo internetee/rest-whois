@@ -23,7 +23,7 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'unicorn'
-  gem 'mina', '~> 0.3.8'
+  gem 'mina', '~> 1.2.3'
   gem 'puma'
   gem 'webmock'
 end
