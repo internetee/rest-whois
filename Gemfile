@@ -4,7 +4,7 @@ gem 'aws-sdk-ses', '~> 1.38'
 gem 'bootsnap', require: false
 gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
-gem 'mimemagic', '~> 0.3.10'
+gem 'mimemagic', '~> 0.4.3'
 gem 'pg', '~> 1.2.3'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
