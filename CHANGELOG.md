@@ -1,4 +1,9 @@
+
+
 31.05.2021
+* Bump mina to 1.2.3 [#289](https://github.com/internetee/rest-whois/pull/289)
+* Bump simpleidn to 0.2.1 [#290](https://github.com/internetee/rest-whois/pull/290)
+* Bump rails to 6.1.3.2 [#291](https://github.com/internetee/rest-whois/pull/291)
 * Bump unicorn to 6.0.0 [#292](https://github.com/internetee/rest-whois/pull/292)
 * Bump puma to 5.3.2 [#292](https://github.com/internetee/rest-whois/pull/293)
 
