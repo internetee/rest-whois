@@ -1,4 +1,8 @@
-
+08.06.2021
+* Bump passenger to 6.0.9 [#294](https://github.com/internetee/rest-whois/pull/294)
+* Bump mimemagic to 0.4.3 [#295](https://github.com/internetee/rest-whois/pull/295)
+* Bump capybara to 3.35.3 [#296](https://github.com/internetee/rest-whois/pull/296)
+* Bump bootsnap to 1.7.5 [#297](https://github.com/internetee/rest-whois/pull/297)
 
 31.05.2021
 * Bump mina to 1.2.3 [#289](https://github.com/internetee/rest-whois/pull/289)
