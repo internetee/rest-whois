@@ -1,20 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'aws-sdk-ses', '~> 1.34'
+gem 'aws-sdk-ses', '~> 1.38'
 gem 'bootsnap', require: false
-gem 'figaro', '~> 1.1.0'
+gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
-gem 'mimemagic', '~> 0.3.10'
-gem 'pg', '~> 1.0.0'
+gem 'mimemagic', '~> 0.4.3'
+gem 'pg', '~> 1.2.3'
 gem 'rails', '>= 6.0.3.1'
-gem 'recaptcha', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
-gem 'simpleidn', '0.0.7' # For Punycode
+gem 'simpleidn', '0.2.1' # For Punycode
 gem 'uglifier'
+gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.0.5', '< 3.6'
 end
 
 group :development, :test do
@@ -22,7 +23,7 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'unicorn'
-  gem 'mina', '~> 0.3.8'
+  gem 'mina', '~> 1.2.3'
   gem 'puma'
   gem 'webmock'
 end

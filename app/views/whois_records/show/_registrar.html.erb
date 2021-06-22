@@ -11,6 +11,6 @@
         <dd><%= registrar.phone %></dd>
 
         <dt><%= Registrar.human_attribute_name :last_update %></dt>
-        <dd><%= l registrar.last_update, default: nil %></dd>
+        <dd><%= l registrar.last_update.to_datetime, default: nil %></dd>
     </dl>
 </section>

@@ -1,3 +1,37 @@
+08.06.2021
+* Bump passenger to 6.0.9 [#294](https://github.com/internetee/rest-whois/pull/294)
+* Bump mimemagic to 0.4.3 [#295](https://github.com/internetee/rest-whois/pull/295)
+* Bump capybara to 3.35.3 [#296](https://github.com/internetee/rest-whois/pull/296)
+* Bump bootsnap to 1.7.5 [#297](https://github.com/internetee/rest-whois/pull/297)
+
+31.05.2021
+* Bump mina to 1.2.3 [#289](https://github.com/internetee/rest-whois/pull/289)
+* Bump simpleidn to 0.2.1 [#290](https://github.com/internetee/rest-whois/pull/290)
+* Bump rails to 6.1.3.2 [#291](https://github.com/internetee/rest-whois/pull/291)
+* Bump unicorn to 6.0.0 [#292](https://github.com/internetee/rest-whois/pull/292)
+* Bump puma to 5.3.2 [#292](https://github.com/internetee/rest-whois/pull/293)
+
+26.05.2021
+* Bump pry to 0.14.1 [#280](https://github.com/internetee/rest-whois/pull/280)
+* Bump figaro to 1.2.0 [#281](https://github.com/internetee/rest-whois/pull/281)
+* Bump listen to 3.5.1 [#282](https://github.com/internetee/rest-whois/pull/282)
+* Bump aws-sdk-ses to 1.38.0 [#283](https://github.com/internetee/rest-whois/pull/283)
+
+20.05.2021
+* Fixed for Recaptcha [#262](https://github.com/internetee/rest-whois/issues/262)
+* Mimemagic version fix [#255](https://github.com/internetee/rest-whois/pull/255)
+* Bump mokogiri to 1.11.4 [#265](https://github.com/internetee/rest-whois/pull/265)
+* Bump puma to 4.3.8 [#266](https://github.com/internetee/rest-whois/pull/266)
+* Dependabot [#269](https://github.com/internetee/rest-whois/pull/269)
+* Bump actions/upload-artifact to 2.2.3 [#270](https://github.com/internetee/rest-whois/pull/270)
+* Bump actions/download-artifact to 2.0.9 [#272](https://github.com/internetee/rest-whois/pull/272)
+* Bump recaptcha to 5.8.0 [#273](https://github.com/internetee/rest-whois/pull/273)
+* Bump jbuilder to 2.11.2 [#274](https://github.com/internetee/rest-whois/pull/274)
+* Bump appiration to 0.6.0 [#275](https://github.com/internetee/rest-whois/pull/275)
+* Bump webmock to 3.13.0 [#276](https://github.com/internetee/rest-whois/pull/276)
+* Bump pg to 1.2.3 [#277](https://github.com/internetee/rest-whois/pull/277)
+* Bump nanasess/setup-chromedriver to 1.0.5 [#271](https://github.com/internetee/rest-whois/pull/271)
+
 09.03.2021
 * Saving AWS message id over API [#252](https://github.com/internetee/rest-whois/pull/252)
 

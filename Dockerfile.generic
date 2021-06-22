@@ -1,0 +1,11 @@
+FROM internetee/ruby:2.7
+LABEL org.opencontainers.image.source=https://github.com/internetee/rest-whois
+ARG RAILS_ENV
+
+ENV RAILS_ENV "$RAILS_ENV"
+
+COPY Gemfile Gemfile.lock ./    
+RUN gem install bundler && bundle config set without 'development test' && bundle install --jobs 20 --retry 5
+
+COPY . .
+RUN bundle exec rails assets:precompile
