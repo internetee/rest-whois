@@ -1,3 +1,7 @@
+29.06.2021
+* Bump actions/download-artifact to 2.0.10 [#299](https://github.com/internetee/rest-whois/pull/299)
+* Bump rails to 6.1.4 [#300](https://github.com/internetee/rest-whois/pull/300)
+
 08.06.2021
 * Bump passenger to 6.0.9 [#294](https://github.com/internetee/rest-whois/pull/294)
 * Bump mimemagic to 0.4.3 [#295](https://github.com/internetee/rest-whois/pull/295)
