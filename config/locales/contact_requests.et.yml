@@ -58,6 +58,9 @@ et:
     smtp_error: >-
       E-posti aadressi kinnitamine ebaõnnestus. Palun kontrollige oma e-posti aadressi ja
       proovige uuesti.
+    something_went_wrong: >-
+      Vabandame, osadele domeeni kontaktidest ei õnnestunud teadet edasi saata. Anname siiski endast parima,
+      et adressaadid saaksid kirja kätte.
 
     already_confirmed: 'Unikaalne link on juba kasutatud'
 

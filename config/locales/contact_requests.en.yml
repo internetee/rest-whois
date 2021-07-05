@@ -52,6 +52,10 @@ en:
     successfully_sent: Your email has been sent.
     smtp_error: >-
       Email confirmation failed. Please check your email address and try again.
+    something_went_wrong: >-
+      We are failed to send email for one or more of addresses, but we will do our best to send your message to as
+      many recipients as we can
+
 
     already_used: 'This one-time link has been already used.'
 

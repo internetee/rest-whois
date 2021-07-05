@@ -57,19 +57,17 @@ class ContactRequest < ApplicationRecord
     ContactRequestMailer.confirmation_email(self).deliver_now
   end
 
-  def send_contact_email(body: '', recipients: [], ip: nil)
-    return unless mark_as_sent(ip: ip)
+  def send_contact_email(body: '', recipients: [], ip: nil, raise_error: nil)
+    return false unless mark_as_sent(ip: ip)
 
     recipients_emails = extract_emails_for_recipients(recipients)
-    return if recipients_emails.empty?
+    return false if recipients_emails.empty?
 
-    ContactRequestMailer.contact_email(
-      contact_request: self,
-      recipients: recipients_emails,
-      mail_body: body
-    ).deliver_now
-
-    self
+    send_bulk_email(body: body, raise_error: raise_error, recipients_emails: recipients_emails)
+    true
+  rescue Net::SMTPFatalError, Net::SMTPSyntaxError
+    send_individual_emails(body: body, recipients_emails: recipients_emails)
+    false
   end
 
   def mark_as_sent(ip: nil)
@@ -93,6 +91,25 @@ class ContactRequest < ApplicationRecord
   end
 
   private
+
+  def send_individual_emails(body:, recipients_emails:)
+    recipients_emails.each do |recipient_email|
+      ContactRequestMailer.contact_email(
+        contact_request: self,
+        recipients: recipient_email,
+        mail_body: body
+      ).deliver_later
+    end
+  end
+
+  def send_bulk_email(body:, recipients_emails:, raise_error:)
+    ContactRequestMailer.contact_email(
+      contact_request: self,
+      recipients: recipients_emails,
+      mail_body: body,
+      raise_error: raise_error
+    ).deliver_now
+  end
 
   def extract_emails_for_recipients(recipients)
     emails = []
