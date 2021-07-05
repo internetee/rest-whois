@@ -1,3 +1,6 @@
+05.07.2021
+* New email templates for bounced rest-whois contact messages [#253](https://github.com/internetee/rest-whois/pull/253)
+
 29.06.2021
 * Bump actions/download-artifact to 2.0.10 [#299](https://github.com/internetee/rest-whois/pull/299)
 * Bump rails to 6.1.4 [#300](https://github.com/internetee/rest-whois/pull/300)
