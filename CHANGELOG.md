@@ -1,3 +1,10 @@
+28.07.2021
+* Bump actions/upload-artifact to 2.2.4 [#298](https://github.com/internetee/rest-whois/pull/298)
+* Bump recaptcha to 5.8.1 [#301](https://github.com/internetee/rest-whois/pull/301)
+* Bump addressable to 2.8.0 [#302](https://github.com/internetee/rest-whois/pull/302)
+* Bump passenger to 6.0.10 [#303](https://github.com/internetee/rest-whois/pull/303)
+* Bump listen to 3.6.0 [#304](https://github.com/internetee/rest-whois/pull/304)
+
 05.07.2021
 * New email templates for bounced rest-whois contact messages [#253](https://github.com/internetee/rest-whois/pull/253)
 
