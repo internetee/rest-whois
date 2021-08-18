@@ -1,3 +1,10 @@
+18.08.2021
+* Bump bootsnap to 1.7.7 [#305](https://github.com/internetee/rest-whois/pull/305)
+* Bump puma to 5.4.0 [#306](https://github.com/internetee/rest-whois/pull/306)
+* Bump aws-sdk-ses to 1.40.0 [#307](https://github.com/internetee/rest-whois/pull/307)
+* Bump webmock to 3.14.0 [#308](https://github.com/internetee/rest-whois/pull/308)
+* Bump mina to 1.2.4 [#309](https://github.com/internetee/rest-whois/pull/309)
+
 28.07.2021
 * Bump actions/upload-artifact to 2.2.4 [#298](https://github.com/internetee/rest-whois/pull/298)
 * Bump recaptcha to 5.8.1 [#301](https://github.com/internetee/rest-whois/pull/301)
