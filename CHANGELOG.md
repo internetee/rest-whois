@@ -1,3 +1,7 @@
+25.08.2021
+* Bump listen to 3.7.0 [#310](https://github.com/internetee/rest-whois/pull/310)
+* Bump rails to 6.1.4.1 [#311](https://github.com/internetee/rest-whois/pull/311)
+
 18.08.2021
 * Bump bootsnap to 1.7.7 [#305](https://github.com/internetee/rest-whois/pull/305)
 * Bump puma to 5.4.0 [#306](https://github.com/internetee/rest-whois/pull/306)
