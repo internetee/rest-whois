@@ -1,3 +1,6 @@
+31.08.2021
+* Bump bootsnap to 1.8.1 [#312](https://github.com/internetee/rest-whois/pull/312)
+
 25.08.2021
 * Bump listen to 3.7.0 [#310](https://github.com/internetee/rest-whois/pull/310)
 * Bump rails to 6.1.4.1 [#311](https://github.com/internetee/rest-whois/pull/311)
