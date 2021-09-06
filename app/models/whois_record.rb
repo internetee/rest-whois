@@ -5,7 +5,7 @@ class WhoisRecord < ApplicationRecord
     json['registrant_kind'] != 'org'
   end
 
-  def partial_name(authorized = false)
+  def partial_name(authorized: false)
     if domain.active?
       partial_for_private_person(authorized)
     else
