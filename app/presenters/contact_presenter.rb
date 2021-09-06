@@ -1,4 +1,6 @@
 class ContactPresenter
+  attr_reader :contact, :view, :whois_record
+
   delegate :legal_person?, :reg_number, :ident_country, to: :contact
 
   def initialize(contact, view, whois_record)
@@ -66,8 +68,4 @@ class ContactPresenter
   def captcha_unsolved?
     !captcha_solved?
   end
-
-  attr_reader :contact
-  attr_reader :view
-  attr_reader :whois_record
 end

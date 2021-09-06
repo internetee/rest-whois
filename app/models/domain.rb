@@ -13,14 +13,8 @@ class Domain
 
   private_constant :INACTIVE_STATUSES
 
-  attr_accessor :name
-  attr_accessor :statuses
-  attr_accessor :registered
-  attr_accessor :changed
-  attr_accessor :expire
-  attr_accessor :outzone
-  attr_accessor :delete
-  attr_accessor :registration_deadline
+  attr_accessor :name, :statuses, :registered, :changed, :expire,
+                :outzone, :delete, :registration_deadline
 
   def active?
     return false if registered.blank?
