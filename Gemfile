@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'aws-sdk-ses', '~> 1.40'
-gem 'bootsnap', require: false
+gem 'bootsnap', '~>1.10.2', require: false
 gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
@@ -19,7 +19,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'apparition'
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
   gem 'pry'
   gem 'unicorn'
