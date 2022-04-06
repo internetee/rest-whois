@@ -1,3 +1,6 @@
+06.04.2022
+* Fixed asset compilation error [#327](https://github.com/internetee/rest-whois/issues/327)
+
 31.08.2021
 * Bump bootsnap to 1.8.1 [#312](https://github.com/internetee/rest-whois/pull/312)
 
