@@ -1,3 +1,6 @@
+06.05.2022
+* Implemented ReCaptcha v3 [#264](https://github.com/internetee/rest-whois/issues/264)
+
 06.04.2022
 * Fixed asset compilation error [#327](https://github.com/internetee/rest-whois/issues/327)
 
