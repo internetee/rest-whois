@@ -30,7 +30,7 @@
 
 <p><%= t '.more_info' %></p>
 
-<% if !@show_sensitive_data && @whois_record.contactable? %>
+<% unless @show_sensitive_data %>
     <section class="captcha">
         <%= render 'whois_records/show/captcha' %>
     </section>
