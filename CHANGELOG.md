@@ -1,3 +1,6 @@
+23.05.2022
+* Fixed captcha check for org owned registrations [#348](https://github.com/internetee/rest-whois/issues/348)
+
 06.05.2022
 * Implemented ReCaptcha v3 [#264](https://github.com/internetee/rest-whois/issues/264)
 
