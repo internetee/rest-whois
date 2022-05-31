@@ -83,7 +83,7 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.4)
       aws-eventstream (~> 1, >= 1.0.2)
-    bootsnap (1.11.1)
+    bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     capybara (3.35.3)
@@ -135,7 +135,7 @@ GEM
     mini_mime (1.1.1)
     mini_portile2 (2.8.0)
     minitest (5.14.4)
-    msgpack (1.5.1)
+    msgpack (1.5.2)
     nio4r (2.5.8)
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
@@ -245,7 +245,7 @@ PLATFORMS
 DEPENDENCIES
   apparition!
   aws-sdk-ses (~> 1.40)
-  bootsnap (~> 1.11.0)
+  bootsnap (~> 1.12.0)
   capybara
   figaro (~> 1.2.0)
   jbuilder
