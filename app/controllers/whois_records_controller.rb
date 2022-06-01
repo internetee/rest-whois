@@ -4,10 +4,10 @@ class WhoisRecordsController < ApplicationController
   helper_method :captcha_solved?
 
   def show
-    logger.warn(
-      "Params: #{params};"
-    )
-
+    logger.warn("Params: #{params};")
+    # logger.warn("Headers: #{request.headers.env.reject { |key| key.to_s.include?('.') }};")
+    # logger.warn("Params in json: #{params.to_json};")
+    
     domain_name = SimpleIDN.to_unicode(params[:name].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
@@ -91,7 +91,7 @@ class WhoisRecordsController < ApplicationController
 
   def captcha_solved?
     @captcha_solved ||= verify_recaptcha(
-      action: 'check',
+      action: nil,
       minimum_score: 0.5,
       secret_key: ENV['recaptcha_secret_key']
     )
