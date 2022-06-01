@@ -4,6 +4,10 @@ class WhoisRecordsController < ApplicationController
   helper_method :captcha_solved?
 
   def show
+    logger.warn(
+      "Params: #{params};"
+    )
+
     domain_name = SimpleIDN.to_unicode(params[:name].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
