@@ -110,4 +110,3 @@ jobs:
         run: |
           ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
           ./cc-test-reporter upload-coverage
-
