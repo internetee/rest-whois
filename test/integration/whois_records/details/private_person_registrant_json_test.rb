@@ -47,6 +47,26 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
     assert_equal 'john@inbox.test', response.parsed_body['email']
   end
 
+  def test_registrant_phone_is_masked_when_disclosed_and_captcha_is_unsolved
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+
+    get whois_record_path(name: @whois_record.name), as: :json
+
+    assert_equal disclosable_mask, response.parsed_body['phone']
+  end
+
+  def test_registrant_phone_is_unmasked_when_disclosed_and_captcha_is_solved
+    solve_captcha
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ phone: 'john@inbox.test',
+                                           registrant_disclosed_attributes: %w[phone] }))
+
+    get whois_record_path(name: @whois_record.name), as: :json
+
+    assert_equal 'john@inbox.test', response.parsed_body['phone']
+  end
+
   def test_admin_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',
