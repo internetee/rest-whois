@@ -66,6 +66,7 @@ class WhoisRecord < ApplicationRecord
                 type: json['registrant_kind'],
                 reg_number: json['registrant_reg_no'],
                 email: json['email'],
+                phone: json['phone'],
                 ident_country: json['registrant_ident_country_code'],
                 last_update: json['registrant_changed'],
                 disclosed_attributes: json['registrant_disclosed_attributes'])

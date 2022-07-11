@@ -1,7 +1,7 @@
 class Contact
   include ActiveModel::Model
 
-  attr_accessor :name, :type, :reg_number, :email, :ident_country,
+  attr_accessor :name, :type, :reg_number, :email, :phone, :ident_country,
                 :last_update, :disclosed_attributes
 
   def private_person?

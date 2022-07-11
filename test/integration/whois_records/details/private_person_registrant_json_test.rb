@@ -59,12 +59,12 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
   def test_registrant_phone_is_unmasked_when_disclosed_and_captcha_is_solved
     solve_captcha
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ phone: 'john@inbox.test',
+                                  .merge({ phone: '1234',
                                            registrant_disclosed_attributes: %w[phone] }))
 
     get whois_record_path(name: @whois_record.name), as: :json
 
-    assert_equal 'john@inbox.test', response.parsed_body['phone']
+    assert_equal '1234', response.parsed_body['phone']
   end
 
   def test_admin_contact_name_is_unmasked_when_disclosed
