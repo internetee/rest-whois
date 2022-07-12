@@ -1,3 +1,5 @@
+registrant = RegistrantPresenter.new(@whois_record.registrant, self, whois_record)
+
 json.name whois_record.json['name']
 json.changed whois_record.json['changed']
 json.delete whois_record.json['delete']
@@ -18,8 +20,8 @@ json.registrar_changed whois_record.json['registrar_changed']
 json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
-json.email whois_record.json['email']
-json.phone whois_record.json['phone']
+json.email(registrant.email)
+json.phone(registrant.phone)
 json.registrant whois_record.json['registrant']
 json.registrant_reg_no whois_record.json['registrant_reg_no']
 json.registrant_ident_country_code whois_record.json['registrant_ident_country_code']

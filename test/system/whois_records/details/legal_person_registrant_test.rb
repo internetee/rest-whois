@@ -36,29 +36,55 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     end
   end
 
-  def test_registrant_email_phone_and_last_update_are_masked_when_captcha_is_unsolved
+  def test_registrant_email_and_last_update_are_masked_when_captcha_is_unsolved
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
       assert_text "Email #{disclosable_mask}"
-      assert_text "Phone #{disclosable_mask}"
       assert_text "Last update #{disclosable_mask}"
     end
   end
 
-  def test_registrant_email_phone_and_last_update_are_unmasked_when_captcha_is_solved
+  def test_registrant_phone_is_masked_when_not_disclosed
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text "Phone Not Disclosed"
+    end
+  end
+
+  def test_registrant_phone_is_masked_when_disclosed_and_unsolved_captcha
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text "Phone #{disclosable_mask}"
+    end
+  end
+
+  def test_registrant_email_and_last_update_are_unmasked_when_captcha_is_solved
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ email: 'john@inbox.test',
-                                           phone: '1234',
                                            registrant_changed: '2010-07-05T00:00:00+00:00' }))
 
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
       assert_text 'Email john@inbox.test'
-      assert_text 'Phone 1234'
       assert_text 'Last update 2010-07-05 00:00:00 +00:00'
+    end
+  end
+
+  def test_registrant_phone_is_unmasked_when_disclosed_and_solved_captcha
+    solve_captcha
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text "Phone +555.555"
     end
   end
 

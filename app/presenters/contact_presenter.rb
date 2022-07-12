@@ -29,15 +29,14 @@ class ContactPresenter
   end
 
   def phone
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?) ||
-               (contact.attribute_disclosed?(:phone) && captcha_solved?)
+    unmasked = whitelisted_user? || (contact.attribute_disclosed?(:phone) && captcha_solved?)
 
     if unmasked
       contact.phone
     elsif contact.attribute_disclosed?(:phone) && captcha_unsolved?
       disclosable_mask
     else
-      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
+      undisclosable_mask
     end
   end
 
