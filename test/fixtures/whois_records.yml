@@ -14,6 +14,7 @@ privately_owned:
       - two
     dnssec_changed: "2010-07-05T00:00:00+00:00"
     email: owner@privatedomain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: privatedomain.test
     nameservers:
@@ -52,6 +53,7 @@ legally_owned:
     dnssec_changed: "2018-07-25"
     dnssec_keys: []
     email: owner@company-domain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: company-domain.test
     nameservers: []
@@ -96,6 +98,7 @@ with_duplicate_domain_contacts:
     dnssec_changed: "2018-07-25"
     dnssec_keys: []
     email: duplicate@domain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: duplicatecontacts-domain.test
     nameservers: []

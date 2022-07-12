@@ -65,6 +65,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
       'dnssec_changed': "2010-07-05T00:00:00+00:00",
       'dnssec_keys': %w[one two],
       'email': 'Not Disclosed',
+      'phone': 'Not Disclosed',
       'expire': '2018-07-25',
       'name': 'privatedomain.test',
       'nameservers': ['ns1.privatedomain.test', 'ns2.privatedomain.test'],
@@ -97,6 +98,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     assert_equal 'Private Person', response_json[:registrant]
     assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Not Disclosed', response_json[:phone]
     assert_equal 'Not Disclosed', response_json[:registrant_changed]
 
     expected_admin_contacts = [
@@ -119,6 +121,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:phone]
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
                  response_json[:registrant_changed]
 
@@ -145,6 +148,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     assert_equal 'test', response_json[:registrant]
     assert_equal 'owner@privatedomain.test', response_json[:email]
+    assert_equal '+555.555', response_json[:phone]
     assert_equal '2018-04-25T14:10:39+00:00', response_json[:registrant_changed]
 
     expected_admin_contacts = [
@@ -169,6 +173,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     assert_equal 'test', response_json[:registrant]
     assert_equal 'owner@company-domain.test', response_json[:email]
+    assert_equal '+555.555', response_json[:phone]
     assert_equal '2018-04-25T14:10:39+00:00', response_json[:registrant_changed]
 
     expected_admin_contacts = [
@@ -194,6 +199,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
     assert_equal 'Private Person', response_json[:registrant]
     assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Not Disclosed', response_json[:phone]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed',
@@ -217,6 +223,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:phone]
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
                  response_json[:registrant_changed]
 

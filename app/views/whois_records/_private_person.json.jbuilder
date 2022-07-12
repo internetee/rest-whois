@@ -20,6 +20,7 @@ json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
 json.email(registrant.email)
+json.phone(registrant.phone)
 json.registrant(registrant.name)
 
 json.tech_contacts do

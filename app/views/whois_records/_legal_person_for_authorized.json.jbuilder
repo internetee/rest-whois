@@ -19,6 +19,7 @@ json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
 json.email whois_record.json['email']
+json.phone whois_record.json['phone']
 json.registrant whois_record.json['registrant']
 json.registrant_reg_no whois_record.json['registrant_reg_no']
 json.registrant_ident_country_code whois_record.json['registrant_ident_country_code']
