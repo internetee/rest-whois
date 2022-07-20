@@ -69,7 +69,8 @@ class WhoisRecord < ApplicationRecord
                 phone: json['phone'],
                 ident_country: json['registrant_ident_country_code'],
                 last_update: json['registrant_changed'],
-                disclosed_attributes: json['registrant_disclosed_attributes'])
+                disclosed_attributes: json['registrant_disclosed_attributes'],
+                registrant_publishable: json['registrant_publishable'])
   end
 
   def deserialize_contact(serialized_contact)
