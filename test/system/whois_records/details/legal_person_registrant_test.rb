@@ -138,7 +138,6 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     within '.registrant' do
       assert_text 'Name test'
       assert_text "Email #{disclosable_mask}"
-      assert_text "Last update #{disclosable_mask}"
       assert_text "Phone Not Disclosed"
     end
   end
@@ -150,7 +149,6 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     within '.registrant' do
       assert_text 'Name test'
       assert_text 'Email owner@privatedomain.test'
-      assert_text 'Last update 2018-04-25 14:10:39 +00:00'
       assert_text "Phone +555.555"
     end
   end

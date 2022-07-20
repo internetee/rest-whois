@@ -42,8 +42,7 @@ class ContactPresenter
   end
 
   def last_update
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?) ||
-               registrant_publishable?
+    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
 
     if unmasked
       view.l(contact.last_update.to_datetime, default: nil)
