@@ -31,6 +31,12 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     assert_sensitive_data_is_masked
   end
 
+  def test_sensitive_data_is_masked_when_registrant_is_not_publishable
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }))
+    visit whois_record_url(name: @whois_record.name)
+    assert_sensitive_data_is_masked
+  end
+
   def test_sensitive_data_is_masked_when_captcha_is_solved
     solve_captcha
 
@@ -95,6 +101,17 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
     within '.registrant' do
       assert_text 'Phone 1234'
+    end
+  end
+
+  def test_registrant_sensitive_data_is_unmasked_when_registrant_is_publishable
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true }))
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text 'Name test'
+      assert_text 'Email owner@privatedomain.test'
+      assert_text 'Phone +555.555'
     end
   end
 

@@ -241,4 +241,43 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     assert_equal expected_admin_contacts, response_json[:admin_contacts]
     assert_equal expected_tech_contacts, response_json[:tech_contacts]
   end
+
+  def test_show_sensitive_data_when_registrant_is_publishable
+    whois_record = whois_records(:legally_owned)
+    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: true }))
+
+    get '/v1/company-domain.test', params: { format: :json }
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'test', response_json[:registrant]
+    assert_equal 'owner@company-domain.test', response_json[:email]
+    assert_equal '+555.555', response_json[:phone]
+  end
+
+  def test_hide_sensitive_data_when_registrant_is_not_publishable
+    whois_record = whois_records(:privately_owned)
+    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: false }))
+
+    get '/v1/privatedomain.test', params: { format: :json }
+
+    response_json = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal 'Private Person', response_json[:registrant]
+    assert_equal 'Not Disclosed', response_json[:email]
+    assert_equal 'Not Disclosed', response_json[:phone]
+
+    expected_admin_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+    expected_tech_contacts = [
+      { name: 'Not Disclosed',
+        email: 'Not Disclosed',
+        changed: 'Not Disclosed' }
+    ]
+
+    assert_equal expected_admin_contacts, response_json[:admin_contacts]
+    assert_equal expected_tech_contacts, response_json[:tech_contacts]
+  end
 end

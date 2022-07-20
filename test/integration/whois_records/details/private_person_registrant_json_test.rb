@@ -67,6 +67,28 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
     assert_equal '1234', response.parsed_body['phone']
   end
 
+  def test_registrant_sensitive_data_is_masked_when_not_publishable
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ registrant_publishable: false }))
+
+    get whois_record_path(name: @whois_record.name), as: :json
+
+    assert_equal 'Private Person', response.parsed_body['registrant']
+    assert_equal 'Not Disclosed', response.parsed_body['email']
+    assert_equal 'Not Disclosed', response.parsed_body['phone']
+  end
+
+  def test_registrant_sensitive_data_is_unmasked_when_publishable
+    @whois_record.update!(json: @whois_record.json
+                                  .merge({ registrant_publishable: true }))
+
+    get whois_record_path(name: @whois_record.name), as: :json
+
+    assert_equal 'test', response.parsed_body['registrant']
+    assert_equal 'owner@privatedomain.test', response.parsed_body['email']
+    assert_equal '+555.555', response.parsed_body['phone']
+  end
+
   def test_admin_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',

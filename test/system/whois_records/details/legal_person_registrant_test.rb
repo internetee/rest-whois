@@ -131,6 +131,30 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     end
   end
 
+  def test_registrant_sensitive_data_is_masked_when_registrant_is_not_publishable
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }))
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text 'Name test'
+      assert_text "Email #{disclosable_mask}"
+      assert_text "Last update #{disclosable_mask}"
+      assert_text "Phone Not Disclosed"
+    end
+  end
+
+  def test_registrant_sensitive_data_is_unmasked_when_registrant_is_publishable
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true }))
+    visit whois_record_url(name: @whois_record.name)
+
+    within '.registrant' do
+      assert_text 'Name test'
+      assert_text 'Email owner@privatedomain.test'
+      assert_text 'Last update 2018-04-25T14:10:41+00:00'
+      assert_text "Phone +555.555"
+    end
+  end
+
   private
 
   def disclosable_mask
