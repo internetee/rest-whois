@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'aws-sdk-ses', '~> 1.40'
-gem 'bootsnap', '~> 1.11.0', require: false
+gem 'bootsnap', '~> 1.13.0', require: false
 gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
-gem 'pg', '~> 1.3.0'
+gem 'pg', '~> 1.4.0'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
@@ -19,7 +19,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'apparition'
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
   gem 'pry'
   gem 'unicorn'

@@ -1,8 +1,10 @@
 <section class="captcha">
     <%= form_for @whois_record, url: whois_record_path(@whois_record.name), method: :get do |_f| %>
         <%= hidden_field_tag 'locale', locale %>
-        <div class="recaptcha"><%= recaptcha_tags %></div>
-        <br/>
+        <%= recaptcha_v3(action: 'check',
+                         nonce: request.content_security_policy_nonce,
+                         site_key: ENV['recaptcha_site_key']) %>
         <%= submit_tag t('.submit_btn'), name: nil %>
+        <br/>
     <% end %>
 </section>

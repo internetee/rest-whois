@@ -51,16 +51,7 @@ module RestWhois
         'X-XSS-Protection' => '1; mode=block',
         'X-Content-Type-Options' => 'nosniff',
         'X-Permitted-Cross-Domain-Policies' => 'none',
-        'Referrer-Policy' => 'strict-origin-when-cross-origin',
-        'Content-Security-Policy' => "default-src 'self';" \
-          "style-src 'self' 'unsafe-inline';" \
-          'script-src https://www.recaptcha.net/recaptcha/ ' \
-          'https://www.google.com/recaptcha/ ' \
-          'https://www.gstatic.com/recaptcha/;' \
-          'img-src www.gstatic.com;'\
-          "frame-src 'self' https://www.google.com/recaptcha/ https://www.google.com https://www.recaptcha.net/recaptcha/;"\
-          "object-src 'none';"\
-          "base-uri 'none';",
+        'Referrer-Policy' => 'strict-origin-when-cross-origin'
     }
 
     config.active_support.parse_json_times = true

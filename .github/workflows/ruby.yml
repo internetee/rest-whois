@@ -22,7 +22,7 @@ jobs:
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -56,7 +56,7 @@ jobs:
           ./cc-test-reporter before-build
 
       - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.5
+        uses: nanasess/setup-chromedriver@v1.0.8
 
       - name: Run Tests
         env:
@@ -75,7 +75,7 @@ jobs:
       - name: Save coverage
         run: ./cc-test-reporter format-coverage --output coverage/codeclimate.${{ matrix.ruby }}.json
 
-      - uses: actions/upload-artifact@v2.3.1
+      - uses: actions/upload-artifact@v3.1.0
         with:
           name: coverage-${{ matrix.ruby }}
           path: coverage/codeclimate.${{ matrix.ruby }}.json
@@ -96,12 +96,12 @@ jobs:
       - name: Give test coverage reporter executable permissions
         run: chmod +x cc-test-reporter
 
-      - uses: actions/download-artifact@v2.1.0
+      - uses: actions/download-artifact@v3.0.0
         with:
           name: coverage-2.6
           path: coverage
 
-      - uses: actions/download-artifact@v2.1.0
+      - uses: actions/download-artifact@v3.0.0
         with:
           name: coverage-2.7
           path: coverage
@@ -110,4 +110,3 @@ jobs:
         run: |
           ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
           ./cc-test-reporter upload-coverage
-

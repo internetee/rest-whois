@@ -86,7 +86,11 @@ class WhoisRecordsController < ApplicationController
   end
 
   def captcha_solved?
-    @captcha_solved ||= verify_recaptcha
+    @captcha_solved ||= verify_recaptcha(
+      action: 'check',
+      minimum_score: 0.5,
+      secret_key: ENV['recaptcha_secret_key']
+    )
   end
 
   def contact_form_default_locale

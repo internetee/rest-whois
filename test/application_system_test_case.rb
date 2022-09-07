@@ -7,8 +7,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include CaptchaHelpers
 
   # Moved from Selenium to Apparition driver due to Selenium intentionally lacks page.status
+  options = {js_errors: false}
   Capybara.register_driver(:headless_apparition) do |app|
-    Capybara::Apparition::Driver.new(app)
+    Capybara::Apparition::Driver.new(app, options)
   end
 
   driven_by :headless_apparition
