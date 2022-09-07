@@ -105,6 +105,7 @@ jobs:
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
+          helm ls -a -A
           helm upgrade --install rwhois-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/rest-whois -n rwhois-st
           rm kubeconfig
           echo "server obs.tld.ee
