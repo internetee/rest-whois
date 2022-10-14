@@ -56,7 +56,7 @@ jobs:
           ./cc-test-reporter before-build
 
       - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.8
+        uses: nanasess/setup-chromedriver@v1.1.0
 
       - name: Run Tests
         env:
