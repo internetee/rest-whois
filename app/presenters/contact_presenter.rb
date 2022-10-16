@@ -16,8 +16,7 @@ class ContactPresenter
   end
 
   def email
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?) ||
-               (contact.attribute_disclosed?(:email) && captcha_solved?) || registrant_publishable?
+    unmasked = whitelisted_user? || ((whois_record.registrant.legal_person? || contact.attribute_disclosed?(:email)) && (captcha_solved? || registrant_publishable?))
 
     if unmasked
       contact.email
@@ -29,8 +28,7 @@ class ContactPresenter
   end
 
   def phone
-    unmasked = whitelisted_user? || (contact.attribute_disclosed?(:phone) && captcha_solved?) ||
-               registrant_publishable?
+    unmasked = whitelisted_user? || (contact.attribute_disclosed?(:phone) && (captcha_solved? || registrant_publishable?))
 
     if unmasked
       contact.phone
@@ -54,10 +52,9 @@ class ContactPresenter
 
   private
 
-  def unmask_name?
-    whitelisted_user? || (whois_record.registrant.legal_person? &&
-      captcha_solved?) || contact.attribute_disclosed?(:name) ||
-      registrant_publishable?
+  def unmask_name?    
+    whitelisted_user? || ((whois_record.registrant.legal_person? ||
+      contact.attribute_disclosed?(:name)) && (captcha_solved? || registrant_publishable?))
   end
 
   def disclosable_mask
