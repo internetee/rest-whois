@@ -244,7 +244,8 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
   def test_show_sensitive_data_when_registrant_is_publishable
     whois_record = whois_records(:legally_owned)
-    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: true }))
+    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: true,
+                                                         registrant_disclosed_attributes: %w[name email phone] }))
 
     get '/v1/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)

@@ -143,7 +143,8 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   end
 
   def test_registrant_sensitive_data_is_unmasked_when_registrant_is_publishable
-    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true,
+                                                           registrant_disclosed_attributes: %w[name email phone] }))
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do

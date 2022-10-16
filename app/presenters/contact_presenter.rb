@@ -52,9 +52,9 @@ class ContactPresenter
 
   private
 
-  def unmask_name?    
-    whitelisted_user? || ((whois_record.registrant.legal_person? ||
-      contact.attribute_disclosed?(:name)) && (captcha_solved? || registrant_publishable?))
+  def unmask_name?
+    whitelisted_user? || (whois_record.registrant.legal_person? &&
+      (captcha_solved? || registrant_publishable?)) || contact.attribute_disclosed?(:name)
   end
 
   def disclosable_mask
