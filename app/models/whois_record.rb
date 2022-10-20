@@ -79,7 +79,8 @@ class WhoisRecord < ApplicationRecord
                 reg_number: nil,
                 email: serialized_contact['email'],
                 last_update: serialized_contact['changed'],
-                disclosed_attributes: serialized_contact['disclosed_attributes'])
+                disclosed_attributes: serialized_contact['disclosed_attributes'],
+                contact_publishable: serialized_contact['contact_publishable'])
   end
 
   def partial_for_private_person(authorized)

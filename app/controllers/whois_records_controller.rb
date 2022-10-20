@@ -23,6 +23,9 @@ class WhoisRecordsController < ApplicationController
 
       format.html do
         if @whois_record
+          p '-------'
+          p @whois_record
+          p '-------'
           render :show, status: :ok
         else
           render plain: invalid_data_body(domain_name), status: :not_found

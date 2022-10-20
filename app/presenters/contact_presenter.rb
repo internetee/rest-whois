@@ -10,35 +10,31 @@ class ContactPresenter
   end
 
   def name
-    # return contact.name if unmask_name?
-
-    # whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
-
-    unmasked = whitelisted_user? || ((whois_record.registrant.legal_person? || contact.attribute_disclosed?(:name)) && (captcha_solved? || registrant_publishable?))
+    unmasked = whitelisted_user? || ((contact.legal_person? || contact.attribute_disclosed?(:name)) && (captcha_solved? || contact_publishable?))
 
     if unmasked
       contact.name
     elsif contact.attribute_disclosed?(:name) && captcha_unsolved?
       disclosable_mask
     else
-      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
+      contact.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
   def email
-    unmasked = whitelisted_user? || ((whois_record.registrant.legal_person? || contact.attribute_disclosed?(:email)) && (captcha_solved? || registrant_publishable?))
+    unmasked = whitelisted_user? || ((contact.legal_person? || contact.attribute_disclosed?(:email)) && (captcha_solved? || contact_publishable?))
 
     if unmasked
       contact.email
     elsif contact.attribute_disclosed?(:email) && captcha_unsolved?
       disclosable_mask
     else
-      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
+      contact.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
   def phone
-    unmasked = whitelisted_user? || (contact.attribute_disclosed?(:phone) && (captcha_solved? || registrant_publishable?))
+    unmasked = whitelisted_user? || (contact.attribute_disclosed?(:phone) && (captcha_solved? || contact_publishable?))
 
     if unmasked
       contact.phone
@@ -50,12 +46,12 @@ class ContactPresenter
   end
 
   def last_update
-    unmasked = whitelisted_user? || (whois_record.registrant.legal_person? && captcha_solved?)
+    unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
 
     if unmasked
       view.l(contact.last_update.to_datetime, default: nil)
     else
-      whois_record.registrant.private_person? ? undisclosable_mask : disclosable_mask
+      contact.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
@@ -63,7 +59,7 @@ class ContactPresenter
   private
 
   def unmask_name?
-    whitelisted_user? || (whois_record.registrant.legal_person? &&
+    whitelisted_user? || (contact.legal_person? &&
       (captcha_solved? || registrant_publishable?)) || contact.attribute_disclosed?(:name)
   end
 
@@ -92,6 +88,10 @@ class ContactPresenter
   end
 
   def registrant_publishable?
-    whois_record.registrant.registrant_publishable
+    contact.registrant_publishable
+  end
+
+  def contact_publishable?
+    contact.contact_publishable
   end
 end
