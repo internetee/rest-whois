@@ -30,6 +30,7 @@ json.tech_contacts do
   json.array!(whois_record.json['tech_contacts']) do |contact|
     json.name contact['name']
     json.email contact['email']
+    json.phone contact['phone']
     json.changed contact['changed']
   end
 end
@@ -37,6 +38,7 @@ json.admin_contacts do
   json.array!(whois_record.json['admin_contacts']) do |contact|
     json.name contact['name']
     json.email contact['email']
+    json.phone contact['phone']
     json.changed contact['changed']
   end
 end

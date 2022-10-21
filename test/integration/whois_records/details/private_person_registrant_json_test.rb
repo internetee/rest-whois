@@ -20,7 +20,8 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
   def test_registrant_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ registrant: 'John',
-                                           registrant_disclosed_attributes: %w[name] }))
+                                           registrant_disclosed_attributes: %w[name],
+                                           registrant_publishable: 'true'}))
 
     get whois_record_path(name: @whois_record.name), as: :json
 
@@ -69,11 +70,11 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
 
   def test_registrant_sensitive_data_is_masked_when_not_publishable
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ registrant_publishable: false }))
+                                  .merge({ registrant_publishable: false, registrant_disclosed_attributes: %w[name] }))
 
     get whois_record_path(name: @whois_record.name), as: :json
 
-    assert_equal 'Private Person', response.parsed_body['registrant']
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response.parsed_body['registrant']
     assert_equal 'Not Disclosed', response.parsed_body['email']
     assert_equal 'Not Disclosed', response.parsed_body['phone']
   end
@@ -93,7 +94,8 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
   def test_admin_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',
-                                                              disclosed_attributes: %w[name] }] }))
+                                                              disclosed_attributes: %w[name],
+                                                              contact_publishable: 'true' }] }))
 
     get whois_record_path(name: @whois_record.name), as: :json
 
@@ -123,7 +125,8 @@ class WhoisRecordDetailsPrivatePersonRegistrantJSONTest < ActionDispatch::Integr
   def test_tech_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ tech_contacts: [{ name: 'John',
-                                                             disclosed_attributes: %w[name] }] }))
+                                                             disclosed_attributes: %w[name],
+                                                             contact_publishable: 'true'}] }))
 
     get whois_record_path(name: @whois_record.name), as: :json
 

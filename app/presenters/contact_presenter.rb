@@ -61,6 +61,10 @@ class ContactPresenter
     view.t('masks.undisclosable')
   end
 
+  def name_mask
+    contact.private_person? ? undisclosable_mask : disclosable_mask
+  end
+
   def whitelisted_user?
     view.ip_in_whitelist?
   end

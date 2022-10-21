@@ -30,6 +30,7 @@ json.tech_contacts do
   json.array!(whois_record.json['tech_contacts']) do |_contact|
     json.name 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     json.email 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
+    json.phone 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     json.changed 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
   end
 end
@@ -37,6 +38,7 @@ json.admin_contacts do
   json.array!(whois_record.json['admin_contacts']) do |_contact|
     json.name 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     json.email 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
+    json.phone 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     json.changed 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
   end
 end

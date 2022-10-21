@@ -25,18 +25,20 @@ json.registrant(registrant.name)
 
 json.tech_contacts do
   json.array!(whois_record.tech_contacts) do |contact|
-    contact_presenter = ContactPresenter.new(contact, self, whois_record, 'tech')
+    contact_presenter = ContactPresenter.new(contact, self, whois_record)
     json.name(contact_presenter.name)
     json.email(contact_presenter.email)
+    json.phone(contact_presenter.phone)
     json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end
 
 json.admin_contacts do
   json.array!(whois_record.admin_contacts) do |contact|
-    contact_presenter = ContactPresenter.new(contact, self, whois_record, 'priv')
+    contact_presenter = ContactPresenter.new(contact, self, whois_record)
     json.name(contact_presenter.name)
     json.email(contact_presenter.email)
+    json.phone(contact_presenter.phone)
     json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end
