@@ -78,6 +78,7 @@ class WhoisRecord < ApplicationRecord
                 type: nil,
                 reg_number: nil,
                 email: serialized_contact['email'],
+                phone: serialized_contact['phone'],
                 last_update: serialized_contact['changed'],
                 disclosed_attributes: serialized_contact['disclosed_attributes'],
                 contact_publishable: serialized_contact['contact_publishable'])
