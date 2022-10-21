@@ -28,26 +28,41 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_sensitive_data_is_masked_when_captcha_is_unsolved
     visit whois_record_url(name: @whois_record.name)
-    assert_sensitive_data_is_masked
+    within '.registrant' do
+      assert_text 'Name Not Disclosed'
+      assert_text 'Email Not Disclosed'
+      assert_text 'Phone Not Disclosed'
+    end
   end
 
   def test_sensitive_data_is_masked_when_registrant_is_not_publishable
     @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }))
     visit whois_record_url(name: @whois_record.name)
-    assert_sensitive_data_is_masked
+
+    within '.registrant' do
+      assert_text 'Name Not Disclosed'
+      assert_text 'Email Not Disclosed'
+      assert_text 'Phone Not Disclosed'
+    end
   end
 
   def test_sensitive_data_is_masked_when_captcha_is_solved
     solve_captcha
 
     visit whois_record_url(name: @whois_record.name)
-    assert_sensitive_data_is_masked
+
+    within '.registrant' do
+      assert_text 'Name Not Disclosed'
+      assert_text 'Email Not Disclosed'
+      assert_text 'Phone Not Disclosed'
+    end
   end
 
   def test_registrant_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ registrant: 'John',
-                                           registrant_disclosed_attributes: %w[name] }))
+                                           registrant_disclosed_attributes: %w[name],
+                                           registrant_publishable: true}))
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -119,7 +134,8 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
   def test_admin_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',
-                                                              disclosed_attributes: %w[name] }] }))
+                                                              disclosed_attributes: %w[name],
+                                                              contact_publishable: 'true'}] }))
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -155,7 +171,8 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
   def test_tech_contact_name_is_unmasked_when_disclosed
     @whois_record.update!(json: @whois_record.json
                                   .merge({ tech_contacts: [{ name: 'John',
-                                                             disclosed_attributes: %w[name] }] }))
+                                                             disclosed_attributes: %w[name],
+                                                             contact_publishable: 'true' }] }))
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -190,7 +207,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   private
 
-  def assert_sensitive_data_is_masked
+  def assert_sensitive_data_is_masked(disclosable: true)
     within '.registrant' do
       assert_text 'Name Private Person'
       assert_text "Email #{undisclosable_mask}"
@@ -202,6 +219,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     within '.admin-contacts' do
       assert_text "Name #{undisclosable_mask}"
       assert_text "Email #{undisclosable_mask}"
+      assert_text "Phone #{undisclosable_mask}"
       assert_text "Last update #{undisclosable_mask}"
       assert_no_text disclosable_mask
     end
@@ -209,6 +227,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     within '.tech-contacts' do
       assert_text "Name #{undisclosable_mask}"
       assert_text "Email #{undisclosable_mask}"
+      assert_text "Phone #{undisclosable_mask}"
       assert_text "Last update #{undisclosable_mask}"
       assert_no_text disclosable_mask
     end

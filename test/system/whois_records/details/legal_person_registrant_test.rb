@@ -27,7 +27,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   end
 
   def test_registrant_name_is_unmasked
-    @whois_record.update!(json: @whois_record.json.merge({ registrant: 'Acme' }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant: 'Acme', registrant_publishable: 'true' }))
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -92,15 +92,17 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     visit whois_record_url(name: @whois_record.name)
 
     within '.admin-contacts' do
-      assert_text "Name #{disclosable_mask}"
-      assert_text "Email #{disclosable_mask}"
-      assert_text "Last update #{disclosable_mask}"
+      assert_text "Name Not Disclosed"
+      assert_text "Email Not Disclosed"
+      assert_text "Phone Not Disclosed"
+      assert_text "Last update Not Disclosed"
     end
 
     within '.tech-contacts' do
-      assert_text "Name #{disclosable_mask}"
-      assert_text "Email #{disclosable_mask}"
-      assert_text "Last update #{disclosable_mask}"
+      assert_text "Name Not Disclosed"
+      assert_text "Email Not Disclosed"
+      assert_text "Phone Not Disclosed"
+      assert_text "Last update Not Disclosed"
     end
   end
 
@@ -109,11 +111,17 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',
                                                               email: 'john@inbox.test',
+                                                              phone: '+555.555',
                                                               changed: '2010-07-06T00:00:00+00:00',
+                                                              contact_publishable: true,
+                                                              disclosed_attributes: %w[name email phone changed]
                                                             }],
                                            tech_contacts: [{ name: 'William',
                                                              email: 'william@inbox.test',
+                                                             phone: '+555.555',
                                                              changed: '2010-07-07T00:00:00+00:00',
+                                                             contact_publishable: true,
+                                                             disclosed_attributes: %w[name email phone changed]
                                                            }] }))
 
     visit whois_record_url(name: @whois_record.name)
@@ -121,13 +129,15 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     within '.admin-contacts' do
       assert_text 'Name John'
       assert_text 'Email john@inbox.test'
-      assert_text 'Last update 2010-07-06 00:00:00 +00:00'
+      assert_text '+555.555'
+      assert_text 'Last update Not Disclosed'
     end
 
     within '.tech-contacts' do
       assert_text 'Name William'
       assert_text 'Email william@inbox.test'
-      assert_text 'Last update 2010-07-07 00:00:00 +00:00'
+      assert_text '+555.555'
+      assert_text 'Last update Not Disclosed'
     end
   end
 
@@ -136,9 +146,9 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
-      assert_text 'Name test'
+      assert_text "Name #{disclosable_mask}"
       assert_text "Email #{disclosable_mask}"
-      assert_text "Phone Not Disclosed"
+      assert_text "Phone #{disclosable_mask}"
     end
   end
 
