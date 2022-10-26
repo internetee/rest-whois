@@ -10,7 +10,7 @@ class ContactPresenter
   end
 
   def registrant_is_org?
-    !whois_record.registrant.private_person? 
+    !whois_record.registrant.private_person?
   end
 
   def registrant_publishable?
@@ -46,7 +46,13 @@ class ContactPresenter
 
     attr = attr.to_sym
 
-    registrant_publishable? ? contact.send(attr) : disclosable_mask
+    registrant_publishable? ? contact.send(attr) : registrant_resolve_captcha(attr)
+  end
+
+  def registrant_resolve_captcha(attr)
+    attr = attr.to_sym
+
+    captcha_solved? ? contact.send(attr) : disclosable_mask
   end
 
   def unmasked_attr(attr)
