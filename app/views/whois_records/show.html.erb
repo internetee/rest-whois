@@ -8,7 +8,6 @@
 <p><%= disclaimer_string if disclaimer %></p>
 
 <%= render 'whois_records/show/domain', domain: @whois_record.domain %>
-
 <% if @whois_record.domain.active? %>
     <%= render 'whois_records/show/registrant',
                registrant: RegistrantPresenter.new(@whois_record.registrant, self, @whois_record) %>

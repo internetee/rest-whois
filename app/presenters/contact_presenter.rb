@@ -18,30 +18,27 @@ class ContactPresenter
   end
 
   def name
-    # registrant_is_org? ? disclose_attr_for_org_registrant('name') :
-    publishable_attribute('name')
+    registrant_is_org? ? disclose_attr_for_org_registrant('name') : publishable_attribute('name')
+    # publishable_attribute('name')
   end
 
   def email
-    # registrant_is_org? ? disclose_attr_for_org_registrant('email') :
-    publishable_attribute('email')
+    registrant_is_org? ? disclose_attr_for_org_registrant('email') : publishable_attribute('email')
+    # publishable_attribute('email')
   end
 
   def phone
-    publishable_attribute('phone')
+    registrant_is_org? ? disclose_attr_for_org_registrant('phone') : publishable_attribute('phone')
+    # publishable_attribute('phone')
   end
 
   def last_update
-    if registrant_is_org?
-      disclose_attr_for_org_registrant('last_update')
-    else
-      unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
+    unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
 
-      if unmasked
-        view.l(contact.last_update.to_datetime, default: nil)
-      else
-        contact.private_person? ? undisclosable_mask : disclosable_mask
-      end
+    if unmasked
+      view.l(contact.last_update.to_datetime, default: nil)
+    else
+      contact.private_person? ? undisclosable_mask : disclosable_mask
     end
   end
 
@@ -50,13 +47,16 @@ class ContactPresenter
   def disclose_attr_for_org_registrant(attr)
     return unless registrant_is_org?
 
-    attr = attr.to_sym
-
-    registrant_publishable? ? contact.send(attr) : registrant_resolve_captcha(attr)
+    # attr = attr.to_sym
+    if contact.private_person?
+      publishable_attribute(attr)
+    else
+      registrant_publishable? ? contact.send(attr.to_sym) : registrant_resolve_captcha(attr.to_sym)
+    end
   end
 
   def registrant_resolve_captcha(attr)
-    attr = attr.to_sym
+    # attr = attr.to_sym
 
     captcha_solved? ? contact.send(attr) : disclosable_mask
   end
