@@ -26,7 +26,7 @@ class ContactPresenter
   end
 
   def phone
-    registrant_is_org? ? disclose_attr_for_org_registrant('phone') : publishable_attribute('phone')
+    publishable_attribute('phone')
   end
 
   def last_update
@@ -97,10 +97,6 @@ class ContactPresenter
 
   def captcha_unsolved?
     !captcha_solved?
-  end
-
-  def registrant_publishable?
-    contact.registrant_publishable
   end
 
   def contact_publishable?

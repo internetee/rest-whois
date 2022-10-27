@@ -1,6 +1,10 @@
 class RegistrantPresenter < ContactPresenter
   def name
-    publishable_attribute('name')
+    if registrant_is_org?
+      contact.name
+    else
+      publishable_attribute('name')
+    end
   end
 
   def email
