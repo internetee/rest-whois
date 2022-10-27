@@ -18,11 +18,13 @@ class ContactPresenter
   end
 
   def name
-    registrant_is_org? ? disclose_attr_for_org_registrant('name') : publishable_attribute('name')
+    # registrant_is_org? ? disclose_attr_for_org_registrant('name') : 
+    publishable_attribute('name')
   end
 
   def email
-    registrant_is_org? ? disclose_attr_for_org_registrant('email') : publishable_attribute('email')
+    # registrant_is_org? ? disclose_attr_for_org_registrant('email') : 
+    publishable_attribute('email')
   end
 
   def phone
@@ -30,12 +32,16 @@ class ContactPresenter
   end
 
   def last_update
-    unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
-
-    if unmasked
-      view.l(contact.last_update.to_datetime, default: nil)
+    if registrant_is_org?
+      disclose_attr_for_org_registrant('last_update')
     else
-      contact.private_person? ? undisclosable_mask : disclosable_mask
+      unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
+
+      if unmasked
+        view.l(contact.last_update.to_datetime, default: nil)
+      else
+        contact.private_person? ? undisclosable_mask : disclosable_mask
+      end
     end
   end
 
