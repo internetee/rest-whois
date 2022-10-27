@@ -18,12 +18,12 @@ class ContactPresenter
   end
 
   def name
-    # registrant_is_org? ? disclose_attr_for_org_registrant('name') : 
+    # registrant_is_org? ? disclose_attr_for_org_registrant('name') :
     publishable_attribute('name')
   end
 
   def email
-    # registrant_is_org? ? disclose_attr_for_org_registrant('email') : 
+    # registrant_is_org? ? disclose_attr_for_org_registrant('email') :
     publishable_attribute('email')
   end
 
