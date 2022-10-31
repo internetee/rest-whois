@@ -28,8 +28,8 @@ class ContactPresenter
   end
 
   def phone
-    registrant_is_org? ? disclose_attr_for_org_registrant('phone') : publishable_attribute('phone')
-    # publishable_attribute('phone')
+    # registrant_is_org? ? disclose_attr_for_org_registrant('phone') : publishable_attribute('phone')
+    publishable_attribute('phone')
   end
 
   def last_update
@@ -47,11 +47,20 @@ class ContactPresenter
   def disclose_attr_for_org_registrant(attr)
     return unless registrant_is_org?
 
+    p '------'
+    p whois_record.registrant
+    p '-------'
     # attr = attr.to_sym
-    if contact.private_person?
-      publishable_attribute(attr)
+    # if contact.private_person?
+    #   publishable_attribute(attr)
+    # else
+    #   registrant_publishable? ? contact.send(attr.to_sym) : registrant_resolve_captcha(attr.to_sym)
+    # end
+
+    if contact_publishable? || captcha_solved?
+      contact.send(attr.to_sym)
     else
-      registrant_publishable? ? contact.send(attr.to_sym) : registrant_resolve_captcha(attr.to_sym)
+      disclosable_mask
     end
   end
 
