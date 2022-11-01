@@ -32,8 +32,6 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def disclose_data_priv_registrant(attr)
-    return unless registrant_is_org?
-
     return undisclosable_mask unless contact.attribute_disclosed?(attr)
     disclose_attr(attr)
   end
