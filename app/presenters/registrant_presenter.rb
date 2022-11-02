@@ -13,7 +13,8 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def phone
-    publishable_attribute('phone')
+    # publishable_attribute('phone')
+    disclose_data_priv_registrant('phone')
   end
 
   private

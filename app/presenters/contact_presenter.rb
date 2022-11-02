@@ -52,9 +52,6 @@ class ContactPresenter
     # else
     #   registrant_publishable? ? contact.send(attr.to_sym) : registrant_resolve_captcha(attr.to_sym)
     # end
-    p '---------'
-    p captcha_solved?
-    p '---------'
 
     if contact_publishable? || captcha_solved?
       contact.send(attr.to_sym)
