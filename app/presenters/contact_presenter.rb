@@ -40,7 +40,13 @@ class ContactPresenter
     # else
     #   contact.private_person? ? undisclosable_mask : disclosable_mask
     # end
-    registrant_is_org? ? disclose_attr_for_org_registrant('last_update') : publishable_attribute('last_update')
+    # registrant_is_org? ? disclose_attr_for_org_registrant('last_update') : publishable_attribute('last_update')
+    # disclose_attr_for_org_registrant('last_update')
+    if captcha_solved?
+      contact.last_update
+    else
+      disclosable_mask
+    end
   end
 
   private

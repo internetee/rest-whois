@@ -17,6 +17,14 @@ class RegistrantPresenter < ContactPresenter
     disclose_data_priv_registrant('phone')
   end
 
+  def last_update
+    if captcha_solved?
+      contact.last_update
+    else
+      disclosable_mask
+    end
+  end
+
   private
 
   def disclose_registrant_data(attr)
