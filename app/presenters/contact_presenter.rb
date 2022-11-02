@@ -33,29 +33,28 @@ class ContactPresenter
   end
 
   def last_update
-    unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
+    # unmasked = whitelisted_user? || (contact.legal_person? && captcha_solved?)
 
-    if unmasked
-      view.l(contact.last_update.to_datetime, default: nil)
-    else
-      contact.private_person? ? undisclosable_mask : disclosable_mask
-    end
+    # if unmasked
+    #   view.l(contact.last_update.to_datetime, default: nil)
+    # else
+    #   contact.private_person? ? undisclosable_mask : disclosable_mask
+    # end
+    registrant_is_org? ? disclose_attr_for_org_registrant('last_update') : publishable_attribute('last_update')
   end
 
   private
 
   def disclose_attr_for_org_registrant(attr)
-    return unless registrant_is_org?
-
-    p '------'
-    p whois_record.registrant
-    p '-------'
     # attr = attr.to_sym
     # if contact.private_person?
     #   publishable_attribute(attr)
     # else
     #   registrant_publishable? ? contact.send(attr.to_sym) : registrant_resolve_captcha(attr.to_sym)
     # end
+    p '---------'
+    p captcha_solved?
+    p '---------'
 
     if contact_publishable? || captcha_solved?
       contact.send(attr.to_sym)
@@ -65,8 +64,6 @@ class ContactPresenter
   end
 
   def registrant_resolve_captcha(attr)
-    # attr = attr.to_sym
-
     captcha_solved? ? contact.send(attr) : disclosable_mask
   end
 

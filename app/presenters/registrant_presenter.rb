@@ -1,11 +1,10 @@
 class RegistrantPresenter < ContactPresenter
   def name
-    # if registrant_is_org?
-    #   disclose_data_org_registrant('name')
-    # else
-    #   publishable_attribute('name')
-    # end
-    disclose_registrant_data('name')
+    if registrant_is_org?
+      contact.name
+    else
+      disclose_data_priv_registrant('name')
+    end
   end
 
   def email
