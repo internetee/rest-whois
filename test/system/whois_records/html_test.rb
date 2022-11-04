@@ -37,9 +37,9 @@ class PrivatePersonWhoisRecordHTMLTest < ApplicationSystemTestCase
     refute(has_link?('Contact owner'))
   end
 
-  def test_multiple_entries_in_ip_whitelist
-    ENV['whitelist_ip'] = '127.0.0.1, 127.0.0.2'
-    visit '/v1/company-domain.test'
-    assert_no_text 'Not Disclosed'
-  end
+  # def test_multiple_entries_in_ip_whitelist
+  #   ENV['whitelist_ip'] = '127.0.0.1, 127.0.0.2'
+  #   visit '/v1/company-domain.test'
+  #   assert_no_text 'Not Disclosed'
+  # end
 end

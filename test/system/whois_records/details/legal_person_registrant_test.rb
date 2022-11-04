@@ -73,7 +73,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
 
     within '.registrant' do
       assert_text 'Email john@inbox.test'
-      assert_text 'Last update 2010-07-05 00:00:00 +00:00'
+      assert_text 'Last update 2010-07-05T00:00:00+00:00'
     end
   end
 
@@ -130,14 +130,14 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
       assert_text 'Name John'
       assert_text 'Email john@inbox.test'
       assert_text '+555.555'
-      assert_text 'Last update Not Disclosed'
+      assert_text '2010-07-06T00:00:00+00:00'
     end
 
     within '.tech-contacts' do
       assert_text 'Name William'
       assert_text 'Email william@inbox.test'
       assert_text '+555.555'
-      assert_text 'Last update Not Disclosed'
+      assert_text '2010-07-07T00:00:00+00:00'
     end
   end
 
@@ -146,9 +146,10 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
-      assert_text "Name #{disclosable_mask}"
+      assert_text "Name test"
       assert_text "Email #{disclosable_mask}"
-      assert_text "Phone #{disclosable_mask}"
+      assert_text "Phone Not Disclosed"
+      assert_text "Last update Not Disclosed - Visit www.internet.ee for web-based WHOIS"
     end
   end
 
