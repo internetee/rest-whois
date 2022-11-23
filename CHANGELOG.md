@@ -1,3 +1,22 @@
+23.11.2022
+* Update actions/checkout action to v3 by @renovate in https://github.com/internetee/rest-whois/pull/336
+* Update actions/upload-artifact action to v3 by @renovate in https://github.com/internetee/rest-whois/pull/338
+* Update actions/download-artifact action to v3 by @renovate in https://github.com/internetee/rest-whois/pull/337
+* Update nanasess/setup-chromedriver action to v1.0.7 by @renovate in https://github.com/internetee/rest-whois/pull/341
+* Bump nokogiri from 1.12.5 to 1.13.6 by @dependabot in https://github.com/internetee/rest-whois/pull/349
+* Update dependency bootsnap to ~> 1.12.0 by @renovate in https://github.com/internetee/rest-whois/pull/351
+* Bump rack from 2.2.3 to 2.2.3.1 by @dependabot in https://github.com/internetee/rest-whois/pull/352
+* Bump jmespath from 1.4.0 to 1.6.1 by @dependabot in https://github.com/internetee/rest-whois/pull/354
+* Update dependency pg to ~> 1.4.0 by @renovate in https://github.com/internetee/rest-whois/pull/355
+* Update dependency bootsnap to ~> 1.13.0 by @renovate in https://github.com/internetee/rest-whois/pull/358
+* Bump rails-html-sanitizer from 1.4.1 to 1.4.3 by @dependabot in https://github.com/internetee/rest-whois/pull/356
+* Update nanasess/setup-chromedriver action to v1.0.8 by @renovate in https://github.com/internetee/rest-whois/pull/360
+* Update postgres Docker tag to v14 by @renovate in https://github.com/internetee/rest-whois/pull/359
+* Update nanasess/setup-chromedriver action to v1.1.0 by @renovate in https://github.com/internetee/rest-whois/pull/361
+* Update actions/download-artifact action to v3.0.1 by @renovate in https://github.com/internetee/rest-whois/pull/363
+* Update actions/upload-artifact action to v3.1.1 by @renovate in https://github.com/internetee/rest-whois/pull/365
+* Update dependency bootsnap to '~> 1.14.0' by @renovate in https://github.com/internetee/rest-whois/pull/366
+
 23.05.2022
 * Fixed captcha check for org owned registrations [#348](https://github.com/internetee/rest-whois/issues/348)
 
