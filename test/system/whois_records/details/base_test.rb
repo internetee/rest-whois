@@ -51,9 +51,10 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
-      assert_text 'Name John'
-      assert_text 'Email john@inbox.test'
-      assert_text 'Last update 2010-07-05 00:00:00 +00:00'
+      assert_text 'Name Not Disclosed'
+      assert_text 'Email Not Disclosed'
+      assert_text 'Phone Not Disclosed'
+      assert_text 'Last update Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     end
   end
 
@@ -70,7 +71,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
     within '.admin-contacts' do
       assert_text 'Name John'
       assert_text 'Email john@inbox.test'
-      assert_text 'Last update 2010-07-05 00:00:00 +00:00'
+      assert_text 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     end
   end
 
@@ -87,7 +88,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
     within '.tech-contacts' do
       assert_text 'Name John'
       assert_text 'Email john@inbox.test'
-      assert_text 'Last update 2010-07-05 00:00:00 +00:00'
+      assert_text 'Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     end
   end
 

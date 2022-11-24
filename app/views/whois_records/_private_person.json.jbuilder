@@ -20,6 +20,7 @@ json.registrar_phone whois_record.json['registrar_phone']
 json.registrar_website whois_record.json['registrar_website']
 
 json.email(registrant.email)
+json.phone(registrant.phone)
 json.registrant(registrant.name)
 
 json.tech_contacts do
@@ -27,6 +28,7 @@ json.tech_contacts do
     contact_presenter = ContactPresenter.new(contact, self, whois_record)
     json.name(contact_presenter.name)
     json.email(contact_presenter.email)
+    json.phone(contact_presenter.phone)
     json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end
@@ -36,6 +38,7 @@ json.admin_contacts do
     contact_presenter = ContactPresenter.new(contact, self, whois_record)
     json.name(contact_presenter.name)
     json.email(contact_presenter.email)
+    json.phone(contact_presenter.phone)
     json.changed(ip_in_whitelist ? contact.last_update : 'Not Disclosed')
   end
 end

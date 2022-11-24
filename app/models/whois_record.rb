@@ -66,9 +66,11 @@ class WhoisRecord < ApplicationRecord
                 type: json['registrant_kind'],
                 reg_number: json['registrant_reg_no'],
                 email: json['email'],
+                phone: json['phone'],
                 ident_country: json['registrant_ident_country_code'],
                 last_update: json['registrant_changed'],
-                disclosed_attributes: json['registrant_disclosed_attributes'])
+                disclosed_attributes: json['registrant_disclosed_attributes'],
+                registrant_publishable: json['registrant_publishable'])
   end
 
   def deserialize_contact(serialized_contact)
@@ -76,8 +78,10 @@ class WhoisRecord < ApplicationRecord
                 type: nil,
                 reg_number: nil,
                 email: serialized_contact['email'],
+                phone: serialized_contact['phone'],
                 last_update: serialized_contact['changed'],
-                disclosed_attributes: serialized_contact['disclosed_attributes'])
+                disclosed_attributes: serialized_contact['disclosed_attributes'],
+                contact_publishable: serialized_contact['contact_publishable'])
   end
 
   def partial_for_private_person(authorized)

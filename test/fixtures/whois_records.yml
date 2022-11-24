@@ -6,6 +6,7 @@ privately_owned:
         changed: "2018-04-25T14:10:41+00:00"
         email: admin-contact@privatedomain.test
         name: "Admin Contact"
+        phone:
     changed: "2018-04-25T14:10:41+00:00"
     delete: "2018-07-25"
     disclaimer: "The information obtained through .ee WHOIS is subject to database protection according to the Estonian Copyright Act and international conventions. All rights are reserved to Estonian Internet Foundation. Search results may not be used for commercial,advertising, recompilation, repackaging, redistribution, reuse, obscuring or other similar activities. Downloading of information about domain names for the creation of your own database is not permitted. If any of the information from .ee WHOIS is transferred to a third party, it must be done in its entirety. This server must not be used as a backend for a search engine."
@@ -14,6 +15,7 @@ privately_owned:
       - two
     dnssec_changed: "2010-07-05T00:00:00+00:00"
     email: owner@privatedomain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: privatedomain.test
     nameservers:
@@ -36,6 +38,7 @@ privately_owned:
         changed: "2018-04-25T14:10:41+00:00"
         email: tech-contact@privatedomain.test
         name: "Tech Contact"
+        phone:
   name: privatedomain.test
 
 
@@ -52,6 +55,7 @@ legally_owned:
     dnssec_changed: "2018-07-25"
     dnssec_keys: []
     email: owner@company-domain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: company-domain.test
     nameservers: []
@@ -96,6 +100,7 @@ with_duplicate_domain_contacts:
     dnssec_changed: "2018-07-25"
     dnssec_keys: []
     email: duplicate@domain.test
+    phone: '+555.555'
     expire: "2018-07-25"
     name: duplicatecontacts-domain.test
     nameservers: []
