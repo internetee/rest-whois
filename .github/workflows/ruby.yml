@@ -81,7 +81,7 @@ jobs:
           path: coverage/codeclimate.${{ matrix.ruby }}.json
 
   upload_coverage:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     env:
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
