@@ -2,6 +2,8 @@ class ContactRequestsController < ApplicationController
   before_action :set_contact_request, only: %i[edit update show]
   before_action :check_for_replay, only: %i[edit update show]
 
+  MAX_SYNC_WAIT_TIME = 5 # seconds
+
   rescue_from ActionController::UnknownFormat do
     logger.warn("The unlucky customer was using format of: #{request.format}")
     raise
@@ -17,20 +19,15 @@ class ContactRequestsController < ApplicationController
   def create
     @contact_request = ContactRequest.new(contact_request_params)
     result = @contact_request.save_to_registry
-    @contact_request = result ? ContactRequest.find_by(id: result['id']) : nil
+    fetch_contact_request(result)
+
     if @contact_request
-      update_request_secret
-      @contact_request.send_confirmation_email
-      @contact_request.reload
-      logger.warn("Confirmation request email registered to #{@contact_request.email}" \
-        " (IP: #{request.ip})")
-      render :confirmation_completed
+      process_contact_request
     else
       redirect_to(:root, alert: t('contact_requests.registry_link_error'))
     end
   rescue Net::SMTPServerBusy => e
-    logger.warn("Failed confirmation request email to #{@contact_request.email}. #{e.message}")
-    redirect_to(:root, alert: t('contact_requests.smtp_error'))
+    handle_smtp_error(e)
   end
 
   def redirect_to_main
@@ -86,5 +83,29 @@ class ContactRequestsController < ApplicationController
 
   def contact_request_params
     params.require(:contact_request).permit(:email, :whois_record_id, :name)
+  end
+
+  def fetch_contact_request(result)
+    start_time = Time.now
+    while Time.now - start_time < MAX_SYNC_WAIT_TIME
+      @contact_request = result ? ContactRequest.find_by(id: result['id']) : nil
+      break if @contact_request
+
+      sleep(0.5) # Sleep for 0.5 seconds before retrying
+    end
+  end
+
+  def process_contact_request
+    update_request_secret
+    @contact_request.send_confirmation_email
+    @contact_request.reload
+    logger.warn("Confirmation request email registered to #{@contact_request.email}" \
+      " (IP: #{request.ip})")
+    render :confirmation_completed
+  end
+
+  def handle_smtp_error(exception)
+    logger.warn("Failed confirmation request email to #{@contact_request.email}. #{exception.message}")
+    redirect_to(:root, alert: t('contact_requests.smtp_error'))
   end
 end
