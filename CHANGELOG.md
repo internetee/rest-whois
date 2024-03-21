@@ -1,3 +1,18 @@
+21.03.2024
+* Disclose additional registrant data by @thiagoyoussef in https://github.com/internetee/rest-whois/pull/357
+* Update dependency bootsnap to '~> 1.15.0' by @renovate in https://github.com/internetee/rest-whois/pull/367
+* Update postgres Docker tag to v15 by @renovate in https://github.com/internetee/rest-whois/pull/362
+* Bump nokogiri from 1.13.6 to 1.13.9 by @dependabot in https://github.com/internetee/rest-whois/pull/364
+* Bump loofah from 2.18.0 to 2.19.1 by @dependabot in https://github.com/internetee/rest-whois/pull/368
+* Bump rails-html-sanitizer from 1.4.3 to 1.4.4 by @dependabot in https://github.com/internetee/rest-whois/pull/369
+* Update actions/upload-artifact action to v3.1.2 by @renovate in https://github.com/internetee/rest-whois/pull/373
+* Update actions/download-artifact action to v3.0.2 by @renovate in https://github.com/internetee/rest-whois/pull/372
+* Update dependency listen to '>= 3.0.5', '< 3.9' by @renovate in https://github.com/internetee/rest-whois/pull/374
+* Update dependency ruby to v3.1.3 by @renovate in https://github.com/internetee/rest-whois/pull/377
+* Update dependency bootsnap to '~> 1.16.0' by @renovate in https://github.com/internetee/rest-whois/pull/378
+* Bump rack from 2.2.3.1 to 2.2.6.4 by @dependabot in https://github.com/internetee/rest-whois/pull/381
+* Added syncing loop with delay for contact requests by @maricavor in https://github.com/internetee/rest-whois/pull/402
+
 23.11.2022
 * Update actions/checkout action to v3 by @renovate in https://github.com/internetee/rest-whois/pull/336
 * Update actions/upload-artifact action to v3 by @renovate in https://github.com/internetee/rest-whois/pull/338
