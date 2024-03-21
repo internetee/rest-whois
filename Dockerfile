@@ -1,5 +1,4 @@
-FROM internetee/ruby:2.7
-MAINTAINER maciej.szlosarczyk@internet.ee
+FROM internetee/ruby:3.0-buster
 
 RUN mkdir -p /opt/webapps/app/tmp/pids
 WORKDIR /opt/webapps/app
