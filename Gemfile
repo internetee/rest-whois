@@ -5,7 +5,7 @@ gem 'bootsnap', '~> 1.18.0', require: false
 gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
-gem 'pg', '~> 1.4.0'
+gem 'pg', '~> 1.5.0'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
