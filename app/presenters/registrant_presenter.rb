@@ -1,10 +1,6 @@
 class RegistrantPresenter < ContactPresenter
   def name
-    if registrant_is_org?
-      contact.name
-    else
-      disclose_data_priv_registrant('name')
-    end
+    registrant_is_org? ? contact.name : disclose_data_priv_registrant('name')
   end
 
   def email
@@ -18,11 +14,7 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def last_update
-    if captcha_solved?
-      contact.last_update
-    else
-      disclosable_mask
-    end
+    captcha_solved? ? contact.last_update : disclosable_mask
   end
 
   private
@@ -40,7 +32,9 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def disclose_data_priv_registrant(attr)
+    return contact.send(attr.to_sym) if whitelisted_user?
     return undisclosable_mask unless contact.attribute_disclosed?(attr)
+
     disclose_attr(attr)
   end
 end
