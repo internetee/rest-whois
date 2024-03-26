@@ -51,9 +51,9 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
-      assert_text 'Name Not Disclosed'
-      assert_text 'Email Not Disclosed'
-      assert_text 'Phone Not Disclosed'
+      assert_text 'Name John'
+      assert_text 'Email john@inbox.test'
+      assert_text '+555.555'
       assert_text 'Last update Not Disclosed - Visit www.internet.ee for web-based WHOIS'
     end
   end
