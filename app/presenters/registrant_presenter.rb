@@ -5,7 +5,7 @@ class RegistrantPresenter < ContactPresenter
 
   def email
     # publishable_attribute('email')
-    disclose_registrant_data('email')
+    registrant_is_org? ? disclose_attr('email') : disclose_data_priv_registrant('email')
   end
 
   def phone
@@ -19,12 +19,8 @@ class RegistrantPresenter < ContactPresenter
 
   private
 
-  def disclose_registrant_data(attr)
-    registrant_is_org? ? disclose_attr(attr) : disclose_data_priv_registrant(attr)
-  end
-
   def disclose_attr(attr)
-    if registrant_publishable? || captcha_solved?
+    if whitelisted_user? || registrant_publishable? || captcha_solved?
       contact.send(attr.to_sym)
     else
       disclosable_mask
