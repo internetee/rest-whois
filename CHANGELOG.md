@@ -1,3 +1,9 @@
+27.03.2024
+* Update dependency puma to v5.6.8 [SECURITY] by @renovate in https://github.com/internetee/rest-whois/pull/388
+* Update dependency bootsnap to '~> 1.18.0' by @renovate in https://github.com/internetee/rest-whois/pull/392
+* Update dependency pg to '~> 1.5.0' by @renovate in https://github.com/internetee/rest-whois/pull/384
+* Disclosed contact info for whitelisted users by @maricavor in [#404](https://github.com/internetee/rest-whois/issues/404)
+
 21.03.2024
 * Disclose additional registrant data by @thiagoyoussef in https://github.com/internetee/rest-whois/pull/357
 * Update dependency bootsnap to '~> 1.15.0' by @renovate in https://github.com/internetee/rest-whois/pull/367
