@@ -40,7 +40,7 @@ class ContactPresenter
   private
 
   def disclose_attr_for_org_registrant(attr)
-    if contact_publishable? || captcha_solved?
+    if whitelisted_user? || contact_publishable? || captcha_solved?
       contact.send(attr.to_sym)
     else
       disclosable_mask

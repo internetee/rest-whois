@@ -5,6 +5,7 @@ gem 'bootsnap', '~> 1.18.0', require: false
 gem 'figaro', '~> 1.2.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
+gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 gem 'pg', '~> 1.5.0'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
@@ -12,7 +13,6 @@ gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.2.1' # For Punycode
 gem 'uglifier'
-gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.9'
@@ -21,10 +21,10 @@ end
 group :development, :test do
   gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
-  gem 'pry'
-  gem 'unicorn'
   gem 'mina', '~> 1.2.4'
+  gem 'pry'
   gem 'puma'
+  gem 'unicorn'
   gem 'webmock'
 end
 
