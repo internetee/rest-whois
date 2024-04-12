@@ -1,6 +1,5 @@
 Rest whois server
 =================
-[![Build Status](https://travis-ci.org/internetee/rest-whois.svg?branch=master)](https://travis-ci.org/internetee/rest-whois)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/maintainability)](https://codeclimate.com/github/internetee/rest-whois/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/test_coverage)](https://codeclimate.com/github/internetee/rest-whois/test_coverage)
 
