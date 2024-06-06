@@ -1,38 +1,31 @@
-Rest whois server
+Estonian Internet Foundation's REST WHOIS Server
 =================
 [![Maintainability](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/maintainability)](https://codeclimate.com/github/internetee/rest-whois/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/test_coverage)](https://codeclimate.com/github/internetee/rest-whois/test_coverage)
 
-Rest whois server
 
-Examlpe usege:
+## Example usage
 
-1) html request, GET:
+### HTML Request
+* GET: `/v1/example.ee`
 
-    /v1/example.ee
+### JSON Request
+* GET: `/v1/example.ee.json`
 
-2) json request, GET:
+By default, this will return only public information. If full WHOIS info is required, the user needs to use Google ReCaptcha. Example usage:
 
-    /v1/example.ee.json
+### HTML for the Full WHOIS Info
+* GET: `/v1/test.ee?utf8=%E2%9C%93&g-recaptcha-response=03AHJ_VuvVgYnzxXAuf8rdHvTPQ5FZSHYZ...`
 
-By default there will return only public info.
-If you need full whois info, user needs to use Google ReCaptchia, example usage:
-
-1) html for full whois info, GET:
-
-    /v1/test.ee?utf8=%E2%9C%93&g-recaptcha-response=03AHJ_VuvVgYnzxXAuf8rdHvTPQ5FZSHYZ...
-
-2) json for full whois info, GET:
-
-    /v1/example.ee.json?utf8=%E2%9C%93&g-recaptcha-response=03AHJ_VuvY4cI_oBaP1BtercOD...
-
+### JSON for the Full WHOIS Info
+* GET: `/v1/example.ee.json?utf8=%E2%9C%93&g-recaptcha-response=03AHJ_VuvY4cI_oBaP1BtercOD...`
 
 Installation
 ------------
 
-Rest whois is based on Rails 4
+REST WHOIS is based on Rails 4.
 
-Manual demo install:
+## Manual demo installation
 
     git clone https://github.com/internetee/rest-whois/
     cd rest-whois
@@ -42,14 +35,15 @@ Manual demo install:
     cp config/database-example.yml config/database.yml # and edit it
     bundle exec rake db:setup # for production, please follow deployment howto
 
-Deployment
+
+## Deployment
 ----------
 
     cd rest-whois
     mina pr setup
     edit shared/config/application.yml and shared/config/database.yml files
 
-Add apache config file:
+## Add apache config file:
 
 ```
 <VirtualHost *:80>
@@ -83,10 +77,10 @@ Add apache config file:
 </VirtualHost>
 ```
 
-Deploy from your machine:
+## Deploying from your machine:
 
     mina pr deploy
 
-Data Base
+## Database
 ----------
-The database is shared and all operations are taking place in the registry project. It is not recommended to make operations and migrations within the framework of rest-whois.
+The database is shared, and all operations take place in the registry project. It is not recommended to perform operations or migrations within the framework of rest-whois.
