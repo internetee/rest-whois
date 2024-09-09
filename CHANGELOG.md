@@ -1,3 +1,6 @@
+09.09.2024
+* Disabled dependabot autorenew and downgraded Ruby to 3.0.3 https://github.com/internetee/rest-whois/pull/410
+
 27.03.2024
 * Update dependency puma to v5.6.8 [SECURITY] by @renovate in https://github.com/internetee/rest-whois/pull/388
 * Update dependency bootsnap to '~> 1.18.0' by @renovate in https://github.com/internetee/rest-whois/pull/392
