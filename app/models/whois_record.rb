@@ -37,12 +37,21 @@ class WhoisRecord < ApplicationRecord
     json['tech_contacts'].map { |serialized_contact| deserialize_contact(serialized_contact) }
   end
 
+  def status
+    if blocked_domains.include?(domain_name)
+      ["Blocked"]
+    else
+      # Логика для получения статуса из базы данных или WHOIS
+      json['status'] || []
+    end
+  end
+
   private
 
   # rubocop:disable Metrics/AbcSize
   def deserialize_domain
     Domain.new(name: json['name'],
-               statuses: json['status'],
+               statuses: blocked_domains.include?(json['name']) ? ["Blocked"] : json['status'],
                registered: json['registered'],
                changed: json['changed'],
                expire: json['expire'],
@@ -92,5 +101,9 @@ class WhoisRecord < ApplicationRecord
     else
       'legal_person'
     end
+  end
+
+  def blocked_domains
+    %w[com.ee fie.ee med.ee pri.ee]
   end
 end
