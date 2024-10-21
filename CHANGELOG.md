@@ -1,3 +1,6 @@
+21.10.24
+* Fix output for second level zone records https://github.com/internetee/rest-whois/pull/415
+
 09.09.2024
 * Disabled dependabot autorenew and downgraded Ruby to 3.0.3 https://github.com/internetee/rest-whois/pull/410
 
