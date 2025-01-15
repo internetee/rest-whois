@@ -11,7 +11,7 @@ gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
-gem 'simpleidn', '0.2.1' # For Punycode
+gem 'simpleidn', '0.2.3' # For Punycode
 gem 'uglifier'
 
 group :development do
