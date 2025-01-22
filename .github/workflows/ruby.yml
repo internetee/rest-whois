@@ -3,10 +3,44 @@ on: [push]
 
 
 jobs:
+  bundle_audit:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: config bundler
+        run:  |
+          bundle config set without 'development staging production'
+          bundle config set deployment '[secure]'
+          bundle env
+          head -n1 $(which bundle)
+      - name: Bundle Audit Check
+        run: bundle exec bundle-audit check --update
+
+  brakeman:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: config bundler
+        run:  |
+          bundle config set without 'development staging production'
+          bundle config set deployment '[secure]'
+          bundle env
+          head -n1 $(which bundle)
+      - name: Run Brakeman
+        run: bundle exec brakeman --quiet --skip-libs --exit-on-warn --ignore-config=.brakeman-ignore
+
   test:
     services:
       postgres:
-        image: postgres:17
+        image: postgres:15
         ports: ["5432:5432"]
         env:
           POSTGRES_PASSWORD: password
@@ -82,7 +116,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby: [ '3.0.3' ]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
 
     env:
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
