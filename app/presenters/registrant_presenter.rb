@@ -27,7 +27,9 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def disclose_registrant_org_phone
-    if contact.attribute_disclosed?('phone') && captcha_solved? || whitelisted_user? || registrant_publishable?
+    phone_disclosed_and_captcha_solved = contact.attribute_disclosed?('phone') && captcha_solved?
+
+    if phone_disclosed_and_captcha_solved || whitelisted_user? || registrant_publishable?
       contact.send('phone')
     else
       disclosable_mask
