@@ -31,6 +31,8 @@ class RegistrantPresenter < ContactPresenter
 
     if phone_disclosed_and_captcha_solved || whitelisted_user? || registrant_publishable?
       contact.send('phone')
+    elsif !contact.attribute_disclosed?('phone')
+      undisclosable_mask
     else
       disclosable_mask
     end
