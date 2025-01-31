@@ -125,7 +125,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
-    assert_equal 'Not Disclosed', response_json[:phone]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:phone]
 
     expected_admin_contacts = [
       { name: 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
@@ -233,7 +233,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
     response_json = JSON.parse(response.body, symbolize_names: true)
 
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:email]
-    assert_equal 'Not Disclosed', response_json[:phone]
+    assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS', response_json[:phone]
     assert_equal 'Not Disclosed - Visit www.internet.ee for web-based WHOIS',
                  response_json[:registrant_changed]
 
