@@ -1,3 +1,6 @@
+31.01.25
+* Publish phone nr for org owned domains https://github.com/internetee/rest-whois/pull/423
+
 21.10.24
 * Fix output for second level zone records https://github.com/internetee/rest-whois/pull/415
 
