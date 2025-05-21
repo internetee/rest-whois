@@ -1,3 +1,6 @@
+21.05.2025
+* Dockerfile update https://github.com/internetee/rest-whois/pull/427
+
 31.01.25
 * Publish phone nr for org owned domains https://github.com/internetee/rest-whois/pull/423
 
