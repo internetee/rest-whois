@@ -26,6 +26,8 @@ group :development, :test do
   gem 'puma'
   gem 'unicorn'
   gem 'webmock'
+  gem 'bundler-audit'
+  gem 'brakeman'
 end
 
 group :test do
