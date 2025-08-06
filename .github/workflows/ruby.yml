@@ -63,3 +63,4 @@ jobs:
         run: |
           # SimpleCov stores coverage results under coverage/.index.json; publish the whole folder
           qlty coverage publish coverage/
+          
