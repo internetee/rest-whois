@@ -52,16 +52,17 @@ jobs:
       # ------------------------------
       # Qlty.sh integration
       # ------------------------------
-      - name: Install qlty CLI
+      - name: Install Qlty CLI
+        uses: qltysh/qlty-action/install@v1
+      
+      - name: Run Qlty checks
         run: |
-          curl -LSs https://get.qlty.sh | bash
-          echo "${HOME}/.qlty/bin" >> $GITHUB_PATH
-
+          qlty check --all
+          qlty smells --all
+          qlty metrics --all
+      
       - name: Upload coverage to Qlty
-        env:
-          QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
-        run: |
-          curl -LSfs https://get.qlty.sh | sh
-          export PATH="$HOME/.qlty/bin:$PATH"
-
-          qlty coverage publish coverage/
+        if: always()
+        uses: qltysh/qlty-action/coverage@v1
+        with:
+          coverage_token: ${{ secrets.QLTY_TOKEN }}
