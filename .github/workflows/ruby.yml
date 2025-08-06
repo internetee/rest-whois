@@ -61,4 +61,4 @@ jobs:
         env:
           QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
         run: |
-          qlty coverage publish coverage/
+          qlty coverage publish --report-format=simplecov coverage/.resultset.json
