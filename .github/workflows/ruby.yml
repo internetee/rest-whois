@@ -61,6 +61,7 @@ jobs:
         env:
           QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
         run: |
-          # SimpleCov stores coverage results under coverage/.index.json; publish the whole folder
+          curl -LSfs https://get.qlty.sh | sh
+          export PATH="$HOME/.qlty/bin:$PATH"
+
           qlty coverage publish coverage/
-          
