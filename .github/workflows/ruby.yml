@@ -54,13 +54,13 @@ jobs:
       # ------------------------------
       - name: Install qlty CLI
         run: |
-          curl -LSs https://install.qlty.sh | bash
+          curl -LSs https://qlty.sh | bash
           echo "${HOME}/.qlty/bin" >> $GITHUB_PATH
 
       - name: Upload coverage to Qlty
         env:
           QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
         run: |
-          curl -LSfs https://install.qlty.sh | sh
+          curl -LSfs https://qlty.sh | sh
           export PATH="$HOME/.qlty/bin:$PATH"
           qlty coverage publish coverage/
