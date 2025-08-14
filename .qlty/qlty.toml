@@ -86,4 +86,4 @@ name = "rubocop"
 
 [[plugin.fetch]]
 url = "https://raw.githubusercontent.com/internetee/style-guide/master/ruby/.rubocop-modern.yml"
-path = ".rubocop.yml"
+path = ".rubocop-modern.yml"
