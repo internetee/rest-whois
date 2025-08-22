@@ -1,3 +1,6 @@
+08.22.2025
+*  Replacing codeclimate https://github.com/internetee/rest-whois/pull/434
+
 21.05.2025
 * Dockerfile update https://github.com/internetee/rest-whois/pull/427
 
