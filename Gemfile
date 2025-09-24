@@ -20,6 +20,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
   gem 'mina', '~> 1.2.4'
   gem 'pry'
