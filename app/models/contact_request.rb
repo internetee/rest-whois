@@ -17,7 +17,16 @@ class ContactRequest < ApplicationRecord
   belongs_to :whois_record
 
   validates :whois_record, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, 
+                    email: { 
+                      mode: :strict, 
+                      require_fqdn: true,
+                      message: I18n.t('contact_requests.invalid_email') 
+                    },
+                    format: { 
+                      with: /\A.*\.[a-zA-Z]{2,}\z/,
+                      message: I18n.t('contact_requests.invalid_email')
+                    }
   validates :name, presence: true
   validates :status, inclusion: { in: STATUSES }
 
