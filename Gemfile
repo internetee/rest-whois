@@ -9,6 +9,7 @@ gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 gem 'pg', '~> 1.5.0'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
+gem 'email_validator'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.2.1' # For Punycode
@@ -19,11 +20,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
   gem 'mina', '~> 1.2.4'
   gem 'pry'
   gem 'puma'
+  gem 'sqlite3', '~> 1.4'
   gem 'unicorn'
   gem 'webmock'
 end
