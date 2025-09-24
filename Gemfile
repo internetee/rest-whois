@@ -25,7 +25,6 @@ group :development, :test do
   gem 'mina', '~> 1.2.4'
   gem 'pry'
   gem 'puma'
-  gem 'sqlite3', '~> 1.4'
   gem 'unicorn'
   gem 'webmock'
 end
