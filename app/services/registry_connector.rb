@@ -123,4 +123,8 @@ class RegistryConnector
       Net::HTTP::Put
     end
   end
+
+  def self.logger
+    Rails.logger
+  end
 end
