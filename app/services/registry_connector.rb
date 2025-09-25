@@ -21,14 +21,75 @@ class RegistryConnector
       raise CommunicationError.new(request, code_as_string)
     end
   rescue Timeout::Error, SocketError, Errno::ECONNREFUSED => e
-    Rails.logger.error("Registry API NetworkError: #{e.class} - #{e.message}, URL=#{url}, Request=#{request.inspect}")
+    logger.error({
+      timestamp: Time.current.utc.iso8601(3),
+      level: 'error',
+      message: 'Registry API network connection failed',
+      event: 'registry.api.network_error',
+      service: 'rest-whois',
+      environment: Rails.env,
+      host: Socket.gethostname,
+      pid: Process.pid,
+      error: {
+        type: e.class.name,
+        message: e.message
+      },
+      details: {
+        url: url.to_s,
+        request_method: request.method,
+        request_uri: request.uri
+      },
+      schema_version: '1.0.0',
+      log_version: '1.0.0'
+    }.to_json)
     false
   rescue CommunicationError => e
-    Rails.logger.error("Registry API CommunicationError: #{e.message}, URL=#{url}, Request=#{request.inspect}, Response=#{response&.body}")
+    logger.error({
+      timestamp: Time.current.utc.iso8601(3),
+      level: 'error',
+      message: 'Registry API communication error',
+      event: 'registry.api.communication_error',
+      service: 'rest-whois',
+      environment: Rails.env,
+      host: Socket.gethostname,
+      pid: Process.pid,
+      error: {
+        type: e.class.name,
+        message: e.message
+      },
+      details: {
+        url: url.to_s,
+        request_method: request.method,
+        request_uri: request.uri,
+        response_body: response&.body
+      },
+      schema_version: '1.0.0',
+      log_version: '1.0.0'
+    }.to_json)
     false
   rescue StandardError => e
-    Rails.logger.error("Registry API UnexpectedError: #{e.class} - #{e.message}, URL=#{url}, Request=#{request.inspect}")
-    Rails.logger.error(e.backtrace.join("\n"))
+    logger.error({
+      timestamp: Time.current.utc.iso8601(3),
+      level: 'error',
+      message: 'Registry API unexpected error',
+      event: 'registry.api.unexpected_error',
+      service: 'rest-whois',
+      environment: Rails.env,
+      host: Socket.gethostname,
+      pid: Process.pid,
+      error: {
+        type: e.class.name,
+        message: e.message,
+        stack: e.backtrace&.first(5)&.join(' | ')
+      },
+      details: {
+        url: url.to_s,
+        request_method: request.method,
+        request_uri: request.uri
+      },
+      schema_version: '1.0.0',
+      log_version: '1.0.0'
+    }.to_json)
     false
   end
 
