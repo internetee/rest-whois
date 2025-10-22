@@ -12,17 +12,18 @@ permissions:
 jobs:
   auto-approve-merge:
     runs-on: ubuntu-latest
-    if: (github.actor == 'dependabot[bot]' || github.actor == 'renovate[bot]') && github.repository == 'internetee/whois'
+    if: (github.actor == 'dependabot[bot]' || github.actor == 'renovate[bot]') && github.repository == 'internetee/rest-whois'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install GitHub CLI
+      - name: Install GitHub CLI and jq
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
           sudo apt update
-          sudo apt install gh
+          sudo apt install -y gh jq
+
       - name: Auto approve PR
         uses: hmarr/auto-approve-action@v3
         with:
@@ -40,7 +41,7 @@ jobs:
         run: |
           # Set default UPDATE_TYPE to avoid unbound variable errors
           UPDATE_TYPE="${{ steps.metadata.outputs.update-type || 'unknown' }}"
-          
+
           if [ "${{ github.actor }}" == "dependabot[bot]" ]; then
             if [[ "$UPDATE_TYPE" == "version-update:semver-patch" ]]; then
               echo "auto_merge=true" >> $GITHUB_OUTPUT
@@ -51,7 +52,6 @@ jobs:
               echo "Auto-merge: Dependabot non-patch update, skipping"
             fi
           elif [ "${{ github.actor }}" == "renovate[bot]" ]; then
-            # Check if PR has patch label (set by renovate.json configuration)
             # Extract label names from the labels array
             LABEL_NAMES=$(echo '${{ toJson(github.event.pull_request.labels) }}' | jq -r '.[].name' | tr '\n' ' ')
             if [[ "$LABEL_NAMES" == *"patch"* ]] || [[ "$LABEL_NAMES" == *"bundler"* ]] || [[ "$LABEL_NAMES" == *"ruby-version"* ]] || [[ "$LABEL_NAMES" == *"github-actions"* ]]; then
@@ -79,17 +79,21 @@ jobs:
 
       - name: Auto-merge PR
         if: steps.check_auto_merge.outputs.auto_merge == 'true'
+        id: auto_merge_pr
         run: |
           echo "Attempting to auto-merge PR #${{ github.event.pull_request.number }}"
-          gh pr merge --auto --merge ${{ github.event.pull_request.number }} || {
+          if gh pr merge --auto --merge "${{ github.event.pull_request.number }}"; then
+            echo "merge_succeeded=true" >> $GITHUB_OUTPUT
+            echo "Merged successfully"
+          else
+            echo "merge_succeeded=false" >> $GITHUB_OUTPUT
             echo "Auto-merge failed, continuing..."
-            exit 0
-          }
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notify Mattermost about auto-merge
-        if: steps.check_auto_merge.outputs.auto_merge == 'true'
+        if: steps.check_auto_merge.outputs.auto_merge == 'true' && steps.auto_merge_pr.outputs.merge_succeeded == 'true'
         env:
           MATTERMOST_BOT_TOKEN: ${{ secrets.MATTERMOST_BOT_TOKEN }}
           MATTERMOST_CHANNEL_ID: ${{ secrets.MATTERMOST_CHANNEL_ID }}
@@ -101,12 +105,20 @@ jobs:
           ACTOR: ${{ github.actor }}
         run: |
           if [ -z "$MATTERMOST_BOT_TOKEN" ] || [ -z "$MATTERMOST_CHANNEL_ID" ] || [ -z "$MATTERMOST_BASE_URL" ]; then
-            echo "Missing Mattermost secrets" >&2
+            echo "Missing Mattermost secrets - skipping notification" >&2
             exit 0
           fi
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-          curl -sS -X POST \
+          payload=$(jq -n \
+            --arg channel_id "$MATTERMOST_CHANNEL_ID" \
+            --arg message "🤖 [$REPO] PR #$PR_NUMBER: \"$PR_TITLE\" was auto-merged by $ACTOR.\nMerged at: $TIMESTAMP\nLink: $PR_URL" \
+            '{channel_id: $channel_id, message: $message}')
+          # -f to fail on http errors, -S to show errors
+          curl -fS -X POST \
             -H "Authorization: Bearer $MATTERMOST_BOT_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"channel_id\":\"$MATTERMOST_CHANNEL_ID\",\"message\":\"🤖 [$REPO] PR #$PR_NUMBER: \\\"$PR_TITLE\\\" was auto-merged by $ACTOR.\\nMerged at: $TIMESTAMP\\nLink: $PR_URL\"}" \
-            "$MATTERMOST_BASE_URL/api/v4/posts"
+            -d "$payload" \
+            "$MATTERMOST_BASE_URL/api/v4/posts" || {
+              echo "Failed to send Mattermost notification" >&2
+              exit 1
+            }
