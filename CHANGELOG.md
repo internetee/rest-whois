@@ -1,3 +1,12 @@
+08.22.2025
+*  Replacing codeclimate https://github.com/internetee/rest-whois/pull/434
+
+21.05.2025
+* Dockerfile update https://github.com/internetee/rest-whois/pull/427
+
+31.01.25
+* Publish phone nr for org owned domains https://github.com/internetee/rest-whois/pull/423
+
 21.10.24
 * Fix output for second level zone records https://github.com/internetee/rest-whois/pull/415
 

@@ -9,8 +9,7 @@ class RegistrantPresenter < ContactPresenter
   end
 
   def phone
-    # publishable_attribute('phone')
-    disclose_data_priv_registrant('phone')
+    registrant_is_org? ? disclose_registrant_org_phone : disclose_data_priv_registrant('phone')
   end
 
   def last_update
@@ -22,6 +21,18 @@ class RegistrantPresenter < ContactPresenter
   def disclose_attr(attr)
     if whitelisted_user? || registrant_publishable? || captcha_solved?
       contact.send(attr.to_sym)
+    else
+      disclosable_mask
+    end
+  end
+
+  def disclose_registrant_org_phone
+    phone_disclosed_and_captcha_solved = contact.attribute_disclosed?('phone') && captcha_solved?
+
+    if phone_disclosed_and_captcha_solved || whitelisted_user? || registrant_publishable?
+      contact.send('phone')
+    elsif !contact.attribute_disclosed?('phone')
+      undisclosable_mask
     else
       disclosable_mask
     end
