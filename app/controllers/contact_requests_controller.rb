@@ -18,13 +18,19 @@ class ContactRequestsController < ApplicationController
 
   def create
     @contact_request = ContactRequest.new(contact_request_params)
-    result = @contact_request.save_to_registry
-    fetch_contact_request(result)
+    
+    if @contact_request.valid?
+      result = @contact_request.save_to_registry
+      fetch_contact_request(result)
 
-    if @contact_request
-      process_contact_request
+      if @contact_request
+        process_contact_request
+      else
+        redirect_to(:root, alert: t('contact_requests.registry_link_error'))
+      end
     else
-      redirect_to(:root, alert: t('contact_requests.registry_link_error'))
+      # Renderi vormi uuesti vigadega
+      render :new
     end
   rescue Net::SMTPServerBusy => e
     handle_smtp_error(e)
