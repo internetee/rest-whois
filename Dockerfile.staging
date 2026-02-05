@@ -14,14 +14,14 @@ ENV RAILS_ENV="production" \
     LC_ALL=et_EE.UTF-8
 
 # Fix repository issues and install packages
-RUN apt-get update -qq || true && \
-    apt-get install -y --no-install-recommends gnupg2 && \
-    # Remove problematic repositories
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
     rm -f /etc/apt/sources.list.d/google-chrome.list && \
     rm -f /etc/apt/sources.list.d/pgdg.list && \
-    # Update sources and install packages
     apt-get update -qq && \
     apt-get install --no-install-recommends -y \
+    gnupg2 \
     netcat \
     curl \
     libpq-dev \
