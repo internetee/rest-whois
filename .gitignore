@@ -11,3 +11,4 @@
 # Do not commit one. Instead, download the latest from https://github.com/internetee/style-guide.
 .rubocop.yml
 .DS_Store
+Dockerfile.dev.v2
