@@ -7,6 +7,14 @@ on:
         description: 'Number of PR to deploy (only digits, e.g., 2889)'
         required: true
         type: string
+      registry_url:
+        description: 'Registry base URL override (e.g. https://registry1-dev.cloud.tld.ee)'
+        required: false
+        type: string
+      billing_url:
+        description: 'Billing base URL override (e.g. https://billing1-dev.cloud.tld.ee)'
+        required: false
+        type: string
 
 permissions:
   id-token: write
@@ -78,6 +86,10 @@ jobs:
               "image_tag": "${{ steps.docker_build.outputs.IMAGE_TAG }}",
               "namespace": "${{ env.APP_NAME }}",
               "pr_number": "${{ inputs.pr_number }}",
-              "source_repo": "internetee/rest-whois"
+              "source_repo": "internetee/rest-whois",
+              "url_overrides": {
+                "registry_url": "${{ inputs.registry_url }}",
+                "billing_url": "${{ inputs.billing_url }}"
+              }
             }
             
