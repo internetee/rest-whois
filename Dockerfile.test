@@ -1,0 +1,54 @@
+# Base image with platform specification
+FROM internetee/ruby:3.0-buster
+
+# Set working directory
+WORKDIR /opt/webapps/app
+
+# Set production environment
+ENV RAILS_ENV="production" \
+    RAILS_LOG_TO_STDOUT=true \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    LANG=et_EE.UTF-8 \
+    LANGUAGE=et_EE:et \
+    LC_ALL=et_EE.UTF-8
+
+# Fix repository issues and install packages
+RUN echo "deb [trusted=yes] http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+    echo "deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
+    rm -f /etc/apt/sources.list.d/google-chrome.list && \
+    rm -f /etc/apt/sources.list.d/pgdg.list && \
+    rm -f /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+    gnupg2 \
+    netcat \
+    curl \
+    libpq-dev \
+    imagemagick \
+    shared-mime-info \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Gemfile and install dependencies
+COPY Gemfile Gemfile.lock ./
+RUN bundle config set --local without 'development test' && \
+    bundle install --jobs 20 --retry 5 && \
+    bundle clean --force
+
+# Copy application code
+COPY . .
+
+# Precompile assets
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+# Expose Rails port
+EXPOSE 3000
+
+# Health check for Rails
+# HEALTHCHECK --interval=30s --timeout=3s \
+#   CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the Rails server
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
