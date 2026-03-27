@@ -48,6 +48,10 @@ en:
       out in the Data Protection Policy. By entering the data, you confirm that you agree to the
       processing of your personal data. See more
       <a href="https://www.internet.ee/domains/eif-s-data-protection-policy">here</a>.
+    
+    invalid_email: "Please enter a valid email address"
+    email_required: "Email address is required"
+    name_required: "Name is required"
 
     successfully_sent: Your email has been sent.
     smtp_error: >-
