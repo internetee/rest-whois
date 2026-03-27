@@ -189,7 +189,7 @@ GEM
     recaptcha (5.8.1)
       json
     regexp_parser (2.1.1)
-    rexml (3.2.5)
+    rexml (3.3.9)
     rubyzip (2.3.0)
     sassc (2.4.0)
       ffi (~> 1.9)
