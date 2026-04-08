@@ -1,7 +1,7 @@
 Estonian Internet Foundation's REST WHOIS Server
 =================
-[![Maintainability](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/maintainability)](https://codeclimate.com/github/internetee/rest-whois/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0bda260781bb26c6a737/test_coverage)](https://codeclimate.com/github/internetee/rest-whois/test_coverage)
+[![Maintainability](https://qlty.sh/gh/internetee/projects/rest-whois/maintainability.svg)](https://qlty.sh/gh/internetee/projects/rest-whois)
+[![Code Coverage](https://qlty.sh/gh/internetee/projects/rest-whois/coverage.svg)](https://qlty.sh/gh/internetee/projects/rest-whois)
 
 
 ## Example usage
