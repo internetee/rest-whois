@@ -4,6 +4,8 @@ on: [push, pull_request]
 
 jobs:
   test:
+    env:
+      QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
     services:
       postgres:
         image: postgres:17
@@ -58,7 +60,6 @@ jobs:
           echo "${HOME}/.qlty/bin" >> $GITHUB_PATH
 
       - name: Upload coverage to Qlty
-        env:
-          QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+        if: env.QLTY_COVERAGE_TOKEN != ''
         run: |
           qlty coverage publish --report-format=simplecov coverage/.resultset.json
