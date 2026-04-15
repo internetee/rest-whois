@@ -12,7 +12,7 @@ permissions:
 jobs:
   auto-approve-merge:
     runs-on: ubuntu-latest
-    if: (github.actor == 'dependabot[bot]' || github.actor == 'renovate[bot]') && github.repository == 'internetee/rest-whois'
+    if: (github.actor == 'dependabot[bot]' || github.actor == 'dependabot' || github.actor == 'renovate[bot]' || github.actor == 'renovate') && github.repository == 'internetee/rest-whois'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -30,7 +30,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch Dependabot metadata
-        if: github.actor == 'dependabot[bot]'
+        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot'
         id: metadata
         uses: dependabot/fetch-metadata@v1
         with:
@@ -41,7 +41,7 @@ jobs:
         run: |
           UPDATE_TYPE="${{ steps.metadata.outputs.update-type || 'unknown' }}"
 
-          if [ "${{ github.actor }}" == "dependabot[bot]" ]; then
+          if [ "${{ github.actor }}" == "dependabot[bot]" ] || [ "${{ github.actor }}" == "dependabot" ]; then
             if [[ "$UPDATE_TYPE" == *"semver-major"* ]]; then
               echo "auto_merge=false" >> $GITHUB_OUTPUT
               echo "update_type=${UPDATE_TYPE}" >> $GITHUB_OUTPUT
@@ -54,7 +54,7 @@ jobs:
               echo "update_type=${UPDATE_TYPE}" >> $GITHUB_OUTPUT
               echo "Auto-merge: Dependabot non-patch/minor/security update, skipping"
             fi
-          elif [ "${{ github.actor }}" == "renovate[bot]" ]; then
+          elif [ "${{ github.actor }}" == "renovate[bot]" ] || [ "${{ github.actor }}" == "renovate" ]; then
             LABEL_NAMES=$(echo '${{ toJson(github.event.pull_request.labels) }}' | jq -r '.[].name' | tr '\n' ' ')
             if [[ " $LABEL_NAMES " =~ ([[:space:]]|^)(patch|minor)([[:space:]]|$) ]] || [[ " $LABEL_NAMES " =~ ([[:space:]]|^)(github-actions)([[:space:]]|$) ]]; then
               echo "auto_merge=true" >> $GITHUB_OUTPUT
