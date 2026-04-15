@@ -1,0 +1,95 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.test
+#1 transferring dockerfile: 1.71kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/internetee/ruby:3.0-buster
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 566B done
+#3 DONE 0.0s
+
+#4 [1/7] FROM docker.io/internetee/ruby:3.0-buster@sha256:2eb115b90178ca24a6856a8e78194820a1988b02073c9d308e2cb418a012fa8a
+#4 DONE 0.0s
+
+#5 [2/7] WORKDIR /opt/webapps/app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 13.24kB 0.0s done
+#6 DONE 0.0s
+
+#7 [3/7] RUN echo "deb [trusted=yes] http://archive.debian.org/debian buster main" > /etc/apt/sources.list &&     echo "deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list &&     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until &&     rm -f /etc/apt/sources.list.d/google-chrome.list &&     rm -f /etc/apt/sources.list.d/pgdg.list &&     rm -f /etc/apt/sources.list.d/nodesource.list &&     apt-get update &&     apt-get install --no-install-recommends -y     gnupg2     netcat     curl     libpq-dev     imagemagick     shared-mime-info     && apt-get clean     && rm -rf /var/lib/apt/lists/*
+#7 0.474 Get:1 http://archive.debian.org/debian buster InRelease [122 kB]
+#7 0.520 Get:2 http://archive.debian.org/debian-security buster/updates InRelease [34,8 kB]
+#7 0.862 Ign:1 http://archive.debian.org/debian buster InRelease
+#7 0.876 Get:3 http://archive.debian.org/debian buster/main amd64 Packages [7 909 kB]
+#7 1.242 Ign:2 http://archive.debian.org/debian-security buster/updates InRelease
+#7 1.845 Get:4 http://archive.debian.org/debian-security buster/updates/main amd64 Packages [610 kB]
+#7 2.638 Fetched 8 676 kB in 2s (3 867 kB/s)
+#7 2.638 Reading package lists...
+#7 3.102 W: GPG error: http://archive.debian.org/debian buster InRelease: At least one invalid signature was encountered.
+#7 3.102 W: GPG error: http://archive.debian.org/debian-security buster/updates InRelease: At least one invalid signature was encountered.
+#7 3.184 Reading package lists...
+#7 3.740 Building dependency tree...
+#7 3.840 Reading state information...
+#7 3.916 shared-mime-info is already the newest version (1.10-1).
+#7 3.916 shared-mime-info set to manually installed.
+#7 3.916 libpq-dev is already the newest version (14.1-1.pgdg100+1).
+#7 3.916 The following additional packages will be installed:
+#7 3.916   dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client
+#7 3.917   gpg-wks-server gpgconf gpgsm gpgv libcurl4 netcat-traditional
+#7 3.918 Suggested packages:
+#7 3.918   pinentry-gnome3 tor parcimonie xloadimage scdaemon
+#7 4.034 The following NEW packages will be installed:
+#7 4.035   netcat netcat-traditional
+#7 4.035 The following packages will be upgraded:
+#7 4.035   curl dirmngr gnupg gnupg-l10n gnupg-utils gnupg2 gpg gpg-agent
+#7 4.035   gpg-wks-client gpg-wks-server gpgconf gpgsm gpgv imagemagick libcurl4
+#7 4.041 E: 15 upgraded, 2 newly installed, 0 to remove and 135 not upgraded.
+#7 4.041 Need to get 8 672 kB of archives.
+#7 4.041 After this operation, 162 kB of additional disk space will be used.
+#7 4.041 You don't have enough free space in /var/cache/apt/archives/.
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"deb [trusted=yes] http://archive.debian.org/debian buster main\" > /etc/apt/sources.list &&     echo \"deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main\" >> /etc/apt/sources.list &&     echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&     rm -f /etc/apt/sources.list.d/google-chrome.list &&     rm -f /etc/apt/sources.list.d/pgdg.list &&     rm -f /etc/apt/sources.list.d/nodesource.list &&     apt-get update &&     apt-get install --no-install-recommends -y     gnupg2     netcat     curl     libpq-dev     imagemagick     shared-mime-info     && apt-get clean     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+------
+ > [3/7] RUN echo "deb [trusted=yes] http://archive.debian.org/debian buster main" > /etc/apt/sources.list &&     echo "deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list &&     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until &&     rm -f /etc/apt/sources.list.d/google-chrome.list &&     rm -f /etc/apt/sources.list.d/pgdg.list &&     rm -f /etc/apt/sources.list.d/nodesource.list &&     apt-get update &&     apt-get install --no-install-recommends -y     gnupg2     netcat     curl     libpq-dev     imagemagick     shared-mime-info     && apt-get clean     && rm -rf /var/lib/apt/lists/*:
+3.918   pinentry-gnome3 tor parcimonie xloadimage scdaemon
+4.034 The following NEW packages will be installed:
+4.035   netcat netcat-traditional
+4.035 The following packages will be upgraded:
+4.035   curl dirmngr gnupg gnupg-l10n gnupg-utils gnupg2 gpg gpg-agent
+4.035   gpg-wks-client gpg-wks-server gpgconf gpgsm gpgv imagemagick libcurl4
+4.041 E: 15 upgraded, 2 newly installed, 0 to remove and 135 not upgraded.
+4.041 Need to get 8 672 kB of archives.
+4.041 After this operation, 162 kB of additional disk space will be used.
+4.041 You don't have enough free space in /var/cache/apt/archives/.
+------
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidBaseImagePlatform: Base image internetee/ruby:3.0-buster was pulled with platform "linux/amd64", expected "linux/arm64" for current build (line 2)
+Dockerfile.test:17
+--------------------
+  16 |     # Fix repository issues and install packages
+  17 | >>> RUN echo "deb [trusted=yes] http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+  18 | >>>     echo "deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+  19 | >>>     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
+  20 | >>>     rm -f /etc/apt/sources.list.d/google-chrome.list && \
+  21 | >>>     rm -f /etc/apt/sources.list.d/pgdg.list && \
+  22 | >>>     rm -f /etc/apt/sources.list.d/nodesource.list && \
+  23 | >>>     apt-get update && \
+  24 | >>>     apt-get install --no-install-recommends -y \
+  25 | >>>     gnupg2 \
+  26 | >>>     netcat \
+  27 | >>>     curl \
+  28 | >>>     libpq-dev \
+  29 | >>>     imagemagick \
+  30 | >>>     shared-mime-info \
+  31 | >>>     && apt-get clean \
+  32 | >>>     && rm -rf /var/lib/apt/lists/*
+  33 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"deb [trusted=yes] http://archive.debian.org/debian buster main\" > /etc/apt/sources.list &&     echo \"deb [trusted=yes] http://archive.debian.org/debian-security buster/updates main\" >> /etc/apt/sources.list &&     echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&     rm -f /etc/apt/sources.list.d/google-chrome.list &&     rm -f /etc/apt/sources.list.d/pgdg.list &&     rm -f /etc/apt/sources.list.d/nodesource.list &&     apt-get update &&     apt-get install --no-install-recommends -y     gnupg2     netcat     curl     libpq-dev     imagemagick     shared-mime-info     && apt-get clean     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/nzo2amx90g0hxhcjkyhkyumpz
