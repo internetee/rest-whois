@@ -8,7 +8,7 @@ gem 'mimemagic', '~> 0.4.3'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 gem 'pg', '~> 1.6.3'
 gem 'rails', '>= 6.0.3.1'
-gem 'recaptcha', '~> 5.8', require: 'recaptcha/rails'
+gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.2.1' # For Punycode
