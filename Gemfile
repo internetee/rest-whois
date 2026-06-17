@@ -19,7 +19,7 @@ gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
 gem 'pg', '~> 1.6.3', force_ruby_platform: true
-gem 'rails', '>= 6.0.3.1'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
@@ -42,6 +42,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest', '~> 5.25' # Rails 6.1 is built against minitest 5.x; 6.x breaks minitest/mock
   gem 'selenium-webdriver'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end

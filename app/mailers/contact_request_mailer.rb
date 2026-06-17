@@ -13,8 +13,20 @@ class ContactRequestMailer < ApplicationMailer
     mail(to: recipients, subject: t('contact_request_mailer.confirmation_email.subject'))
   end
 
-  def contact_email(contact_request:, recipients:, mail_body:, raise_error: false)
-    raise ::Net::SMTPFatalError if Rails.env.test? && raise_error
+  # NOTE: takes a positional Hash rather than keyword arguments on purpose.
+  # ActionMailer 6.1 does not preserve the ruby2_keywords flag through its lazy
+  # delivery proxy (Mailer.action(...).deliver_*), so keyword arguments arrive
+  # as a single positional Hash on Ruby 3.x and raise ArgumentError. Accepting a
+  # Hash here sidesteps that. Fixed upstream in Rails 7; can revert on upgrade.
+  def contact_email(args)
+    contact_request = args.fetch(:contact_request)
+    recipients = args.fetch(:recipients)
+    mail_body = args.fetch(:mail_body)
+    raise_error = args.fetch(:raise_error, false)
+
+    # Net::SMTPFatalError#initialize requires a response argument in the
+    # net-smtp gem (unlike the old Ruby 3.0 stdlib version).
+    raise ::Net::SMTPFatalError, 'Simulated SMTP failure' if Rails.env.test? && raise_error
 
     if ApplicationMailer.ses_configured?
       ses_contact_email(
