@@ -19,6 +19,13 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  # ActionMailer::Base.deliveries is a global array shared across all test
+  # classes. Clear it after every test so mails sent by one test never leak
+  # into another (the failure is order/seed dependent otherwise).
+  teardown do
+    ActionMailer::Base.deliveries.clear
+  end
+
   # Add more helper methods to be used by all tests here...
 end
 
