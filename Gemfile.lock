@@ -83,6 +83,9 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.4)
       aws-eventstream (~> 1, >= 1.0.2)
+    base64 (0.3.0)
+    benchmark (0.5.0)
+    bigdecimal (4.1.2)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -101,6 +104,7 @@ GEM
       rexml
     crass (1.0.6)
     docile (1.3.2)
+    drb (2.2.3)
     erubi (1.10.0)
     execjs (2.10.1)
     ffi (1.17.4)
@@ -127,6 +131,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
+    matrix (0.4.3)
     method_source (1.0.0)
     mimemagic (0.4.3)
       nokogiri (~> 1)
@@ -138,11 +143,17 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.14.4)
     msgpack (1.7.2)
+    mutex_m (0.3.0)
+    net-protocol (0.2.2)
+      timeout
+    net-smtp (0.5.1)
+      net-protocol
     nio4r (2.5.9)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     open4 (1.3.4)
+    ostruct (0.6.3)
     passenger (6.1.2)
       logger (>= 1.7.0)
       rack (>= 1.6.13)
@@ -222,8 +233,11 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    syslog (0.4.0)
+      logger
     thor (1.5.0)
     tilt (2.0.10)
+    timeout (0.6.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.1)
@@ -252,13 +266,22 @@ PLATFORMS
 DEPENDENCIES
   apparition!
   aws-sdk-ses (~> 1.40)
+  base64
+  benchmark
+  bigdecimal
   bootsnap (~> 1.18.0)
   capybara
+  drb
   figaro (~> 1.3.0)
   jbuilder
   listen (>= 3.0.5, < 3.10.1)
+  logger
+  matrix
   mimemagic (~> 0.4.3)
   mina (~> 1.2.4)
+  mutex_m
+  net-smtp
+  ostruct
   passenger (>= 5.3.2)
   pg (~> 1.6.3)
   pry
@@ -270,9 +293,10 @@ DEPENDENCIES
   selenium-webdriver
   simplecov (= 0.17.1)
   simpleidn (= 0.2.1)
+  syslog
   uglifier
   unicorn
   webmock
 
 BUNDLED WITH
-   2.5.7
+   2.5.23

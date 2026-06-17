@@ -19,15 +19,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04]
-        ruby: ['3.0.3']
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
     steps:
 
       - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: .ruby-version # reads the Ruby version from the .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: config bundler
         run:  |
