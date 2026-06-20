@@ -38,6 +38,8 @@ RUN bundle config set --local without 'development test' && \
 
 # Copy application code
 COPY . .
+COPY config/application-example.yml config/application.yml
+COPY config/database-example.yml config/database.yml
 
 # Precompile assets
 RUN RAILS_ENV=production bundle exec rake assets:precompile
