@@ -115,7 +115,7 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.6.1)
-    json (2.19.5)
+    json (2.19.9)
     kgio (2.11.4)
     listen (3.10.0)
       logger
