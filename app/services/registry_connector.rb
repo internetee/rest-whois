@@ -7,17 +7,20 @@ class RegistryConnector
   attr_accessor :request
 
   def self.perform_request(request, url)
-    @response = Net::HTTP.start(url.host, url.port,
-                                use_ssl: url.scheme == 'https') do |http|
+    response = Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https') do |http|
       http.request(request)
     end
 
-    @body_as_string = @response.body
-    @code_as_string = @response.code.to_s
-
-    return JSON.parse(@body_as_string) if [HTTP_CREATED, HTTP_SUCCESS].include? @code_as_string
-
-    raise CommunicationError.new(request, @code_as_string)
+    handle_response(response, request)
+  rescue Timeout::Error, SocketError, Errno::ECONNREFUSED => e
+    log_error(e, request, url, 'network_error')
+    false
+  rescue CommunicationError => e
+    log_error(e, request, url, 'communication_error', e.response)
+    false
+  rescue StandardError => e
+    log_error(e, request, url, 'unexpected_error')
+    false
   end
 
   def self.request(url:, type:)
@@ -33,8 +36,6 @@ class RegistryConnector
     request = request(url: url, type: :post)
     request.body = { contact_request: data }.to_json
     perform_request(request, url)
-  rescue CommunicationError
-    false
   end
 
   def self.do_update(id:, data:)
@@ -42,8 +43,6 @@ class RegistryConnector
     request = request(url: url, type: :put)
     request.body = { contact_request: data }.to_json
     perform_request(request, url)
-  rescue CommunicationError
-    false
   end
 
   def self.request_by_type(type)
@@ -53,5 +52,55 @@ class RegistryConnector
     else
       Net::HTTP::Put
     end
+  end
+
+  def self.logger
+    Rails.logger
+  end
+
+  private_class_method
+
+  def self.handle_response(response, request)
+    if [HTTP_CREATED, HTTP_SUCCESS].include?(response.code.to_s)
+      JSON.parse(response.body)
+    else
+      raise CommunicationError.new(request, response)
+    end
+  end
+
+  def self.log_error(exception, request, url, event, response = nil)
+    logger.error({
+      timestamp: Time.current.utc.iso8601(3),
+      level: 'error',
+      message: "Registry API #{event.gsub('_', ' ')}",
+      event: "registry.api.#{event}",
+      service: 'rest-whois',
+      environment: Rails.env,
+      host: Socket.gethostname,
+      pid: Process.pid,
+      error: {
+        type: exception.class.name,
+        message: exception.message,
+        stack: exception.backtrace&.first(5)&.join(' | ')
+      },
+      details: {
+        url: url.to_s,
+        request_method: request&.method,
+        request_uri: request&.uri,
+        response_body: response&.body
+      },
+      schema_version: '1.0.0',
+      log_version: '1.0.0'
+    }.to_json)
+  end
+end
+
+class CommunicationError < StandardError
+  attr_reader :request, :response
+
+  def initialize(request = nil, response = nil)
+    @request = request
+    @response = response
+    super("Communication failed with status #{response&.code}")
   end
 end
