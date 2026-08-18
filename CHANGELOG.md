@@ -1,3 +1,6 @@
+18.08.2026
+* Fixed contact request failures caused by registry replication delay https://github.com/internetee/rest-whois/pull/503
+
 08.22.2025
 *  Replacing codeclimate https://github.com/internetee/rest-whois/pull/434
 
