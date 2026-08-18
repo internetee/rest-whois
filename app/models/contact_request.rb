@@ -58,10 +58,9 @@ class ContactRequest < ApplicationRecord
   end
 
   def send_contact_email(body: '', recipients: [], ip: nil, raise_error: nil)
-    return false unless mark_as_sent(ip: ip)
-
     recipients_emails = extract_emails_for_recipients(recipients)
     return false if recipients_emails.empty?
+    return false unless mark_as_sent(ip: ip)
 
     send_bulk_email(body: body, raise_error: raise_error, recipients_emails: recipients_emails)
     true
@@ -71,15 +70,17 @@ class ContactRequest < ApplicationRecord
   end
 
   def mark_as_sent(ip: nil)
-    return unless sendable? || Rails.env == 'test'
+    return unless sendable?
 
-    update_registry_status(status: STATUS_SENT, ip: ip)
+    apply_status_locally(STATUS_SENT) { update_registry_status(status: STATUS_SENT, ip: ip) }
   end
 
   def confirm_email(ip: nil)
     return unless confirmable?
 
-    update_registry_status(status: STATUS_CONFIRMED, ip: ip)
+    apply_status_locally(STATUS_CONFIRMED) do
+      update_registry_status(status: STATUS_CONFIRMED, ip: ip)
+    end
   end
 
   def completed_or_expired?
@@ -91,6 +92,18 @@ class ContactRequest < ApplicationRecord
   end
 
   private
+
+  # Statuses are written into the registry over HTTP and reach our own database only with
+  # replication delay. The write we have just made is authoritative, so keep it in memory instead
+  # of re-reading a row that may still hold the previous status - that stale read is what used to
+  # make a perfectly valid request unsendable.
+  def apply_status_locally(status)
+    result = yield
+    return false unless result
+
+    self.status = status
+    result
+  end
 
   def send_individual_emails(body:, recipients_emails:)
     recipients_emails.each do |recipient_email|

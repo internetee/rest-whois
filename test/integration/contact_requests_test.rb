@@ -39,6 +39,20 @@ class ContactRequestsIntegrationTest < ActionDispatch::IntegrationTest
     assert_text('Message is limited to 2000 characters')
   end
 
+  # Regression: a rejected status update in the registry used to surface as "We are failed to send
+  # email for one or more of addresses", which sent the user looking for a mail problem that did
+  # not exist. The registry not answering is now reported as what it is.
+  def test_shows_registry_error_when_registry_refuses_to_confirm_the_request
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/)
+      .to_return(status: 500, body: '', headers: {})
+
+    visit(contact_request_path(@valid_contact_request.secret))
+    fill_in('Message', with: 'Some mail body')
+    click_link_or_button 'Send'
+
+    assert_text('Domain registry connect error. Please, try again later')
+  end
+
   def test_request_fails_when_whois_record_was_deleted
     @private_domain.destroy
 
