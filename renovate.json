@@ -4,6 +4,11 @@
   ],
   "packageRules": [
     {
+      "description": "Ruby stays where Rails 6.1 can run. Automatic bumps of .ruby-version broke this app twice: 3.3.0 (reverted in 9e9d62d) and 3.4.9, where Ruby moved bigdecimal and other libraries out of the standard library and the deploy died on the first require. Re-enable together with the Rails upgrade.",
+      "matchDatasources": ["ruby-version"],
+      "enabled": false
+    },
+    {
       "matchUpdateTypes": ["patch", "pin", "digest"],
       "automerge": false,
       "automergeType": "pr",
