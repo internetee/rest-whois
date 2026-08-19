@@ -6,10 +6,13 @@ gem 'figaro', '~> 1.3.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
-# Built from source on purpose. The precompiled x86_64-linux gem that pg ships since 1.6 is
-# linked against glibc 2.29, and the deploy servers are older than that, so the binary one loads
-# with "libm.so.6: version `GLIBC_2.29' not found". Drop this once the servers are upgraded.
-gem 'pg', '~> 1.6.3', force_ruby_platform: true
+# Held on 1.5.x deliberately. 1.6.0 is the first release that publishes an x86_64-linux binary,
+# and it is linked against glibc 2.29, which is newer than the deploy servers: the binary loads
+# with "libm.so.6: version `GLIBC_2.29' not found". 1.5.x has no Linux binary at all, so it is
+# always compiled from source there. The clean way back to 1.6.x is a newer distribution on the
+# servers - or, as a stopgap, Bundler >= 2.3.18 on them plus force_ruby_platform on this line,
+# which the Bundler currently installed there is too old to understand.
+gem 'pg', '~> 1.5.9'
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
