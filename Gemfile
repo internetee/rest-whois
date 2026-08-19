@@ -6,7 +6,10 @@ gem 'figaro', '~> 1.3.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
-gem 'pg', '~> 1.6.3'
+# Built from source on purpose. The precompiled x86_64-linux gem that pg ships since 1.6 is
+# linked against glibc 2.29, and the deploy servers are older than that, so the binary one loads
+# with "libm.so.6: version `GLIBC_2.29' not found". Drop this once the servers are upgraded.
+gem 'pg', '~> 1.6.3', force_ruby_platform: true
 gem 'rails', '>= 6.0.3.1'
 gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
