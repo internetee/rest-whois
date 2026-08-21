@@ -29,6 +29,9 @@ group :development, :test do
 end
 
 group :test do
+  # minitest 6 moved mocks and stubs out of the gem itself; test_helper requires
+  # minitest/mock and the mailer test stubs a method with it.
+  gem 'minitest-mock'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
