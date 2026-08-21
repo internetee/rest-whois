@@ -53,6 +53,12 @@ module RestWhois
         'Referrer-Policy' => 'strict-origin-when-cross-origin'
     }
 
-    config.active_support.parse_json_times = true
+    # Deliberately off. The line used to say true, but it never took effect: on Rails 6.1 the
+    # active_support railtie skipped the setting because ActiveSupport did not respond to it
+    # yet at initializer time, so dates inside the whois json column have always been handed
+    # to the views and to the json API as plain strings. Rails 8 does apply it, and turning it
+    # on would silently change the date format of the public whois output - a product
+    # decision, not something an upgrade gets to do on the side.
+    config.active_support.parse_json_times = false
   end
 end

@@ -3,7 +3,7 @@ require 'application_system_test_case'
 class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
   setup do
     @whois_record = whois_records(:privately_owned)
-    @whois_record.update!(json: @whois_record.json.merge({ registrant_kind: 'priv' }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_kind: 'priv' }).deep_stringify_keys)
 
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
@@ -16,7 +16,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
   def test_legal_person_specific_registrant_details_are_hidden
     @whois_record.update!(json: @whois_record.json
                                   .merge({ registrant_reg_no: 'legal-person-reg-number',
-                                           registrant_ident_country_code: 'legal-person-country' }))
+                                           registrant_ident_country_code: 'legal-person-country' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -36,7 +36,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
   end
 
   def test_sensitive_data_is_masked_when_registrant_is_not_publishable
-    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
@@ -62,7 +62,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     @whois_record.update!(json: @whois_record.json
                                   .merge({ registrant: 'John',
                                            registrant_disclosed_attributes: %w[name],
-                                           registrant_publishable: true}))
+                                           registrant_publishable: true}).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -73,7 +73,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_registrant_email_is_masked_when_disclosed_and_captcha_is_unsolved
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ registrant_disclosed_attributes: %w[email] }))
+                                  .merge({ registrant_disclosed_attributes: %w[email] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -86,7 +86,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ email: 'john@inbox.test',
-                                           registrant_disclosed_attributes: %w[email] }))
+                                           registrant_disclosed_attributes: %w[email] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -97,7 +97,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_registrant_phone_is_masked_when_disclosed_and_captcha_is_unsolved
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -110,7 +110,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ phone: '1234',
-                                           registrant_disclosed_attributes: %w[phone] }))
+                                           registrant_disclosed_attributes: %w[phone] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -121,7 +121,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_registrant_sensitive_data_is_unmasked_when_registrant_is_publishable
     @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true,
-                                                           registrant_disclosed_attributes: %w[name email phone] }))
+                                                           registrant_disclosed_attributes: %w[name email phone] }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
@@ -135,7 +135,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ name: 'John',
                                                               disclosed_attributes: %w[name],
-                                                              contact_publishable: 'true'}] }))
+                                                              contact_publishable: 'true'}] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -146,7 +146,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_admin_contact_email_is_masked_when_disclosed_and_captcha_is_unsolved
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ admin_contacts: [{ disclosed_attributes: %w[email] }] }))
+                                  .merge({ admin_contacts: [{ disclosed_attributes: %w[email] }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -159,7 +159,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ admin_contacts: [{ email: 'john@inbox.test',
-                                                              disclosed_attributes: %w[email] }] }))
+                                                              disclosed_attributes: %w[email] }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -172,7 +172,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     @whois_record.update!(json: @whois_record.json
                                   .merge({ tech_contacts: [{ name: 'John',
                                                              disclosed_attributes: %w[name],
-                                                             contact_publishable: 'true' }] }))
+                                                             contact_publishable: 'true' }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -183,7 +183,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
 
   def test_tech_contact_email_is_masked_when_disclosed_and_captcha_is_unsolved
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ tech_contacts: [{ disclosed_attributes: %w[email] }] }))
+                                  .merge({ tech_contacts: [{ disclosed_attributes: %w[email] }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -196,7 +196,7 @@ class WhoisRecordDetailsPrivatePersonRegistrantTest < ApplicationSystemTestCase
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ tech_contacts: [{ email: 'john@inbox.test',
-                                                             disclosed_attributes: %w[email] }] }))
+                                                             disclosed_attributes: %w[email] }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 

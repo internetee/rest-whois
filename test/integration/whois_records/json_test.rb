@@ -257,7 +257,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
   def test_show_sensitive_data_when_registrant_is_publishable
     whois_record = whois_records(:legally_owned)
     whois_record.update!(json: whois_record.json.merge({ registrant_publishable: true,
-                                                         registrant_disclosed_attributes: %w[name email phone] }))
+                                                         registrant_disclosed_attributes: %w[name email phone] }).deep_stringify_keys)
 
     get '/v1/company-domain.test', params: { format: :json }
     response_json = JSON.parse(response.body, symbolize_names: true)
@@ -269,7 +269,7 @@ class WhoisRecordJsonTest < ActionDispatch::IntegrationTest
 
   def test_hide_sensitive_data_when_registrant_is_not_publishable
     whois_record = whois_records(:privately_owned)
-    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: false }))
+    whois_record.update!(json: whois_record.json.merge({ registrant_publishable: false }).deep_stringify_keys)
     whois_record.reload
 
     get '/v1/privatedomain.test', params: { format: :json }

@@ -25,7 +25,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                                            changed: '2010-07-06T00:00:00+00:00',
                                                            expire: '2010-07-07T00:00:00+00:00',
                                                            outzone: '2010-07-08T00:00:00+00:00',
-                                                           delete: '2010-07-09T00:00:00+00:00' }))
+                                                           delete: '2010-07-09T00:00:00+00:00' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -46,7 +46,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                   .merge({ registrant: 'John',
                                            registrant_kind: 'priv',
                                            email: 'john@inbox.test',
-                                           registrant_changed: '2010-07-05T00:00:00+00:00' }))
+                                           registrant_changed: '2010-07-05T00:00:00+00:00' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -64,7 +64,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                   .merge({ admin_contacts: [{ name: 'John',
                                                               email: 'john@inbox.test',
                                                               changed: '2010-07-05T00:00:00+00:00',
-                                                            }] }))
+                                                            }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -81,7 +81,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                   .merge({ tech_contacts: [{ name: 'John',
                                                              email: 'john@inbox.test',
                                                              changed: '2010-07-05T00:00:00+00:00',
-                                                           }] }))
+                                                           }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -97,7 +97,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                   .merge({ registrar: 'Bestnames',
                                            registrar_website: 'http://bestnames.test',
                                            registrar_phone: '1234',
-                                           registrar_changed: '2010-07-05T00:00:00+00:00' }))
+                                           registrar_changed: '2010-07-05T00:00:00+00:00' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -114,7 +114,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
                                   .merge({ nameservers: %w[ns1.bestnames.test
                                                                       ns2.bestnames.test],
                                            nameservers_changed: '2010-07-05T00:00:00+00:00',
-                                         }))
+                                         }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -129,7 +129,7 @@ class WhoisRecordDetailsBaseTest < ApplicationSystemTestCase
     @whois_record.update!(json: @whois_record.json
                                   .merge({ dnssec_keys: %w[one two],
                                            dnssec_changed: '2010-07-05T00:00:00+00:00',
-                                         }))
+                                         }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
