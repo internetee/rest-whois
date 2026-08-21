@@ -8,8 +8,7 @@ Bundler.require(*Rails.groups)
 
 module RestWhois
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 8.1
 
     # Authorize all hosts
     config.hosts.clear
