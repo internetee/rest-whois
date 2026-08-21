@@ -19,11 +19,7 @@ class ContactRequestsController < ApplicationController
   def create
     @contact_request = ContactRequest.new(contact_request_params)
     result = @contact_request.save_to_registry
-
-    unless result
-      redirect_to(:root, alert: t('contact_requests.registry_link_error'))
-      return
-    end
+    return registry_unreachable unless result
 
     @contact_request = fetch_contact_request(result)
     process_contact_request
@@ -50,13 +46,8 @@ class ContactRequestsController < ApplicationController
 
   def update
     email_body = params[:email_body]
-    recipients = params[:recipients] || ['admin_contacts']
-    recipients << 'admin_contacts' unless recipients.include?('admin_contacts')
-
-    unless confirm_contact_request
-      redirect_to(:root, alert: t('contact_requests.registry_link_error'))
-      return
-    end
+    recipients = (params[:recipients] || []) | ['admin_contacts']
+    return registry_unreachable unless confirm_contact_request
 
     if @contact_request.send_contact_email(body: email_body, recipients: recipients, ip: request.ip)
       logger.warn(
@@ -74,10 +65,6 @@ class ContactRequestsController < ApplicationController
 
   def set_contact_request
     @contact_request = ContactRequest.find_by(secret: params[:secret])
-  end
-
-  def update_request_secret
-    @contact_request.update(secret: SecureRandom.hex(64)) if Rails.env == 'test'
   end
 
   def check_for_replay
@@ -118,11 +105,14 @@ class ContactRequestsController < ApplicationController
   end
 
   def process_contact_request
-    update_request_secret
     @contact_request.send_confirmation_email
     logger.warn("Confirmation request email registered to #{@contact_request.email}" \
       " (IP: #{request.ip})")
     render :confirmation_completed
+  end
+
+  def registry_unreachable
+    redirect_to(:root, alert: t('contact_requests.registry_link_error'))
   end
 
   def handle_smtp_error(exception)
