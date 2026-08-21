@@ -50,7 +50,7 @@ class WhoisRecord < ApplicationRecord
                delete: json['delete'],
                registration_deadline: json['registration_deadline']
                                           .try(:to_datetime)
-                                          .try(:to_s, :iso8601))
+                                          .try(:to_fs, :iso8601))
   end
   # rubocop:enable Metrics/AbcSize
 
