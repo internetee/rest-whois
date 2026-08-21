@@ -1,9 +1,13 @@
+
 27.08.2026
 * Fixed stability issues on contact request https://github.com/internetee/rest-whois/pull/503
 
 19.08.2026
 * Pinned Ruby back to 3.0.3 until Rails is upgraded https://github.com/internetee/rest-whois/pull/503
 * Fixed contact request failures caused by registry replication delay https://github.com/internetee/rest-whois/pull/503
+
+21.08.2026
+* Rails 6.1 -> 8.1 and the zeitwerk autoloader on Ruby 3.4 https://github.com/internetee/rest-whois/pull/PRNUM
 
 08.22.2025
 *  Replacing codeclimate https://github.com/internetee/rest-whois/pull/434
