@@ -53,6 +53,10 @@ jobs:
           cp config/application-example.yml config/application.yml
           cp config/database-travis.yml config/database.yml
           bundle exec rake db:setup
+          # Guards the autoloader: classic was removed in Rails 7.0, so a file whose
+          # constant does not match its path stops being a style question and becomes a
+          # boot failure. Cheaper to catch here than on deploy.
+          bundle exec rails zeitwerk:check
           bundle exec rails test test/*
 
       # ------------------------------
