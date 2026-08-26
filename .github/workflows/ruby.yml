@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
+    name: test (${{ matrix.os }})
     env:
       QLTY_COVERAGE_TOKEN: ${{ secrets.QLTY_COVERAGE_TOKEN }}
     services:
