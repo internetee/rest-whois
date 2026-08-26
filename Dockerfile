@@ -1,4 +1,16 @@
-FROM internetee/ruby:3.0-buster
+ARG RUBY_VERSION=3.4.9
+FROM ruby:${RUBY_VERSION}-bookworm
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    libpq-dev \
+    nodejs \
+    netcat-openbsd \
+    curl \
+    imagemagick \
+    shared-mime-info \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/webapps/app/tmp/pids
 WORKDIR /opt/webapps/app

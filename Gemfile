@@ -1,13 +1,23 @@
 source 'https://rubygems.org'
 
+gem 'base64'
+gem 'benchmark'
+gem 'bigdecimal'
+gem 'drb'
+gem 'logger'
+gem 'mutex_m'
+gem 'net-smtp', require: false
+gem 'ostruct'
+gem 'syslog'
+
 gem 'aws-sdk-ses', '~> 1.40'
 gem 'bootsnap', '~> 1.18.0', require: false
 gem 'figaro', '~> 1.3.0'
 gem 'jbuilder'
 gem 'mimemagic', '~> 0.4.3'
 gem 'passenger', '>= 5.3.2', require: 'phusion_passenger/rack_handler'
-gem 'pg', '~> 1.6.3'
-gem 'rails', '>= 6.0.3.1'
+gem 'pg', '~> 1.6.3', force_ruby_platform: true
+gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
@@ -21,6 +31,7 @@ end
 group :development, :test do
   gem 'apparition', github: 'twalpole/apparition', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
   gem 'capybara'
+  gem 'matrix'
   gem 'mina', '~> 1.2.4'
   gem 'pry'
   gem 'puma'
@@ -29,6 +40,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest', '~> 5.25'
   gem 'selenium-webdriver'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end

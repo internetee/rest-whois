@@ -1,10 +1,22 @@
-FROM internetee/ruby_base:3.0
+ARG RUBY_VERSION=3.4.9
+FROM ruby:${RUBY_VERSION}-bookworm
 LABEL org.opencontainers.image.source=https://github.com/internetee/rest-whois
 ARG RAILS_ENV
 
 ENV RAILS_ENV "$RAILS_ENV"
 
-COPY Gemfile Gemfile.lock ./    
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    libpq-dev \
+    nodejs \
+    curl \
+    imagemagick \
+    shared-mime-info \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/webapps/app
+COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle config set without 'development test' && bundle install --jobs 20 --retry 5
 
 COPY . .
