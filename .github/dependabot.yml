@@ -8,4 +8,10 @@ updates:
       time: "09:00"
     allow:
       - dependency-type: "direct"
+    ignore:
+      # pg 1.6.0 started publishing an x86_64-linux binary built against glibc 2.29, which the
+      # deploy servers cannot load. The bump to 1.6.3 broke the deploy. Lift together with the
+      # server upgrade.
+      - dependency-name: "pg"
+        versions: [">= 1.6.0"]
     open-pull-requests-limit: 10

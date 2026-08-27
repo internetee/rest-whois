@@ -184,6 +184,42 @@ class ContactRequestTest < ActiveJob::TestCase
     refute(@contact_request.send_contact_email)
   end
 
+  # Regression: statuses are written into the registry over HTTP and reach our own database only
+  # with replication delay. The code used to re-read the still stale row, decide the request was
+  # not confirmed and refuse to send the email ("We are failed to send email for one or more of
+  # addresses"), even though the registry had accepted the confirmation.
+  def test_confirm_email_keeps_the_new_status_in_memory_while_the_database_is_stale
+    assert_equal(ContactRequest::STATUS_NEW, ContactRequest.find(@contact_request.id).status)
+
+    assert(@contact_request.confirm_email)
+
+    assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
+    assert_equal(ContactRequest::STATUS_NEW, ContactRequest.find(@contact_request.id).status)
+  end
+
+  def test_send_contact_email_succeeds_right_after_confirmation
+    assert(@contact_request.confirm_email)
+
+    assert(@contact_request.send_contact_email(body: 'some message text',
+                                               recipients: %w[admin_contacts]))
+    assert_equal(ContactRequest::STATUS_SENT, @contact_request.status)
+  end
+
+  def test_confirm_email_returns_false_when_registry_rejects_the_update
+    stub_request(:put, /http:\/\/registry:3000\/api\/v1\/contact_requests\/\d+/)
+      .to_return(status: 500, body: '', headers: {})
+
+    refute(@contact_request.confirm_email)
+    assert_equal(ContactRequest::STATUS_NEW, @contact_request.status)
+  end
+
+  def test_send_contact_email_does_not_mark_as_sent_when_there_are_no_recipients
+    @contact_request.confirm_email
+
+    refute(@contact_request.send_contact_email(body: 'some message text', recipients: []))
+    assert_equal(ContactRequest::STATUS_CONFIRMED, @contact_request.status)
+  end
+
   def test_removing_whois_record_does_not_remove_contact_requests
     @contact_request.save
     @whois_record.delete

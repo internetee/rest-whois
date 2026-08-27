@@ -4,54 +4,75 @@ class RegistryConnector
   BASE_URL = URI(ENV['registry_api_url']).freeze
   BASE_KEY = "Basic #{ENV['registry_api_key']}".freeze
 
-  attr_accessor :request
+  OPEN_TIMEOUT = 5 # seconds
+  READ_TIMEOUT = 10 # seconds
+
+  REQUEST_CLASSES = { post: Net::HTTP::Post, put: Net::HTTP::Put }.freeze
+
+  # The registry did not answer at all. Without these the caller would get an exception instead of
+  # a plain false, and the user would see a 500 page instead of "try again later".
+  NETWORK_ERRORS = [Net::OpenTimeout, Net::ReadTimeout, Errno::ECONNREFUSED, Errno::ECONNRESET,
+                    Errno::EHOSTUNREACH, Errno::ETIMEDOUT, SocketError, IOError,
+                    OpenSSL::SSL::SSLError, JSON::ParserError].freeze
+
+  def self.do_save(data)
+    submit(url: BASE_URL, type: :post, data: data)
+  end
+
+  def self.do_update(id:, data:)
+    submit(url: record_url(id), type: :put, data: data)
+  end
+
+  def self.submit(url:, type:, data:)
+    request = build_request(url: url, type: type)
+    request.body = { contact_request: data }.to_json
+    perform_request(request, url)
+  rescue CommunicationError => e
+    log_failure(type, url, "response code #{e.response_code}")
+    false
+  rescue *NETWORK_ERRORS => e
+    log_failure(type, url, "#{e.class}: #{e.message}")
+    false
+  end
+  private_class_method :submit
 
   def self.perform_request(request, url)
-    @response = Net::HTTP.start(url.host, url.port,
-                                use_ssl: url.scheme == 'https') do |http|
+    response = Net::HTTP.start(url.host, url.port,
+                               use_ssl: url.scheme == 'https',
+                               open_timeout: OPEN_TIMEOUT,
+                               read_timeout: READ_TIMEOUT) do |http|
       http.request(request)
     end
 
-    @body_as_string = @response.body
-    @code_as_string = @response.code.to_s
+    code = response.code.to_s
+    Rails.logger.info("Registry integration: #{request.method} #{url} -> #{code}")
+    return JSON.parse(response.body) if [HTTP_CREATED, HTTP_SUCCESS].include?(code)
 
-    return JSON.parse(@body_as_string) if [HTTP_CREATED, HTTP_SUCCESS].include? @code_as_string
-
-    raise CommunicationError.new(request, @code_as_string)
+    raise CommunicationError.new(request, code)
   end
+  private_class_method :perform_request
 
-  def self.request(url:, type:)
-    request_by_type(type).new(
+  def self.build_request(url:, type:)
+    REQUEST_CLASSES.fetch(type).new(
       url,
       'Content-Type': 'application/json',
       "Authorization": BASE_KEY
     )
   end
+  private_class_method :build_request
 
-  def self.do_save(data)
-    url = BASE_URL
-    request = request(url: url, type: :post)
-    request.body = { contact_request: data }.to_json
-    perform_request(request, url)
-  rescue CommunicationError
-    false
+  # URI.join drops the last path segment when the base has no trailing slash, which would turn
+  # every update into a request to a non-existent endpoint. Build the path by hand instead, so a
+  # missing slash in `registry_api_url` cannot break updates.
+  def self.record_url(id)
+    URI("#{BASE_URL.to_s.chomp('/')}/#{id}")
   end
+  private_class_method :record_url
 
-  def self.do_update(id:, data:)
-    url = URI.join(BASE_URL, id.to_s)
-    request = request(url: url, type: :put)
-    request.body = { contact_request: data }.to_json
-    perform_request(request, url)
-  rescue CommunicationError
-    false
+  # Deliberately without the request body: it carries the name, the email address and the IP of
+  # the person behind the contact request, and those have no business being in an application log.
+  def self.log_failure(type, url, reason)
+    Rails.logger.error("Registry integration error. Request: #{type.to_s.upcase} #{url}, #{reason}")
   end
-
-  def self.request_by_type(type)
-    case type
-    when :post
-      Net::HTTP::Post
-    else
-      Net::HTTP::Put
-    end
-  end
+  private_class_method :log_failure
 end

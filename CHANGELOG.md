@@ -1,3 +1,7 @@
+19.08.2026
+* Pinned Ruby back to 3.0.3 until Rails is upgraded https://github.com/internetee/rest-whois/pull/503
+* Fixed contact request failures caused by registry replication delay https://github.com/internetee/rest-whois/pull/503
+
 08.22.2025
 *  Replacing codeclimate https://github.com/internetee/rest-whois/pull/434
 
