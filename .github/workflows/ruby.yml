@@ -20,6 +20,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04]
+        # Read from .ruby-version instead of a second copy of the number here. CI used to be
+        # pinned to 3.0.3 while .ruby-version said 3.4.9, so the suite stayed green on a Ruby
+        # the servers no longer ran and the breakage surfaced only on deploy.
         ruby: ['.ruby-version']
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}

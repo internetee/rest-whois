@@ -21,7 +21,9 @@ gem 'recaptcha', '~> 5.21', require: 'recaptcha/rails'
 gem 'sassc', '~> 2.4'
 gem 'sassc-rails'
 gem 'simpleidn', '0.2.1' # For Punycode
-gem 'uglifier'
+# Ruby 3.4 demoted syslog from a default gem to a bundled one, so Bundler no longer puts it on the
+# load path unless it is asked for. config/environments/production.rb logs through Syslog::Logger.
+gem 'syslog'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.10.1'
