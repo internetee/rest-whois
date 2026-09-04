@@ -21,8 +21,8 @@ jobs:
       matrix:
         os: [ubuntu-22.04]
         # Read from .ruby-version instead of a second copy of the number here. CI used to be
-        # pinned to 3.0.3 while .ruby-version had been bumped to 3.4.9, so the suite stayed
-        # green on a Ruby the servers no longer ran and the breakage surfaced only on deploy.
+        # pinned to 3.0.3 while .ruby-version said 3.4.9, so the suite stayed green on a Ruby
+        # the servers no longer ran and the breakage surfaced only on deploy.
         ruby: ['.ruby-version']
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
@@ -53,6 +53,10 @@ jobs:
           cp config/application-example.yml config/application.yml
           cp config/database-travis.yml config/database.yml
           bundle exec rake db:setup
+          # Guards the autoloader: classic was removed in Rails 7.0, so a file whose
+          # constant does not match its path stops being a style question and becomes a
+          # boot failure. Cheaper to catch here than on deploy.
+          bundle exec rails zeitwerk:check
           bundle exec rails test test/*
 
       # ------------------------------

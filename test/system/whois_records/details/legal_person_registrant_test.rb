@@ -3,7 +3,7 @@ require 'application_system_test_case'
 class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   setup do
     @whois_record = whois_records(:privately_owned)
-    @whois_record.update!(json: @whois_record.json.merge({ registrant_kind: 'org' }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_kind: 'org' }).deep_stringify_keys)
 
     @original_whitelist_ip = ENV['whitelist_ip']
     ENV['whitelist_ip'] = ''
@@ -16,7 +16,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   def test_legal_person_specific_registrant_details_are_visible
     @whois_record.update!(json: @whois_record.json
                                   .merge({ registrant_reg_no: '1234',
-                                           registrant_ident_country_code: 'US' }))
+                                           registrant_ident_country_code: 'US' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -27,7 +27,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   end
 
   def test_registrant_name_is_unmasked
-    @whois_record.update!(json: @whois_record.json.merge({ registrant: 'Acme', registrant_publishable: 'true' }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant: 'Acme', registrant_publishable: 'true' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -55,7 +55,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
 
   def test_registrant_phone_is_masked_when_disclosed_and_unsolved_captcha
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
@@ -67,7 +67,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
     solve_captcha
     @whois_record.update!(json: @whois_record.json
                                   .merge({ email: 'john@inbox.test',
-                                           registrant_changed: '2010-07-05T00:00:00+00:00' }))
+                                           registrant_changed: '2010-07-05T00:00:00+00:00' }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -80,7 +80,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   def test_registrant_phone_is_unmasked_when_disclosed_and_solved_captcha
     solve_captcha
     @whois_record.update!(json: @whois_record.json
-                                  .merge({ registrant_disclosed_attributes: %w[phone] }))
+                                  .merge({ registrant_disclosed_attributes: %w[phone] }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
@@ -122,7 +122,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
                                                              changed: '2010-07-07T00:00:00+00:00',
                                                              contact_publishable: true,
                                                              disclosed_attributes: %w[name email phone changed]
-                                                           }] }))
+                                                           }] }).deep_stringify_keys)
 
     visit whois_record_url(name: @whois_record.name)
 
@@ -142,7 +142,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
   end
 
   def test_registrant_sensitive_data_is_masked_when_registrant_is_not_publishable
-    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }))
+    @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: false }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do
@@ -155,7 +155,7 @@ class WhoisRecordDetailsLegalPersonRegistrantTest < ApplicationSystemTestCase
 
   def test_registrant_sensitive_data_is_unmasked_when_registrant_is_publishable
     @whois_record.update!(json: @whois_record.json.merge({ registrant_publishable: true,
-                                                           registrant_disclosed_attributes: %w[name email phone] }))
+                                                           registrant_disclosed_attributes: %w[name email phone] }).deep_stringify_keys)
     visit whois_record_url(name: @whois_record.name)
 
     within '.registrant' do

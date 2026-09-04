@@ -52,19 +52,21 @@ class ContactRequestTest < ActiveJob::TestCase
 
   def test_secret_cannot_be_changed
     @contact_request.save
-    @contact_request.update!(secret: 'foo')
-    @contact_request.reload
 
-    refute_equal('foo', @contact_request.secret)
+    assert_raises(ActiveRecord::ReadonlyAttributeError) do
+      @contact_request.update!(secret: 'foo')
+    end
+    refute_equal('foo', @contact_request.reload.secret)
   end
 
   def test_valid_to_cannot_be_changed
     @contact_request.save
     new_date = Time.parse('2018-01-01 00:00 UTC')
-    @contact_request.update!(valid_to: new_date)
-    @contact_request.reload
 
-    refute_equal(new_date, @contact_request.valid_to)
+    assert_raises(ActiveRecord::ReadonlyAttributeError) do
+      @contact_request.update!(valid_to: new_date)
+    end
+    refute_equal(new_date, @contact_request.reload.valid_to)
   end
 
   def test_can_be_confirmed_only_once

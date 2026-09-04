@@ -72,7 +72,7 @@ class WhoisRecordTest < ActiveSupport::TestCase
 
     assert_equal 'shop.test', whois_record.domain.name
     assert_equal %w[active], whois_record.domain.statuses
-    assert_equal Time.parse('2020-06-09 23:59:59 +0300').try(:to_datetime).try(:to_s, :iso8601),
+    assert_equal Time.parse('2020-06-09 23:59:59 +0300').try(:to_datetime).try(:to_fs, :iso8601),
                  whois_record.domain.registration_deadline
   end
 

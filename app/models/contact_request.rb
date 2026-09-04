@@ -1,5 +1,5 @@
 class ContactRequest < ApplicationRecord
-  include Concerns::ContactRequest::Bounceable
+  include Bounceable
 
   def self.connect_to_write_database_if_defined
     return unless Rails.configuration.database_configuration["write_#{Rails.env}"]

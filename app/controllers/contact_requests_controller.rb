@@ -30,7 +30,10 @@ class ContactRequestsController < ApplicationController
   def redirect_to_main
     referer = ENV.fetch('main_page_url') { root_url }
     respond_to do |format|
-      format.html { redirect_to referer }
+      # Leaving our own host is the whole point of this button, and the address comes from the
+      # server configuration rather than from the request, so the open redirect protection that
+      # the 7.1 defaults turned on has nothing to protect here.
+      format.html { redirect_to referer, allow_other_host: true }
     end
   end
 

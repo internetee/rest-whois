@@ -12,3 +12,6 @@
 .rubocop.yml
 .DS_Store
 Dockerfile.dev.v2
+
+# repowise local index
+.repowise/

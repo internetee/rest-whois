@@ -14,7 +14,7 @@ class ContactRequestMailer < ApplicationMailer
   end
 
   def contact_email(contact_request:, recipients:, mail_body:, raise_error: false)
-    raise ::Net::SMTPFatalError if Rails.env.test? && raise_error
+    raise ::Net::SMTPFatalError, 'simulated delivery failure' if Rails.env.test? && raise_error
 
     if ApplicationMailer.ses_configured?
       ses_contact_email(
