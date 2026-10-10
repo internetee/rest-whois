@@ -36,5 +36,5 @@ end
 
 group :test do
   gem 'selenium-webdriver'
-  gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
+  gem 'simplecov', '1.1.0', require: false # CC last supported v0.17
 end
