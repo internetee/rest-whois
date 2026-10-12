@@ -87,6 +87,149 @@ discarded:
       - <%= Domain::STATUS_DISCARDED %>
   name: discarded-domain.test
 
+# Post-2027 blob shape (internetee/registry#2969): carries kind on contacts,
+# nameserver_records, registrar email/address and the disclosure arrays.
+policy_org_owned:
+  json:
+    admin_contacts:
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: admin-org@policy-org.test
+        ident_country_code: EE
+        kind: org
+        name: "Admin Org"
+        phone: '+372 500 0001'
+        reg_no: '87654321'
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: admin-priv@policy-org.test
+        kind: priv
+        name: "Admin Priv"
+        phone: '+372 500 0002'
+    changed: "2018-04-26T14:10:41+00:00"
+    delete: "2018-07-25"
+    dnssec_keys:
+      - "257 3 8 awEAAa"
+    dnssec_changed: "2018-04-25T14:10:30+00:00"
+    email: owner@policy-org.test
+    phone: '+372 500 0000'
+    expire: "2018-07-25"
+    name: policy-org.test
+    nameservers:
+      - ns1.policy-org.test
+      - ns2.policy-org.test
+    nameserver_records:
+      -
+        hostname: ns1.policy-org.test
+        ipv4:
+          - "192.0.2.1"
+        ipv6:
+          - "2001:db8::1"
+      -
+        hostname: ns2.policy-org.test
+        ipv4:
+          - "192.0.2.2"
+        ipv6: []
+    nameservers_changed: "2018-04-25T14:10:30+00:00"
+    outzone: "2018-07-25"
+    registered: "2018-04-25T14:10:41+00:00"
+    registrant: "ACME OÜ"
+    registrant_reg_no: '12345678'
+    registrant_ident_country_code: EE
+    registrant_changed: "2018-04-25T14:10:39+00:00"
+    registrant_disclosed_attributes: []
+    registrant_system_disclosed_attributes: []
+    registrant_publishable: false
+    registrant_kind: org
+    registrar: "Test Registrar"
+    registrar_changed: "2018-04-25T14:10:30+00:00"
+    registrar_email: registrar@test.test
+    registrar_address: "Street 1, Tallinn, Harjumaa, 10111"
+    registrar_phone: '+372 600 0000'
+    registrar_website: https://registrar.test
+    status:
+      - "ok (paid and in zone)"
+    tech_contacts:
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: tech-org@policy-org.test
+        ident_country_code: EE
+        kind: org
+        name: "Tech Org"
+        phone: '+372 500 0003'
+        reg_no: '11223344'
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: tech-priv@policy-org.test
+        name: "Tech Priv"
+        phone: '+372 500 0004'
+  name: policy-org.test
+
+policy_priv_owned:
+  json:
+    admin_contacts:
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: admin@policy-priv.test
+        kind: priv
+        name: "Admin Priv"
+        phone: '+372 500 0001'
+    changed: "2018-04-26T14:10:41+00:00"
+    delete: "2018-07-25"
+    dnssec_keys: []
+    dnssec_changed: "2018-04-25T14:10:30+00:00"
+    email: owner@policy-priv.test
+    phone: '+372 500 0000'
+    expire: "2018-07-25"
+    name: policy-priv.test
+    nameservers:
+      - ns1.policy-priv.test
+    nameserver_records:
+      -
+        hostname: ns1.policy-priv.test
+        ipv4:
+          - "192.0.2.10"
+        ipv6: []
+    nameservers_changed: "2018-04-25T14:10:30+00:00"
+    outzone: "2018-07-25"
+    registered: "2018-04-25T14:10:41+00:00"
+    registrant: "Peeter Pera"
+    registrant_changed: "2018-04-25T14:10:39+00:00"
+    registrant_disclosed_attributes: []
+    registrant_system_disclosed_attributes: []
+    registrant_publishable: false
+    registrant_kind: priv
+    registrar: "Test Registrar"
+    registrar_changed: "2018-04-25T14:10:30+00:00"
+    registrar_email: registrar@test.test
+    registrar_address: "Street 1, Tallinn, Harjumaa, 10111"
+    registrar_phone: '+372 600 0000'
+    registrar_website: https://registrar.test
+    status:
+      - "ok (paid and in zone)"
+    tech_contacts:
+      -
+        changed: "2018-04-25T14:10:41+00:00"
+        contact_publishable: false
+        disclosed_attributes: []
+        email: tech-org@policy-priv.test
+        kind: org
+        name: "Tech Org"
+        phone: '+372 500 0003'
+        reg_no: '11223344'
+        ident_country_code: EE
+  name: policy-priv.test
+
 with_duplicate_domain_contacts:
   json:
     admin_contacts:

@@ -1,0 +1,22 @@
+<li class="contact">
+    <dl>
+        <% { 'kind' => :type, 'reg_no' => :reg_number, 'ident_country_code' => :ident_country }.each do |key, label| %>
+            <% if contact.identification.key?(key) %>
+                <dt><%= Contact.human_attribute_name label %></dt>
+                <dd><%= contact.identification[key] %></dd>
+            <% end %>
+        <% end %>
+
+        <dt><%= Contact.human_attribute_name :name %></dt>
+        <dd><%= contact.name %></dd>
+
+        <dt><%= Contact.human_attribute_name :email %></dt>
+        <dd><%= contact.email %></dd>
+
+        <dt><%= Contact.human_attribute_name :phone %></dt>
+        <dd><%= contact.phone %></dd>
+
+        <dt><%= Contact.human_attribute_name :last_update %></dt>
+        <dd><%= contact.last_update %></dd>
+    </dl>
+</li>

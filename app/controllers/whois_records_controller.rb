@@ -2,18 +2,24 @@ class WhoisRecordsController < ApplicationController
   helper_method :ip_in_whitelist?
   helper_method :contact_form_default_locale
   helper_method :captcha_solved?
+  helper_method :disclosure_level
 
   def show
     domain_name = SimpleIDN.to_unicode(params[:name].to_s).downcase
     @whois_record = WhoisRecord.find_by(name: domain_name)
 
-    @show_sensitive_data = (ip_in_whitelist? || captcha_solved?)
+    @disclosure_level = disclosure_level
+    @show_sensitive_data = (@disclosure_level != :public)
+    @disclosure_policy_active = DisclosurePolicy.active?
+    if @disclosure_policy_active && @disclosure_level != :public
+      response.headers['Cache-Control'] = 'private, no-store'
+    end
     log_message(params, @whois_record)
 
     respond_to do |format|
       format.json do
         if @whois_record
-          render :show, status: :ok
+          render show_template, status: :ok
         else
           render json: { name: domain_name,
                          error: invalid_data_body(domain_name, json: true) },
@@ -23,7 +29,7 @@ class WhoisRecordsController < ApplicationController
 
       format.html do
         if @whois_record
-          render :show, status: :ok
+          render show_template, status: :ok
         else
           render plain: invalid_data_body(domain_name), status: :not_found
         end
@@ -91,6 +97,23 @@ class WhoisRecordsController < ApplicationController
       minimum_score: 0.5,
       secret_key: ENV['recaptcha_secret_key']
     )
+  end
+
+  # Disclosure level under the Domain Regulation 2027 policy, resolved once
+  # per request and shared by the HTML and JSON pipelines.
+  def disclosure_level
+    @disclosure_level ||=
+      if ip_in_whitelist?
+        :privileged
+      elsif captcha_solved?
+        :detailed
+      else
+        :public
+      end
+  end
+
+  def show_template
+    @disclosure_policy_active ? 'whois_records/policy_2027/show' : :show
   end
 
   def contact_form_default_locale

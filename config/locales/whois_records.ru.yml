@@ -28,3 +28,33 @@ ru:
 
       dnssec_keys:
         header: DNSSEC
+
+    policy_2027:
+      show:
+        header: Эстонский TLD .ee сервер WHOIS
+        more_info: Подробнее на http://internet.ee
+        contact_owner_btn: Связаться с владельцем
+
+      domain:
+        header: Домен
+
+      registrant:
+        header: Владелец домена
+
+      admin_contacts:
+        header: Административные контакты
+
+      tech_contacts:
+        header: Технические контакты
+
+      registrar:
+        header: Регистратор
+
+      nameservers:
+        header: Сервера имен
+
+      dnssec_keys:
+        header: DNSSEC
+
+      captcha:
+        submit_btn: Показать полную информацию
