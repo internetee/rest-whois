@@ -74,7 +74,14 @@ module Disclosure
 
     def volunteered?(attr)
       return false unless @json['registrant_publishable'] == true
-      return false if attr == 'phone' && system_disclosed_phone?
+
+      if attr == 'phone'
+        # Old blobs lack the key entirely; the business-registry checker used
+        # to write 'phone' into disclosed_attributes, so consent cannot be
+        # proven when it is absent.
+        return false if @json['registrant_system_disclosed_attributes'].nil?
+        return false if system_disclosed_phone?
+      end
 
       disclosed_attributes.include?(attr)
     end

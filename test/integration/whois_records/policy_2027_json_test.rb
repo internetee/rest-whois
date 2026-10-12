@@ -193,6 +193,46 @@ class WhoisRecordPolicy2027JsonTest < ActionDispatch::IntegrationTest
     assert_equal disclosable_mask, response.parsed_body['phone']
   end
 
+  # Old blobs lack registrant_system_disclosed_attributes and the
+  # business-registry checker wrote 'phone' into disclosed_attributes too,
+  # so consent cannot be proven: the phone stays hidden at every level.
+  def test_old_blob_registrant_phone_fails_closed
+    record = whois_records(:policy_org_owned)
+    data = record.json.deep_dup
+    data.delete('registrant_system_disclosed_attributes')
+    data['registrant_publishable'] = true
+    data['registrant_disclosed_attributes'] = %w[name email phone]
+    record.update!(json: data)
+
+    get '/v1/policy-org.test', params: { format: :json }
+    json = response.parsed_body
+
+    assert_equal 'ACME OÜ', json['registrant']
+    assert_equal 'owner@policy-org.test', json['email']
+    assert_equal undisclosable_mask, json['phone']
+
+    solve_captcha
+    get '/v1/policy-org.test', params: { format: :json }
+    json = response.parsed_body
+
+    assert_equal 'ACME OÜ', json['registrant']
+    assert_equal 'owner@policy-org.test', json['email']
+    assert_equal undisclosable_mask, json['phone']
+  end
+
+  def test_registrant_phone_volunteered_when_system_disclosed_key_present_and_empty
+    record = whois_records(:policy_org_owned)
+    record.update!(json: record.json.merge(
+      'registrant_publishable' => true,
+      'registrant_disclosed_attributes' => %w[phone],
+      'registrant_system_disclosed_attributes' => []
+    ))
+
+    get '/v1/policy-org.test', params: { format: :json }
+
+    assert_equal '+372 500 0000', response.parsed_body['phone']
+  end
+
   def test_volunteered_attributes_are_visible_at_public_level
     record = whois_records(:policy_priv_owned)
     record.update!(json: record.json.merge(
