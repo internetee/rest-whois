@@ -39,8 +39,14 @@ RUN bundle config set --local without 'development test' && \
 # Copy application code
 COPY . .
 
-# Precompile assets
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+# Precompile assets. Booting Rails needs secret_key_base, and the Figaro
+# initializer requires the recaptcha keys. Real values come from
+# application.yml at runtime, so these placeholders exist only for this
+# build step and are not stored in the image.
+RUN SECRET_KEY_BASE=precompile-placeholder \
+    recaptcha_site_key=precompile-placeholder \
+    recaptcha_secret_key=precompile-placeholder \
+    RAILS_ENV=production bundle exec rake assets:precompile
 
 # Expose Rails port
 EXPOSE 3000
