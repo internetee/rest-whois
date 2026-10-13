@@ -1,0 +1,15 @@
+<% if nameserver_records.any? %>
+    <section class="nameservers">
+        <h2><%= t '.header' %></h2>
+        <ul>
+            <% nameserver_records.each do |record| %>
+                <li>nserver: <%= [record['hostname'], *record['ipv4'], *record['ipv6']].compact.join(' ') %></li>
+            <% end %>
+        </ul>
+
+        <dl>
+            <dt><%= Nameserver.human_attribute_name :last_update %></dt>
+            <dd><%= last_update %></dd>
+        </dl>
+    </section>
+<% end %>

@@ -1,3 +1,6 @@
+12.10.2026
+* New .ee WHOIS disclosure policy (Domain Regulation 2027), activated by DISCLOSURE_POLICY_ACTIVE_FROM https://github.com/internetee/registry/issues/2969
+
 27.08.2026
 * Fixed stability issues on contact request https://github.com/internetee/rest-whois/pull/503
 

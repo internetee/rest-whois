@@ -1,0 +1,22 @@
+<section class="registrar">
+    <h2><%= t '.header' %></h2>
+    <dl>
+        <dt><%= Registrar.human_attribute_name :name %></dt>
+        <dd><%= registrar.name %></dd>
+
+        <dt><%= Registrar.human_attribute_name :website %></dt>
+        <dd><%= registrar.website %></dd>
+
+        <dt><%= Registrar.human_attribute_name :phone %></dt>
+        <dd><%= registrar.phone %></dd>
+
+        <dt><%= Registrar.human_attribute_name :email %></dt>
+        <dd><%= registrar.email %></dd>
+
+        <dt><%= Registrar.human_attribute_name :address %></dt>
+        <dd><%= registrar.address %></dd>
+
+        <dt><%= Registrar.human_attribute_name :last_update %></dt>
+        <dd><%= registrar.last_update %></dd>
+    </dl>
+</section>

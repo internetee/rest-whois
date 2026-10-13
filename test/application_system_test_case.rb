@@ -8,6 +8,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   # Moved from Selenium to Apparition driver due to Selenium intentionally lacks page.status
   options = {js_errors: false}
+  # Chrome cannot start as root inside a container with its sandbox enabled.
+  options[:browser_options] = { 'no-sandbox' => nil } if Process.uid.zero?
   Capybara.register_driver(:headless_apparition) do |app|
     Capybara::Apparition::Driver.new(app, options)
   end

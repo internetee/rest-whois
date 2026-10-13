@@ -1,0 +1,38 @@
+<h1><%= t '.header' %></h1>
+<% disclaimer = @whois_record.disclaimer %>
+<% if disclaimer.is_a?(String) %>
+  <% disclaimer_string = disclaimer %>
+<% elsif disclaimer.is_a?(Hash) %>
+  <% disclaimer_string = disclaimer[I18n.locale.to_s] %>
+<% end %>
+<p><%= disclaimer_string if disclaimer %></p>
+
+<% policy = Disclosure::RecordPresenter.new(@whois_record, @disclosure_level) %>
+<%= render 'whois_records/policy_2027/domain', domain: policy.domain %>
+<% if @whois_record.domain.active? %>
+    <%= render 'whois_records/policy_2027/registrant', registrant: policy.registrant %>
+    <%= render 'whois_records/policy_2027/admin_contacts', contacts: policy.admin_contacts %>
+    <%= render 'whois_records/policy_2027/tech_contacts', contacts: policy.tech_contacts %>
+    <%= render 'whois_records/policy_2027/registrar', registrar: policy.registrar %>
+    <%= render 'whois_records/policy_2027/nameservers',
+               nameserver_records: policy.nameserver_records,
+               last_update: policy.nameservers_changed %>
+    <%= render 'whois_records/policy_2027/dnssec_keys',
+               keys: policy.dnssec_keys,
+               last_update: policy.dnssec_changed %>
+<% end %>
+
+<p><%= t '.more_info' %></p>
+
+<% if @disclosure_level == :public && @whois_record.domain.active? %>
+    <section class="captcha">
+        <%= render 'whois_records/policy_2027/captcha' %>
+    </section>
+<% end %>
+
+<% if @disclosure_level != :public && @whois_record.contactable? %>
+    <p>
+        <%= link_to t('.contact_owner_btn'),
+                    new_contact_request_path({ domain_name: @whois_record.name }) %>
+    </p>
+<% end %>

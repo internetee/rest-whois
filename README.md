@@ -20,6 +20,21 @@ By default, this will return only public information. If full WHOIS info is requ
 ### JSON for the Full WHOIS Info
 * GET: `/v1/example.ee.json?utf8=%E2%9C%93&g-recaptcha-response=03AHJ_VuvY4cI_oBaP1BtercOD...`
 
+Disclosure policy (Domain Regulation 2027)
+------------
+
+The new WHOIS disclosure policy ([internetee/registry#2969](https://github.com/internetee/registry/issues/2969)) activates at the moment given by the environment variable `DISCLOSURE_POLICY_ACTIVE_FROM` — an ISO 8601 timestamp **with an explicit offset**, e.g. `2027-01-18T00:00:00+02:00`. It is parsed once at boot (it can also be set as a key in `config/application.yml`). Unset/blank keeps the legacy behaviour; a malformed value aborts boot.
+
+Once active, every request is answered at one of three disclosure levels:
+
+| Level | Requester | Contents |
+|---|---|---|
+| `public` | captcha not solved | domain name/status/registered/expire, registrant type (org/priv), registrar contacts incl. email/address, nameservers with IPs, dnssec keys; registrant/contact attributes only when the contact volunteered them; everything else masked |
+| `detailed` | captcha solved | public plus `changed`/`outzone`/`delete`, org registrant name/reg no/country/email, business-registry matched org phone, org tech contacts |
+| `privileged` | IP in `whitelist_ip` | everything present in the whois blob |
+
+Detailed and privileged responses carry `Cache-Control: private, no-store`.
+
 Installation
 ------------
 
