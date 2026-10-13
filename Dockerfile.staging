@@ -27,6 +27,7 @@ RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.l
     libpq-dev \
     imagemagick \
     shared-mime-info \
+    libpcre2-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,6 +36,14 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle config set --local without 'development test' && \
     bundle install --jobs 20 --retry 5 && \
     bundle clean --force
+
+# Build Passenger Standalone's agent and Nginx engine into the image. On
+# first boot, `rails server` would otherwise build them itself: the
+# precompiled Nginx 1.28 that Passenger 6.1 ships does not run on buster's
+# glibc, so it falls back to compiling from source, stops at an interactive
+# prompt about PCRE2, and never opens port 3000.
+RUN bundle exec passenger-config install-standalone-runtime --auto && \
+    bundle exec passenger-config build-native-support
 
 # Copy application code
 COPY . .
